@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- styles -->
+    <link href="/stylesheets/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <noscript>This site requires javascript. Please don't try using it with it off. You'll just end up having a bad time.</noscript>
+    <%- body -%>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/jquery-1.7.2.min.js"></script>
+    <script src="/javascripts/main.js"></script>
+    <% if (script) { -%>
+<script src="/javascripts/<%= script %>.js"></script>
+    <% } -%>
+  </body>
+</html>
