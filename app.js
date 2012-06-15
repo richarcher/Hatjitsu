@@ -2,15 +2,13 @@ var express = require('express')
   , app = express.createServer()
   , io = require('socket.io').listen(app)
   , rooms = []
+  , routes = require('./routes')
   ;
 // Configuration
 
 app.configure(function() {
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
 
@@ -20,6 +18,14 @@ app.configure('development', function() {
 
 app.configure('production', function() {
   app.use(express.errorHandler());
+});
+
+app.get('/', routes.index);
+app.get('/:id', function(req, res) {
+  if (req.params.id in roomObj) {
+    res.render('room', { title: 'Room ' + req.params.id, script: 'room' });
+  }
+  res.send(404);
 });
 
 // Heroku won't actually allow us to use WebSockets
@@ -34,37 +40,16 @@ io.configure('production', function(){
 });
 io.configure('development', function(){
   io.enable('browser client etag');
-  io.set('log level', 3);
+  io.set('log level', 2);
   io.set('transports', [
       "websocket"
     ]);
 });
 
-
-/* ROUTES */
-
 var port = process.env.PORT || 5000; // Use the port that Heroku provides or default to 5000
 app.listen(port, function() {
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
-
-app.use("/public", express.static(__dirname + '/public'));
-app.get("/favicon.ico", function(req, res) {
-  return false;
-});
-app.get('/:id?', function(req, res) {
-  var params = req.params.id;
-  if (params === undefined) {
-    res.render('index', { title: 'Express', script: 'index' });
-    }
-  else if (rooms.indexOf(params) != -1) {
-    res.render('room', { title: 'Room ' + params, script: 'room' });
-    } 
-  else {
-    res.send(404);
-  }
-});
-
 
 /* EVENT LISTENERS */
 

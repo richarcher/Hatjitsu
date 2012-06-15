@@ -1,11 +1,11 @@
 function Room(name) {
-  var self = this
-    , adminPanel
+  var adminPanel
     , playArea
     , cardDeck
-    , clientCount
+    , clientCountDiv
+    , socket
     ;
-  self.name = name;
+  // this.name = name;
 
   socket = io.connect(document.location.origin);
   socket.on('connect', function () {
@@ -26,27 +26,21 @@ function Room(name) {
   });
 
   function handleResponse(response) {
-    self.clientcount = response.clientcount;
-    updateRoom();
+    //TODO: create admin cookie if response.needsAdmin
+    console.log(response);
+    $('#content').show();
+    clientCountDiv.html('Players : ' + response.clientcount);
   };
 
   function setupRoom() {
     adminPanel = $(document.createElement('div')).attr('id', 'adminPanel');
     playArea = $(document.createElement('div')).attr('id', 'playArea');
     cardDeck = $(document.createElement('div')).attr('id', 'cardDeck');
-    clientCount = $(document.createElement('div')).attr('id', 'clientCount');
-    clientCount.appendTo(playArea);
+    clientCountDiv = $(document.createElement('div')).attr('id', 'clientCount');
+    clientCountDiv.appendTo(playArea);
     $('#content').html('').hide().append(adminPanel, playArea, cardDeck);
   };
 
-  function updateRoom() {
-    $('#content').show();
-    clientCount.html('Players : ' + self.clientcount);
-  };
 };
 
-
-var thisRoom;
-$(function() {
-  thisRoom = new Room(window.location.pathname.split( '/' )[1]);
-});
+var thisRoom = new Room(window.location.pathname.split( '/' )[1]);
