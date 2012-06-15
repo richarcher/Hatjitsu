@@ -1,8 +1,8 @@
 var express = require('express')
   , app = express.createServer()
   , io = require('socket.io').listen(app)
-  , rooms = []
   , routes = require('./routes')
+  , roomObj = {}
   ;
 // Configuration
 
@@ -63,10 +63,17 @@ io.sockets.on('connection', function (socket) {
     createRoom(socket, callback);
   });
 
-  socket.on('join room', function (data, callback) {
-    socket.join(data);
-    socket.broadcast.to(data).emit('room joined');
-    callback(roomInfo({ room : data }));
+  socket.on('join room', function (roomname, callback) {
+    var obj = {};
+    if(roomname in roomObj) {
+      socket.join(roomname);
+      socket.broadcast.to(roomname).emit('room joined');
+      obj.room = roomname;
+      obj.needsAdmin = roomNeedsAdmin(roomname);
+      callback(roomInfo(obj));
+    } else {
+      callback('error');
+    }
   });
 
   socket.on('room info', function (data, callback) {
@@ -82,36 +89,46 @@ io.sockets.on('connection', function (socket) {
 function createRoom(socket, callback) {
   var randurl = createUniqueUrl();
   socket.set('admin', true);
-  rooms.push(randurl);
+  roomObj[randurl] = {
+                      administratorSet: false
+                    };
   return callback(randurl);
-  //TODO: create admin cookie
 };
 
 function createUniqueUrl() {
-  var text = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for( var i=0; i < 4; i++ ) {
+  var text = ""
+    , possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    , i
+    ;
+  for ( i = 0; i < 4; i++ ) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
-  if (rooms.indexOf(text) === -1) {
-    return text;
+  if (text in roomObj) {
+    createUniqueUrl();
     }
-  makeUniqueUrl();
+  return text;
 };
 
 function roomInfo(obj) {
-  var clientcount = Object.keys(io.sockets.clients(obj.room)).length;
-  obj.clientcount = clientcount;
+  obj.clientcount = Object.keys(io.sockets.clients(obj.room)).length;
   return obj;
 };
 
 function broadcastDisconnect(socket) {
-  var rooms = io.sockets.manager.roomClients[socket.id]
+  var clientRooms = io.sockets.manager.roomClients[socket.id]
     , room
     ;
-  for (room in rooms) {
+  for (room in clientRooms) {
     if (room.length) {
       io.sockets.in(room.substr(1)).emit('room left');
-      }
     }
+  }
 };
+
+function roomNeedsAdmin(room) {
+  if (roomObj[room].administratorSet) {
+    return false;
+  } else {
+    return roomObj[room].administratorSet = true;
+  }
+}
