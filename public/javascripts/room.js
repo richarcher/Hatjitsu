@@ -5,7 +5,6 @@ function Room(name) {
     , clientCountDiv
     , socket
     ;
-  // this.name = name;
 
   socket = io.connect(document.location.origin);
   socket.on('connect', function () {
@@ -26,10 +25,21 @@ function Room(name) {
   });
 
   function handleResponse(response) {
-    //TODO: create admin cookie if response.needsAdmin
     console.log(response);
+    if (response.needsAdmin) {
+      $.cookie("admin-" + name, true);  
+    }
+    
     $('#content').show();
     clientCountDiv.html('Players : ' + response.clientcount);
+
+    if($.cookie("admin-" + name)) {
+      adminPanel.html('You are the admin.');  
+      adminPanel.show();
+    }
+    else {
+      adminPanel.hide();
+    }
   };
 
   function setupRoom() {
