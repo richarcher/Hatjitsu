@@ -67,15 +67,20 @@ app.listen(port, function() {
 
 io.sockets.on('connection', function (socket) {
 
+  console.log("Connect");
+
   socket.on('disconnect', function () {
+    console.log("Disconnect");
     broadcastDisconnect(socket);
   });
   
   socket.on('create room', function (data, callback) {
+    console.log("create room");
     createRoom(socket, callback);
   });
 
   socket.on('join room', function (roomname, callback) {
+    console.log("join room");
     var obj = {};
     if(roomname in roomObj) {
       socket.join(roomname);
@@ -88,15 +93,15 @@ io.sockets.on('connection', function (socket) {
     }
   });
 
-  socket.on('room info', function (data, callback) {
-    callback(roomInfo({ room : data }));
+  socket.on('room info', function (roomname, callback) {
+    console.log("room info");
+    callback(roomInfo({ room: roomname, needsAdmin: roomNeedsAdmin(roomname) }));
   });
 
 });
 
 
-
-/* METHODS */
+ /* METHODS */
 
 function createRoom(socket, callback) {
   var randurl = createUniqueUrl();
