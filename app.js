@@ -1,24 +1,32 @@
+
+/**
+ * Module dependencies.
+ */
+
 var express = require('express')
-  , app = express.createServer()
-  , io = require('socket.io').listen(app)
-  , routes = require('./routes')
-  , roomObj = {}
-  ;
+  , routes = require('./routes');
+
+var app = module.exports = express.createServer();
+var io = require('socket.io').listen(app);
+var roomObj = {};
+
 // Configuration
 
-app.configure(function() {
+app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
   app.use(express.static(__dirname + '/public'));
 });
 
-app.configure('development', function() {
+app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-app.configure('production', function() {
+app.configure('production', function(){
   app.use(express.errorHandler());
 });
+
+// Routes
 
 app.get('/', routes.index);
 app.get('/:id', function(req, res) {
@@ -27,6 +35,7 @@ app.get('/:id', function(req, res) {
   }
   res.send(404);
 });
+
 
 // Heroku won't actually allow us to use WebSockets
 // so we have to setup polling instead.
@@ -50,6 +59,9 @@ var port = process.env.PORT || 5000; // Use the port that Heroku provides or def
 app.listen(port, function() {
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
+
+
+
 
 /* EVENT LISTENERS */
 
