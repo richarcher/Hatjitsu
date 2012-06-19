@@ -87,6 +87,10 @@ io.sockets.on('connection', function (socket) {
       socket.broadcast.to(roomname).emit('room joined');
       obj.room = roomname;
       obj.needsAdmin = roomNeedsAdmin(roomname);
+      if (obj.needsAdmin) {
+        socket.set('admin', true);  
+      }
+
       callback(roomInfo(obj));
     } else {
       callback('error');
@@ -105,10 +109,9 @@ io.sockets.on('connection', function (socket) {
 
 function createRoom(socket, callback) {
   var randurl = createUniqueUrl();
-  socket.set('admin', true);
   roomObj[randurl] = {
-                      administratorSet: false
-                    };
+    administratorSet: false
+  };
   return callback(randurl);
 };
 
@@ -135,9 +138,11 @@ function broadcastDisconnect(socket) {
   var clientRooms = io.sockets.manager.roomClients[socket.id]
     , room
     ;
+  console.log("broadcast Disconnect");
   for (room in clientRooms) {
     if (room.length) {
-      io.sockets.in(room.substr(1)).emit('room left');
+      roomname = room.substr(1);
+      io.sockets.in(roomname).emit('room left');
     }
   }
 };
