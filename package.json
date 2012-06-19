@@ -3,8 +3,13 @@
   , "version": "0.0.1"
   , "private": true
   , "dependencies": {
-      "express": "2.5.10"
+        "express": "2.5.10"
       , "ejs": "~ 0.7.1"
-      ,"socket.io": "~0.9.6"
-  }
+      , "socket.io": "~0.9.6"
+    }
+  , "devDependencies": {
+        "socket.io-client": "*"
+      , "should" : "*"
+      , "mocha" : "*"
+    }
 }

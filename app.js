@@ -8,7 +8,8 @@ var express = require('express')
 
 var app = module.exports = express.createServer();
 var io = require('socket.io').listen(app);
-var roomObj = {};
+var lobbyObj = require('./lib/lobby.js');
+// var roomObj = {};
 
 // Configuration
 
@@ -33,8 +34,9 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', routes.index);
+
 app.get('/:id', function(req, res) {
-  if (req.params.id in roomObj) {
+  if (req.params.id in lobby.roomObj) {
     res.render('room', { title: 'Room ' + req.params.id, script: 'room' });
   }
   res.send(404);
@@ -64,6 +66,8 @@ app.listen(port, function() {
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
 
+var lobby = new lobbyObj.Lobby();
+
 
 
 
@@ -80,58 +84,28 @@ io.sockets.on('connection', function (socket) {
   
   socket.on('create room', function (data, callback) {
     console.log("create room");
-    createRoom(socket, callback);
+    callback(lobby.createRoom());
   });
 
   socket.on('join room', function (roomname, callback) {
     console.log("join room");
-    var obj = {};
-    if(roomname in roomObj) {
-      socket.join(roomname);
-      socket.broadcast.to(roomname).emit('room joined');
-      obj.room = roomname;
-      obj.needsAdmin = roomNeedsAdmin(roomname);
-      if (obj.needsAdmin) {
-        socket.set('admin', true);  
-      }
-
-      callback(roomInfo(obj));
+    var response = lobby.joinRoom(socket, roomname);
+    if(response.error) {
+      callback( 'room does not exist' );
     } else {
-      callback('error');
+      callback(roomInfo(lobby.joinRoom(socket, roomname)));
     }
   });
 
   socket.on('room info', function (roomname, callback) {
     console.log("room info");
-    callback(roomInfo({ room: roomname, needsAdmin: roomNeedsAdmin(roomname) }));
+    callback(roomInfo({ room: roomname, needsAdmin: lobby.roomNeedsAdmin(roomname) }));
   });
 
 });
 
 
  /* METHODS */
-
-function createRoom(socket, callback) {
-  var randurl = createUniqueUrl();
-  roomObj[randurl] = {
-    administratorSet: false
-  };
-  return callback(randurl);
-};
-
-function createUniqueUrl() {
-  var text = ""
-    , possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-    , i
-    ;
-  for ( i = 0; i < 4; i++ ) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-  if (text in roomObj) {
-    createUniqueUrl();
-    }
-  return text;
-};
 
 function roomInfo(obj) {
   obj.clientcount = Object.keys(io.sockets.clients(obj.room)).length;
@@ -150,11 +124,3 @@ function broadcastDisconnect(socket) {
     }
   }
 };
-
-function roomNeedsAdmin(room) {
-  if (roomObj[room].administratorSet) {
-    return false;
-  } else {
-    return roomObj[room].administratorSet = true;
-  }
-}
