@@ -88,19 +88,19 @@ io.sockets.on('connection', function (socket) {
     callback(lobby.createRoom());
   });
 
-  socket.on('join room', function (roomname, callback) {
+  socket.on('join room', function (roomUrl, callback) {
     console.log("join room");
-    var response = lobby.joinRoom(socket, roomname);
+    var response = lobby.joinRoom(socket, roomUrl);
     if(response.error) {
       callback( 'room does not exist' );
     } else {
-      callback(lobby.refreshRoomInfo(roomname));
+      callback(lobby.refreshRoomInfo(roomUrl));
     }
   });
 
-  socket.on('room info', function (roomname, callback) {
+  socket.on('room info', function (roomUrl, callback) {
     console.log("room info");
-    callback(lobby.refreshRoomInfo(roomname));
+    callback(lobby.refreshRoomInfo(roomUrl));
   });
 
 });
