@@ -8,8 +8,9 @@ var express = require('express')
 
 var app = module.exports = express.createServer();
 var io = require('socket.io').listen(app);
-var lobbyObj = require('./lib/lobby.js');
-// var roomObj = {};
+var lobbyClass = require('./lib/lobby.js');
+
+// var rooms = {};
 
 // Configuration
 
@@ -36,7 +37,7 @@ app.configure('production', function(){
 app.get('/', routes.index);
 
 app.get('/:id', function(req, res) {
-  if (req.params.id in lobby.roomObj) {
+  if (req.params.id in lobby.rooms) {
     res.render('room', { title: 'Room ' + req.params.id, script: 'room' });
   }
   res.send(404);
@@ -66,7 +67,7 @@ app.listen(port, function() {
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
 
-var lobby = new lobbyObj.Lobby();
+var lobby = new lobbyClass.Lobby(io);
 
 
 
@@ -79,7 +80,7 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('disconnect', function () {
     console.log("Disconnect");
-    broadcastDisconnect(socket);
+    lobby.broadcastDisconnect(socket);
   });
   
   socket.on('create room', function (data, callback) {
@@ -93,34 +94,13 @@ io.sockets.on('connection', function (socket) {
     if(response.error) {
       callback( 'room does not exist' );
     } else {
-      callback(roomInfo(response));
+      callback(lobby.refreshRoomInfo(roomname));
     }
   });
 
   socket.on('room info', function (roomname, callback) {
     console.log("room info");
-    callback(roomInfo({ room: roomname, needsAdmin: lobby.roomNeedsAdmin(roomname) }));
+    callback(lobby.refreshRoomInfo(roomname));
   });
 
 });
-
-
- /* METHODS */
-
-function roomInfo(obj) {
-  obj.clientcount = Object.keys(io.sockets.clients(obj.room)).length;
-  return obj;
-};
-
-function broadcastDisconnect(socket) {
-  var clientRooms = io.sockets.manager.roomClients[socket.id]
-    , room
-    ;
-  console.log("broadcast Disconnect");
-  for (room in clientRooms) {
-    if (room.length) {
-      roomname = room.substr(1);
-      io.sockets.in(roomname).emit('room left');
-    }
-  }
-};

@@ -26,7 +26,7 @@ function Room(name) {
 
   function handleResponse(response) {
     console.log(response);
-    if (response.needsAdmin) {
+    if (response.createAdmin) {
       $.cookie("admin-" + name, true);  
     }
     
