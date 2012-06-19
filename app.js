@@ -92,7 +92,7 @@ io.sockets.on('connection', function (socket) {
     console.log("join room");
     var response = lobby.joinRoom(socket, roomUrl);
     if(response.error) {
-      callback( 'room does not exist' );
+      callback( response.error );
     } else {
       callback(lobby.refreshRoomInfo(roomUrl));
     }
