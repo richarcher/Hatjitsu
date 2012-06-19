@@ -93,7 +93,7 @@ io.sockets.on('connection', function (socket) {
     if(response.error) {
       callback( 'room does not exist' );
     } else {
-      callback(roomInfo(lobby.joinRoom(socket, roomname)));
+      callback(roomInfo(response));
     }
   });
 
