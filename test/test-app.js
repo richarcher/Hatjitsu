@@ -1,6 +1,6 @@
 // var should = require('should');
 var io = require('socket.io-client');
-var room = require('../lib/room.js');
+var lobby = require('../lib/lobby.js');
 var socketURL = "http://0.0.0.0:5000";
 var options = {
   transports: ['websocket'],
@@ -89,7 +89,7 @@ describe("Socket Server", function() {
     // on('room info')
     // client count should work
   });
-  
+
   it("Should assign a count of users in multiple rooms" ,function(done){
     //TODO: deal with multiple rooms
   });
