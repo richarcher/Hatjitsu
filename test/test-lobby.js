@@ -1,3 +1,4 @@
+var should = require('chai').should();
 var lobbyClass = require('../lib/lobby.js');
 
 describe('Lobby Class', function(){

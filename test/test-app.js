@@ -1,3 +1,4 @@
+var should = require('chai').should();
 var io = require('socket.io-client');
 var socketURL = "http://0.0.0.0:5000";
 var options = {
