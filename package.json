@@ -9,7 +9,7 @@
     }
   , "devDependencies": {
         "socket.io-client": "*"
-      , "should" : "*"
+      , "chai" : "~1.0.4" 
       , "mocha" : "*"
     }
 }
