@@ -1,8 +1,8 @@
 function Room(name) {
-  var adminPanel
-    , playArea
-    , cardDeck
-    , clientCountDiv
+  var $adminPanel
+    // , playArea
+    // , cardDeck
+    , $clientCount
     , socket
     ;
 
@@ -31,24 +31,24 @@ function Room(name) {
     }
     
     $('#content').show();
-    clientCountDiv.html('Players : ' + response.clientcount);
+    $clientCount.html('Players : ' + response.clientcount);
 
     if($.cookie("admin-" + name)) {
-      adminPanel.html('You are the admin.');  
-      adminPanel.show();
+      $adminPanel.show();
     }
     else {
-      adminPanel.hide();
+      $adminPanel.hide();
     }
   };
 
   function setupRoom() {
-    adminPanel = $(document.createElement('div')).attr('id', 'adminPanel');
-    playArea = $(document.createElement('div')).attr('id', 'playArea');
-    cardDeck = $(document.createElement('div')).attr('id', 'cardDeck');
-    clientCountDiv = $(document.createElement('div')).attr('id', 'clientCount');
-    clientCountDiv.appendTo(playArea);
-    $('#content').html('').hide().append(adminPanel, playArea, cardDeck);
+    // playArea = $(document.createElement('div')).attr('id', 'playArea');
+    // cardDeck = $(document.createElement('div')).attr('id', 'cardDeck');
+    $adminPanel = $('#adminPanel');
+    $clientCount = $('#clientCount');
+
+    $clientCount.show();
+    // $('#content').html('').hide().append(playArea, cardDeck);
   };
 
 };
