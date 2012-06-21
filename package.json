@@ -4,7 +4,6 @@
   , "private": true
   , "dependencies": {
         "express": "2.5.10"
-      , "ejs": "~ 0.7.1"
       , "socket.io": "~0.9.6"
     }
   , "devDependencies": {

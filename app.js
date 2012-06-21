@@ -3,25 +3,21 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes');
+var express = require('express'),
+    fs = require('fs');
 
 var app = module.exports = express.createServer();
 var io = require('socket.io').listen(app);
 var lobbyClass = require('./lib/lobby.js');
 
-// var rooms = {};
-
 // Configuration
 
 app.configure(function(){
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
+  app.set('views', __dirname + '/app');
   app.use(express.logger());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
+  app.use(express.static(__dirname + '/app'));
 });
 
 app.configure('development', function(){
@@ -32,17 +28,17 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-// Routes
-
-app.get('/', routes.index);
 
 app.get('/:id', function(req, res) {
   if (req.params.id in lobby.rooms) {
-    res.render('room', { title: 'Room ' + req.params.id, script: 'room' });
+    fs.readFile(__dirname + '/app/index.html', 'utf8', function(err, text){
+      console.log(text);
+      res.send(text);
+    });
+  } else {
+    res.send(404);  
   }
-  res.send(404);
 });
-
 
 // Heroku won't actually allow us to use WebSockets
 // so we have to setup polling instead.
@@ -67,6 +63,7 @@ app.listen(port, function() {
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
 
+
 var lobby = new lobbyClass.Lobby(io);
 
 
@@ -89,7 +86,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('join room', function (roomUrl, callback) {
-    console.log("join room");
+    console.log("join room " + roomUrl);
     var response = lobby.joinRoom(socket, roomUrl);
     if(response.error) {
       callback( response.error );
