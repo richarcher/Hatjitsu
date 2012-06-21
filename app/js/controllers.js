@@ -54,7 +54,7 @@ function RoomCtrl($scope, $routeParams, socket) {
   $scope.roomId = $routeParams.roomId;
   $scope.playerCount = 0;
   $scope.showAdmin = false;
-
+  $scope.cardPack = "fib";
 }
   
 RoomCtrl.$inject = ['$scope', '$routeParams', 'socket'];

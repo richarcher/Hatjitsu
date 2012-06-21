@@ -1,5 +1,16 @@
 <div ng-init="configureRoom()">
   <h2>Room: {{roomId}}</h2>
   <p>Player count: {{playerCount}}</p>
-  <p>Show admin: {{showAdmin}}</p>
+
+  <div ng-switch on="showAdmin">
+    <div ng-switch-when="true">
+      <div id="adminPanel">
+        Choose card pack:
+        <select ng-model="cardPack">
+          <option value="fib">Fibonacci</option>
+          <option value="seq">Sequential</option>
+        </select>
+      </div>
+    </div>
+  </div>
 </div>
