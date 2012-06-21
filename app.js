@@ -100,4 +100,9 @@ io.sockets.on('connection', function (socket) {
     callback(lobby.refreshRoomInfo(roomUrl));
   });
 
+  socket.on('set card pack', function (roomUrl, cardPack) {
+    console.log("set card pack " + cardPack + " for " + roomUrl);
+    lobby.setCardPack(roomUrl, cardPack);
+  });
+
 });
