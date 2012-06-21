@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-function CreateRoomCtrl($scope, $location) {
+function CreateRoomCtrl($scope, $location, socket) {
   $scope.createRoom = function() {
     socket.emit('create room', {}, function(roomUrl){
       $scope.$apply(function() {
@@ -14,10 +14,10 @@ function CreateRoomCtrl($scope, $location) {
   }
 }
 
-CreateRoomCtrl.$inject = ['$scope', '$location'];
+CreateRoomCtrl.$inject = ['$scope', '$location', 'socket'];
 
 
-function RoomCtrl($scope, $routeParams) {
+function RoomCtrl($scope, $routeParams, socket) {
   var refreshRoomInfo = function(roomObj) {
     if (roomObj.createAdmin) {
       $.cookie("admin-" + $scope.roomId, true);  
@@ -57,4 +57,4 @@ function RoomCtrl($scope, $routeParams) {
 
 }
   
-RoomCtrl.$inject = ['$scope', '$routeParams'];
+RoomCtrl.$inject = ['$scope', '$routeParams', 'socket'];
