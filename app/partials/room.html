@@ -1,7 +1,7 @@
 <div ng-init="configureRoom()">
   <div id="commsError" class="alert alert-error" ui-show="errorMessage">{{errorMessage}}</div>
 
-  <h2>Room: {{roomId}}</h2>
+  <h2>Room: /{{roomId}}</h2>
   <p>Player count: {{playerCount}}</p>
 
   <div ng-switch on="showAdmin">
@@ -16,9 +16,21 @@
     </div>
   </div>
 
-  <ul>
-    <li ng-repeat="card in cards">
-      {{card}}
-    </li>
-  </ul>
+  <div id="votePanel">
+    <h3>Votes</h3>
+    <ul class="cards">
+      <li ng-repeat="vote in votes" class="card">
+        <div>{{vote}}</div>
+      </li>
+    </ul>
+  </div>
+
+  <div id="cardPackPanel">
+    <h3>Card Pack</h3>
+    <ul class="cards">
+      <li ng-repeat="card in cards" ng-click="vote(card)" class="card">
+        <div>{{card}}</div>
+      </li>
+    </ul>
+  </div>
 </div>

@@ -115,4 +115,20 @@ io.sockets.on('connection', function (socket) {
     }
   });
 
+  socket.on('vote', function (roomUrl, vote) {
+    console.log("vote " + vote + " received for " + roomUrl);
+    var room = lobby.getRoom(roomUrl);
+    if (!room.error) {
+      room.recordVote(vote);
+    }
+  });
+
+  socket.on('reset vote', function (roomUrl) {
+    console.log("reset vote  received for " + roomUrl);
+    var room = lobby.getRoom(roomUrl);
+    if (!room.error) {
+      room.resetVote();
+    }
+  });
+
 });

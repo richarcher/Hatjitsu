@@ -49,6 +49,8 @@ function RoomCtrl($scope, $routeParams, socket) {
     } else if ($scope.cardPack == 'seq') {
       $scope.cards = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '?'];
     }
+    console.log("received votes: " + roomObj.votes);
+    $scope.votes = roomObj.votes;
   }
 
   $scope.configureRoom = function() {
@@ -67,6 +69,16 @@ function RoomCtrl($scope, $routeParams, socket) {
         processMessage(response, refreshRoomInfo);
       });
     });
+    socket.on('voted', function () {
+      this.emit('room info', $scope.roomId, function(response){
+        processMessage(response, refreshRoomInfo);
+      });
+    });
+    socket.on('vote reset', function () {
+      this.emit('room info', $scope.roomId, function(response){
+        processMessage(response, refreshRoomInfo);
+      });
+    });
     socket.emit('join room', $scope.roomId, function(response){
       processMessage(response, refreshRoomInfo);
     });
@@ -74,7 +86,18 @@ function RoomCtrl($scope, $routeParams, socket) {
 
   $scope.setCardPack = function(cardPack) {
     $scope.cardPack = cardPack;
+    $scope.resetVote();
     socket.emit('set card pack', $scope.roomId, cardPack);
+  }
+
+  $scope.vote = function(vote) {
+    console.log("vote " + vote);
+    $scope.myVote = vote;
+    socket.emit('vote', $scope.roomId, vote);
+  }
+
+  $scope.resetVote = function() {
+    socket.emit('reset vote', $scope.roomId);
   }
 
   $scope.roomId = $routeParams.roomId;
@@ -82,5 +105,5 @@ function RoomCtrl($scope, $routeParams, socket) {
   $scope.showAdmin = false;
   $scope.errorMessage = null;
 }
-  
+
 RoomCtrl.$inject = ['$scope', '$routeParams', 'socket'];
