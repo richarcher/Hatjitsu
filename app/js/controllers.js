@@ -104,6 +104,8 @@ function RoomCtrl($scope, $routeParams, socket) {
   $scope.playerCount = 0;
   $scope.showAdmin = false;
   $scope.errorMessage = null;
+  $scope.votes = [];
+  $scope.cardPack = '';
 }
 
 RoomCtrl.$inject = ['$scope', '$routeParams', 'socket'];
