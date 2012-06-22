@@ -17,6 +17,25 @@
   opacity: 0.9;
 }
 
+#message {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  margin: 0px;
+  height: 0px;
+  opacity: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#message.ui-show {
+  height: 2em;
+  opacity: 0.9;
+}
+
 #cardPackPanel {
   clear: both;
 }

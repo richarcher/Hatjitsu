@@ -33,6 +33,17 @@ function RoomCtrl($scope, $routeParams, socket) {
     });
   }
 
+  var displayMessage = function(msg) {
+    $scope.$apply(function() {
+      $scope.message = msg;
+      setTimeout(function() {
+        $scope.$apply(function() {
+          $scope.message = null;    
+        });
+      }, 5000);
+    });
+  }
+
   var refreshRoomInfo = function(roomObj) {
     if (roomObj.createAdmin) {
       $.cookie("admin-" + $scope.roomId, true);  
@@ -65,6 +76,7 @@ function RoomCtrl($scope, $routeParams, socket) {
       });
     });
     socket.on('card pack set', function () {
+      displayMessage("Card pack was changed.");
       this.emit('room info', $scope.roomId, function(response){
         processMessage(response, refreshRoomInfo);
       });
@@ -105,6 +117,7 @@ function RoomCtrl($scope, $routeParams, socket) {
   $scope.playerCount = 0;
   $scope.showAdmin = false;
   $scope.errorMessage = null;
+  $scope.message = null;
   $scope.votes = [];
   $scope.cardPack = '';
   $scope.myVote = null;
