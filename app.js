@@ -87,22 +87,23 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('join room', function (roomUrl, callback) {
     console.log("join room " + roomUrl);
-    var response = lobby.joinRoom(socket, roomUrl);
-    if(response.error) {
-      callback( response.error );
+    var room = lobby.joinRoom(socket, roomUrl);
+    if(room.error) {
+      callback( room.error );
     } else {
-      callback(lobby.refreshRoomInfo(roomUrl));
+      callback(room.info());
     }
   });
 
   socket.on('room info', function (roomUrl, callback) {
     console.log("room info");
-    callback(lobby.refreshRoomInfo(roomUrl));
+    var room = lobby.getRoom(roomUrl);
+    callback(room.info());
   });
 
   socket.on('set card pack', function (roomUrl, cardPack) {
     console.log("set card pack " + cardPack + " for " + roomUrl);
-    lobby.setCardPack(roomUrl, cardPack);
+    lobby.getRoom(roomUrl).setCardPack(cardPack);
   });
 
 });
