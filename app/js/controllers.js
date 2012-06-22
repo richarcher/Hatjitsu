@@ -75,6 +75,7 @@ function RoomCtrl($scope, $routeParams, socket) {
       });
     });
     socket.on('vote reset', function () {
+      $scope.myVote = null;
       this.emit('room info', $scope.roomId, function(response){
         processMessage(response, refreshRoomInfo);
       });
@@ -106,6 +107,7 @@ function RoomCtrl($scope, $routeParams, socket) {
   $scope.errorMessage = null;
   $scope.votes = [];
   $scope.cardPack = '';
+  $scope.myVote = null;
 }
 
 RoomCtrl.$inject = ['$scope', '$routeParams', 'socket'];
