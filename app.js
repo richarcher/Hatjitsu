@@ -89,7 +89,7 @@ io.sockets.on('connection', function (socket) {
     console.log("join room " + roomUrl);
     var room = lobby.joinRoom(socket, roomUrl);
     if(room.error) {
-      callback( room.error );
+      callback( { error: room.error } );
     } else {
       callback(room.info());
     }
@@ -98,12 +98,21 @@ io.sockets.on('connection', function (socket) {
   socket.on('room info', function (roomUrl, callback) {
     console.log("room info");
     var room = lobby.getRoom(roomUrl);
-    callback(room.info());
+    // room = { error: "there was an error" };
+    if (room.error) {
+      callback( { error: room.error } );
+    } else {
+      callback(room.info());
+    }
   });
 
   socket.on('set card pack', function (roomUrl, cardPack) {
     console.log("set card pack " + cardPack + " for " + roomUrl);
-    lobby.getRoom(roomUrl).setCardPack(cardPack);
+    var room = lobby.getRoom(roomUrl);
+    console.log("error=" + room.error);
+    if (!room.error) {
+      room.setCardPack(cardPack);
+    }
   });
 
 });

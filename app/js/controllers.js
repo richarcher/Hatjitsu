@@ -17,6 +17,22 @@ CreateRoomCtrl.$inject = ['$scope', '$location', 'socket'];
 
 function RoomCtrl($scope, $routeParams, socket) {
 
+  var processMessage = function(response, process) {
+    $scope.$apply(function() {
+      if (response.error) {
+        $scope.errorMessage = response.error;
+        setTimeout(function() {
+          $scope.$apply(function() {
+            $scope.errorMessage = null;    
+          });
+        }, 3000);
+      } else {
+        $scope.errorMessage = null;
+        process(response);
+      }
+    });
+  }
+
   var refreshRoomInfo = function(roomObj) {
     if (roomObj.createAdmin) {
       $.cookie("admin-" + $scope.roomId, true);  
@@ -38,29 +54,21 @@ function RoomCtrl($scope, $routeParams, socket) {
   $scope.configureRoom = function() {
     socket.on('room joined', function () {
       this.emit('room info', $scope.roomId, function(response){
-        $scope.$apply(function() {
-          refreshRoomInfo(response);
-        });
+        processMessage(response, refreshRoomInfo);
       });
     });
     socket.on('room left', function () {
       this.emit('room info', $scope.roomId, function(response){
-        $scope.$apply(function() {
-          refreshRoomInfo(response);
-        });
+        processMessage(response, refreshRoomInfo);
       });
     });
     socket.on('card pack set', function () {
       this.emit('room info', $scope.roomId, function(response){
-        $scope.$apply(function() {
-          refreshRoomInfo(response);
-        });
+        processMessage(response, refreshRoomInfo);
       });
     });
     socket.emit('join room', $scope.roomId, function(response){
-      $scope.$apply(function() {
-        refreshRoomInfo(response);
-      });
+      processMessage(response, refreshRoomInfo);
     });
   }
 
@@ -72,6 +80,7 @@ function RoomCtrl($scope, $routeParams, socket) {
   $scope.roomId = $routeParams.roomId;
   $scope.playerCount = 0;
   $scope.showAdmin = false;
+  $scope.errorMessage = null;
 }
   
 RoomCtrl.$inject = ['$scope', '$routeParams', 'socket'];
