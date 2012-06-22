@@ -1,6 +1,18 @@
-<!doctype html>
-<html lang="en" ng-app="pokerApp">
+<!doctype html >
+<html xmlns:ng="http://angularjs.org" lang="en" ng-app="pokerApp">
 <head>
+  <!--[if lte IE 8]>
+    <script>
+      document.createElement('ng-include');
+      document.createElement('ng-pluralize');
+      document.createElement('ng-view');
+      
+      // Optionally these for CSS
+      document.createElement('ng:include');
+      document.createElement('ng:pluralize');
+      document.createElement('ng:view');
+    </script>
+  <![endif]-->
   <meta charset="utf-8">
   <title>POKER</title>
   <link rel="stylesheet" href="css/app.css"/>
