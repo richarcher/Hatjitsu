@@ -119,7 +119,7 @@ io.sockets.on('connection', function (socket) {
     console.log("vote " + vote + " received for " + roomUrl);
     var room = lobby.getRoom(roomUrl);
     if (!room.error) {
-      room.recordVote(vote);
+      room.recordVote(socket, vote);
     }
   });
 
