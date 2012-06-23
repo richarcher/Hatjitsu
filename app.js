@@ -85,9 +85,9 @@ io.sockets.on('connection', function (socket) {
     callback(lobby.createRoom());
   });
 
-  socket.on('join room', function (roomUrl, callback) {
-    console.log("join room " + roomUrl);
-    var room = lobby.joinRoom(socket, roomUrl);
+  socket.on('join room', function (data, callback) {
+    console.log("join room " + data.roomUrl);
+    var room = lobby.joinRoom(socket, data.roomUrl);
     if(room.error) {
       callback( { error: room.error } );
     } else {
@@ -95,9 +95,9 @@ io.sockets.on('connection', function (socket) {
     }
   });
 
-  socket.on('room info', function (roomUrl, callback) {
-    console.log("room info");
-    var room = lobby.getRoom(roomUrl);
+  socket.on('room info', function (data, callback) {
+    console.log("room info for " + data.roomUrl);
+    var room = lobby.getRoom(data.roomUrl);
     // room = { error: "there was an error" };
     if (room.error) {
       callback( { error: room.error } );
@@ -106,28 +106,34 @@ io.sockets.on('connection', function (socket) {
     }
   });
 
-  socket.on('set card pack', function (roomUrl, cardPack) {
-    console.log("set card pack " + cardPack + " for " + roomUrl);
-    var room = lobby.getRoom(roomUrl);
+  socket.on('set card pack', function (data, cardPack) {
+    console.log("set card pack " + data.cardPack + " for " + data.roomUrl);
+    var room = lobby.getRoom(data.roomUrl);
     console.log("error=" + room.error);
     if (!room.error) {
-      room.setCardPack(cardPack);
+      room.setCardPack(data.cardPack);
     }
   });
 
-  socket.on('vote', function (roomUrl, vote) {
-    console.log("vote " + vote + " received for " + roomUrl);
-    var room = lobby.getRoom(roomUrl);
-    if (!room.error) {
-      room.recordVote(socket, vote);
+  socket.on('vote', function (data, callback) {
+    console.log("vote " + data.vote + " received for " + data.roomUrl);
+    var room = lobby.getRoom(data.roomUrl);
+    if (room.error) {
+      callback( { error: room.error });
+    } else {
+      room.recordVote(socket, data.vote);
+      callback( {} );
     }
   });
 
-  socket.on('reset vote', function (roomUrl) {
-    console.log("reset vote  received for " + roomUrl);
-    var room = lobby.getRoom(roomUrl);
-    if (!room.error) {
+  socket.on('reset vote', function (data, callback) {
+    console.log("reset vote  received for " + data.roomUrl);
+    var room = lobby.getRoom(data.roomUrl);
+    if (room.error) {
+      callback( { error: room.error });
+    } else {
       room.resetVote();
+      callback( {} );
     }
   });
 
