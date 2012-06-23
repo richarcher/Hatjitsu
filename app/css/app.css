@@ -55,6 +55,13 @@
   opacity: 0.9;
 }
 
+.alert-socket {
+  color: black;
+  background-color: yellow;
+  border-color: #bce8f1;
+}
+
+
 #cardPackPanel {
   clear: both;
 }

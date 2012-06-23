@@ -16,26 +16,35 @@ pokerAppServices.service('socket', ['$rootScope', function($rootScope) {
 
 
 var Sock = function(rootScope) {
-  this.rootScope = rootScope;
-  this.message = null;
+  var that = this;
 
+  this.rootScope = rootScope;
+  this.rootScope.socketMessage = null;  
   this.socket = io.connect(document.location.origin);
 
   this.socket.on('error', function(reason) {
-    this.message = reason;
+    that.rootScope.$apply(function() {
+      that.rootScope.socketMessage = reason;  
+    });
     console.log(reason);
   })
   this.socket.on('connect_failed', function(reason) {
-    this.message = reason;
+    that.rootScope.$apply(function() {
+      that.rootScope.socketMessage = reason;  
+    });
     console.log(reason);
   })
   this.socket.on('disconnect', function() {
-    this.message = "Disconnected";
+    that.rootScope.$apply(function() {
+      that.rootScope.socketMessage = "Disconnected";  
+    })
     console.log('disconnected');
   })
   this.socket.on('connect', function() {
-    this.message = null;
-    console.log('connected');
+    that.rootScope.$apply(function() {
+      that.rootScope.socketMessage = null;  
+    });
+    console.log('connected with ' + this.socket.sessionid);
   })
 };
 
@@ -44,6 +53,6 @@ Sock.prototype.emit = function(msg, data, callback) {
 }
 
 Sock.prototype.on = function(msg, callback) {
-  this.message = null;
+  this.rootScope.socketMessage = null;  
   this.socket.on(msg, callback);
 }
