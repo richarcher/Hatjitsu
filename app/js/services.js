@@ -8,7 +8,7 @@
 angular.module('pokerApp.services', []).
   value('version', '0.1');
 
-angular.module('pokerApp.socket', [], function($provide) {
+angular.module('pokerApp.services', [], function($provide) {
   $provide.factory('socket', function() {
     var socket = io.connect(document.location.origin);
     return socket;

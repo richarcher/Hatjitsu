@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('pokerApp', ['pokerApp.filters', 'pokerApp.services', 'pokerApp.directives', 'pokerApp.socket']).
+angular.module('pokerApp', ['pokerApp.filters', 'pokerApp.services', 'pokerApp.directives']).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true).hashPrefix('!');
     $routeProvider.when('/', { templateUrl: 'partials/createRoom.html', controller: CreateRoomCtrl});
