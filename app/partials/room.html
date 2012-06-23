@@ -1,6 +1,7 @@
 <div ng-init="configureRoom()">
-  <div id="commsError" class="alert alert-error" ui-show="errorMessage">{{errorMessage}}</div>
+  <div id="appError" class="alert alert-error" ui-show="errorMessage">{{errorMessage}}</div>
   <div id="message" class="alert alert-info" ui-show="message">{{message}}</div>
+  <div id="socketMessage" class="alert alert-socket" ui-show="socket.message">{{socket.message}}</div>
 
   <h2>Room: /{{roomId}}</h2>
   <p>Player count: {{playerCount}}</p>
