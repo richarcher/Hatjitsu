@@ -15,16 +15,14 @@ function CreateRoomCtrl($scope, $location, socket) {
 CreateRoomCtrl.$inject = ['$scope', '$location', 'socket'];
 
 
-function RoomCtrl($scope, $routeParams, socket) {
+function RoomCtrl($scope, $routeParams, $timeout, socket) {
 
   var processMessage = function(response, process) {
     $scope.$apply(function() {
       if (response.error) {
         $scope.errorMessage = response.error;
-        setTimeout(function() {
-          $scope.$apply(function() {
-            $scope.errorMessage = null;    
-          });
+        $timeout(function() {
+          $scope.errorMessage = null;
         }, 3000);
       } else {
         $scope.errorMessage = null;
@@ -36,10 +34,8 @@ function RoomCtrl($scope, $routeParams, socket) {
   var displayMessage = function(msg) {
     $scope.$apply(function() {
       $scope.message = msg;
-      setTimeout(function() {
-        $scope.$apply(function() {
-          $scope.message = null;    
-        });
+      $timeout(function() {
+        $scope.message = null;
       }, 5000);
     });
   }
@@ -123,4 +119,4 @@ function RoomCtrl($scope, $routeParams, socket) {
   $scope.myVote = null;
 }
 
-RoomCtrl.$inject = ['$scope', '$routeParams', 'socket'];
+RoomCtrl.$inject = ['$scope', '$routeParams', '$timeout', 'socket'];
