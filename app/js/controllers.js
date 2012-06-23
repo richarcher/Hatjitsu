@@ -11,11 +11,18 @@ function LobbyCtrl($scope, $location, socket) {
     });
   }
   $scope.enterRoom = function(room) {
-    $location.path(room);
+    socket.emit('room info', { roomUrl: room }, function(response){
+      if (!response.error) {
+        $scope.$apply(function() {
+          console.log("going to enter room " + room);
+          $location.path(room);    
+        });
+      }
+    });
   }
 }
 
-CreateRoomCtrl.$inject = ['$scope', '$location', 'socket'];
+LobbyCtrl.$inject = ['$scope', '$location', 'socket'];
 
 
 function RoomCtrl($scope, $routeParams, $timeout, socket) {
