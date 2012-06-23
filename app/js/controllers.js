@@ -2,13 +2,16 @@
 
 /* Controllers */
 
-function CreateRoomCtrl($scope, $location, socket) {
+function LobbyCtrl($scope, $location, socket) {
   $scope.createRoom = function() {
     socket.emit('create room', {}, function(roomUrl){
       $scope.$apply(function() {
         $location.path(roomUrl);
       });
     });
+  }
+  $scope.enterRoom = function(room) {
+    $location.path(room);
   }
 }
 
