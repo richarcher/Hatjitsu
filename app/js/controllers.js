@@ -14,8 +14,8 @@ function LobbyCtrl($scope, $location, socket) {
     socket.emit('room info', { roomUrl: room }, function(response){
       if (!response.error) {
         $scope.$apply(function() {
-          console.log("going to enter room " + room);
-          $location.path(room);    
+          console.log("going to enter room " + response.roomUrl);
+          $location.path(response.roomUrl);    
         });
       }
     });
