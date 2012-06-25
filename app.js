@@ -148,4 +148,14 @@ io.sockets.on('connection', function (socket) {
     }
   });
 
+  socket.on('toggle voter', function (data, callback) {
+    var room = lobby.getRoom(data.roomUrl);
+    if (room.error) {
+      callback( { error: room.error });
+    } else {
+      room.toggleVoter(socket, data.voter);
+      callback( {} );
+    }
+  });
+
 });

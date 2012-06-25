@@ -3,7 +3,9 @@
   <div id="message" class="alert alert-info" ui-show="message">{{message}}</div>
 
   <h2>Room: /{{roomId}}</h2>
-  <p>Player count: {{playerCount}}</p>
+  <p>Human count: {{humanCount}}</p>
+  <p>Voter count: {{voterCount}}</p>
+  <p>Voter: <input type="checkbox" ng-model="voter" ng-change="toggleVoter()" /></p>
 
   <div ng-switch on="showAdmin">
     <div ng-switch-when="true">
@@ -22,13 +24,13 @@
     <h3>Votes</h3>
     <ul class="cards">
       <li ng-repeat="vote in votes" ng-click="unvote(vote.socketId)" class="card mine-{{vote.socketId==socketId}}">
-        <div ng-show="votes.length == playerCount">{{vote.vote}}</div>
-        <div ng-show="votes.length < playerCount">x</div>
+        <div ng-show="votes.length == voterCount">{{vote.vote}}</div>
+        <div ng-show="votes.length < voterCount">x</div>
       </li>
     </ul>
   </div>
 
-  <div id="cardPackPanel">
+  <div id="cardPackPanel" ng-show="voter">
     <h3>Card Pack</h3>
     <ul class="cards">
       <li ng-repeat="card in cards" ng-click="vote(card)" class="card mine-{{card==myVote}}">

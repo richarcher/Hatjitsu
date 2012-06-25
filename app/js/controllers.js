@@ -58,7 +58,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       $scope.showAdmin = true;
     }
     
-    $scope.playerCount = roomObj.clientCount;
+    $scope.humanCount = roomObj.clientCount;
     $scope.cardPack = roomObj.cardPack;
 
     if ($scope.cardPack == 'fib') {
@@ -69,6 +69,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     console.log("received votes: " + roomObj.connections);
     $scope.connections = roomObj.connections;
     $scope.votes = _.chain($scope.connections).filter(function(c) { return c.vote }).values().value();
+    $scope.voterCount = _.filter($scope.connections, function(c) { return c.voter }).length;
   }
 
   $scope.configureRoom = function() {
@@ -84,6 +85,11 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     });
     socketService.on('card pack set', function () {
       displayMessage("Card pack was changed.");
+      this.emit('room info', { roomUrl: $scope.roomId }, function(response){
+        processMessage(response, refreshRoomInfo);
+      });
+    });
+    socketService.on('voter status changed', function () {
       this.emit('room info', { roomUrl: $scope.roomId }, function(response){
         processMessage(response, refreshRoomInfo);
       });
@@ -151,9 +157,20 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     });
   }
 
+  $scope.toggleVoter = function() {
+    if (!$scope.voter) {
+      $scope.unvote($scope.socketId);
+    }
+    socketService.emit('toggle voter', { roomUrl: $scope.roomId, voter: $scope.voter }, function(response) {
+      processMessage(response);
+    });
+  }
+
   $scope.roomId = $routeParams.roomId;
-  $scope.playerCount = 0;
+  $scope.humanCount = 0;
+  $scope.voterCount = 0;
   $scope.showAdmin = false;
+  $scope.voter = true;
   $scope.errorMessage = null;
   $scope.message = null;
   $scope.connections = {};
