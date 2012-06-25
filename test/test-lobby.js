@@ -17,9 +17,12 @@ describe('Lobby Class', function(){
       var room;
       lobby.createRoom();
       room = Object.keys(lobby.rooms)[0];
-      Object.keys(lobby.rooms[room]).length.should.equal(2);
+      Object.keys(lobby.rooms[room]).length.should.equal(7);
       lobby.rooms[room].should.have.property('createAdmin', true);
       lobby.rooms[room].should.have.property('hasAdmin', false);
+      lobby.rooms[room].should.have.property('cardPack', 'fib');
+      lobby.rooms[room].should.have.property('clientCount', 0);
+      lobby.rooms[room].should.have.property('connections').and.be.empty;
     });
   });
 
