@@ -126,6 +126,17 @@ io.sockets.on('connection', function (socket) {
     }
   });
 
+  socket.on('unvote', function (data, callback) {
+    console.log("unvote received for " + data.roomUrl);
+    var room = lobby.getRoom(data.roomUrl);
+    if (room.error) {
+      callback( { error: room.error });
+    } else {
+      room.destroyVote(socket);
+      callback( {} );
+    }
+  });
+
   socket.on('reset vote', function (data, callback) {
     console.log("reset vote  received for " + data.roomUrl);
     var room = lobby.getRoom(data.roomUrl);

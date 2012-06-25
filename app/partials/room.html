@@ -21,8 +21,8 @@
   <div id="votePanel">
     <h3>Votes</h3>
     <ul class="cards">
-      <li ng-repeat="vote in votes" class="card">
-        <div ng-show="votes.length == playerCount">{{vote}}</div>
+      <li ng-repeat="vote in votes" ng-click="unvote(vote.socketId)" class="card mine-{{vote.socketId==socketId}}">
+        <div ng-show="votes.length == playerCount">{{vote.vote}}</div>
         <div ng-show="votes.length < playerCount">x</div>
       </li>
     </ul>
