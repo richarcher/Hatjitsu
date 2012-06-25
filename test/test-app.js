@@ -22,7 +22,7 @@ describe("Socket Server events", function() {
       var client1 = io.connect(socketURL, options);
       client1.emit('create room', {}, function(roomUrl) {
         client1.emit('join room', roomUrl, function(callback){
-          callback.should.have.property('clientcount', 1);
+          callback.should.have.property('clientCount', 1);
           client1.disconnect();
           done();
         });
@@ -33,7 +33,7 @@ describe("Socket Server events", function() {
       var client1 = io.connect(socketURL, options);
       client1.emit('create room', {}, function(roomUrl1) {
         client1.emit('join room', roomUrl1, function(callback){
-          callback.should.have.property('clientcount', 1);
+          callback.should.have.property('clientCount', 1);
           client1.disconnect();
 
           var client2 = io.connect(socketURL, options);
@@ -43,7 +43,7 @@ describe("Socket Server events", function() {
               var client3 = io.connect(socketURL, options);
               client3.emit('join room', roomUrl2, function(callback) {
 
-                callback.should.have.property('clientcount', 2);
+                callback.should.have.property('clientCount', 2);
                 client2.disconnect();
                 client3.disconnect();
                 done();
@@ -58,25 +58,25 @@ describe("Socket Server events", function() {
       var client1 = io.connect(socketURL, options);
       client1.emit('create room', {}, function(roomUrl){
         client1.emit('room info', roomUrl, function(callback){
-          // client1 has yet to join room, so no admin is set and clientcount is zero
+          // client1 has yet to join room, so no admin is set and clientCount is zero
           Object.keys(callback).length.should.equal(3);
-          callback.should.have.property('clientcount', 0);
+          callback.should.have.property('clientCount', 0);
 
 
           client1.emit('join room', roomUrl, function(callback){
             client1.emit('room info', roomUrl, function(callback){
               // client1 has now joined room, so _now_ room info is updated
               Object.keys(callback).length.should.equal(3);
-              callback.should.have.property('clientcount', 1);
+              callback.should.have.property('clientCount', 1);
 
               var client2 = io.connect(socketURL, options);
               client2.emit('join room', roomUrl, function(callback){
                 client2.emit('room info', roomUrl, function(callback){
-                  callback.should.have.property('clientcount', 2);
+                  callback.should.have.property('clientCount', 2);
 
                   client1.disconnect();
                   client2.emit('room info', roomUrl, function(callback){
-                    callback.should.have.property('clientcount', 1);
+                    callback.should.have.property('clientCount', 1);
 
                     client2.disconnect();
                     done();
@@ -100,12 +100,12 @@ describe("Socket Server events", function() {
         client1.emit('room info', roomUrl, function(callback){
           callback.should.have.property('createAdmin', true);
           callback.should.have.property('hasAdmin', true);
-          callback.should.have.property('clientcount', 0);
+          callback.should.have.property('clientCount', 0);
           client1.emit('join room', roomUrl, function(callback){
             client1.emit('room info', roomUrl, function(callback){
               callback.should.have.property('createAdmin', false);
               callback.should.have.property('hasAdmin', true);
-              callback.should.have.property('clientcount', 1);
+              callback.should.have.property('clientCount', 1);
               client1.disconnect();
               done();
             });

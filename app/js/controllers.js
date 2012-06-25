@@ -60,7 +60,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
       $scope.showAdmin = true;
     }
     
-    $scope.playerCount = roomObj.clientcount;
+    $scope.playerCount = roomObj.clientCount;
     $scope.cardPack = roomObj.cardPack;
 
     if ($scope.cardPack == 'fib') {
