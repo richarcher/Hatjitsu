@@ -167,8 +167,6 @@ describe('Lobby Class', function(){
   });
 
   describe('#broadcastDisconnect()', function(){
-    it('should error if trying to leave a non-existent room');
-    it("should not be a member of the room on success");
-    it("should tell other room members that a client has left");
+    it('should be tested somehow. Now idea how though.');
   });
 });
