@@ -76,8 +76,16 @@ describe('Lobby Class', function(){
   });
 
   describe('#createUniqueURL()', function(){
+
+    it('should be called from #createRoom()', function(){
+      var lobby = new LobbyClass.Lobby();
+      var spy = sinon.spy(lobby, "createUniqueURL");
+      lobby.createRoom();
+      spy.should.have.been.calledOnce;
+    });
+
     it('should generate a random 4-character string', function(){
-      var lobby = new lobbyClass.Lobby();
+      var lobby = new LobbyClass.Lobby();
       var string = lobby.createUniqueURL();
       string.should.match(/^[0-9a-zA-Z]{4}$/);
     });
@@ -135,12 +143,27 @@ describe('Lobby Class', function(){
       joiner.should.have.property('roomUrl', 'fake');
     });
 
-  describe('#refreshRoomInfo()', function(){
-    it('should return information about a specific room');
   });
 
-  describe('#getClientCount()', function(){
-    it('should return a count of users currently connected to a room');
+  describe('#getRoom()', function() {
+
+    it('should return a room object', function () {
+      var lobby = new LobbyClass.Lobby();
+      var stubRoom = sinon.stub(lobby, 'createUniqueURL', function(){ 
+        return 'fake';
+      });
+      var getRoomSpy = sinon.spy(lobby, 'getRoom');
+      lobby.createRoom();
+      lobby.getRoom('fake');
+      getRoomSpy.should.have.returned(lobby.rooms['fake']);
+    });
+
+    it('should return an error when no room parameter is specified', function () {
+      var lobby = new LobbyClass.Lobby();
+      var response = lobby.getRoom('notThere');
+      response.should.have.property('error', 'room notThere does not exist');
+    });
+
   });
 
   describe('#broadcastDisconnect()', function(){
