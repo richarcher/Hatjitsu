@@ -84,11 +84,56 @@ describe('Lobby Class', function(){
   });
 
   describe('#joinRoom()', function(){
-    it('should error if trying to join a non-existent room');
-    it('should be a member of the room on success');
-    it('should tell other room members that a client has joined');
-    it('should return the roomUrl on success');
-  });
+    
+    var testSocket = { id : 1234567890 };
+
+    it('should expect a room parameter', function() {
+      var lobby = new LobbyClass.Lobby();
+      var test1 = lobby.joinRoom(testSocket);
+      test1.should.have.property('error', 'room undefined does not exist');
+    });
+
+    it('should error if trying to join a non-existent room', function(){
+      var lobby = new LobbyClass.Lobby();
+      var stubRoom = sinon.stub(lobby, 'createUniqueURL', function(){ 
+        return 'fake';
+      });
+      var test1 = lobby.joinRoom(testSocket, 'fake');
+      test1.should.have.property('error', 'room fake does not exist');
+    });
+
+    it('should call #getRoom() and return room', function() {
+      var lobby = new LobbyClass.Lobby();
+      var stubRoom = sinon.stub(lobby, 'createUniqueURL', function(){ 
+        return 'fake';
+      });
+      var getRoomSpy = sinon.spy(lobby, 'getRoom');
+      lobby.createRoom();
+      lobby.joinRoom(null, 'fake');
+      getRoomSpy.should.have.been.calledWith('fake');
+    });
+
+    it('should be a member of the room on success', function() {
+      var lobby = new LobbyClass.Lobby();
+      var stubRoom = sinon.stub(lobby, 'createUniqueURL', function(){ 
+        return 'fake';
+      });
+      var getRoomSpy = sinon.spy(lobby, 'getRoom');
+      lobby.createRoom();
+      lobby.joinRoom(null, 'fake');
+      getRoomSpy.should.have.returned(lobby.rooms['fake']);
+    });
+
+    it('should return the roomUrl on success', function(){
+      var lobby = new LobbyClass.Lobby();
+      var stubRoom = sinon.stub(lobby, 'createUniqueURL', function(){ 
+        return 'fake';
+      });
+      var joiner;
+      lobby.createRoom();
+      joiner = lobby.joinRoom(null, 'fake');
+      joiner.should.have.property('roomUrl', 'fake');
+    });
 
   describe('#refreshRoomInfo()', function(){
     it('should return information about a specific room');
