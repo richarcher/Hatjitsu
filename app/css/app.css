@@ -5,7 +5,9 @@ a, a:hover { color: #dddddd;}
   margin: 0 auto;
   overflow: hidden;
 }
-
+select {
+  width: 100%;
+}
 
 #lobby {
   margin: 2em;
