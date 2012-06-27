@@ -1,6 +1,7 @@
-<div>
-  <button ng-click="createRoom()">Create new room</button>
-</div>
-<div>
-  Or, enter room <input ng-model="room" /><button ng-click="enterRoom(room)">Enter</button>
-</div>
+<section id="lobby">
+  <h1>Do something here ↓</h1>
+  <button ng-click="createRoom()" id="creator">Create new room</button>
+  <div>
+    <label>Or enter existing room</label> <input ng-model="room" /><button ng-click="enterRoom(room)">Enter</button>
+  </div>
+</section>
