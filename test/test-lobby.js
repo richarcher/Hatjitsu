@@ -47,7 +47,17 @@ describe('Lobby Class', function(){
       Object.keys(lobby.rooms)[0].should.not.equal(Object.keys(lobby.rooms)[1]);
     });
 
-    it('should return false if the room name already exists', function () {
+    it('should call #createUniqueURL()', function(){
+      var lobby = new LobbyClass.Lobby()
+          , mock
+          ;
+      mock = sinon.mock(lobby);
+      mock.expects("createUniqueURL").once();
+      lobby.createRoom();
+      mock.verify;
+    });
+
+    it('should trigger again if the room name already exists', function () {
       var lobby = new LobbyClass.Lobby()
         , stub
         , spy
@@ -58,7 +68,9 @@ describe('Lobby Class', function(){
       spy = sinon.spy(lobby, 'createRoom');
       lobby.createRoom();
       lobby.createRoom();
-      spy.should.have.returned(false)
+
+      spy.should.have.been.calledThrice;
+      spy.should.have.been.calledWith('fake');
     });
 
     it('should define default room values', function(){
