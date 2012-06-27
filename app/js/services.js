@@ -20,7 +20,7 @@ var Sock = function(rootScope) {
 
   this.rootScope = rootScope;
   this.rootScope.socketMessage = null;  
-  this.rootScope.socketId = null;
+  this.rootScope.sessionId = null;
   this.socket = io.connect(document.location.origin);
 
   this.socket.on('error', function(reason) {
@@ -42,10 +42,15 @@ var Sock = function(rootScope) {
     console.log('disconnected');
   })
   this.socket.on('connect', function() {
-    var socketid = this.socket.sessionid;
+    var sessionId = this.socket.sessionid;
     that.rootScope.$apply(function() {
       that.rootScope.socketMessage = null;  
-      that.rootScope.socketId = socketid;
+      console.log("new session id = " + sessionId);
+      if (!$.cookie("sessionId")) {
+        $.cookie("sessionId", sessionId);  
+      }
+      that.rootScope.sessionId = $.cookie("sessionId");
+      console.log("session id = " + that.rootScope.sessionId);
     });
   })
 };

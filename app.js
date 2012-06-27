@@ -87,7 +87,7 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('join room', function (data, callback) {
     console.log("join room " + data.roomUrl);
-    var room = lobby.joinRoom(socket, data.roomUrl);
+    var room = lobby.joinRoom(socket, data);
     if(room.error) {
       callback( { error: room.error } );
     } else {
@@ -121,7 +121,7 @@ io.sockets.on('connection', function (socket) {
     if (room.error) {
       callback( { error: room.error });
     } else {
-      room.recordVote(socket, data.vote);
+      room.recordVote(data);
       callback( {} );
     }
   });
@@ -132,7 +132,7 @@ io.sockets.on('connection', function (socket) {
     if (room.error) {
       callback( { error: room.error });
     } else {
-      room.destroyVote(socket);
+      room.destroyVote(data);
       callback( {} );
     }
   });
@@ -153,7 +153,7 @@ io.sockets.on('connection', function (socket) {
     if (room.error) {
       callback( { error: room.error });
     } else {
-      room.toggleVoter(socket, data.voter);
+      room.toggleVoter(data);
       callback( {} );
     }
   });

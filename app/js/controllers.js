@@ -72,7 +72,9 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     $scope.voterCount = _.filter($scope.connections, function(c) { return c.voter }).length;
   }
 
+
   $scope.configureRoom = function() {
+
     socketService.on('room joined', function () {
       this.emit('room info', { roomUrl: $scope.roomId }, function(response){
         processMessage(response, refreshRoomInfo);
@@ -122,7 +124,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
         $scope.myVote = null;  
       })
     });
-    socketService.emit('join room', { roomUrl: $scope.roomId }, function(response){
+    socketService.emit('join room', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response){
       processMessage(response, refreshRoomInfo);
     });
   }
@@ -136,16 +138,16 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   $scope.vote = function(vote) {
     if ($scope.myVote != vote) {
       $scope.myVote = vote;
-      socketService.emit('vote', { roomUrl: $scope.roomId, vote: vote }, function(response) {
+      socketService.emit('vote', { roomUrl: $scope.roomId, sessionId: $scope.sessionId, vote: vote }, function(response) {
         processMessage(response);
       });
     }
   }
 
-  $scope.unvote = function(socketId) {
-    if (socketId == $scope.socketId) {
+  $scope.unvote = function(sessionId) {
+    if (sessionId == $scope.sessionId) {
       $scope.myVote = null;
-      socketService.emit('unvote', { roomUrl: $scope.roomId }, function(response) {
+      socketService.emit('unvote', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response) {
         processMessage(response);
       });
     }
@@ -159,9 +161,9 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
 
   $scope.toggleVoter = function() {
     if (!$scope.voter) {
-      $scope.unvote($scope.socketId);
+      $scope.unvote($scope.sessionId);
     }
-    socketService.emit('toggle voter', { roomUrl: $scope.roomId, voter: $scope.voter }, function(response) {
+    socketService.emit('toggle voter', { roomUrl: $scope.roomId, sessionId: $scope.sessionId, voter: $scope.voter }, function(response) {
       processMessage(response);
     });
   }
