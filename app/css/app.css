@@ -5,7 +5,9 @@ a, a:hover { color: #dddddd;}
   margin: 0 auto;
   overflow: hidden;
 }
-
+select {
+  width: 100%;
+}
 
 #lobby {
   margin: 2em;
@@ -13,9 +15,7 @@ a, a:hover { color: #dddddd;}
 }
 #lobby h1 {
   color: white;
-  text-align: right;
-  left: -49%;
-  position: relative;
+  text-align: center;
 }
 #lobby label {
   color: white;
@@ -123,7 +123,13 @@ footer {
   color: #cccccc;
 }
 
-@media all and (min-width: 600px) { 
+@media all and (min-width: 600px) {
+  #lobby h1 {
+    color: white;
+    text-align: right;
+    left: -49%;
+    position: relative;
+  } 
   .off-canvas-navigation ul li {
     float: right;
     width: 20%;
