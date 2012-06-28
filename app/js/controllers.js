@@ -51,10 +51,12 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   }
 
   var refreshRoomInfo = function(roomObj) {
+    console.log("roomObj:", roomObj)
+
     if (roomObj.createAdmin) {
-      $.cookie("admin-" + $scope.roomId, true);  
+      $.cookie("admin-" + $scope.roomUrl, true);  
     }
-    if($.cookie("admin-" + $scope.roomId)) {
+    if($.cookie("admin-" + $scope.roomUrl)) {
       $scope.showAdmin = true;
     }
     
@@ -66,7 +68,6 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     } else if ($scope.cardPack == 'seq') {
       $scope.cards = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '?'];
     }
-    console.log("received votes: " + roomObj.connections);
     $scope.connections = roomObj.connections;
     $scope.votes = _.chain($scope.connections).filter(function(c) { return c.vote }).values().value();
     $scope.voterCount = _.filter($scope.connections, function(c) { return c.voter }).length;
@@ -130,7 +131,8 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   $scope.setCardPack = function(cardPack) {
     $scope.cardPack = cardPack;
     $scope.resetVote();
-    socketService.emit('set card pack', { roomUrl: $scope.roomId }, cardPack);
+    console.log("emit set card pack");
+    socketService.emit('set card pack', { roomUrl: $scope.roomId, cardPack: cardPack });
   }
 
   $scope.vote = function(vote) {

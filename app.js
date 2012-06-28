@@ -111,7 +111,7 @@ io.sockets.on('connection', function (socket) {
     var room = lobby.getRoom(data.roomUrl);
     console.log("error=" + room.error);
     if (!room.error) {
-      room.setCardPack(data.cardPack);
+      room.setCardPack(data);
     }
   });
 
