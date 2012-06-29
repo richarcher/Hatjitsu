@@ -2,6 +2,7 @@
   "name": "application-name",
   "version": "0.0.1",
   "private": true,
+  "node":"0.6.17",
   "dependencies": {
     "express": "2.5.10",
     "socket.io": "~0.9.6",
