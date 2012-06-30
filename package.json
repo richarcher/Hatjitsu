@@ -1,8 +1,17 @@
 {
-  "name": "application-name",
+  "name": "hatchetapp.net",
   "version": "0.0.1",
-  "private": true,
-  "node":"0.6.17",
+  "subdomain": "hatchet",
+  "domains": [
+    "hatchetapp.net",
+    "www.hatchetapp.net"
+  ],
+  "scripts": {
+    "start": "server.js"
+  },
+  "engines": {
+    "node": "0.6.19"
+  },
   "dependencies": {
     "express": "2.5.10",
     "socket.io": "~0.9.6",
