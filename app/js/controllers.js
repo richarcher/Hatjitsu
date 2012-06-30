@@ -134,8 +134,17 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     });
     socketService.on('connect', function() {
       console.log("on connect");
-      console.log("emit join room", { roomUrl: $scope.roomId });
-      socketService.emit('join room', { roomUrl: $scope.roomId }, function(response){
+      var sessionId = this.socket.sessionid;
+      console.log("new socket id = " + sessionId);
+      if (!$.cookie("sessionId")) {
+        $.cookie("sessionId", sessionId);  
+      }
+      $scope.$apply(function() {
+        $scope.sessionId = $.cookie("sessionId");
+        console.log("session id = " + $scope.sessionId);
+      });
+      console.log("emit join room", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
+      socketService.emit('join room', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response){
         processMessage(response, refreshRoomInfo);
       });
     });
@@ -145,7 +154,6 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
         $scope.myVote = null;  
       })
     });
-
 
     console.log("emit join room", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
     socketService.emit('join room', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response){
