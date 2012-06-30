@@ -14,12 +14,17 @@ function LobbyCtrl($scope, $location, socketService) {
   $scope.enterRoom = function(room) {
     console.log('enterRoom: room info');
     socketService.emit('room info', { roomUrl: room }, function(response){
-      if (!response.error) {
-        $scope.$apply(function() {
+      $scope.$apply(function() {
+        if (response.error) {
+          $scope.errorMessage = response.error;
+          $timeout(function() {
+            $scope.errorMessage = null;
+          }, 3000);
+        } else {
           console.log("going to enter room " + response.roomUrl);
           $location.path(response.roomUrl);    
-        });
-      }
+        }
+      });
     });
   }
 }
