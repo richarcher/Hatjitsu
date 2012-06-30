@@ -71,9 +71,16 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     } else if ($scope.cardPack == 'seq') {
       $scope.cards = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '?'];
     }
-    $scope.connections = roomObj.connections;
+    $scope.connections = _.filter(roomObj.connections, function(c) { return c.socketId });
     $scope.votes = _.chain($scope.connections).filter(function(c) { return c.vote }).values().value();
     $scope.voterCount = _.filter($scope.connections, function(c) { return c.voter }).length;
+
+    var myConnection = _.find($scope.connections, function(c) { return c.sessionId == $scope.sessionId });
+
+    if (myConnection) {
+      $scope.voter = myConnection.voter;  
+      $scope.myVote = myConnection.vote;
+    }
   }
 
 
@@ -123,9 +130,6 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       });
     });
     socketService.on('vote reset', function () {
-      $scope.$apply(function() {
-        $scope.myVote = null;  
-      })
       console.log("on vote reset");
       console.log("emit room info", { roomUrl: $scope.roomId });
       this.emit('room info', { roomUrl: $scope.roomId }, function(response){
@@ -150,9 +154,6 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     });
     socketService.on('disconnect', function() {
       console.log("on disconnect");
-      $scope.$apply(function() {
-        $scope.myVote = null;  
-      })
     });
 
     console.log("emit join room", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
@@ -170,7 +171,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
 
   $scope.vote = function(vote) {
     if ($scope.myVote != vote) {
-      $scope.myVote = vote;
+      
       console.log("emit vote", { roomUrl: $scope.roomId, vote: vote, sessionId: $scope.sessionId });
       socketService.emit('vote', { roomUrl: $scope.roomId, vote: vote, sessionId: $scope.sessionId }, function(response) {
         processMessage(response);
@@ -180,7 +181,6 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
 
   $scope.unvote = function(sessionId) {
     if (sessionId == $scope.sessionId) {
-      $scope.myVote = null;
       console.log("emit unvote", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
       socketService.emit('unvote', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response) {
         processMessage(response);
@@ -196,9 +196,6 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   }
 
   $scope.toggleVoter = function() {
-    if (!$scope.voter) {
-      $scope.unvote($scope.sessionId);
-    }
     console.log("emit toggle voter", { roomUrl: $scope.roomId, voter: $scope.voter, sessionId: $scope.sessionId });
     socketService.emit('toggle voter', { roomUrl: $scope.roomId, voter: $scope.voter, sessionId: $scope.sessionId }, function(response) {
       processMessage(response);
