@@ -9,6 +9,16 @@ select {
   width: 100%;
 }
 
+header {
+  background: url(./../img/hatchet.png) no-repeat;
+  height: 120px;
+  padding-left: 70px;
+}
+
+header h1 {
+  padding-top: 70px;
+}
+
 #lobby {
   margin: 2em;
   text-align: center;
