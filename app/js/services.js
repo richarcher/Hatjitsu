@@ -24,18 +24,21 @@ var Sock = function(rootScope) {
   this.socket = io.connect(document.location.origin);
 
   this.socket.on('error', function(reason) {
+    console.log('service: on error', reason);
     that.rootScope.$apply(function() {
       that.rootScope.socketMessage = reason;  
     });
     console.log(reason);
   })
   this.socket.on('connect_failed', function(reason) {
+    console.log('service: on connect failed', reason);
     that.rootScope.$apply(function() {
       that.rootScope.socketMessage = reason;  
     });
     console.log(reason);
   })
   this.socket.on('disconnect', function() {
+    console.log('service: on disconnect');
     that.rootScope.$apply(function() {
       that.rootScope.socketMessage = "Disconnected";  
     })
@@ -43,6 +46,7 @@ var Sock = function(rootScope) {
   })
   this.socket.on('connect', function() {
     var sessionId = this.socket.sessionid;
+    console.log('service: on connect');
     that.rootScope.$apply(function() {
       that.rootScope.socketMessage = null;  
       console.log("new session id = " + sessionId);
@@ -56,10 +60,12 @@ var Sock = function(rootScope) {
 };
 
 Sock.prototype.emit = function(msg, data, callback) {
-  this.socket.emit(msg, data, callback);  
+   console.log('service: emit ' + msg);
+   this.socket.emit(msg, data, callback);  
 }
 
 Sock.prototype.on = function(msg, callback) {
+  console.log('service: on ' + msg);
   this.rootScope.socketMessage = null;  
   this.socket.on(msg, callback);
 }

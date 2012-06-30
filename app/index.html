@@ -18,14 +18,23 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/app.css"/>
 </head>
-<body>
-  <h1><a href="/" title="Home">HATCHET</a></h1>
-  <div id="socketMessage" class="alert alert-socket" ui-show="socketMessage">{{socketMessage}}</div>
-  
-  <div id="app">  
-    <div ng-view></div>
-  </div>
+<body class="no-js">
+  <div class="container">
+    <header id="header">
+      <h1><a href="/" title="Home">HATCHET</a></h1>
+    </header>
+    <noscript>
+      <p>This site is <em>heavily</em> dependant upon JavaScript. If you don't have it enabled, you're not going to have a Good Time.</p>
+    </noscript>
 
+    <div id="socketMessage" class="alert alert-socket" ui-show="socketMessage">{{socketMessage}}</div>
+
+    <div ng-view></div>
+
+    <footer role="contentInfo">
+      <p>Done by Jörg &amp; Rïch.</p>
+    </footer>
+  </div>
   <script src="/socket.io/socket.io.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script src="lib/jquery.cookie/jquery.cookie.js"></script>

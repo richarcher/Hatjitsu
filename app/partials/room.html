@@ -1,41 +1,101 @@
+<nav class="off-canvas-navigation">
+  <ul>
+    <li class="menu-item"><a href="#menu" class="menu-button">Vote</a></li>
+    <li class="sidebar-item"><a href="#extra" class="sidebar-button">Settings</a></li>
+  </ul>
+</nav>
+
 <div ng-init="configureRoom()">
   <div id="appError" class="alert alert-error" ui-show="errorMessage">{{errorMessage}}</div>
   <div id="message" class="alert alert-info" ui-show="message">{{message}}</div>
 
-  <h2>Room: /{{roomId}}</h2>
-  <p>Human count: {{humanCount}}</p>
-  <p>Voter count: {{voterCount}}</p>
-  <p>Voter: <input type="checkbox" ng-model="voter" ng-change="toggleVoter()" /></p>
-
-  <div ng-switch on="showAdmin">
-    <div ng-switch-when="true">
-      <div id="adminPanel">
-        Choose card pack:
-        <select ng-model="cardPack" ng-change="setCardPack(cardPack)">
-          <option value="fib">Fibonacci</option>
-          <option value="seq">Sequential</option>
-        </select><br/>
-        <button ng-click="resetVote()">Reset the vote</button>
-      </div>
+  <section id="votePanel" role="navigation">
+    <div ng-show="voter">
+      <p>Please choose your estimation:</p>
+      <ul class="cards">
+        <li ng-repeat="card in cards" ng-click="vote(card)" class="card mine-{{card==myVote}}">
+          <div>{{card}}</div>
+        </li>
+      </ul>
     </div>
-  </div>
+    <div ng-hide="voter">
+      <p>You have chosen to simply observe this session. Enjoy!</p>
+    </div>
 
-  <div id="votePanel">
-    <h3>Votes</h3>
+  </section>
+
+  <section id="cardPanel" role="main">
+    <h1>Votes</h1>
+    <h2>Room: /{{roomId}}</h2>
+    <p>Human count: {{humanCount}}</p>
+    <p>Voter count: {{voterCount}}</p>
     <ul class="cards">
       <li ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card mine-{{vote.sessionId==sessionId}}">
         <div ng-show="votes.length == voterCount">{{vote.vote}}</div>
         <div ng-show="votes.length < voterCount">x</div>
       </li>
     </ul>
-  </div>
+  </section>
 
-  <div id="cardPackPanel" ng-show="voter">
-    <h3>Card Pack</h3>
-    <ul class="cards">
-      <li ng-repeat="card in cards" ng-click="vote(card)" class="card mine-{{card==myVote}}">
-        <div>{{card}}</div>
-      </li>
-    </ul>
-  </div>
+  <section id="adminPanel" ng-switch on="showAdmin" role="complementary">
+    <h1>Settings</h1>
+    <div ng-switch-when="true">
+      <label>Choose card pack:</label>
+      <select ng-model="cardPack" ng-change="setCardPack(cardPack)">
+        <option value="fib">Fibonacci</option>
+        <option value="seq">Sequential</option>
+      </select>
+      <button ng-click="resetVote()">Reset the vote</button>
+    </div>
+    <p>Voter: <input type="checkbox" ng-model="voter" ng-change="toggleVoter()" /></p>
+  </section>
+
 </div>
+  <script>
+    var showSidebar = function() {
+      $('body').removeClass("active-nav").toggleClass("active-sidebar");
+      $('.menu-button').removeClass("active-button");         
+      $('.sidebar-button').toggleClass("active-button");
+    }
+
+    var showMenu = function() {
+      $('body').removeClass("active-sidebar").toggleClass("active-nav");
+      $('.sidebar-button').removeClass("active-button");        
+      $('.menu-button').toggleClass("active-button"); 
+    }
+
+    // add/remove classes everytime the window resize event fires
+    $(window).resize(function(){
+      var off_canvas_nav_display = $('.off-canvas-navigation').css('display');
+      var menu_button_display = $('.menu-button').css('display');
+      if (off_canvas_nav_display === 'block') {     
+        $("body").removeClass("three-column").addClass("small-screen");       
+      } 
+      if (off_canvas_nav_display === 'none') {
+        $("body").removeClass("active-sidebar active-nav small-screen")
+          .addClass("three-column");      
+      } 
+    }); 
+
+    $(document).ready(function(){
+      $('html').removeClass('no-js').addClass('js');
+
+      // Toggle for nav menu
+      $('.menu-button').click(function(e) {
+        e.preventDefault();
+        showMenu();             
+      }); 
+      // Toggle for sidebar
+      $('.sidebar-button').click(function(e) {
+        e.preventDefault();
+        showSidebar();                  
+      });
+      // slide to main after voting
+      $('#votePanel li').click(function(e) {
+        console.log('click');
+        e.preventDefault();
+        showMenu(); 
+      })
+
+    });
+  </script>
