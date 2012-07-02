@@ -1,7 +1,7 @@
 {
   "name": "hatchetapp.net",
-  "version": "0.0.1-1",
-  "subdomain": "hatchet",
+  "version": "0.0.1-5",
+  "subdomain": "hat",
   "domains": [
     "hatchetapp.net",
     "www.hatchetapp.net"
