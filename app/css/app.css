@@ -1,18 +1,13 @@
-html { height: 100%; }
 body {
   background: #666666;
-  height: 100%;
 }
 header {
   background: url(./../img/hatchet.png) no-repeat;
-  height: 18%;
+  height: 120px;
   padding-left: 4em;
 }
 header h1 {
   padding-top: 2.5em;
-}
-#content { 
-  height: 77%; 
 }
 footer {
   clear: both;
@@ -24,7 +19,6 @@ footer {
 a, a:hover { color: #dddddd;}
 .container {
   width: 100%;
-  height: 100%;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -56,9 +50,6 @@ select {
   }          
 }
 
-.wrapper {
-  overflow: hidden;
-}
 [role="navigation"] { background: #CCCCCC; }
 [role="main"] {  }
 [role="complementary"] { background: #CCCCCC; }
@@ -73,7 +64,7 @@ select {
   transition: .2s all ease;    
   width: 80%;
   height: 100%;
-  padding: 3%;
+  padding: 3% 4%;
   position: relative;
   box-sizing: border-box;
 }
@@ -83,7 +74,7 @@ select {
   top: 0;
   background-color: #666666;
   display: block;
-  width: 12%;
+  width: 15%;
   height: 100%;
   overflow: hidden;
 }
