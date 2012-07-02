@@ -95,6 +95,17 @@ select {
   background-color: #CCCCCC;
   border-radius: 1em;
 }
+.vote-item a:after {
+  display: block;
+  background-image: -webkit-linear-gradient(0deg, #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%, #bbb );
+  background-size:10px 10px;
+  width: 60%;
+  height: 90%;
+  position: absolute;
+  content: ".";
+  top: 5%;
+  left: 15%;
+}
 [role="navigation"] .vote-item {
   right: 0;
 }
