@@ -1,15 +1,8 @@
-<nav class="off-canvas-navigation">
-  <ul>
-    <li class="menu-item"><a href="#menu" class="menu-button">Vote</a></li>
-    <li class="sidebar-item"><a href="#extra" class="sidebar-button">Settings</a></li>
-  </ul>
-</nav>
-
-<div ng-init="configureRoom()">
+<div class="wrapper" ng-init="configureRoom()">
   <div id="appError" class="alert alert-error" ui-show="errorMessage">{{errorMessage}}</div>
   <div id="message" class="alert alert-info" ui-show="message">{{message}}</div>
 
-  <section id="votePanel" role="navigation">
+  <section id="cardPanel" role="navigation">
     <div ng-show="voter">
       <p>Please choose your estimation:</p>
       <ul class="cards">
@@ -21,10 +14,10 @@
     <div ng-hide="voter">
       <p>You have chosen to simply observe this session. Enjoy!</p>
     </div>
-
+    <span class="vote-item"><a href="#menu" class="vote-button">Vote</a></span>
   </section>
 
-  <section id="cardPanel" role="main">
+  <section id="votePanel" role="main">
     <h1>Votes</h1>
     <h2>Room: /{{roomId}}</h2>
     <p>Human count: {{humanCount}}</p>
@@ -48,54 +41,44 @@
       <button ng-click="resetVote()">Reset the vote</button>
     </div>
     <p>Voter: <input type="checkbox" ng-model="voter" ng-change="toggleVoter()" /></p>
+    <span class="vote-item"><a href="#extra" class="sidebar-button">Settings</a></span>
   </section>
 
 </div>
   <script>
-    var showSidebar = function() {
-      $('body').removeClass("active-nav").toggleClass("active-sidebar");
-      $('.menu-button').removeClass("active-button");         
-      $('.sidebar-button').toggleClass("active-button");
+    var showVotePanel = function() {
+      $('body').removeClass("active-settings").toggleClass("active-vote");
     }
 
-    var showMenu = function() {
-      $('body').removeClass("active-sidebar").toggleClass("active-nav");
-      $('.sidebar-button').removeClass("active-button");        
-      $('.menu-button').toggleClass("active-button"); 
+    var showSettings = function() {
+      $('body').removeClass("active-vote").toggleClass("active-settings");
     }
 
     // add/remove classes everytime the window resize event fires
     $(window).resize(function(){
-      var off_canvas_nav_display = $('.off-canvas-navigation').css('display');
-      var menu_button_display = $('.menu-button').css('display');
-      if (off_canvas_nav_display === 'block') {     
-        $("body").removeClass("three-column").addClass("small-screen");       
-      } 
-      if (off_canvas_nav_display === 'none') {
-        $("body").removeClass("active-sidebar active-nav small-screen")
-          .addClass("three-column");      
-      } 
+      var size = window.getComputedStyle(document.body,':after').getPropertyValue('content');
+      if (size == 'widescreen') {
+        $("body").removeClass("narrow-screen small-screen").addClass("three-column");
+      } else if (size == 'narrow'){
+        $("body").removeClass("small-screen three-column").addClass("narrow-screen");
+      } else {
+        $("body").removeClass("narrow-screen three-column").addClass("small-screen");
+      }
     }); 
 
     $(document).ready(function(){
       $('html').removeClass('no-js').addClass('js');
 
       // Toggle for nav menu
-      $('.menu-button').click(function(e) {
-        e.preventDefault();
-        showMenu();             
+      $('.vote-button').click(function() {
+        showVotePanel();
+        return false;
       }); 
       // Toggle for sidebar
-      $('.sidebar-button').click(function(e) {
-        e.preventDefault();
-        showSidebar();                  
+      $('.sidebar-button').click(function() {
+        showSettings();
+        return false;
       });
-      // slide to main after voting
-      $('#votePanel li').click(function(e) {
-        console.log('click');
-        e.preventDefault();
-        showMenu(); 
-      })
 
     });
   </script>
