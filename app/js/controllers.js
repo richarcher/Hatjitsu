@@ -58,6 +58,16 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     });
   }
 
+  var myConnection = function() {
+    return _.find($scope.connections, function(c) { return c.sessionId == $scope.sessionId });
+  }
+
+  var setLocalVote = function(vote) {
+    $scope.myVote = vote;
+    var connection = myConnection();
+    connection.vote = vote;
+  }
+
   var refreshRoomInfo = function(roomObj) {
     console.log("refreshRoomInfo: roomObj:", roomObj)
 
@@ -80,11 +90,11 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     $scope.votes = _.chain($scope.connections).filter(function(c) { return c.vote }).values().value();
     $scope.voterCount = _.filter($scope.connections, function(c) { return c.voter }).length;
 
-    var myConnection = _.find($scope.connections, function(c) { return c.sessionId == $scope.sessionId });
+    var connection = myConnection();
 
-    if (myConnection) {
-      $scope.voter = myConnection.voter;  
-      $scope.myVote = myConnection.vote;
+    if (connection) {
+      $scope.voter = connection.voter;  
+      $scope.myVote = connection.vote;
     }
   }
 
@@ -170,6 +180,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   $scope.setCardPack = function(cardPack) {
     $scope.cardPack = cardPack;
     $scope.resetVote();
+
     console.log("set card pack", { roomUrl: $scope.roomId, cardPack: cardPack });
     socketService.emit('set card pack', { roomUrl: $scope.roomId, cardPack: cardPack });
   }
@@ -177,6 +188,8 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   $scope.vote = function(vote) {
     if ($scope.myVote != vote) {
       
+      setLocalVote(vote);
+
       console.log("emit vote", { roomUrl: $scope.roomId, vote: vote, sessionId: $scope.sessionId });
       socketService.emit('vote', { roomUrl: $scope.roomId, vote: vote, sessionId: $scope.sessionId }, function(response) {
         processMessage(response);
@@ -186,6 +199,9 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
 
   $scope.unvote = function(sessionId) {
     if (sessionId == $scope.sessionId) {
+
+      setLocalVote(null);
+
       console.log("emit unvote", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
       socketService.emit('unvote', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response) {
         processMessage(response);
