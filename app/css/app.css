@@ -217,6 +217,7 @@ select {
   width: 300%;
   height: 100%;
   margin-left: -100%;
+  overflow: hidden;
   -webkit-transition: .2s all ease;
   -moz-transition: .2s all ease;
   -o-transition: .2s all ease;    
