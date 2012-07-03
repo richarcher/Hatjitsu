@@ -30,21 +30,21 @@ var Sock = function(rootScope) {
       that.rootScope.socketMessage = reason;  
     });
     // console.log(reason);
-  })
+  });
   this.socket.on('connect_failed', function(reason) {
     // console.log('service: on connect failed', reason);
     that.rootScope.$apply(function() {
       that.rootScope.socketMessage = reason;  
     });
     // console.log(reason);
-  })
+  });
   this.socket.on('disconnect', function() {
     // console.log('service: on disconnect');
     that.rootScope.$apply(function() {
       that.rootScope.socketMessage = "Disconnected";  
-    })
+    });
     // console.log('disconnected');
-  })
+  });
   this.socket.on('connect', function() {
     var sessionId = this.socket.sessionid;
     // console.log('service: on connect');
@@ -57,7 +57,7 @@ var Sock = function(rootScope) {
       that.rootScope.sessionId = $.cookie("sessionId");
       // console.log("session id = " + that.rootScope.sessionId);
     });
-  })
+  });
 };
 
 Sock.prototype.emit = function(msg, data, callback) {

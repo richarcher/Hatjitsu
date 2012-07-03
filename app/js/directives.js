@@ -17,7 +17,7 @@ angular.module('pokerApp.directives', []).
         } else {
           elm.removeClass('ui-show');
         }
-      })
+      });
     };
   }]).
   directive('uiHide', [function() {
@@ -28,6 +28,6 @@ angular.module('pokerApp.directives', []).
         } else {
           elm.removeClass('ui-hide');
         }
-      })
+      });
     };
   }]);
