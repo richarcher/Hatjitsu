@@ -3,7 +3,7 @@ var siteConfig = {
 };
 
 if (process.env.NODE_ENV == 'production') {
-  settings.uri = 'http://hat.jit.su';
+  siteConfig.uri = 'http://hat.jit.su';
 }
 
 module.exports = siteConfig;
