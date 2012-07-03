@@ -134,7 +134,7 @@ select {
   border-bottom-right-radius: 0;
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 400px) {
 }
 
 @media all and (min-width: 800px) {
@@ -249,7 +249,7 @@ select {
   right: 0;
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 400px) {
   .wrapper {
     width: 150%;
     margin-left: 0;
@@ -320,7 +320,7 @@ select {
 
 
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 400px) {
     body:after {
         content: 'narrow';
         display: none;
