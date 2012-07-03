@@ -7,18 +7,27 @@ var express = require('express'),
     fs = require('fs');
 
 var app = module.exports = express.createServer();
-var BundleUp = require('bundle-up');
+var assetManager = require('connect-assetmanager');
 var io = require('socket.io').listen(app);
 var lobbyClass = require('./lib/lobby.js');
 // Configuration
 
-BundleUp(app, __dirname + '/assets', {
-  staticRoot: __dirname + '/app/',
-  staticUrlRoot:'/',
-  bundle:true
-  // minifyCss: true,
-  // minifyJs: true
-});
+
+var assetManagerGroups = {
+  'js': {
+    'route': /\/static\/js\/[0-9]+\/.*\.js/
+    , 'path': './app/js/'
+    , 'dataType': 'javascript'
+    , 'files': [
+      'app.js',
+      'controllers.js',
+      'directives.js',
+      'filters.js',
+      'services.js',
+    ]
+  }
+}
+var assetsManagerMiddleware = assetManager(assetManagerGroups);
 
 app.configure(function(){
   app.set('views', __dirname + '/app');
@@ -29,6 +38,7 @@ app.configure(function(){
   app.use(express.logger());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+  app.use(assetsManagerMiddleware);
   app.use(express.staticCache());
   app.use(express.static(__dirname + '/app'));
 });
