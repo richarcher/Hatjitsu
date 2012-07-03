@@ -4,7 +4,7 @@
 
 function LobbyCtrl($scope, $location, socketService) {
   $scope.createRoom = function() {
-    console.log('createRoom: emit create room');
+    // console.log('createRoom: emit create room');
     socketService.emit('create room', {}, function(roomUrl){
       $scope.$apply(function() {
         $location.path(roomUrl);
@@ -12,7 +12,7 @@ function LobbyCtrl($scope, $location, socketService) {
     });
   }
   $scope.enterRoom = function(room) {
-    console.log('enterRoom: room info');
+    // console.log('enterRoom: room info');
     socketService.emit('room info', { roomUrl: room }, function(response){
       $scope.$apply(function() {
         if (response.error) {
@@ -21,7 +21,7 @@ function LobbyCtrl($scope, $location, socketService) {
             $scope.errorMessage = null;
           }, 3000);
         } else {
-          console.log("going to enter room " + response.roomUrl);
+          // console.log("going to enter room " + response.roomUrl);
           $location.path(response.roomUrl);    
         }
       });
@@ -35,7 +35,7 @@ LobbyCtrl.$inject = ['$scope', '$location', 'socketService'];
 function RoomCtrl($scope, $routeParams, $timeout, socketService) {
 
   var processMessage = function(response, process) {
-    console.log("processMessage: response:", response)
+    // console.log("processMessage: response:", response)
     $scope.$apply(function() {
       if (response.error) {
         $scope.errorMessage = response.error;
@@ -69,7 +69,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   }
 
   var refreshRoomInfo = function(roomObj) {
-    console.log("refreshRoomInfo: roomObj:", roomObj)
+    // console.log("refreshRoomInfo: roomObj:", roomObj)
 
     if (roomObj.createAdmin) {
       $.cookie("admin-" + $scope.roomUrl, true);  
@@ -102,76 +102,76 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   $scope.configureRoom = function() {
 
     socketService.on('room joined', function () {
-      console.log("on room joined");
-      console.log("emit room info", { roomUrl: $scope.roomId });
+      // console.log("on room joined");
+      // console.log("emit room info", { roomUrl: $scope.roomId });
       this.emit('room info', { roomUrl: $scope.roomId }, function(response){
         processMessage(response, refreshRoomInfo);
       });
     });
     socketService.on('room left', function () {
-      console.log("on room left");
-      console.log("emit room info", { roomUrl: $scope.roomId });
+      // console.log("on room left");
+      // console.log("emit room info", { roomUrl: $scope.roomId });
       this.emit('room info', { roomUrl: $scope.roomId }, function(response){
         processMessage(response, refreshRoomInfo);
       });
     });
     socketService.on('card pack set', function () {
       displayMessage("Card pack was changed.");
-      console.log("on card pack set");
-      console.log("emit room info", { roomUrl: $scope.roomId });
+      // console.log("on card pack set");
+      // console.log("emit room info", { roomUrl: $scope.roomId });
       this.emit('room info', { roomUrl: $scope.roomId }, function(response){
         processMessage(response, refreshRoomInfo);
       });
     });
     socketService.on('voter status changed', function () {
-      console.log("on voter status changed");
-      console.log("emit room info", { roomUrl: $scope.roomId });
+      // console.log("on voter status changed");
+      // console.log("emit room info", { roomUrl: $scope.roomId });
       this.emit('room info', { roomUrl: $scope.roomId }, function(response){
         processMessage(response, refreshRoomInfo);
       });
     });
     socketService.on('voted', function () {
-      console.log("on voted");
-      console.log("emit room info", { roomUrl: $scope.roomId });
+      // console.log("on voted");
+      // console.log("emit room info", { roomUrl: $scope.roomId });
       this.emit('room info', { roomUrl: $scope.roomId }, function(response){
         processMessage(response, refreshRoomInfo);
       });
     });
     socketService.on('unvoted', function () {
-      console.log("on unvoted");
-      console.log("emit room info", { roomUrl: $scope.roomId });
+      // console.log("on unvoted");
+      // console.log("emit room info", { roomUrl: $scope.roomId });
       this.emit('room info', { roomUrl: $scope.roomId }, function(response){
         processMessage(response, refreshRoomInfo);
       });
     });
     socketService.on('vote reset', function () {
-      console.log("on vote reset");
-      console.log("emit room info", { roomUrl: $scope.roomId });
+      // console.log("on vote reset");
+      // console.log("emit room info", { roomUrl: $scope.roomId });
       this.emit('room info', { roomUrl: $scope.roomId }, function(response){
         processMessage(response, refreshRoomInfo);
       });
     });
     socketService.on('connect', function() {
-      console.log("on connect");
+      // console.log("on connect");
       var sessionId = this.socket.sessionid;
-      console.log("new socket id = " + sessionId);
+      // console.log("new socket id = " + sessionId);
       if (!$.cookie("sessionId")) {
         $.cookie("sessionId", sessionId);  
       }
       $scope.$apply(function() {
         $scope.sessionId = $.cookie("sessionId");
-        console.log("session id = " + $scope.sessionId);
+        // console.log("session id = " + $scope.sessionId);
       });
-      console.log("emit join room", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
+      // console.log("emit join room", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
       socketService.emit('join room', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response){
         processMessage(response, refreshRoomInfo);
       });
     });
     socketService.on('disconnect', function() {
-      console.log("on disconnect");
+      // console.log("on disconnect");
     });
 
-    console.log("emit join room", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
+    // console.log("emit join room", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
     socketService.emit('join room', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response){
       processMessage(response, refreshRoomInfo);
     });
@@ -181,7 +181,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     $scope.cardPack = cardPack;
     $scope.resetVote();
 
-    console.log("set card pack", { roomUrl: $scope.roomId, cardPack: cardPack });
+    // console.log("set card pack", { roomUrl: $scope.roomId, cardPack: cardPack });
     socketService.emit('set card pack', { roomUrl: $scope.roomId, cardPack: cardPack });
   }
 
@@ -190,7 +190,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       
       setLocalVote(vote);
 
-      console.log("emit vote", { roomUrl: $scope.roomId, vote: vote, sessionId: $scope.sessionId });
+      // console.log("emit vote", { roomUrl: $scope.roomId, vote: vote, sessionId: $scope.sessionId });
       socketService.emit('vote', { roomUrl: $scope.roomId, vote: vote, sessionId: $scope.sessionId }, function(response) {
         processMessage(response);
       });
@@ -202,7 +202,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
 
       setLocalVote(null);
 
-      console.log("emit unvote", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
+      // console.log("emit unvote", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
       socketService.emit('unvote', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response) {
         processMessage(response);
       });
@@ -210,14 +210,14 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   }
 
   $scope.resetVote = function() {
-    console.log("emit reset vote", { roomUrl: $scope.roomId });
+    // console.log("emit reset vote", { roomUrl: $scope.roomId });
     socketService.emit('reset vote', { roomUrl: $scope.roomId }, function(response) {
       processMessage(response);
     });
   }
 
   $scope.toggleVoter = function() {
-    console.log("emit toggle voter", { roomUrl: $scope.roomId, voter: $scope.voter, sessionId: $scope.sessionId });
+    // console.log("emit toggle voter", { roomUrl: $scope.roomId, voter: $scope.voter, sessionId: $scope.sessionId });
     socketService.emit('toggle voter', { roomUrl: $scope.roomId, voter: $scope.voter, sessionId: $scope.sessionId }, function(response) {
       processMessage(response);
     });
