@@ -20,6 +20,7 @@ var Sock = function(rootScope) {
 
   this.rootScope = rootScope;
   this.rootScope.socketMessage = null;  
+  this.rootScope.activity = false;  
   this.rootScope.sessionId = null;
   this.socket = io.connect(document.location.origin);
 
@@ -60,8 +61,14 @@ var Sock = function(rootScope) {
 };
 
 Sock.prototype.emit = function(msg, data, callback) {
-   console.log('service: emit ' + msg);
-   this.socket.emit(msg, data, callback);  
+  var that = this;
+
+  console.log('service: emit ' + msg);
+   this.rootScope.activity = true;
+   this.socket.emit(msg, data, function(response) {
+    that.rootScope.activity = false;
+    callback.call(this, response);
+   });  
 }
 
 Sock.prototype.on = function(msg, callback) {

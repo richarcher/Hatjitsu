@@ -119,6 +119,16 @@ select {
 }
 
 
+#activity {
+  background: url(./../img/led.gif) no-repeat;
+  height: 5px;
+  width: 12px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+}
+
 .alert {
   position: absolute;
   top: 0;
