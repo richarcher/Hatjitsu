@@ -87,7 +87,7 @@ app.get('/:id', function(req, res) {
     //   res.send(text);
     // });
   } else {
-    res.send(404);  
+    res.redirect('/');  
   }
 });
 
