@@ -58,18 +58,22 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     });
   }
 
-  var myConnection = function() {
+  var myConnectionHash = function() {
     return _.find($scope.connections, function(c) { return c.sessionId == $scope.sessionId });
+  }
+
+  var myVoteHash = function() {
+    return _.find($scope.votes, function(c) { return c.sessionId == $scope.sessionId });
   }
 
   var setLocalVote = function(vote) {
     $scope.myVote = vote;
-    var connection = myConnection();
-    if (!connection) {
+    var voteHash = myVoteHash();
+    if (!voteHash) {
       // initialize connections array with my first vote. (just to speed up UI)
-      $scope.connections.push({ sessionId: $scope.sessionId, vote: vote });
+      $scope.votes.push({ sessionId: $scope.sessionId, vote: vote });
     } else {
-      connection.vote = vote;  
+      voteHash.vote = vote;  
     }
   }
 
@@ -97,7 +101,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     $scope.votes = _.chain($scope.connections).filter(function(c) { return c.vote }).values().value();
     $scope.voterCount = _.filter($scope.connections, function(c) { return c.voter }).length;
 
-    var connection = myConnection();
+    var connection = myConnectionHash();
 
     if (connection) {
       $scope.voter = connection.voter;  
