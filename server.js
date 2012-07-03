@@ -172,7 +172,7 @@ io.sockets.on('connection', function (socket) {
     if (room.error) {
       callback( { error: room.error });
     } else {
-      room.recordVote(data);
+      room.recordVote(socket, data);
       callback( {} );
     }
   });
@@ -183,7 +183,7 @@ io.sockets.on('connection', function (socket) {
     if (room.error) {
       callback( { error: room.error });
     } else {
-      room.destroyVote(data);
+      room.destroyVote(socket, data);
       callback( {} );
     }
   });
