@@ -17,8 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>HATCHET</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" href="css/<%= assetsCacheHashes.css || 0 %>.css">
 </head>
 <body class="no-js">
   <div class="container">
@@ -40,13 +39,6 @@
   </div>
   <script src="/socket.io/socket.io.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script src="lib/jquery.cookie/jquery.cookie.js"></script>
-  <script src="lib/underscore.min.js"></script>
-  <script src="lib/angular/angular.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
+  <script src="js/<%= assetsCacheHashes.js || 0 %>.js"></script>
 </body>
 </html>

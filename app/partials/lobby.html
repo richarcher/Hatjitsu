@@ -1,7 +1,7 @@
 <section id="lobby">
   <h1>Do something here ↓</h1>
-  <button ng-click="createRoom()" id="creator">Create new room</button>
+  <button ng-click="createRoom()" id="creator" class="btn">Create new room</button>
   <div>
-    <label>Or enter existing room</label> <input ng-model="room" /><button ng-click="enterRoom(room)">Enter</button>
+    <label>Or enter existing room</label> /<input ng-model="room" type="tel" autofocus="true" maxlength="4" placeholder="room no" class="roomUrl" /><button ng-click="enterRoom(room)" class="btn">Enter</button>
   </div>
 </section>

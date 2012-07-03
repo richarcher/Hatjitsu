@@ -7,16 +7,53 @@ var express = require('express'),
     fs = require('fs');
 
 var app = module.exports = express.createServer();
+var assetManager = require('connect-assetmanager');
 var io = require('socket.io').listen(app);
 var lobbyClass = require('./lib/lobby.js');
+var siteConfig = require('./siteConfig.js');
 
 // Configuration
 
+
+var assetManagerGroups = {
+  'js': {
+    'route': /js\/.*\.js/
+    , 'path': './app/'
+    , 'dataType': 'javascript'
+    , 'files': [
+        // siteConfig.uri + '/socket.io/socket.io.js', // combined js has errors with this one in it
+        'lib/jquery.cookie/jquery.cookie.js',
+        'lib/underscore.min.js',
+        'lib/angular/angular.min.js',
+        'js/app.js',
+        'js/controllers.js',
+        'js/directives.js',
+        'js/filters.js',
+        'js/services.js'
+    ]
+  },
+  'css': {
+    'route': /css\/.*\.css/
+    , 'path': './app/'
+    , 'dataType': 'css'
+    , 'files': [
+      'css/bootstrap.min.css',
+      'css/app.css'
+    ]
+  }
+}
+var assetsManagerMiddleware = assetManager(assetManagerGroups);
+
 app.configure(function(){
   app.set('views', __dirname + '/app');
+  app.set('view engine', 'ejs');
+  app.set('view options', {
+      layout: false
+  });
   app.use(express.logger());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+  app.use(assetsManagerMiddleware);
   app.use(express.staticCache());
   app.use(express.static(__dirname + '/app'));
 });
@@ -31,13 +68,24 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
+// Template helpers
+app.dynamicHelpers({
+  'assetsCacheHashes': function(req, res) {
+    return assetsManagerMiddleware.cacheHashes;
+  }
+});
+
+app.get('/', function(req, res) {
+  res.render('index.ejs');
+});
 
 app.get('/:id', function(req, res) {
   if (req.params.id in lobby.rooms) {
-    fs.readFile(__dirname + '/app/index.html', 'utf8', function(err, text){
-      console.log(text);
-      res.send(text);
-    });
+    res.render('index.ejs');
+    // fs.readFile(__dirname + '/app/index.html', 'utf8', function(err, text){
+    //   console.log(text);
+    //   res.send(text);
+    // });
   } else {
     res.send(404);  
   }
@@ -76,20 +124,20 @@ var lobby = new lobbyClass.Lobby(io);
 
 io.sockets.on('connection', function (socket) {
 
-  console.log("On connect", socket.id);
+  // console.log("On connect", socket.id);
 
   socket.on('disconnect', function () {
-    console.log("On disconnect", socket.id);
+    // console.log("On disconnect", socket.id);
     lobby.broadcastDisconnect(socket);
   });
   
   socket.on('create room', function (data, callback) {
-    console.log("on create room", socket.id, data);
+    // console.log("on create room", socket.id, data);
     callback(lobby.createRoom());
   });
 
   socket.on('join room', function (data, callback) {
-    console.log("on join room " + data.roomUrl, socket.id, data);
+    // console.log("on join room " + data.roomUrl, socket.id, data);
     var room = lobby.joinRoom(socket, data);
     if(room.error) {
       callback( { error: room.error } );
@@ -99,7 +147,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('room info', function (data, callback) {
-    console.log("on room info for " + data.roomUrl, socket.id, data);
+    // console.log("on room info for " + data.roomUrl, socket.id, data);
     var room = lobby.getRoom(data.roomUrl);
     // room = { error: "there was an error" };
     if (room.error) {
@@ -110,38 +158,38 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('set card pack', function (data, cardPack) {
-    console.log("on set card pack " + data.cardPack + " for " + data.roomUrl, socket.id, data);
+    // console.log("on set card pack " + data.cardPack + " for " + data.roomUrl, socket.id, data);
     var room = lobby.getRoom(data.roomUrl);
-    console.log("error=" + room.error);
+    // console.log("error=" + room.error);
     if (!room.error) {
       room.setCardPack(data);
     }
   });
 
   socket.on('vote', function (data, callback) {
-    console.log("on vote " + data.vote + " received for " + data.roomUrl, socket.id, data);
+    // console.log("on vote " + data.vote + " received for " + data.roomUrl, socket.id, data);
     var room = lobby.getRoom(data.roomUrl);
     if (room.error) {
       callback( { error: room.error });
     } else {
-      room.recordVote(data);
+      room.recordVote(socket, data);
       callback( {} );
     }
   });
 
   socket.on('unvote', function (data, callback) {
-    console.log("omn unvote received for " + data.roomUrl, socket.id, data);
+    // console.log("omn unvote received for " + data.roomUrl, socket.id, data);
     var room = lobby.getRoom(data.roomUrl);
     if (room.error) {
       callback( { error: room.error });
     } else {
-      room.destroyVote(data);
+      room.destroyVote(socket, data);
       callback( {} );
     }
   });
 
   socket.on('reset vote', function (data, callback) {
-    console.log("on reset vote  received for " + data.roomUrl, socket.id, data);
+    // console.log("on reset vote  received for " + data.roomUrl, socket.id, data);
     var room = lobby.getRoom(data.roomUrl);
     if (room.error) {
       callback( { error: room.error });
@@ -152,7 +200,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('toggle voter', function (data, callback) {
-    console.log("on toggle voter for " + data.roomUrl, socket.id, data);
+    // console.log("on toggle voter for " + data.roomUrl, socket.id, data);
     var room = lobby.getRoom(data.roomUrl);
     if (room.error) {
       callback( { error: room.error });
