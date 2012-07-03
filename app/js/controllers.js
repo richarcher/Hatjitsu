@@ -85,6 +85,8 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       $scope.cards = ['0', '1', '2', '3', '5', '8', '13', '20', '40', '?'];
     } else if ($scope.cardPack == 'seq') {
       $scope.cards = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '?'];
+    } else if ($scope.cardPack == 'tshirt') {
+      $scope.cards = ['XL', 'L', 'M', 'S', 'XS', '?'];
     }
     $scope.connections = _.filter(roomObj.connections, function(c) { return c.socketId });
     $scope.votes = _.chain($scope.connections).filter(function(c) { return c.vote }).values().value();
