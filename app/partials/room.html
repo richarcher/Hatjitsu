@@ -58,11 +58,11 @@
     $(window).resize(function(){
       var size = window.getComputedStyle(document.body,':after').getPropertyValue('content');
       if (size == 'widescreen') {
-        $("body").removeClass("narrow-screen small-screen").addClass("three-column");
+        $("body").removeClass().addClass("three-column");
       } else if (size == 'narrow'){
-        $("body").removeClass("small-screen three-column").addClass("narrow-screen");
+        $("body").removeClass().addClass("narrow-screen");
       } else {
-        $("body").removeClass("narrow-screen three-column").addClass("small-screen");
+        $("body").removeClass().addClass("small-screen");
       }
     }); 
 
