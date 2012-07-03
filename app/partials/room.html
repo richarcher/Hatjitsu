@@ -55,8 +55,7 @@
       $('body').removeClass("active-vote").toggleClass("active-settings");
     }
 
-    // add/remove classes everytime the window resize event fires
-    $(window).resize(function(){
+    var resizer = function () {
       var size = window.getComputedStyle(document.body,':after').getPropertyValue('content');
       if (size == 'widescreen') {
         $("body").removeClass().addClass("three-column");
@@ -65,9 +64,13 @@
       } else {
         $("body").removeClass().addClass("small-screen");
       }
-    }); 
+    }
+
+    // add/remove classes everytime the window resize event fires
+    $(window).resize(function() { resizer(); }); 
 
     $(document).ready(function(){
+      resizer();
       $('html').removeClass('no-js').addClass('js');
 
       // Toggle for nav menu
