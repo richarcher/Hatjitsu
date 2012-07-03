@@ -24,7 +24,7 @@ var assetManagerGroups = {
         // siteConfig.uri + '/socket.io/socket.io.js', // combined js has errors with this one in it
         'lib/jquery.cookie/jquery.cookie.js',
         'lib/underscore.min.js',
-        'lib/angular/angular.js',
+        'lib/angular/angular.min.js',
         'js/app.js',
         'js/controllers.js',
         'js/directives.js',
