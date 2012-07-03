@@ -1,21 +1,52 @@
 body {
-  background: #666666;
+  background: #FFFFFF;
+}
+a:hover,
+a:focus {
+  text-decoration: none;
 }
 header {
-  background: url(./../img/hatchet.png) no-repeat;
-  height: 120px;
-  padding-left: 4em;
+  overflow: hidden;
+  position: relative;
+}
+header a {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  height: 8em;
 }
 header h1 {
-  padding-top: 2.5em;
+  font-size: 3em;
+  margin-top: 0.8em;
+  margin-left: 2.6em;
+}
+.logo {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  background: url('/img/hatchet.svg') no-repeat center;
+  background-size: 100%;
+  display: block;
+  border-radius: 50%;
+  width: 6em;
+  height: 6em;
+  z-index: 1;
+  background-color: color;
+  -webkit-transition: .3s background-color ease;
+     -moz-transition: .3s background-color ease;
+      -ms-transition: .3s background-color ease;
+       -o-transition: .3s background-color ease;
+          transition: .3s background-color ease;
+}
+.logo.activity {
+  background-color: lime;
 }
 footer {
   clear: both;
   text-align: center;
   color: #cccccc;
-  height: 5%;
+  padding-top: 2em;
 }
-
 input.roomUrl {
   width: 50px;
 }
@@ -56,9 +87,12 @@ select {
   }          
 }
 
-[role="navigation"] { background: #CCCCCC; box-shadow: 1px 0px 2px #555 }
-[role="main"] {  }
-[role="complementary"] { background: #CCCCCC; box-shadow: -1px 0px 2px #555}
+[role="navigation"] { 
+  background: #CCCCCC; box-shadow: 1px 0px 2px #555;
+}
+[role="complementary"] { 
+  background: #CCCCCC; box-shadow: -1px 0px 2px #555;
+}
 
 [role="navigation"],
 [role="main"],
@@ -73,11 +107,9 @@ select {
   padding: 3% 4%;
   position: relative;
 }
-
 .vote-item {
   position: absolute;
   top: 0;
-  background-color: #666666;
   display: block;
   width: 15%;
   height: 100%;
@@ -140,15 +172,8 @@ select {
   border-bottom-right-radius: 0;
 }
 
-@media all and (min-width: 400px) {
-}
-
-@media all and (min-width: 800px) {
-}
-
-
 #activity {
-  background: url(./../img/led.gif) no-repeat;
+  background: url(/img/led.gif) no-repeat;
   height: 5px;
   width: 12px;
   position: absolute;
@@ -189,7 +214,7 @@ select {
 .cards {
   overflow: hidden;
   margin: 0;
-  padding-right: 2%;
+  padding: 1%;
 }
 .cards li {
   display: block;
@@ -197,7 +222,7 @@ select {
   width: 2em;
   height: 3em;
   font-size: 1.5em;
-  background-color: white;
+  background-color: #FAFAFA;
   cursor: pointer;
   border-radius: 0.2em;
   margin: 0 4% 0.5em 0;
@@ -210,7 +235,6 @@ select {
 .cards .mine-true {
   background-color: yellow;
 }
-
 
 /* POSITIONING */
 .wrapper {
