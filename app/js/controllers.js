@@ -73,7 +73,13 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       // initialize connections array with my first vote. (just to speed up UI)
       $scope.votes.push({ sessionId: $scope.sessionId, vote: vote });
     } else {
-      voteHash.vote = vote;  
+      if (vote) {
+        voteHash.vote = vote;    
+      } else {
+        // we're unvoting - lets remove it from the votes.
+        $scope.votes = _.filter($scope.votes, function(v) { return v.sessionId != $scope.sessionId } );
+        // the above works - but causes an error in the UI.
+      }
     }
   }
 
