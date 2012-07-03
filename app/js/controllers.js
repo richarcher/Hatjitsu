@@ -65,7 +65,12 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   var setLocalVote = function(vote) {
     $scope.myVote = vote;
     var connection = myConnection();
-    connection.vote = vote;
+    if (!connection) {
+      // initialize connections array with my first vote. (just to speed up UI)
+      $scope.connections.push({ sessionId: $scope.sessionId, vote: vote });
+    } else {
+      connection.vote = vote;  
+    }
   }
 
   var refreshRoomInfo = function(roomObj) {
