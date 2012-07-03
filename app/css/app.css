@@ -87,27 +87,49 @@ select {
 }
 .vote-item a:after {
   display: block;
-  background-image: -webkit-linear-gradient(0deg, #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%, #bbb );
-  background-image: linear-gradient(0deg, #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%, #bbb );
-  background-size:10px 10px;
-  width: 60%;
-  height: 90%;
+  background: #BBBBBB;
+  background-size:5px 1px;
+  width: 40%;
+  height: 91%;
   position: absolute;
   content: ".";
   top: 5%;
   left: 15%;
+  border-radius: 0.75em;
 }
 [role="navigation"] .vote-item {
   right: 0;
 }
-[role="navigation"] .vote-item a {
+[role="navigation"] .vote-item a:after {
+  left: auto;
+  right: 15%;
+}
+.active-vote [role="navigation"] .vote-item a:after {
+  left: auto;
+  right: 40%;
+}
+.active-settings [role="complementary"] .vote-item a:after {
+  left: 30%;
+}
+.narrow-screen.active-settings [role="complementary"] .vote-item a:after {
+  left: 14%;
+}
+[role="navigation"] .vote-item a,
+[role="navigation"] .vote-item a:after {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+[role="navigation"] .vote-item a:after {
+  box-shadow: -1px 1px 0px #aaa inset
 }
 [role="complementary"] .vote-item {
   left: 0;
 }
-[role="complementary"] .vote-item a {
+[role="complementary"] .vote-item a:after {
+  box-shadow: 1px 1px 0px #aaa inset
+}
+[role="complementary"] .vote-item a,
+[role="complementary"] .vote-item a:after {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
