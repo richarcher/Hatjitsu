@@ -50,9 +50,9 @@ select {
   }          
 }
 
-[role="navigation"] { background: #CCCCCC; }
+[role="navigation"] { background: #CCCCCC; box-shadow: 1px 0px 2px #555 }
 [role="main"] {  }
-[role="complementary"] { background: #CCCCCC; }
+[role="complementary"] { background: #CCCCCC; box-shadow: -1px 0px 2px #555}
 
 [role="navigation"],
 [role="main"],
@@ -88,6 +88,7 @@ select {
 .vote-item a:after {
   display: block;
   background-image: -webkit-linear-gradient(0deg, #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%, #bbb );
+  background-image: linear-gradient(0deg, #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%, #bbb );
   background-size:10px 10px;
   width: 60%;
   height: 90%;
@@ -161,11 +162,13 @@ select {
   background-color: white;
   cursor: pointer;
   border-radius: 0.2em;
-  margin: 0 0.5em 0.5em 0;
+  margin: 0 4% 0.5em 0;
   text-align: center;
   line-height: 3em;
 }
-
+[role="navigation"] .cards li {box-shadow: 1px 0px 0px #aaa; }
+[role="navigation"] .cards li.mine-true {box-shadow: none; }
+[role="main"] .cards li {box-shadow: 0px 0px 2px #555; }
 .cards .mine-true {
   background-color: yellow;
 }
