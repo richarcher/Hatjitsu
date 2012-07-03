@@ -10,20 +10,35 @@ var app = module.exports = express.createServer();
 var assetManager = require('connect-assetmanager');
 var io = require('socket.io').listen(app);
 var lobbyClass = require('./lib/lobby.js');
+var siteConfig = require('./siteConfig.js');
+
 // Configuration
 
 
 var assetManagerGroups = {
   'js': {
-    'route': /\/static\/js\/[0-9]+\/.*\.js/
-    , 'path': './app/js/'
+    'route': /js\/.*\.js/
+    , 'path': './app/'
     , 'dataType': 'javascript'
     , 'files': [
-      'app.js',
-      'controllers.js',
-      'directives.js',
-      'filters.js',
-      'services.js',
+        // siteConfig.uri + '/socket.io/socket.io.js', // combined js has errors with this one in it
+        'lib/jquery.cookie/jquery.cookie.js',
+        'lib/underscore.min.js',
+        'lib/angular/angular.js',
+        'js/app.js',
+        'js/controllers.js',
+        'js/directives.js',
+        'js/filters.js',
+        'js/services.js'
+    ]
+  },
+  'css': {
+    'route': /css\/.*\.css/
+    , 'path': './app/'
+    , 'dataType': 'css'
+    , 'files': [
+      'css/bootstrap.min.css',
+      'css/app.css'
     ]
   }
 }
@@ -51,6 +66,13 @@ app.configure('production', function(){
   var oneYear = 31557600000;
   app.use(express.static(__dirname + '/app', { maxAge: oneYear }));
   app.use(express.errorHandler());
+});
+
+// Template helpers
+app.dynamicHelpers({
+  'assetsCacheHashes': function(req, res) {
+    return assetsManagerMiddleware.cacheHashes;
+  }
 });
 
 app.get('/', function(req, res) {
