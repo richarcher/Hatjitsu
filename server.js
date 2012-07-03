@@ -7,13 +7,25 @@ var express = require('express'),
     fs = require('fs');
 
 var app = module.exports = express.createServer();
+var BundleUp = require('bundle-up');
 var io = require('socket.io').listen(app);
 var lobbyClass = require('./lib/lobby.js');
-
 // Configuration
+
+BundleUp(app, __dirname + '/assets', {
+  staticRoot: __dirname + '/app/',
+  staticUrlRoot:'/',
+  bundle:true
+  // minifyCss: true,
+  // minifyJs: true
+});
 
 app.configure(function(){
   app.set('views', __dirname + '/app');
+  app.set('view engine', 'ejs');
+  app.set('view options', {
+      layout: false
+  });
   app.use(express.logger());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
@@ -28,16 +40,21 @@ app.configure('development', function(){
 app.configure('production', function(){
   var oneYear = 31557600000;
   app.use(express.static(__dirname + '/app', { maxAge: oneYear }));
+  app.use(assetManager);
   app.use(express.errorHandler());
 });
 
+app.get('/', function(req, res) {
+  res.render('index.ejs');
+});
 
 app.get('/:id', function(req, res) {
   if (req.params.id in lobby.rooms) {
-    fs.readFile(__dirname + '/app/index.html', 'utf8', function(err, text){
-      console.log(text);
-      res.send(text);
-    });
+    res.render('index.ejs');
+    // fs.readFile(__dirname + '/app/index.html', 'utf8', function(err, text){
+    //   console.log(text);
+    //   res.send(text);
+    // });
   } else {
     res.send(404);  
   }
