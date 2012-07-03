@@ -16,12 +16,18 @@ footer {
   height: 5%;
 }
 
+input.roomUrl {
+  width: 50px;
+}
+
+
 a, a:hover { color: #dddddd;}
 .container {
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
 }
+
 select {
   width: 100%;
 }
