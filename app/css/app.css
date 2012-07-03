@@ -50,9 +50,9 @@ select {
   }          
 }
 
-[role="navigation"] { background: #CCCCCC; }
+[role="navigation"] { background: #CCCCCC; box-shadow: 1px 0px 2px #555 }
 [role="main"] {  }
-[role="complementary"] { background: #CCCCCC; }
+[role="complementary"] { background: #CCCCCC; box-shadow: -1px 0px 2px #555}
 
 [role="navigation"],
 [role="main"],
@@ -66,7 +66,6 @@ select {
   height: 100%;
   padding: 3% 4%;
   position: relative;
-  box-sizing: border-box;
 }
 
 .vote-item {
@@ -89,6 +88,7 @@ select {
 .vote-item a:after {
   display: block;
   background-image: -webkit-linear-gradient(0deg, #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%, #bbb );
+  background-image: linear-gradient(0deg, #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%, #bbb );
   background-size:10px 10px;
   width: 60%;
   height: 90%;
@@ -161,6 +161,7 @@ select {
 .cards {
   overflow: hidden;
   margin: 0;
+  padding-right: 2%;
 }
 .cards li {
   display: block;
@@ -171,11 +172,13 @@ select {
   background-color: white;
   cursor: pointer;
   border-radius: 0.2em;
-  margin: 0 0.5em 0.5em 0;
+  margin: 0 4% 0.5em 0;
   text-align: center;
   line-height: 3em;
 }
-
+[role="navigation"] .cards li {box-shadow: 1px 0px 0px #aaa; }
+[role="navigation"] .cards li.mine-true {box-shadow: none; }
+[role="main"] .cards li {box-shadow: 0px 0px 2px #555; }
 .cards .mine-true {
   background-color: yellow;
 }
@@ -193,7 +196,7 @@ select {
   transition: .2s all ease; 
 }
 .js [role="navigation"] {
-  width: 35%;
+  width: 27%;
   margin: 0;
   float: left;
 }
@@ -202,12 +205,12 @@ select {
     z-index: 1;
   }
 .js [role="main"] {
-  width: 30%;
+  width: 22%;
   margin: 0;
   float: left;
 }
 .js [role="complementary"] {
-  width: 33%;
+  width: 26%;
   margin: 0;
   float: left;
 }
@@ -230,7 +233,7 @@ select {
     margin-left: 0;
   }
   .js [role="navigation"] {
-    width: 31%; 
+    width: 24%; 
     margin-left: 0;
     margin-right: 1%;
   }
@@ -238,7 +241,7 @@ select {
       display: none;
     }
   .js [role="main"] {
-    width: 31%;
+    width: 22%;
     float: left;
     margin-right: 1%;
   }
@@ -253,7 +256,7 @@ select {
     margin-left: -15%;
   }
   .active-settings [role="main"] {
-    width: 40%;
+    width: 24%;
   }
   .active-settings [role="complementary"] {
     width: 26%;
@@ -270,19 +273,19 @@ select {
   }
 
   .js [role="navigation"] {
-    width: 19%; 
+    width: 13%; 
     margin-left: 0;
     float: left;
     padding: 3%
   }
 
   .js [role="main"] {
-    width: 60%;
+    width: 48%;
     padding: 3%;    
   }
 
   .js [role="complementary"] {
-    width: 19%; 
+    width: 13%; 
     padding: 3%;  
     margin-right: 0;
     margin-left: 0;
