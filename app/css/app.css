@@ -55,15 +55,20 @@ header h1 {
 .logo.red {
   background-color: brown;
 }
-.btn {
-  margin-bottom: 9px;
-}
 footer {
   clear: both;
   text-align: center;
   color: #cccccc;
   padding-top: 2em;
 }
+footer p a {
+  color: #999;
+}
+footer p a:hover {
+  color: #999;
+  text-decoration: underline;
+}
+
 .container {
   width: 100%;
   margin: 0 auto;
