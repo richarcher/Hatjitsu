@@ -274,6 +274,7 @@ h2 span.sub {
 [role="navigation"] .cards li.mine-true {
   box-shadow: none;
   cursor: pointer;
+  background-color: yellow;
 }
 [role="main"] .cards li { 
   position: relative;
@@ -291,6 +292,7 @@ h2 span.sub {
 .cards .mine-true .vote,
 .cards .mine-true .hidden {
   background-color: yellow;
+  cursor: pointer;
 }
 [role="main"] .cards .vote {
   z-index: 900;
