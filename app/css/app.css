@@ -98,12 +98,10 @@ input.roomUrl {
 }
 
 [role="navigation"] { 
-  background: #CCCCCC; 
-  /*box-shadow: 1px 0px 2px #555;*/
+  background: #CCCCCC;
 }
 [role="complementary"] { 
-  background: #CCCCCC; 
-  /*box-shadow: -1px 0px 2px #555;*/
+  background: #CCCCCC;
 }
 
 [role="navigation"],
