@@ -1,6 +1,6 @@
 <div class="wrapper" ng-init="configureRoom()">
-  <div id="appError" class="alert alert-error" ui-show="errorMessage">{{errorMessage}}</div>
-  <div id="message" class="alert alert-info" ui-show="message">{{message}}</div>
+  <div id="appError" class="notification" ui-show="errorMessage">{{errorMessage}}</div>
+  <div id="message" class="notification" ui-show="message">{{message}}</div>
 
   <section id="cardPanel" role="navigation">
     <div ng-show="voter">

@@ -39,10 +39,10 @@
   </script>
 </head>
 <body class="no-js">
-  <div class="container">
+  <div class="container" ng-controller="MainCtrl">
     <header id="header">
       <a href="/" title="Home">
-        <span class="logo {{activity}}"></span>
+        <span class="logo {{logoState}}"></span>
         <h1>Hatchet</h1>
       </a>
     </header>
@@ -51,7 +51,7 @@
     </noscript>
 
     <div id="activity" ng-show="activity"></div>
-    <div id="socketMessage" class="alert alert-socket" ui-show="socketMessage">{{socketMessage}}</div>
+    <div id="socketMessage" class="notification" ui-show="socketMessage">{{socketMessage}}</div>
 
     <div id="content" ng-view></div>
 
