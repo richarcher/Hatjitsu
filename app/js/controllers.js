@@ -137,9 +137,9 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     // console.log("refreshRoomInfo: roomObj:", roomObj)
     $scope.$apply(function() {
       if (roomObj.createAdmin) {
-        $.cookie("admin-" + $scope.roomUrl, true);  
+        $.cookie("admin-" + roomObj.roomUrl, true);  
       }
-      if($.cookie("admin-" + $scope.roomUrl)) {
+      if($.cookie("admin-" + roomObj.roomUrl)) {
         $scope.showAdmin = true;
       }
       
