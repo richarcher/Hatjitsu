@@ -58,17 +58,18 @@ header h1 {
 footer {
   clear: both;
   text-align: center;
-  color: #cccccc;
+  color: #AAA;
   padding-top: 2em;
 }
-footer p a {
-  color: #999;
+
+footer a {
+  color: #555;
 }
-footer p a:hover {
-  color: #999;
+footer a:hover,
+footer a:focus {
+  color: #444;
   text-decoration: underline;
 }
-
 .container {
   width: 100%;
   margin: 0 auto;
