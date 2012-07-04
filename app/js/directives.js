@@ -30,4 +30,16 @@ angular.module('pokerApp.directives', []).
         }
       });
     };
+  }]).
+  directive('uiEnter', [function() {
+    return function(scope, elm, attrs) {
+      elm.bind("keydown keypress", function(event) {
+        if(event.which === 13) {
+          scope.$apply(function() {
+            scope.$eval(attrs.uiEnter);
+          });
+          event.preventDefault();
+        }
+      });
+    }
   }]);
