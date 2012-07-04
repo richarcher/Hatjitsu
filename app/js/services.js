@@ -41,7 +41,7 @@ var Sock = function(rootScope) {
   this.socket.on('disconnect', function() {
     // console.log('service: on disconnect');
     that.rootScope.$apply(function() {
-      that.rootScope.socketMessage = "Disconnected";  
+      that.rootScope.socketMessage = ":-(  Disconnected";  
     });
     // console.log('disconnected');
   });
