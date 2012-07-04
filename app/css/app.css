@@ -98,20 +98,22 @@ input.roomUrl {
 }
 
 [role="navigation"] { 
-  background: #CCCCCC; box-shadow: 1px 0px 2px #555;
+  background: #CCCCCC; 
+  /*box-shadow: 1px 0px 2px #555;*/
 }
 [role="complementary"] { 
-  background: #CCCCCC; box-shadow: -1px 0px 2px #555;
+  background: #CCCCCC; 
+  /*box-shadow: -1px 0px 2px #555;*/
 }
 
 [role="navigation"],
 [role="main"],
 [role="complementary"] {
   -webkit-transition: .2s all ease;
-  -moz-transition: .2s all ease;
-  -o-transition: .2s all ease;    
-  -ms-transition: .2s all ease;
-  transition: .2s all ease;    
+     -moz-transition: .2s all ease;
+      -ms-transition: .2s all ease;
+       -o-transition: .2s all ease;    
+          transition: .2s all ease;    
   width: 80%;
   height: 100%;
   padding: 3% 4%;
@@ -197,6 +199,10 @@ input.roomUrl {
   top: 0;
   opacity: 0;
   -webkit-transition: .5s all ease;
+     -moz-transition: .5s all ease;
+      -ms-transition: .5s all ease;
+       -o-transition: .5s all ease;
+          transition: .5s all ease;
 }
 #appError {
   left: 0px;
@@ -233,19 +239,60 @@ input.roomUrl {
   height: 3em;
   font-size: 1.5em;
   background-color: #FAFAFA;
-  cursor: pointer;
-  border-radius: 0.2em;
   margin: 0 4% 0.5em 0;
   text-align: center;
   line-height: 3em;
 }
-[role="navigation"] .cards li {box-shadow: 1px 0px 0px #aaa; }
-[role="navigation"] .cards li.mine-true {box-shadow: none; }
-[role="main"] .cards li {box-shadow: 0px 0px 2px #555; }
-.cards .mine-true {
+[role="navigation"] .cards li {
+  box-shadow: 1px 0px 0px #aaa;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+[role="navigation"] .cards li.mine-true {
+  box-shadow: none;
+  cursor: pointer;
+}
+[role="main"] .cards li { 
+  position: relative;
+  -webkit-perspective: 600px;
+}
+[role="main"] .cards div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: linen;
+  border-radius: 0.2em;
+  box-shadow: 0px 0px 2px #555;
+}
+.cards .mine-true .vote,
+.cards .mine-true .hidden {
   background-color: yellow;
 }
-
+[role="main"] .cards .vote {
+  z-index: 900;
+  -webkit-transform: rotateY(-180deg);
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -webkit-transition: all .4s ease-in-out;
+}
+[role="main"] .cards .hidden { 
+  z-index: 800;
+  -webkit-transform: rotateX(0deg) rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -webkit-transition: all .4s ease-in-out;
+}
+[role="main"] .cards.true .vote {
+  -webkit-transition-delay: 1s;
+  -webkit-transform: rotateX(0deg) rotateY(0deg);
+  z-index: 800;
+}
+[role="main"] .cards.true .hidden {
+  -webkit-transition-delay: 1s;
+  -webkit-transform: rotateY(180deg);
+  z-index: 900;
+}
 /* POSITIONING */
 .wrapper {
   width: 300%;

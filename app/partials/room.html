@@ -21,10 +21,10 @@
     <h2>Room: /{{roomId}}</h2>
     <p>Human count: {{humanCount}}</p>
     <p>Voter count: <span class="label">{{voterCount}}</span></p>
-    <ul class="cards">
+    <ul class="cards {{votes.length == voterCount}}">
       <li ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card mine-{{vote.sessionId==sessionId}}">
-        <div ng-show="votes.length == voterCount">{{vote.vote}}</div>
-        <div ng-show="votes.length < voterCount">x</div>
+        <div class="vote">{{vote.vote}}</div>
+        <div class="hidden">x</div>
       </li>
     </ul>
   </section>
