@@ -8,7 +8,7 @@
     <div ng-show="voter">
       <h2>Estimate</h2>
       <ul class="cards">
-        <li ng-repeat="card in cards" ng-click="vote(card)" class="card mine-{{card==myVote}}">
+        <li ng-repeat="card in cards" ng-click="vote(card)" onclick="showVotePanel();" class="card mine-{{card==myVote}}">
           <div>{{card}}</div>
         </li>
       </ul>
@@ -50,6 +50,10 @@
   <script>
     var showCardPanel = function() {
       $('body').removeClass("active-settings").toggleClass("active-cardPanel");
+    }
+
+    var showVotePanel = function() {
+      $('body').removeClass("active-settings").removeClass("active-cardPanel");
     }
 
     var showSettings = function() {
