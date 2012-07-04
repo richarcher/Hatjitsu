@@ -34,14 +34,14 @@
     <h2>Settings</h2>
     <hr />
     <div ng-switch-when="true">
-      <label>Choose card pack:</label>
-      <input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="fib">  Fibonacci<br/>
-      <input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="seq">  Sequential<br/>
-      <input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="tshirt">  T-Shirt
+      <p>Choose card pack:</p>
+      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="fib"> Fibonacci</label>
+      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="seq"> Sequential</label>
+      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="tshirt"> T-Shirt</label>
       <hr />
       <button ng-click="resetVote()" class="btn">Reset the vote</button>
     </div>
-    <p>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-change="toggleVoter()" /></p>
+    <p><label>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-change="toggleVoter()" /></label></p>
     <hr />
     <span class="vote-item"><a href="#extra" class="sidebar-button">Settings</a></span>
   </section>
