@@ -2,6 +2,27 @@
 
 /* Controllers */
 
+function MainCtrl($scope) {
+  $scope.logoState = '';
+  $scope.$on('$routeChangeSuccess', function() {
+    $scope.logoState = '';
+  }); 
+  $scope.$on('unanimous vote', function() {
+    $scope.logoState = 'green';
+  });
+  $scope.$on('not unanimous vote', function() {
+    $scope.logoState = 'yellow';
+  });
+  $scope.$on('problem vote', function() {
+    $scope.logoState = 'red';
+  });
+  $scope.$on('unfinished vote', function() {
+    $scope.logoState = '';
+  });
+}
+
+MainCtrl.$inject = ['$scope'];
+
 function LobbyCtrl($scope, $location, socketService) {
   $scope.createRoom = function() {
     // console.log('createRoom: emit create room');
@@ -63,11 +84,26 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   // wipe out vote if voting state is not yet finished to prevent cheating.
   // if it has already been set - use the actual vote. This works for unvoting - so that 
   // before the flip occurs - we don't display 'oi'
-  var setVisibleVotes = function() {
+  var processVotes = function() {
     var voteCount = $scope.votes.length;
     _.each($scope.votes, function(v) {
       v.visibleVote = v.visibleVote === undefined && voteCount < $scope.voterCount ? 'oi!' : v.vote;
     });
+
+    if ($scope.votes.length == $scope.voterCount) {
+      var uniqVotes = _.chain($scope.votes).pluck('vote').uniq().value().length;
+      if (uniqVotes == 1) {
+        $scope.$emit('unanimous vote');
+      } else if (uniqVotes == $scope.voterCount) {
+        $scope.$emit('problem vote');
+      } else if ($scope.voterCount > 3 && uniqVotes == ($scope.voterCount - 1)) {
+        $scope.$emit('problem vote');
+      } else {
+        $scope.$emit('not unanimous vote');  
+      }
+    } else {
+      $scope.$emit('unfinished vote');
+    }
   }
 
   var myConnectionHash = function() {
@@ -93,7 +129,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
         // the above works - but causes an error in the UI.
       }
     }
-    setVisibleVotes();
+    processVotes();
     $scope.votingState = $scope.votes.length == $scope.voterCount ? 'finished' : ''
   }
 
@@ -128,7 +164,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
         $scope.myVote = connection.vote;
       }
 
-      setVisibleVotes();
+      processVotes();
 
     });
 

@@ -46,7 +46,7 @@ header h1 {
        -o-transition: .3s background-color ease;
           transition: .3s background-color ease;
 }
-.logo.true {
+.logo.green {
   background-color: lawngreen;
 }
 .logo.yellow {
