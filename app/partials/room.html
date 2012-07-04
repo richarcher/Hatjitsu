@@ -21,7 +21,7 @@
     <h1>Votes</h1>
     <h2>Room: /{{roomId}}</h2>
     <p>Human count: {{humanCount}}</p>
-    <p>Voter count: {{voterCount}}</p>
+    <p>Voter count: <span class="label">{{voterCount}}</span></p>
     <ul class="cards">
       <li ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card mine-{{vote.sessionId==sessionId}}">
         <div ng-show="votes.length == voterCount">{{vote.vote}}</div>
@@ -39,7 +39,7 @@
         <option value="seq">Sequential</option>
         <option value="tshirt">T-shirt</option>
       </select>
-      <button ng-click="resetVote()">Reset the vote</button>
+      <button ng-click="resetVote()" class="btn">Reset the vote</button>
     </div>
     <p>Voter: <input type="checkbox" ng-model="voter" ng-change="toggleVoter()" /></p>
     <span class="vote-item"><a href="#extra" class="sidebar-button">Settings</a></span>
