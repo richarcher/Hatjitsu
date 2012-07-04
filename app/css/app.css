@@ -134,6 +134,7 @@ input.roomUrl {
   text-indent: -300%;
   background-color: #CCCCCC;
   border-radius: 1em;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 .vote-item a:after {
   display: block;
