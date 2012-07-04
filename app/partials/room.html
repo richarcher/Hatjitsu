@@ -16,7 +16,7 @@
     <div ng-hide="voter">
       <p>You have chosen to simply observe this session. Enjoy!</p>
     </div>
-    <span class="vote-item"><a href="#menu" class="vote-button">Vote</a></span>
+    <span class="vote-item"><a href="#menu" class="cardPanel-button">Vote</a></span>
   </section>
 
   <section id="votePanel" role="main">
@@ -48,7 +48,7 @@
 
 </div>
   <script>
-    var showVotePanel = function() {
+    var showCardPanel = function() {
       $('body').removeClass("active-settings").toggleClass("active-cardPanel");
     }
 
@@ -75,8 +75,8 @@
       $('html').removeClass('no-js').addClass('js');
 
       // Toggle for nav menu
-      $('.vote-button').click(function() {
-        showVotePanel();
+      $('.cardPanel-button').click(function() {
+        showCardPanel();
         return false;
       }); 
       // Toggle for sidebar
