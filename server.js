@@ -11,6 +11,7 @@ var assetManager = require('connect-assetmanager');
 var io = require('socket.io').listen(app);
 var lobbyClass = require('./lib/lobby.js');
 var siteConfig = require('./siteConfig.js');
+var gzippo = require('gzippo');
 
 // Configuration
 
@@ -58,7 +59,8 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(assetsManagerMiddleware);
   app.use(express.staticCache());
-  app.use(express.static(__dirname + '/app'));
+  app.use(gzippo.staticGzip(__dirname + '/app'));
+  // app.use(express.static(__dirname + '/app'));
 });
 
 app.configure('development', function(){
@@ -67,7 +69,8 @@ app.configure('development', function(){
 
 app.configure('production', function(){
   var oneYear = 31557600000;
-  app.use(express.static(__dirname + '/app', { maxAge: oneYear }));
+  app.use(gzippo.staticGzip(__dirname + '/app', { maxAge: oneYear, clientMaxAge: oneYear }));
+  // app.use(express.static(__dirname + '/app', { maxAge: oneYear }));
   app.use(express.errorHandler());
 });
 
