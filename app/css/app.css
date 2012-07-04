@@ -58,17 +58,18 @@ header h1 {
 footer {
   clear: both;
   text-align: center;
-  color: #cccccc;
+  color: #AAA;
   padding-top: 2em;
 }
-footer p a {
-  color: #999;
+
+footer a {
+  color: #555;
 }
-footer p a:hover {
-  color: #999;
+footer a:hover,
+footer a:focus {
+  color: #444;
   text-decoration: underline;
 }
-
 .container {
   width: 100%;
   margin: 0 auto;
@@ -103,12 +104,10 @@ input.roomUrl {
 }
 
 [role="navigation"] { 
-  background: #CCCCCC; 
-  /*box-shadow: 1px 0px 2px #555;*/
+  background: #CCCCCC;
 }
 [role="complementary"] { 
-  background: #CCCCCC; 
-  /*box-shadow: -1px 0px 2px #555;*/
+  background: #CCCCCC;
 }
 
 [role="navigation"],
@@ -139,6 +138,7 @@ input.roomUrl {
   text-indent: -300%;
   background-color: #CCCCCC;
   border-radius: 1em;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 .vote-item a:after {
   display: block;
