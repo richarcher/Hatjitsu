@@ -5,6 +5,14 @@ a:hover,
 a:focus {
   text-decoration: none;
 }
+a, 
+a:hover,
+a:focus { 
+  color: #dddddd;
+}
+select {
+  width: 100%;
+}
 header {
   overflow: hidden;
   position: relative;
@@ -38,8 +46,17 @@ header h1 {
        -o-transition: .3s background-color ease;
           transition: .3s background-color ease;
 }
-.logo.activity {
-  background-color: lime;
+.logo.true {
+  background-color: lawngreen;
+}
+.logo.yellow {
+  background-color: gold;
+}
+.logo.red {
+  background-color: brown;
+}
+.btn {
+  margin-bottom: 9px;
 }
 footer {
   clear: both;
@@ -47,20 +64,13 @@ footer {
   color: #cccccc;
   padding-top: 2em;
 }
-input.roomUrl {
-  width: 50px;
-}
-
-
-a, a:hover { color: #dddddd;}
 .container {
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
 }
-
-select {
-  width: 100%;
+input.roomUrl {
+  width: 50px;
 }
 
 #lobby {
@@ -243,10 +253,10 @@ select {
   margin-left: -100%;
   overflow: hidden;
   -webkit-transition: .2s all ease;
-  -moz-transition: .2s all ease;
-  -o-transition: .2s all ease;    
-  -ms-transition: .2s all ease;
-  transition: .2s all ease; 
+     -moz-transition: .2s all ease;
+      -ms-transition: .2s all ease;
+       -o-transition: .2s all ease;    
+          transition: .2s all ease; 
 }
 .js [role="navigation"] {
   width: 27%;
