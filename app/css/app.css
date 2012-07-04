@@ -159,7 +159,7 @@ input.roomUrl {
   left: auto;
   right: 15%;
 }
-.active-vote [role="navigation"] .vote-item a:after {
+.active-cardPanel [role="navigation"] .vote-item a:after {
   left: auto;
   right: 40%;
 }
@@ -350,13 +350,13 @@ h2 span.sub {
   .js [role="complementary"] .vote-item {
     left: -5%;
   }
-.active-vote .wrapper {
+.active-cardPanel .wrapper {
   margin-left: 0;
 }
 .active-settings .wrapper {
   margin-left: -193%;
 }
-.active-vote [role="navigation"] .vote-item {
+.active-cardPanel [role="navigation"] .vote-item {
   right: 0;
 }
 
