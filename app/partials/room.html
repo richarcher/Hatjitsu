@@ -2,9 +2,11 @@
   <div id="appError" class="notification" ui-show="errorMessage">{{errorMessage}}</div>
   <div id="message" class="notification" ui-show="message">{{message}}</div>
 
+  <div id="roomNumber">Room: <strong>{{roomId}}</strong></div>
+
   <section id="cardPanel" role="navigation">
     <div ng-show="voter">
-      <p>Please choose your estimation:</p>
+      <h2>Estimate</h2>
       <ul class="cards">
         <li ng-repeat="card in cards" ng-click="vote(card)" class="card mine-{{card==myVote}}">
           <div>{{card}}</div>
@@ -18,10 +20,9 @@
   </section>
 
   <section id="votePanel" role="main">
-    <h2>Room: /{{roomId}}</h2>
-    <p>Human count: {{humanCount}}</p>
-    <p>Voter count: <span class="label">{{voterCount}}</span></p>
-    <ul class="cards {{votingState}}">
+    <h2>Votes <span class="sub">Humans: {{humanCount}}, Voters: <span class="label">{{voterCount}}</span></span></h2>
+    
+    <ul class="cards {{votingState}}" style="clear: both;">
       <li ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card mine-{{vote.sessionId==sessionId}}">
         <div class="vote">{{vote.visibleVote}}</div>
         <div class="hidden">x</div>
@@ -30,17 +31,18 @@
   </section>
 
   <section id="adminPanel" ng-switch on="showAdmin" role="complementary">
-    <h1>Settings</h1>
+    <h2>Settings</h2>
+    <hr />
     <div ng-switch-when="true">
       <label>Choose card pack:</label>
-      <select ng-model="cardPack" ng-change="setCardPack(cardPack)">
-        <option value="fib">Fibonacci</option>
-        <option value="seq">Sequential</option>
-        <option value="tshirt">T-shirt</option>
-      </select>
+      <input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="fib">  Fibonacci<br/>
+      <input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="seq">  Sequential<br/>
+      <input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="tshirt">  T-Shirt
+      <hr />
       <button ng-click="resetVote()" class="btn">Reset the vote</button>
     </div>
-    <p>Voter: <input type="checkbox" ng-model="voter" ng-change="toggleVoter()" /></p>
+    <p>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-change="toggleVoter()" /></p>
+    <hr />
     <span class="vote-item"><a href="#extra" class="sidebar-button">Settings</a></span>
   </section>
 

@@ -237,6 +237,19 @@ input.roomUrl {
   opacity: 0.7;
 }
 
+#roomNumber {
+  position: absolute;
+  top: 71px;
+  left: 103px;
+  color: #999;
+}
+
+h2 span.sub {
+  font-size: 13px;
+  font-weight: normal;
+  color: #999;
+}
+
 .cards {
   overflow: hidden;
   margin: 0;
