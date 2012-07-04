@@ -283,12 +283,12 @@ input.roomUrl {
   -webkit-backface-visibility: hidden;
   -webkit-transition: all .4s ease-in-out;
 }
-[role="main"] .cards.true .vote {
+[role="main"] .cards.finished .vote {
   -webkit-transition-delay: 1s;
   -webkit-transform: rotateX(0deg) rotateY(0deg);
   z-index: 800;
 }
-[role="main"] .cards.true .hidden {
+[role="main"] .cards.finished .hidden {
   -webkit-transition-delay: 1s;
   -webkit-transform: rotateY(180deg);
   z-index: 900;

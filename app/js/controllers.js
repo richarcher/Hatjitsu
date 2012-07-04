@@ -36,18 +36,20 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
 
   var processMessage = function(response, process) {
     // console.log("processMessage: response:", response)
-    $scope.$apply(function() {
-      if (response.error) {
+    if (response.error) {
+      $scope.$apply(function() {
         $scope.errorMessage = response.error;
         $timeout(function() {
           $scope.errorMessage = null;
         }, 3000);
-      } else {
+      });
+    } else {
+      $scope.$apply(function() {
         $scope.errorMessage = null;
-        (process || angular.noop)(response);
-      }
-    });
-  }
+      });
+      (process || angular.noop)(response);
+    }
+  };
 
   var displayMessage = function(msg) {
     $scope.$apply(function() {
@@ -81,38 +83,45 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
         // the above works - but causes an error in the UI.
       }
     }
+    $scope.votingState = $scope.votes.length == $scope.voterCount ? 'finished' : ''
   }
 
   var refreshRoomInfo = function(roomObj) {
     // console.log("refreshRoomInfo: roomObj:", roomObj)
+    $scope.$apply(function() {
+      if (roomObj.createAdmin) {
+        $.cookie("admin-" + $scope.roomUrl, true);  
+      }
+      if($.cookie("admin-" + $scope.roomUrl)) {
+        $scope.showAdmin = true;
+      }
+      
+      $scope.humanCount = roomObj.clientCount;
+      $scope.cardPack = roomObj.cardPack;
 
-    if (roomObj.createAdmin) {
-      $.cookie("admin-" + $scope.roomUrl, true);  
-    }
-    if($.cookie("admin-" + $scope.roomUrl)) {
-      $scope.showAdmin = true;
-    }
-    
-    $scope.humanCount = roomObj.clientCount;
-    $scope.cardPack = roomObj.cardPack;
+      if ($scope.cardPack == 'fib') {
+        $scope.cards = ['0', '1', '2', '3', '5', '8', '13', '20', '40', '?'];
+      } else if ($scope.cardPack == 'seq') {
+        $scope.cards = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '?'];
+      } else if ($scope.cardPack == 'tshirt') {
+        $scope.cards = ['XL', 'L', 'M', 'S', 'XS', '?'];
+      }
+      $scope.connections = _.filter(roomObj.connections, function(c) { return c.socketId });
+      $scope.votes = _.chain($scope.connections).filter(function(c) { return c.vote }).values().value();
+      $scope.voterCount = _.filter($scope.connections, function(c) { return c.voter }).length;
 
-    if ($scope.cardPack == 'fib') {
-      $scope.cards = ['0', '1', '2', '3', '5', '8', '13', '20', '40', '?'];
-    } else if ($scope.cardPack == 'seq') {
-      $scope.cards = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '?'];
-    } else if ($scope.cardPack == 'tshirt') {
-      $scope.cards = ['XL', 'L', 'M', 'S', 'XS', '?'];
-    }
-    $scope.connections = _.filter(roomObj.connections, function(c) { return c.socketId });
-    $scope.votes = _.chain($scope.connections).filter(function(c) { return c.vote }).values().value();
-    $scope.voterCount = _.filter($scope.connections, function(c) { return c.voter }).length;
+      var connection = myConnectionHash();
 
-    var connection = myConnectionHash();
-
-    if (connection) {
-      $scope.voter = connection.voter;  
-      $scope.myVote = connection.vote;
-    }
+      if (connection) {
+        $scope.voter = connection.voter;  
+        $scope.myVote = connection.vote;
+      }
+    });
+    // we first want the cards to be displayed as hidden, and then apply the finished state
+    // if voting has finished - which then actions the transition.
+    $timeout(function() {
+      $scope.votingState = $scope.votes.length == $scope.voterCount ? 'finished' : '';
+    }, 100);
   }
 
 
@@ -251,6 +260,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   $scope.votes = [];
   $scope.cardPack = '';
   $scope.myVote = null;
+  $scope.votingState = "";
 }
 
 RoomCtrl.$inject = ['$scope', '$routeParams', '$timeout', 'socketService'];
