@@ -23,7 +23,7 @@
     <p>Voter count: <span class="label">{{voterCount}}</span></p>
     <ul class="cards {{votingState}}">
       <li ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card mine-{{vote.sessionId==sessionId}}">
-        <div class="vote">{{vote.vote}}</div>
+        <div class="vote">{{vote.visibleVote}}</div>
         <div class="hidden">x</div>
       </li>
     </ul>

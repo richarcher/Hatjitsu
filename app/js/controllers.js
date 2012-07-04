@@ -60,6 +60,16 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     });
   }
 
+  // wipe out vote if voting state is not yet finished to prevent cheating.
+  // if it has already been set - use the actual vote. This works for unvoting - so that 
+  // before the flip occurs - we don't display 'oi'
+  var setVisibleVotes = function() {
+    var voteCount = $scope.votes.length;
+    _.each($scope.votes, function(v) {
+      v.visibleVote = v.visibleVote === undefined && voteCount < $scope.voterCount ? 'oi!' : v.vote;
+    });
+  }
+
   var myConnectionHash = function() {
     return _.find($scope.connections, function(c) { return c.sessionId == $scope.sessionId });
   }
@@ -83,6 +93,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
         // the above works - but causes an error in the UI.
       }
     }
+    setVisibleVotes();
     $scope.votingState = $scope.votes.length == $scope.voterCount ? 'finished' : ''
   }
 
@@ -116,14 +127,18 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
         $scope.voter = connection.voter;  
         $scope.myVote = connection.vote;
       }
+
+      setVisibleVotes();
+
     });
+
     // we first want the cards to be displayed as hidden, and then apply the finished state
     // if voting has finished - which then actions the transition.
     $timeout(function() {
       $scope.votingState = $scope.votes.length == $scope.voterCount ? 'finished' : '';
     }, 100);
-  }
 
+  }
 
   $scope.configureRoom = function() {
 
