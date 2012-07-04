@@ -194,37 +194,42 @@ input.roomUrl {
   z-index: 1000;
 }
 
-.alert {
+.notification {
   position: absolute;
   top: 0;
   opacity: 0;
+  padding: 3px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 11px;
+  font-weight: bold;
   -webkit-transition: .5s all ease;
      -moz-transition: .5s all ease;
       -ms-transition: .5s all ease;
        -o-transition: .5s all ease;
           transition: .5s all ease;
 }
+
 #appError {
-  left: 0px;
+  left: 100px;
+  background-color: red;
+  color: white;
 }
 
 #message {
-  left: 0px;
+  left: 100px;
+  background-color: blue;
+  color: white;
 }
 
 #socketMessage {
   right: 0px;
+  background-color: yellow;
+  color: black;
 }
 
 .ui-show {
-  height: 2em;
-  opacity: 0.9;
-}
-
-.alert-socket {
-  color: black;
-  background-color: yellow;
-  border-color: #bce8f1;
+  opacity: 0.7;
 }
 
 .cards {
