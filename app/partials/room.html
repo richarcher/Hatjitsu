@@ -35,8 +35,10 @@
     <hr />
     <div ng-switch-when="true">
       <p><strong>Card pack</strong>:</p>
+      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="goat"> Mountain Goat</label>
       <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="fib"> Fibonacci</label>
       <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="seq"> Sequential</label>
+      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="play"> Playing Cards</label>
       <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="tshirt"> T-Shirt</label>
       <hr />
       <button ng-click="resetVote()" class="btn">Reset the vote</button>
