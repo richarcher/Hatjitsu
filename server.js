@@ -15,7 +15,7 @@ var siteConfig = require('./siteConfig.js');
 // Configuration
 
 io.configure(function () {
-  io.set('transports', ['websocket', 'flashsocket', 'xhr-polling']);
+  io.set('transports', ['websocket', 'xhr-polling']);
 });
 
 var assetManagerGroups = {
