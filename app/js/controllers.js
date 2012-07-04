@@ -197,7 +197,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       });
     });
     socketService.on('card pack set', function () {
-      displayMessage("Card pack was changed.");
+      displayMessage('Card pack changed...' + );
       // console.log("on card pack set");
       // console.log("emit room info", { roomUrl: $scope.roomId });
       this.emit('room info', { roomUrl: $scope.roomId }, function(response){
