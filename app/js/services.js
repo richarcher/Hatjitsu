@@ -34,14 +34,14 @@ var Sock = function(rootScope) {
   this.socket.on('error', function(reason) {
     // console.log('service: on error', reason);
     that.rootScope.$apply(function() {
-      that.rootScope.socketMessage = reason;  
+      that.rootScope.socketMessage = ":-(  Error = " + reason;  
     });
     // console.log(reason);
   });
   this.socket.on('connect_failed', function(reason) {
     // console.log('service: on connect failed', reason);
     that.rootScope.$apply(function() {
-      that.rootScope.socketMessage = reason;  
+      that.rootScope.socketMessage = ":-(  Connect failed ";  
     });
     // console.log(reason);
   });
