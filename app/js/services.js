@@ -29,7 +29,7 @@ var Sock = function(rootScope) {
     'reconnection delay': 500,
     'max reconnection attempts': 10,
     'try multiple transports': true,
-    'transports': ['websocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'jsonp-polling']
+    'transports': ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']
   });
 
   this.socket.on('error', function(reason) {

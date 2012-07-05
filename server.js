@@ -15,10 +15,6 @@ var gzippo = require('gzippo');
 
 // Configuration
 
-io.configure(function () {
-  io.set('transports', ['websocket', 'xhr-multipart', 'jsonp-polling', 'htmlfile', 'xhr-polling']);
-});
-
 var assetManagerGroups = {
   'js': {
     'route': /js\/.*\.js/
@@ -97,22 +93,19 @@ app.get('/:id', function(req, res) {
   }
 });
 
-// Heroku won't actually allow us to use WebSockets
-// so we have to setup polling instead.
-// https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
-io.configure('production', function(){
+
+io.configure(function () {
+  io.set('transports', ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
+  io.enable('browser client minification');
   io.enable('browser client etag');
+  io.enable('browser client gzip');
+});
+
+io.configure('production', function(){
   io.set('log level', 1);
-  io.set('transports', [
-      "websocket"
-    ]);
 });
 io.configure('development', function(){
-  io.enable('browser client etag');
   io.set('log level', 2);
-  io.set('transports', [
-      "websocket"
-    ]);
 });
 
 var port = process.env.app_port || 5000; // Use the port that Heroku provides or default to 5000
