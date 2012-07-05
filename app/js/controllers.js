@@ -185,10 +185,10 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   }
 
   var setVotingState = function() {
-    $scope.votingState = testToReveal() ? 'finished' : '';
+    $scope.votingState = votingFinished() ? 'finished' : '';
   }
 
-  var testToReveal = function() {
+  var votingFinished = function() {
     return $scope.forcedReveal || $scope.votes.length === $scope.voterCount;
   }
 
@@ -301,7 +301,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
 
   $scope.unvote = function(sessionId) {
     if (sessionId === $scope.sessionId) {
-      if ( !testToReveal() ) {
+      if ( !votingFinished() ) {
         setLocalVote(null);
 
         // console.log("emit unvote", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
