@@ -142,7 +142,8 @@ input.roomUrl {
 }
 .vote-item a:after {
   display: block;
-  background: #BBBBBB;
+  background-color: #BBBBBB;
+  background-image: url(/img/vert-ribbing.png);
   background-size:5px 1px;
   width: 40%;
   height: 91%;
@@ -175,13 +176,13 @@ input.roomUrl {
   border-bottom-left-radius: 0;
 }
 [role="navigation"] .vote-item a:after {
-  box-shadow: -1px 1px 0px #aaa inset
+  box-shadow: -2px 1px 0px #aaa inset
 }
 [role="complementary"] .vote-item {
   left: 0;
 }
 [role="complementary"] .vote-item a:after {
-  box-shadow: 1px 1px 0px #aaa inset
+  box-shadow: 2px 1px 0px #aaa inset
 }
 [role="complementary"] .vote-item a,
 [role="complementary"] .vote-item a:after {
@@ -328,6 +329,7 @@ h2 span.sub {
   -webkit-transform: rotateY(180deg);
   z-index: 900;
 }
+
 /* POSITIONING */
 .wrapper {
   width: 300%;
