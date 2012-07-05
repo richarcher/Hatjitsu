@@ -23,7 +23,7 @@ var Sock = function(rootScope) {
   this.rootScope.activity = false;  
   this.rootScope.sessionId = null;
 
-  this.socket = io.connect(document.location.origin, {
+  this.socket = io.connect(location.protocol + '//' + location.host, {
     'reconnect': true,
     'reconnection delay': 500,
     'max reconnection attempts': 10,
