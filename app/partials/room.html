@@ -41,8 +41,12 @@
       <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="play"> Playing Cards</label>
       <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="tshirt"> T-Shirt</label>
       <hr />
-      <button ng-click="resetVote()" class="btn" title="Start a new vote"><i class="icon icon-refresh"></i> Reset</button>
-      <button ng-click="forceReveal()" class="btn" title="Force a reveal of all cards if there are some stragglers"><i class="icon icon-exclamation-sign"></i> Reveal</button>
+      <button ng-click="resetVote()" class="btn" title="Start a new vote">
+        <i class="icon icon-refresh"></i> Reset
+      </button>
+      <button ng-click="forceReveal()" class="btn" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
+        <i class="icon icon-exclamation-sign"></i> Reveal
+      </button>
       <hr />
     </div>
     <p><label>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-change="toggleVoter()" /></label></p>

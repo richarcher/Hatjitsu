@@ -28,6 +28,13 @@ header h1 {
   margin-top: 0.8em;
   margin-left: 2.6em;
 }
+button {
+  -webkit-transition: .3s opacity ease;
+     -moz-transition: .3s opacity ease;
+      -ms-transition: .3s opacity ease;
+       -o-transition: .3s opacity ease;
+          transition: .3s opacity ease;
+}
 .logo {
   position: absolute;
   top: 1em;
