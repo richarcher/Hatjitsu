@@ -298,14 +298,15 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   }
 
   $scope.unvote = function(sessionId) {
-    if (sessionId == $scope.sessionId) {
+    if (sessionId === $scope.sessionId) {
+      if ( !testToReveal() ) {
+        setLocalVote(null);
 
-      setLocalVote(null);
-
-      // console.log("emit unvote", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
-      socketService.emit('unvote', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response) {
-        processMessage(response);
-      });
+        // console.log("emit unvote", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
+        socketService.emit('unvote', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response) {
+          processMessage(response);
+        });
+      }
     }
   }
 

@@ -7,7 +7,7 @@
   <section id="cardPanel" role="navigation">
     <div ng-show="voter">
       <h2>Estimate</h2>
-      <ul class="cards">
+      <ul class="cards {{votingState}}">
         <li ng-repeat="card in cards" ng-click="vote(card)" onclick="showVotePanel();" class="card mine-{{card==myVote}}">
           <div>{{card}}</div>
         </li>
@@ -22,7 +22,7 @@
   <section id="votePanel" role="main">
     <h2>Votes <span class="sub">Humans: {{humanCount}}, Voters: <span class="label">{{voterCount}}</span></span></h2>
     
-    <ul class="cards {{votingState}}" style="clear: both;">
+    <ul class="cards {{votingState}}">
       <li ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card mine-{{vote.sessionId==sessionId}}">
         <div class="vote">{{vote.visibleVote}}</div>
         <div class="hidden">x</div>
