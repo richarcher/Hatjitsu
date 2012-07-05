@@ -289,13 +289,14 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
 
   $scope.vote = function(vote) {
     if ($scope.myVote != vote) {
-      
-      setLocalVote(vote);
+      if ( !votingFinished() ) {
+        setLocalVote(vote);
 
-      // console.log("emit vote", { roomUrl: $scope.roomId, vote: vote, sessionId: $scope.sessionId });
-      socketService.emit('vote', { roomUrl: $scope.roomId, vote: vote, sessionId: $scope.sessionId }, function(response) {
-        processMessage(response);
-      });
+        // console.log("emit vote", { roomUrl: $scope.roomId, vote: vote, sessionId: $scope.sessionId });
+        socketService.emit('vote', { roomUrl: $scope.roomId, vote: vote, sessionId: $scope.sessionId }, function(response) {
+          processMessage(response);
+        });
+      }
     }
   }
 
