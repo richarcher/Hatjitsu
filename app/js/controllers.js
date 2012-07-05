@@ -88,7 +88,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
 
     var voteCount = $scope.votes.length;
     _.each($scope.votes, function(v) {
-      v.visibleVote = v.visibleVote === undefined && voteCount < $scope.voterCount ? '☹' : v.vote;
+      v.visibleVote = v.visibleVote === undefined && (!$scope.forcedReveal && voteCount < $scope.voterCount) ? 'oi!' : v.vote;
     });
 
     if ($scope.votes.length === $scope.voterCount || $scope.forcedReveal) {
@@ -131,7 +131,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       }
     }
     processVotes();
-    $scope.votingState = testToReveal();
+    setVotingState();
   }
 
   var refreshRoomInfo = function(roomObj) {
@@ -177,22 +177,17 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     // we first want the cards to be displayed as hidden, and then apply the finished state
     // if voting has finished - which then actions the transition.
     $timeout(function() {
-      $scope.votingState = testToReveal();
+      setVotingState();
     }, 100);
 
   }
 
+  var setVotingState = function() {
+    $scope.votingState = testToReveal() ? 'finished' : '';
+  }
+
   var testToReveal = function() {
-    if ($scope.forcedReveal) {
-      processVotes();
-      return 'finished';
-    } else {
-      if ($scope.votes.length === $scope.voterCount) {
-        return 'finished';
-      } else {
-        return '';
-      }
-    }
+    return $scope.forcedReveal || $scope.votes.length === $scope.voterCount;
   }
 
   $scope.configureRoom = function() {
