@@ -16,7 +16,7 @@ var gzippo = require('gzippo');
 // Configuration
 
 io.configure(function () {
-  io.set('transports', ['websocket', 'jsonp-polling', 'htmlfile', 'xhr-polling']);
+  io.set('transports', ['websocket', 'xhr-multipart', 'jsonp-polling', 'htmlfile', 'xhr-polling']);
 });
 
 var assetManagerGroups = {

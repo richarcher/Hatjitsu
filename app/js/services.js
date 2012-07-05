@@ -9,7 +9,7 @@ var pokerAppServices = angular.module('pokerApp.services', []);
 
 pokerAppServices.value('version', '0.1');
 
-pokerAppServices.service('socketService', ['$rootScope', function($rootScope) {
+pokerAppServices.service('socketService', ['$rootScope',  '$timeout', function($rootScope) {
   var sock = new Sock($rootScope);
   return sock;
 }]);
@@ -22,7 +22,14 @@ var Sock = function(rootScope) {
   this.rootScope.socketMessage = null;  
   this.rootScope.activity = false;  
   this.rootScope.sessionId = null;
-  this.socket = io.connect(document.location.origin);
+
+  this.socket = io.connect(document.location.origin, {
+    'reconnect': true,
+    'reconnection delay': 500,
+    'max reconnection attempts': 10,
+    'try multiple transports': true,
+    'transports': ['websocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'jsonp-polling']
+  });
 
   this.socket.on('error', function(reason) {
     // console.log('service: on error', reason);
