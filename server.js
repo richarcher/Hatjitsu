@@ -2,6 +2,7 @@
 /**
  * Module dependencies.
  */
+var _ = require('underscore')._;
 
 var express = require('express'),
     fs = require('fs');
@@ -13,6 +14,8 @@ var lobbyClass = require('./lib/lobby.js');
 var siteConfig = require('./siteConfig.js');
 var gzippo = require('gzippo');
 
+var lobby = new lobbyClass.Lobby(io);
+
 // Configuration
 
 var assetManagerGroups = {
@@ -21,7 +24,6 @@ var assetManagerGroups = {
     , 'path': './app/'
     , 'dataType': 'javascript'
     , 'files': [
-        // siteConfig.uri + '/socket.io/socket.io.js', // combined js has errors with this one in it
         'lib/jquery.cookie/jquery.cookie.js',
         'lib/underscore.min.js',
         'lib/angular/angular.min.js',
@@ -54,11 +56,10 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.staticCache());
-  app.use(gzippo.staticGzip(__dirname + '/app'));
-  // app.use(express.static(__dirname + '/app'));
 });
 
 app.configure('development', function(){
+  app.use(gzippo.staticGzip(__dirname + '/app'));
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
@@ -66,7 +67,6 @@ app.configure('production', function(){
   var oneYear = 31557600000;
   app.use(assetsManagerMiddleware);
   app.use(gzippo.staticGzip(__dirname + '/app', { maxAge: oneYear, clientMaxAge: oneYear }));
-  // app.use(express.static(__dirname + '/app', { maxAge: oneYear }));
   app.use(express.errorHandler());
 });
 
@@ -81,13 +81,14 @@ app.get('/', function(req, res) {
   res.render('index.ejs', { siteConfig: siteConfig });
 });
 
+app.get('/debug_state', function(req, res) {
+  console.log(lobby.rooms);
+  res.json(_.map(lobby.rooms, function(room, key) { return room.json() } ));
+});
+
 app.get('/:id', function(req, res) {
   if (req.params.id in lobby.rooms) {
     res.render('index.ejs', { siteConfig: siteConfig });
-    // fs.readFile(__dirname + '/app/index.html', 'utf8', function(err, text){
-    //   console.log(text);
-    //   res.send(text);
-    // });
   } else {
     res.redirect('/', { siteConfig: siteConfig });  
   }
@@ -114,7 +115,6 @@ app.listen(port, function() {
 });
 
 
-var lobby = new lobbyClass.Lobby(io);
 
 
 
