@@ -85,12 +85,13 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   // if it has already been set - use the actual vote. This works for unvoting - so that 
   // before the flip occurs - we don't display 'oi'
   var processVotes = function() {
+
     var voteCount = $scope.votes.length;
     _.each($scope.votes, function(v) {
       v.visibleVote = v.visibleVote === undefined && voteCount < $scope.voterCount ? '☹' : v.vote;
     });
 
-    if ($scope.votes.length == $scope.voterCount) {
+    if ($scope.votes.length === $scope.voterCount || $scope.forcedReveal) {
       var uniqVotes = _.chain($scope.votes).pluck('vote').uniq().value().length;
       if (uniqVotes == 1) {
         $scope.$emit('unanimous vote');
@@ -130,7 +131,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       }
     }
     processVotes();
-    $scope.votingState = $scope.votes.length == $scope.voterCount ? 'finished' : ''
+    $scope.votingState = testToReveal();
   }
 
   var refreshRoomInfo = function(roomObj) {
@@ -145,6 +146,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       
       $scope.humanCount = roomObj.clientCount;
       $scope.cardPack = roomObj.cardPack;
+      $scope.forcedReveal = roomObj.forcedReveal;
 
       if ($scope.cardPack == 'fib') {
         $scope.cards = ['0', '1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '?'];
@@ -175,9 +177,22 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     // we first want the cards to be displayed as hidden, and then apply the finished state
     // if voting has finished - which then actions the transition.
     $timeout(function() {
-      $scope.votingState = $scope.votes.length == $scope.voterCount ? 'finished' : '';
+      $scope.votingState = testToReveal();
     }, 100);
 
+  }
+
+  var testToReveal = function() {
+    if ($scope.forcedReveal) {
+      processVotes();
+      return 'finished';
+    } else {
+      if ($scope.votes.length === $scope.voterCount) {
+        return 'finished';
+      } else {
+        return '';
+      }
+    }
   }
 
   $scope.configureRoom = function() {
@@ -232,6 +247,15 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
         processMessage(response, refreshRoomInfo);
       });
     });
+
+    socketService.on('reveal', function () {
+      // console.log("reveal event received");
+      // setLocalVote(null);
+      this.emit('room info', { roomUrl: $scope.roomId }, function(response){
+        processMessage(response, refreshRoomInfo);
+      });
+    });
+
     socketService.on('connect', function() {
       // console.log("on connect");
       var sessionId = this.socket.sessionid;
@@ -297,6 +321,13 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
     });
   }
 
+  $scope.forceReveal = function() {
+    // console.log("emit force reveal", { roomUrl: $scope.roomId });
+    socketService.emit('force reveal', { roomUrl: $scope.roomId }, function(response) {
+      processMessage(response);
+    });
+  }
+
   $scope.toggleVoter = function() {
     // console.log("emit toggle voter", { roomUrl: $scope.roomId, voter: $scope.voter, sessionId: $scope.sessionId });
     socketService.emit('toggle voter', { roomUrl: $scope.roomId, voter: $scope.voter, sessionId: $scope.sessionId }, function(response) {
@@ -316,6 +347,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   $scope.cardPack = '';
   $scope.myVote = null;
   $scope.votingState = "";
+  $scope.forcedReveal = false;
 }
 
 RoomCtrl.$inject = ['$scope', '$routeParams', '$timeout', 'socketService'];

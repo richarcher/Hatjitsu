@@ -9,7 +9,3 @@ angular.module('pokerApp', ['pokerApp.filters', 'pokerApp.services', 'pokerApp.d
     $routeProvider.when('/:roomId', { templateUrl: 'partials/room.html', controller: RoomCtrl});
     $routeProvider.otherwise({redirectTo: '/'});
   }]);
-
-$(document).ready(function(){
-  $('body').removeClass('no-js').addClass('js');
-});
