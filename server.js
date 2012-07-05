@@ -53,7 +53,6 @@ app.configure(function(){
   app.use(express.logger());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(assetsManagerMiddleware);
   app.use(express.staticCache());
   app.use(gzippo.staticGzip(__dirname + '/app'));
   // app.use(express.static(__dirname + '/app'));
@@ -65,6 +64,7 @@ app.configure('development', function(){
 
 app.configure('production', function(){
   var oneYear = 31557600000;
+  app.use(assetsManagerMiddleware);
   app.use(gzippo.staticGzip(__dirname + '/app', { maxAge: oneYear, clientMaxAge: oneYear }));
   // app.use(express.static(__dirname + '/app', { maxAge: oneYear }));
   app.use(express.errorHandler());
@@ -78,30 +78,30 @@ app.dynamicHelpers({
 });
 
 app.get('/', function(req, res) {
-  res.render('index.ejs');
+  res.render('index.ejs', { siteConfig: siteConfig });
 });
 
 app.get('/:id', function(req, res) {
   if (req.params.id in lobby.rooms) {
-    res.render('index.ejs');
+    res.render('index.ejs', { siteConfig: siteConfig });
     // fs.readFile(__dirname + '/app/index.html', 'utf8', function(err, text){
     //   console.log(text);
     //   res.send(text);
     // });
   } else {
-    res.redirect('/');  
+    res.redirect('/', { siteConfig: siteConfig });  
   }
 });
 
 
 io.configure(function () {
   io.set('transports', ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
-  io.enable('browser client minification');
-  io.enable('browser client etag');
-  io.enable('browser client gzip');
 });
 
 io.configure('production', function(){
+  io.enable('browser client minification');
+  io.enable('browser client etag');
+  io.enable('browser client gzip');
   io.set('log level', 1);
 });
 io.configure('development', function(){
