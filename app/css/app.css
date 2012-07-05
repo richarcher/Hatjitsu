@@ -302,11 +302,21 @@ h2 span.sub {
   -webkit-transition: all .4s ease-in-out;
 }
 [role="main"] .cards .hidden { 
+  background-image: url(/img/card-back.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  text-indent: -9999px;
   z-index: 800;
   -webkit-transform: rotateX(0deg) rotateY(0deg);
   -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
   -webkit-transition: all .4s ease-in-out;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+  [role="main"] .cards .hidden { 
+    background-image: url(/img/card-back_@2x.png);
+    background-size: 30px 30px; 
+  }
 }
 [role="main"] .cards.finished .vote {
   -webkit-transition-delay: 1s;

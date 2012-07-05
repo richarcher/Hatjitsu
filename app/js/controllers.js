@@ -87,7 +87,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   var processVotes = function() {
     var voteCount = $scope.votes.length;
     _.each($scope.votes, function(v) {
-      v.visibleVote = v.visibleVote === undefined && voteCount < $scope.voterCount ? 'oi!' : v.vote;
+      v.visibleVote = v.visibleVote === undefined && voteCount < $scope.voterCount ? '☹' : v.vote;
     });
 
     if ($scope.votes.length == $scope.voterCount) {
