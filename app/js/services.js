@@ -52,6 +52,20 @@ var Sock = function(rootScope) {
     });
     // console.log('disconnected');
   });
+  this.socket.on('connecting', function() {
+    // console.log('service: on connecting');
+    that.rootScope.$apply(function() {
+      that.rootScope.socketMessage = "Connecting...";  
+    });
+    // console.log('disconnected');
+  });
+  this.socket.on('reconnecting', function() {
+    // console.log('service: on reconnecting');
+    that.rootScope.$apply(function() {
+      that.rootScope.socketMessage = "Reconnecting...";  
+    });
+    // console.log('disconnected');
+  });
   this.socket.on('connect', function() {
     var sessionId = this.socket.sessionid;
     // console.log('service: on connect');
