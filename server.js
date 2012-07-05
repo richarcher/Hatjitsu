@@ -59,7 +59,7 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
-  app.use(gzippo.staticGzip(__dirname + '/app'));
+  app.use(express.static(__dirname + '/app'));
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
