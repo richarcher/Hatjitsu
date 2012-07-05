@@ -198,6 +198,16 @@ io.sockets.on('connection', function (socket) {
     }
   });
 
+  socket.on('force reveal', function (data, callback) {
+    var room = lobby.getRoom(data.roomUrl);
+    if (room.error) {
+      callback( { error: room.error });
+    } else {
+      room.forceReveal();
+      callback( {} );
+    }
+  });
+
   socket.on('toggle voter', function (data, callback) {
     // console.log("on toggle voter for " + data.roomUrl, socket.id, data);
     var room = lobby.getRoom(data.roomUrl);

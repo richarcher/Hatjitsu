@@ -42,6 +42,8 @@
       <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="tshirt"> T-Shirt</label>
       <hr />
       <button ng-click="resetVote()" class="btn">Reset the vote</button>
+      <button ng-hide=forcedReveal ng-click="forceReveal()" class="btn">Force reveal</button>
+      <hr />
     </div>
     <p><label>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-change="toggleVoter()" /></label></p>
     <hr />
