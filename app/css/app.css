@@ -340,26 +340,26 @@ h2 span.sub {
        -o-transition: .2s all ease;    
           transition: .2s all ease; 
 }
-.js [role="navigation"] {
+ [role="navigation"] {
   width: 27%;
   margin: 0;
   float: left;
 }
-  .js [role="navigation"] .vote-item {
+   [role="navigation"] .vote-item {
     right: -5%;
     z-index: 1;
   }
-.js [role="main"] {
+ [role="main"] {
   width: 22%;
   margin: 0;
   float: left;
 }
-.js [role="complementary"] {
+ [role="complementary"] {
   width: 26%;
   margin: 0;
   float: left;
 }
-  .js [role="complementary"] .vote-item {
+   [role="complementary"] .vote-item {
     left: -5%;
   }
 .active-cardPanel .wrapper {
@@ -377,20 +377,20 @@ h2 span.sub {
     width: 150%;
     margin-left: 0;
   }
-  .js [role="navigation"] {
+  [role="navigation"] {
     width: 24%; 
     margin-left: 0;
     margin-right: 1%;
   }
-    .js [role="navigation"] .vote-item {
+    [role="navigation"] .vote-item {
       display: none;
     }
-  .js [role="main"] {
+  [role="main"] {
     width: 22%;
     float: left;
     margin-right: 1%;
   }
-  .js [role="complementary"] {
+  [role="complementary"] {
     width: 19%;
     margin-left: 1%;
   }
@@ -417,19 +417,19 @@ h2 span.sub {
     display: none;
   }
 
-  .js [role="navigation"] {
+  [role="navigation"] {
     width: 13%; 
     margin-left: 0;
     float: left;
     padding: 3%
   }
 
-  .js [role="main"] {
+  [role="main"] {
     width: 48%;
     padding: 3%;    
   }
 
-  .js [role="complementary"] {
+  [role="complementary"] {
     width: 13%; 
     padding: 3%;  
     margin-right: 0;

@@ -69,7 +69,7 @@
       } else if (size == 'narrow'){
         $("body").removeClass().addClass("narrow-screen");
       } else {
-        $("body").removeClass().addClass("small-screen");
+        $('body').removeClass();
       }
     }
 
@@ -78,7 +78,6 @@
 
     $(document).ready(function(){
       resizer();
-      $('html').removeClass('no-js').addClass('js');
 
       // Toggle for nav menu
       $('.cardPanel-button').click(function() {
