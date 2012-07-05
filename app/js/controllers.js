@@ -91,6 +91,8 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       v.visibleVote = v.visibleVote === undefined && (!$scope.forcedReveal && voteCount < $scope.voterCount) ? 'oi!' : v.vote;
     });
 
+    $scope.forceRevealDisable = ( !$scope.forcedReveal && $scope.votes.length < $scope.voterCount ) ? false : true;
+
     if ($scope.votes.length === $scope.voterCount || $scope.forcedReveal) {
       var uniqVotes = _.chain($scope.votes).pluck('vote').uniq().value().length;
       if (uniqVotes == 1) {
@@ -183,10 +185,10 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   }
 
   var setVotingState = function() {
-    $scope.votingState = testToReveal() ? 'finished' : '';
+    $scope.votingState = votingFinished() ? 'finished' : '';
   }
 
-  var testToReveal = function() {
+  var votingFinished = function() {
     return $scope.forcedReveal || $scope.votes.length === $scope.voterCount;
   }
 
@@ -298,14 +300,15 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   }
 
   $scope.unvote = function(sessionId) {
-    if (sessionId == $scope.sessionId) {
+    if (sessionId === $scope.sessionId) {
+      if ( !votingFinished() ) {
+        setLocalVote(null);
 
-      setLocalVote(null);
-
-      // console.log("emit unvote", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
-      socketService.emit('unvote', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response) {
-        processMessage(response);
-      });
+        // console.log("emit unvote", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
+        socketService.emit('unvote', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response) {
+          processMessage(response);
+        });
+      }
     }
   }
 
@@ -318,6 +321,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
 
   $scope.forceReveal = function() {
     // console.log("emit force reveal", { roomUrl: $scope.roomId });
+    $scope.forceRevealDisable = true;
     socketService.emit('force reveal', { roomUrl: $scope.roomId }, function(response) {
       processMessage(response);
     });
@@ -343,6 +347,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   $scope.myVote = null;
   $scope.votingState = "";
   $scope.forcedReveal = false;
+  $scope.forceRevealDisable = true;
 }
 
 RoomCtrl.$inject = ['$scope', '$routeParams', '$timeout', 'socketService'];
