@@ -9,7 +9,7 @@ var pokerAppServices = angular.module('pokerApp.services', []);
 
 pokerAppServices.value('version', '0.1');
 
-pokerAppServices.service('socketService', ['$rootScope', function($rootScope) {
+pokerAppServices.service('socketService', ['$rootScope',  '$timeout', function($rootScope) {
   var sock = new Sock($rootScope);
   return sock;
 }]);
@@ -22,19 +22,27 @@ var Sock = function(rootScope) {
   this.rootScope.socketMessage = null;  
   this.rootScope.activity = false;  
   this.rootScope.sessionId = null;
-  this.socket = io.connect(document.location.origin);
+
+  this.socket = io.connect(location.protocol + '//' + location.hostname, {
+    'port': location.port,
+    'reconnect': true,
+    'reconnection delay': 500,
+    'max reconnection attempts': 10,
+    'try multiple transports': true,
+    'transports': ['websocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'jsonp-polling']
+  });
 
   this.socket.on('error', function(reason) {
     // console.log('service: on error', reason);
     that.rootScope.$apply(function() {
-      that.rootScope.socketMessage = reason;  
+      that.rootScope.socketMessage = ":-(  Error = " + reason;  
     });
     // console.log(reason);
   });
   this.socket.on('connect_failed', function(reason) {
     // console.log('service: on connect failed', reason);
     that.rootScope.$apply(function() {
-      that.rootScope.socketMessage = reason;  
+      that.rootScope.socketMessage = ":-(  Connect failed ";  
     });
     // console.log(reason);
   });
@@ -42,6 +50,20 @@ var Sock = function(rootScope) {
     // console.log('service: on disconnect');
     that.rootScope.$apply(function() {
       that.rootScope.socketMessage = ":-(  Disconnected";  
+    });
+    // console.log('disconnected');
+  });
+  this.socket.on('connecting', function() {
+    // console.log('service: on connecting');
+    that.rootScope.$apply(function() {
+      that.rootScope.socketMessage = "Connecting...";  
+    });
+    // console.log('disconnected');
+  });
+  this.socket.on('reconnecting', function() {
+    // console.log('service: on reconnecting');
+    that.rootScope.$apply(function() {
+      that.rootScope.socketMessage = "Reconnecting...";  
     });
     // console.log('disconnected');
   });
