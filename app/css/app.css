@@ -165,10 +165,16 @@ button {
   }
 
 /* VOTING PAGE */
-  h2 span.sub {
+  [role="main"] h2 {
+    float: left;
+    margin-right: 0.5em;
+  }
+  span.sub {
+    float: left;
     font-size: 13px;
     font-weight: normal;
     color: #999;
+    padding-top: 1em;
   }
 
 /* CARDS */
