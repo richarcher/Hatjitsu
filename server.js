@@ -103,6 +103,7 @@ io.configure('production', function(){
   io.enable('browser client minification');
   io.enable('browser client etag');
   io.enable('browser client gzip');
+  io.set("polling duration", 10);
   io.set('log level', 1);
 });
 io.configure('development', function(){
