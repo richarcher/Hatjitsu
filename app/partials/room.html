@@ -20,7 +20,8 @@
   </section>
 
   <section id="votePanel" role="main">
-    <h2>Votes <span class="sub">Humans: {{humanCount}}, Voters: <span class="label">{{voterCount}}</span></span></h2>
+    <h2>Votes</h2>
+    <span class="sub">Humans: {{humanCount}}, Voters: <span class="label">{{voterCount}}</span></span>
     
     <ul class="cards {{votingState}}">
       <li ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card mine-{{vote.sessionId==sessionId}}">
