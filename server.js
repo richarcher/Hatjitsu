@@ -16,6 +16,11 @@ var gzippo = require('gzippo');
 
 var lobby = new lobbyClass.Lobby(io);
 
+var statsConnectionCount = 0;
+var statsDisconnectCount = 0;
+var statsSocketCount = 0;
+var statsSocketMessagesReceived = 0;
+
 // Configuration
 
 var assetManagerGroups = {
@@ -82,8 +87,15 @@ app.get('/', function(req, res) {
 });
 
 app.get('/debug_state', function(req, res) {
-  console.log(lobby.rooms);
-  res.json(_.map(lobby.rooms, function(room, key) { return room.json() } ));
+  res.json({
+    "stats": {
+      "connectionCount": statsConnectionCount,
+      "disconnectCount": statsDisconnectCount,
+      "currentSocketCount": statsSocketCount,
+      "socketMessagesReceived": statsSocketMessagesReceived
+    },
+    "rooms": _.map(lobby.rooms, function(room, key) { return room.json() } )
+  });
 });
 
 app.get('/:id', function(req, res) {
@@ -118,25 +130,30 @@ app.listen(port, function() {
 
 
 
-
-
 /* EVENT LISTENERS */
 
 io.sockets.on('connection', function (socket) {
 
+  statsConnectionCount++;
+  statsSocketCount++;
+
   // console.log("On connect", socket.id);
 
   socket.on('disconnect', function () {
+    statsDisconnectCount++;
+    statsSocketCount--;
     // console.log("On disconnect", socket.id);
     lobby.broadcastDisconnect(socket);
   });
   
   socket.on('create room', function (data, callback) {
+    statsSocketMessagesReceived++;
     // console.log("on create room", socket.id, data);
     callback(lobby.createRoom());
   });
 
   socket.on('join room', function (data, callback) {
+    statsSocketMessagesReceived++;
     // console.log("on join room " + data.roomUrl, socket.id, data);
     var room = lobby.joinRoom(socket, data);
     if(room.error) {
@@ -147,6 +164,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('room info', function (data, callback) {
+    statsSocketMessagesReceived++;
     // console.log("on room info for " + data.roomUrl, socket.id, data);
     var room = lobby.getRoom(data.roomUrl);
     // room = { error: "there was an error" };
@@ -158,6 +176,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('set card pack', function (data, cardPack) {
+    statsSocketMessagesReceived++;
     // console.log("on set card pack " + data.cardPack + " for " + data.roomUrl, socket.id, data);
     var room = lobby.getRoom(data.roomUrl);
     // console.log("error=" + room.error);
@@ -167,6 +186,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('vote', function (data, callback) {
+    statsSocketMessagesReceived++;
     // console.log("on vote " + data.vote + " received for " + data.roomUrl, socket.id, data);
     var room = lobby.getRoom(data.roomUrl);
     if (room.error) {
@@ -178,6 +198,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('unvote', function (data, callback) {
+    statsSocketMessagesReceived++;
     // console.log("omn unvote received for " + data.roomUrl, socket.id, data);
     var room = lobby.getRoom(data.roomUrl);
     if (room.error) {
@@ -189,6 +210,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('reset vote', function (data, callback) {
+    statsSocketMessagesReceived++;
     // console.log("on reset vote  received for " + data.roomUrl, socket.id, data);
     var room = lobby.getRoom(data.roomUrl);
     if (room.error) {
@@ -200,6 +222,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('force reveal', function (data, callback) {
+    statsSocketMessagesReceived++;
     var room = lobby.getRoom(data.roomUrl);
     if (room.error) {
       callback( { error: room.error });
@@ -210,6 +233,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('toggle voter', function (data, callback) {
+    statsSocketMessagesReceived++;
     // console.log("on toggle voter for " + data.roomUrl, socket.id, data);
     var room = lobby.getRoom(data.roomUrl);
     if (room.error) {
