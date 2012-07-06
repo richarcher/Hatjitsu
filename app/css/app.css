@@ -152,12 +152,13 @@ input.roomUrl {
   background-color: #BBBBBB;
   background-image: url(/img/vert-ribbing.png);
   background-size:5px 1px;
-  width: 40%;
-  height: 91%;
   position: absolute;
   content: ".";
-  top: 5%;
+  top: 1em;
   left: 15%;
+  bottom: 1em;
+  width: 40%;
+  min-width: 2.5em;
   border-radius: 0.75em;
 }
 [role="navigation"] .vote-item {
@@ -373,7 +374,7 @@ h2 span.sub {
   float: left;
 }
    [role="navigation"] .vote-item {
-    right: -5%;
+    right: -7%;
     z-index: 1;
   }
  [role="main"] {
@@ -386,8 +387,8 @@ h2 span.sub {
   margin: 0;
   float: left;
 }
-   [role="complementary"] .vote-item {
-    left: -5%;
+  [role="complementary"] .vote-item {
+    left: -7%;
   }
 .active-cardPanel .wrapper {
   margin-left: 0;
