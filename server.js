@@ -90,7 +90,7 @@ app.get('/:id', function(req, res) {
   if (req.params.id in lobby.rooms) {
     res.render('index.ejs', { siteConfig: siteConfig });
   } else {
-    res.redirect('/', { siteConfig: siteConfig });  
+    res.redirect('/');  
   }
 });
 
