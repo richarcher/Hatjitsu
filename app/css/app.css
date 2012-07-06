@@ -1,5 +1,5 @@
 body {
-  background: #FFFFFF;
+  background: #FFFFFF url(/img/noise.png) -50% -10%;
 }
 a:hover,
 a:focus {
@@ -323,7 +323,7 @@ hr {
     right: 40%;
   }
   .active-settings [role="complementary"] .vote-item a:after {
-    left: 30%;
+    left: 50%;
   }
   .narrow-screen.active-settings [role="complementary"] .vote-item a:after {
     left: 14%;
