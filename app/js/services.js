@@ -42,7 +42,7 @@ var Sock = function(rootScope) {
   this.socket.on('connect_failed', function(reason) {
     // console.log('service: on connect failed', reason);
     that.rootScope.$apply(function() {
-      that.rootScope.socketMessage = ":-(  Connect failed ";  
+      that.rootScope.socketMessage = ":-(  Connect failed";  
     });
     // console.log(reason);
   });
@@ -64,6 +64,20 @@ var Sock = function(rootScope) {
     // console.log('service: on reconnecting');
     that.rootScope.$apply(function() {
       that.rootScope.socketMessage = "Reconnecting...";  
+    });
+    // console.log('disconnected');
+  });
+  this.socket.on('reconnect', function() {
+    // console.log('service: on reconnect');
+    that.rootScope.$apply(function() {
+      that.rootScope.socketMessage = null;  
+    });
+    // console.log('disconnected');
+  });
+  this.socket.on('reconnect_failed', function() {
+    // console.log('service: on reconnect_failed');
+    that.rootScope.$apply(function() {
+      that.rootScope.socketMessage = ":-( Reconnect failed";  
     });
     // console.log('disconnected');
   });
