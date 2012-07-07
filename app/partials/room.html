@@ -8,8 +8,11 @@
     <div ng-show="voter">
       <h2>Estimate</h2>
       <ul class="cards {{votingState}}">
-        <li ng-repeat="card in cards" ng-click="vote(card)" onclick="showVotePanel();" class="card mine-{{card==myVote}}">
+        <li ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" onclick="showVotePanel();" class="card mine-{{card==myVote}}">
           <div>{{card}}</div>
+        </li>
+        <li ng-hide="cards" class="waiting">
+          No cards found
         </li>
       </ul>
     </div>

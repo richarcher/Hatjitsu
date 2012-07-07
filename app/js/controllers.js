@@ -149,18 +149,8 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       $scope.humanCount = roomObj.clientCount;
       $scope.cardPack = roomObj.cardPack;
       $scope.forcedReveal = roomObj.forcedReveal;
+      $scope.cards = chooseCardPack($scope.cardPack);
 
-      if ($scope.cardPack == 'fib') {
-        $scope.cards = ['0', '1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '?'];
-      } else if ($scope.cardPack == 'goat') {
-        $scope.cards = ['0', '\u00BD', '1', '2', '3', '5', '8', '13', '20', '40', '100', '?', '\u2615'];
-      } else if ($scope.cardPack == 'seq') {
-        $scope.cards = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '?'];
-      } else if ($scope.cardPack == 'play') {
-        $scope.cards = ['A\u2660', '2', '3', '5', '8', '\u2654'];
-      } else if ($scope.cardPack == 'tshirt') {
-        $scope.cards = ['XL', 'L', 'M', 'S', 'XS', '?'];
-      }
       $scope.connections = _.filter(roomObj.connections, function(c) { return c.socketId });
       $scope.votes = _.chain($scope.connections).filter(function(c) { return c.vote }).values().value();
       $scope.voterCount = _.filter($scope.connections, function(c) { return c.voter }).length;
@@ -182,6 +172,23 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       setVotingState();
     }, 100);
 
+  }
+
+  var chooseCardPack = function(val) {
+    switch(val) {
+      case('fib') :
+        return ['0', '1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '?'];
+      case('goat') :
+        return ['0', '\u00BD', '1', '2', '3', '5', '8', '13', '20', '40', '100', '?', '\u2615'];
+      case('seq') :
+        return ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '?'];
+      case('play') :
+        return ['A\u2660', '2', '3', '5', '8', '\u2654'];
+      case('tshirt') :
+        return ['XL', 'L', 'M', 'S', 'XS', '?'];
+      default :
+        return []
+    }
   }
 
   var setVotingState = function() {
