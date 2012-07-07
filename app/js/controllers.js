@@ -192,7 +192,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   }
 
   var setVotingState = function() {
-    $scope.votingState = votingFinished() ? 'finished' : '';
+    $scope.votingState = votingFinished() ? ' finished' : ' active';
   }
 
   var votingFinished = function() {

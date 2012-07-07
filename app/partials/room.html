@@ -7,7 +7,7 @@
   <section id="cardPanel" role="navigation">
     <div ng-show="voter">
       <h2>Estimate</h2>
-      <ul class="cards {{votingState}}">
+      <ul class="cards{{votingState}}">
         <li ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" onclick="showVotePanel();" class="card mine-{{card==myVote}}">
           <div>{{card}}</div>
         </li>
