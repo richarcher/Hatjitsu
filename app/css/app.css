@@ -243,21 +243,46 @@ hr {
          -o-transition: .5s all ease;
             transition: .5s all ease;
   }
-  [role="main"] .cards .vote {
+  [role="main"] .cards.active .vote {
     -webkit-transform: rotateY(-180deg);
+       -moz-transform: rotateY(-180deg);
+        -ms-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
     -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
+       -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+            backface-visibility: hidden;
     -webkit-transition: all .4s ease-in-out;
+       -moz-transition: all .4s ease-in-out;
+        -ms-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+
   }
-  [role="main"] .cards .hidden { 
+  [role="main"] .cards.active .hidden {
     background-image: url(/img/card-back.png);
     background-repeat: no-repeat;
     background-position: center;
     text-indent: -9999px;
     -webkit-transform: rotateX(0deg) rotateY(0deg);
+       -moz-transform: rotateX(0deg) rotateY(0deg);
+        -ms-transform: rotateX(0deg) rotateY(0deg);
+            transform: rotateX(0deg) rotateY(0deg);
     -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
+       -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+            backface-visibility: hidden;
     -webkit-transition: all .4s ease-in-out;
+       -moz-transition: all .4s ease-in-out;
+        -ms-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
   }
 
   @media only screen and (-webkit-min-device-pixel-ratio: 2) {
@@ -268,17 +293,28 @@ hr {
   }
   [role="main"] .cards.finished .vote {
     -webkit-transition-delay: 1s;
+       -moz-transition-delay: 1s;
+        -ms-transition-delay: 1s;
+            transition-delay: 1s;
     -webkit-transform: rotateX(0deg) rotateY(0deg);
+       -moz-transform: rotateX(0deg) rotateY(0deg);
+        -ms-transform: rotateX(0deg) rotateY(0deg);
+            transform: rotateX(0deg) rotateY(0deg);
   }
   [role="main"] .cards.finished .hidden {
     -webkit-transition-delay: 1s;
+       -moz-transition-delay: 1s;
+        -ms-transition-delay: 1s;
+            transition-delay: 1s;
     -webkit-transform: rotateY(180deg);
+       -moz-transform: rotateY(180deg);
+        -ms-transform: rotateY(180deg);
+            transform: rotateY(180deg);
   }
   [role="main"] .cards.finished .vote {z-index: 900;}
   [role="main"] .cards.finished .hidden {z-index: 800;}
   [role="main"] .cards.active .vote {z-index: 800;}
   [role="main"] .cards.active .hidden {z-index: 900;}
-
 
 /* TAB BUTTONS */
   .vote-item {
@@ -420,9 +456,9 @@ hr {
       margin-left: 0;
       margin-right: 1%;
     }
-      [role="navigation"] .vote-item {
-        display: none;
-      }
+    [role="navigation"] .vote-item {
+      display: none;
+    }
     [role="main"] {
       width: 22%;
       float: left;
