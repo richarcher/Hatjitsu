@@ -24,8 +24,8 @@ var statsSocketMessagesReceived = 0;
 // Configuration
 
 var assetManagerGroups = {
-  'app': {
-    'route': /js\/packaged\/.*\.js/
+  'js': {
+    'route': /js\/.*\.js/
     , 'path': './app/'
     , 'dataType': 'javascript'
     , 'files': [
@@ -39,8 +39,8 @@ var assetManagerGroups = {
         'js/services.js'
     ]
   },
-  'style': {
-    'route': /css\/packaged\/.*\.css/
+  'css': {
+    'route': /css\/.*\.css/
     , 'path': './app/'
     , 'dataType': 'css'
     , 'files': [
@@ -73,6 +73,13 @@ app.configure('production', function(){
   app.use(assetsManagerMiddleware);
   app.use(gzippo.staticGzip(__dirname + '/app', { maxAge: oneYear, clientMaxAge: oneYear }));
   app.use(express.errorHandler());
+});
+
+// Template helpers
+app.dynamicHelpers({
+  'assetsCacheHashes': function(req, res) {
+    return assetsManagerMiddleware.cacheHashes;
+  }
 });
 
 app.get('/', function(req, res) {

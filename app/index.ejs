@@ -20,7 +20,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 
   <% if(siteConfig.packAssets) { %>
-    <link rel="stylesheet" href="/css/packaged/style.css" />
+    <link rel="stylesheet" href="/css/<%= assetsCacheHashes.css || 0 %>.css" />
   <% } else { %>
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/app.css" />
@@ -76,7 +76,7 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
   <% if(siteConfig.packAssets) { %>
-    <script src="/js/packaged/app.js"></script>
+    <script src="/js/<%= assetsCacheHashes.js || 0 %>.js"></script>
   <% } else { %>
     <script src="/lib/jquery.cookie/jquery.cookie.js"></script>
     <script src="/lib/underscore.min.js"></script>
