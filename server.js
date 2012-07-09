@@ -8,10 +8,11 @@ var express = require('express'),
     fs = require('fs');
 
 var app = module.exports = express.createServer();
-var assetManager = require('connect-assetmanager');
 var io = require('socket.io').listen(app);
 var lobbyClass = require('./lib/lobby.js');
 var siteConfig = require('./siteConfig.js');
+var path = require('path');
+
 var gzippo = require('gzippo');
 
 var lobby = new lobbyClass.Lobby(io);
@@ -23,34 +24,23 @@ var statsSocketMessagesReceived = 0;
 
 // Configuration
 
-var assetManagerGroups = {
-  'js': {
-    'route': /js\/.*\.js/
-    , 'path': './app/'
-    , 'dataType': 'javascript'
-    , 'files': [
-        'lib/jquery.cookie/jquery.cookie.js',
-        'lib/underscore.min.js',
-        'lib/angular/angular.min.js',
-        'lib/modernizr-custom.min.js',
-        'js/app.js',
-        'js/controllers.js',
-        'js/directives.js',
-        'js/filters.js',
-        'js/services.js'
-    ]
-  },
-  'css': {
-    'route': /css\/.*\.css/
-    , 'path': './app/'
-    , 'dataType': 'css'
-    , 'files': [
-      'css/bootstrap.min.css',
-      'css/app.css'
-    ]
-  }
-}
-var assetsManagerMiddleware = assetManager(assetManagerGroups);
+// Set the CDN options
+var options = {
+    publicDir  : path.join(__dirname, 'app')
+  , viewsDir   : path.join(__dirname, 'app')
+  , domain     : 'assets.hatchetapp.net'
+  , bucket     : 'hatchetapp'
+  , key        : 'AKIAIQBPSC6SHF7PCQIA'
+  , secret     : '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'
+  , hostname   : 'hatchetapp.net'
+  , port       : 1337
+  , ssl        : false
+  , minify     : false
+  , production : siteConfig.packAssets
+};
+
+// Initialize the CDN magic
+var CDN = require('express-cdn')(app, options);
 
 app.configure(function(){
   app.set('views', __dirname + '/app');
@@ -70,18 +60,15 @@ app.configure('development', function(){
 });
 
 app.configure('production', function(){
-  var oneYear = 31557600000;
-  app.use(assetsManagerMiddleware);
-  app.use(gzippo.staticGzip(__dirname + '/app', { maxAge: oneYear, clientMaxAge: oneYear }));
+  var oneDay = 86400000;
+  // app.use(assetsManagerMiddleware);
+  app.use(gzippo.staticGzip(__dirname + '/app', { maxAge: oneDay, clientMaxAge: oneDay }));
   app.use(express.errorHandler());
 });
 
-// Template helpers
-app.dynamicHelpers({
-  'assetsCacheHashes': function(req, res) {
-    return assetsManagerMiddleware.cacheHashes;
-  }
-});
+// Add the dynamic view helper
+app.dynamicHelpers({ CDN: CDN });
+
 
 app.get('/', function(req, res) {
   res.render('index.ejs', { siteConfig: siteConfig });
