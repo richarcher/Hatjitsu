@@ -28,7 +28,7 @@ var statsSocketMessagesReceived = 0;
 var options = {
     publicDir  : path.join(__dirname, 'app')
   , viewsDir   : path.join(__dirname, 'app')
-  , domain     : 'dkb4nwmyziz71.cloudfront.net'
+  , domain     : 'assets.hatchetapp.net'
   , bucket     : 'hatchetapp'
   , key        : 'AKIAIQBPSC6SHF7PCQIA'
   , secret     : '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'
