@@ -187,7 +187,7 @@ hr {
     padding: 1%;
     clear: both;
   }
-  .cards li {
+  .cards .card {
     display: block;
     float: left;
     width: 2em;
@@ -198,17 +198,17 @@ hr {
     text-align: center;
     line-height: 3em;
   }
-  [role="navigation"] .cards li {
+  [role="navigation"] .cards .card {
     box-shadow: 1px 0px 0px #aaa;
     border-radius: 0.2em;
     cursor: pointer;
   }
-  [role="navigation"] .cards li.mine-true {
+  [role="navigation"] .cards .card.mine-true {
     box-shadow: none;
     cursor: pointer;
     background-color: gold;
   }
-  [role="main"] .cards li { 
+  [role="main"] .cards .card {
     position: relative;
     -webkit-perspective: 600px;
   }
@@ -226,17 +226,17 @@ hr {
     background-color: gold;
     cursor: pointer;
   }
-  .cards.finished li div,
+  .cards.finished .card div,
   .cards.finished .mine-true .hidden,
   .cards.finished .mine-true .vote {
     cursor: default;
   }
-  [role="navigation"] .cards.finished li {
+  [role="navigation"] .cards.finished .card {
     opacity: 0.7;
     color: rgba(0,0,0,0.7);
     box-shadow: none;
   }
-  [role="navigation"] .cards.finished li {
+  [role="navigation"] .cards.finished .card {
     -webkit-transition: .5s all ease;
        -moz-transition: .5s all ease;
         -ms-transition: .5s all ease;
