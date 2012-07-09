@@ -168,6 +168,11 @@ hr {
   }
 
 /* VOTING PAGE */
+
+  #cardPanel,
+  #adminPanel { 
+    background: #D9D0D0;
+  }
   #votePanel h2 {
     float: left;
     margin-right: 0.5em;
@@ -311,16 +316,117 @@ hr {
   #votePanel .cards.active .vote {z-index: 800;}
   #votePanel .cards.active .hidden {z-index: 900;}
 
+/* POSITIONING OF SECTIONS */
+  .wrapper {
+    width: 300%;
+    height: 100%;
+    overflow: hidden;
+  }
+  #cardPanel,
+  #votePanel,
+  #adminPanel {
+    height: 100%;
+    padding: 2em 3%;
+    position: relative;
+  }
+  #cardPanel {
+    padding-left: 1%;
+    padding-right: 5%;
+  }
+  #adminPanel {
+    padding-left: 5%;
+    padding-right: 1%;
+  }
+  .wrapper {
+    -webkit-transition: .2s all ease;
+       -moz-transition: .2s all ease;
+        -ms-transition: .2s all ease;
+         -o-transition: .2s all ease;
+            transition: .2s all ease;
+  }
+  #cardPanel {
+    float: left;
+    width: 27%;
+  }
+  #votePanel {
+    float: left;
+    margin-left: 3%;
+    width: 22%;
+  }
+  #adminPanel {
+    float: right;
+    width: 27%;
+  }
+  .wrapper {
+    -webkit-transform: translate(-33%, 0);
+       -moz-transform: translate(-33%, 0);
+        -ms-transform: translate(-33%, 0);
+         -o-transform: translate(-33%, 0);
+            transform: translate(-33%, 0);
+  }
+  .active-cardPanel .wrapper {
+    -webkit-transform: translate(0, 0);
+       -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+         -o-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  .active-settings .wrapper {
+    -webkit-transform: translate(-66%, 0);
+       -moz-transform: translate(-66%, 0);
+        -ms-transform: translate(-66%, 0);
+         -o-transform: translate(-66%, 0);
+            transform: translate(-66%, 0);
+  }
+  @media all and (min-width: 400px) {
+    #cardPanel {
+      padding-right: 3%;
+      width: 24%;
+    }
+    #votePanel {
+      margin-left: 0;
+      width: 30%;
+    }
+    .wrapper {
+      width: 150%;
+      -webkit-transform: translate(0, 0);
+         -moz-transform: translate(0, 0);
+          -ms-transform: translate(0, 0);
+           -o-transform: translate(0, 0);
+              transform: translate(0, 0);
+    }
+    .active-settings .wrapper {
+      -webkit-transform: translate(-28%, 0);
+         -moz-transform: translate(-28%, 0);
+          -ms-transform: translate(-28%, 0);
+           -o-transform: translate(-28%, 0);
+              transform: translate(-28%, 0);
+    }
+  }
+  @media all and (min-width: 800px) {
+    .wrapper {
+      width: 100%;
+      -webkit-transform: translate(0, 0);
+         -moz-transform: translate(0, 0);
+          -ms-transform: translate(0, 0);
+           -o-transform: translate(0, 0);
+              transform: translate(0, 0);
+    }
+    .active-settings .wrapper {
+    } 
+  }
+
 /* TAB BUTTONS */
   .vote-item {
     position: absolute;
     top: 0;
     display: block;
-    width: 15%;
+    width: 13%;
     height: 100%;
     overflow: hidden;
   }
   .vote-item a {
+    position: relative;
     display: block;
     width: 100%;
     height: 100%;
@@ -337,177 +443,48 @@ hr {
     position: absolute;
     content: ".";
     top: 1em;
-    left: 15%;
     bottom: 1em;
-    width: 40%;
-    min-width: 2.5em;
+    width: 80%;
     border-radius: 0.75em;
   }
   #cardPanel .vote-item {
-    right: 0;
+    right: -10%;
   }
-  #cardPanel .vote-item a:after {
-    left: auto;
-    right: 15%;
-  }
-  .active-cardPanel #cardPanel .vote-item a:after {
-    left: auto;
-    right: 40%;
-  }
-  .active-settings #adminPanel .vote-item a:after {
-    left: 50%;
-  }
-  .narrow-screen.active-settings #adminPanel .vote-item a:after {
-    left: 14%;
+  #adminPanel .vote-item {
+    left: -12%;
   }
   #cardPanel .vote-item a,
   #cardPanel .vote-item a:after {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
-  #cardPanel .vote-item a:after {
-    box-shadow: -2px 1px 0px #aaa inset
-  }
-  #adminPanel .vote-item {
-    left: 0;
-  }
-  #adminPanel .vote-item a:after {
-    box-shadow: 2px 1px 0px #aaa inset
-  }
   #adminPanel .vote-item a,
   #adminPanel .vote-item a:after {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
-
-/* POSITIONING OF SECTIONS */
-  #cardPanel,
-  #adminPanel { 
-    background: #D9D0D0;
+  #cardPanel .vote-item a:after {
+    box-shadow: -2px 1px 0px #aaa inset;
   }
-  #cardPanel,
-  #votePanel,
-  #adminPanel {
-    -webkit-transition: .2s all ease;
-       -moz-transition: .2s all ease;
-        -ms-transition: .2s all ease;
-         -o-transition: .2s all ease;    
-            transition: .2s all ease;    
-    width: 80%;
-    height: 100%;
-    padding: 3% 4%;
-    position: relative;
-  }
-  .wrapper {
-    width: 300%;
-    height: 100%;
-    margin-left: -100%;
-    overflow: hidden;
-    -webkit-transition: .2s all ease;
-       -moz-transition: .2s all ease;
-        -ms-transition: .2s all ease;
-         -o-transition: .2s all ease;    
-            transition: .2s all ease; 
-  }
-   #cardPanel {
-    width: 27%;
-    margin: 0;
-    float: left;
-  }
-     #cardPanel .vote-item {
-      right: -7%;
-      z-index: 1;
-    }
-   #votePanel {
-    width: 22%;
-    margin: 0;
-    float: left;
-  }
-   #adminPanel {
-    width: 26%;
-    margin: 0;
-    float: left;
-  }
-    #adminPanel .vote-item {
-      left: -7%;
-    }
-  .active-cardPanel .wrapper {
-    margin-left: 0;
-  }
-  .active-settings .wrapper {
-    margin-left: -193%;
+  #adminPanel .vote-item a:after {
+    box-shadow: 2px 1px 0px #aaa inset;
+    right: 0;
   }
   .active-cardPanel #cardPanel .vote-item {
     right: 0;
   }
-
+  .active-settings #adminPanel .vote-item {
+    left: 0;
+  }
   @media all and (min-width: 400px) {
-    .wrapper {
-      width: 150%;
-      margin-left: 0;
-    }
-    #cardPanel {
-      width: 24%; 
-      margin-left: 0;
-      margin-right: 1%;
-    }
     #cardPanel .vote-item {
       display: none;
     }
-    #votePanel {
-      width: 22%;
-      float: left;
-      margin-right: 1%;
-    }
-    #adminPanel {
-      width: 19%;
-      margin-left: 1%;
-    }
-    .active-settings .wrapper {
-      margin-left: -25%;
-    }
-    .active-settings #cardPanel {
-      margin-left: -15%;
-    }
-    .active-settings #votePanel {
-      width: 24%;
-    }
-    .active-settings #adminPanel {
-      width: 26%;
-    }
   }
-
   @media all and (min-width: 800px) {
-    .wrapper {
-      width:100%;
-      margin-left: 0;
-    }
-    .vote-item {
+    #adminPanel .vote-item {
       display: none;
     }
-
-    #cardPanel {
-      width: 13%; 
-      margin-left: 0;
-      float: left;
-      padding: 3%
-    }
-
-    #votePanel {
-      width: 48%;
-      padding: 3%;    
-    }
-
-    #adminPanel {
-      width: 13%; 
-      padding: 3%;  
-      margin-right: 0;
-      margin-left: 0;
-      float: right;
-    }
-    .active-settings.three-column .wrapper {
-      margin-left: 0%;
-    }  
   }
 
 /* Used to allow JS to plug into @media query state */
