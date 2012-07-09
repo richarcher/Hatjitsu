@@ -32,6 +32,7 @@ var assetManagerGroups = {
         'lib/jquery.cookie/jquery.cookie.js',
         'lib/underscore.min.js',
         'lib/angular/angular.min.js',
+        'lib/modernizr-custom.min.js',
         'js/app.js',
         'js/controllers.js',
         'js/directives.js',

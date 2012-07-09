@@ -168,7 +168,7 @@ hr {
   }
 
 /* VOTING PAGE */
-  [role="main"] h2 {
+  #votePanel h2 {
     float: left;
     margin-right: 0.5em;
   }
@@ -198,21 +198,38 @@ hr {
     text-align: center;
     line-height: 3em;
   }
-  [role="navigation"] .cards .card {
+  .cards.finished .card div,
+  #votePanel .cards.finished .mine-true .hidden,
+  #votePanel .cards.finished .mine-true .vote {
+    cursor: default;
+  }
+  #cardPanel .cards .card {
     box-shadow: 1px 0px 0px #aaa;
     border-radius: 0.2em;
     cursor: pointer;
   }
-  [role="navigation"] .cards .card.mine-true {
+  #cardPanel .cards .card.mine-true {
     box-shadow: none;
     cursor: pointer;
     background-color: gold;
   }
-  [role="main"] .cards .card {
-    position: relative;
-    -webkit-perspective: 600px;
+  #cardPanel .cards.finished .card {
+    opacity: 0.7;
+    color: rgba(0,0,0,0.7);
+    box-shadow: none;
   }
-  [role="main"] .cards div {
+  #cardPanel .cards.finished .card {
+    -webkit-transition: .5s all ease;
+       -moz-transition: .5s all ease;
+        -ms-transition: .5s all ease;
+         -o-transition: .5s all ease;
+            transition: .5s all ease;
+  }
+  #votePanel .cards .mine-true div {
+    background-color: gold;
+    cursor: pointer;
+  }
+  #votePanel .cards div {
     position: absolute;
     left: 0;
     top: 0;
@@ -221,100 +238,78 @@ hr {
     border-radius: 0.2em;
     box-shadow: 0px 0px 2px #555;
   }
-  .cards .mine-true .vote,
-  .cards .mine-true .hidden {
-    background-color: gold;
-    cursor: pointer;
-  }
-  .cards.finished .card div,
-  .cards.finished .mine-true .hidden,
-  .cards.finished .mine-true .vote {
-    cursor: default;
-  }
-  [role="navigation"] .cards.finished .card {
-    opacity: 0.7;
-    color: rgba(0,0,0,0.7);
-    box-shadow: none;
-  }
-  [role="navigation"] .cards.finished .card {
-    -webkit-transition: .5s all ease;
-       -moz-transition: .5s all ease;
-        -ms-transition: .5s all ease;
-         -o-transition: .5s all ease;
-            transition: .5s all ease;
-  }
-  [role="main"] .cards.active .vote {
-    -webkit-transform: rotateY(-180deg);
-       -moz-transform: rotateY(-180deg);
-        -ms-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
-    -webkit-transform-style: preserve-3d;
-       -moz-transform-style: preserve-3d;
-        -ms-transform-style: preserve-3d;
-            transform-style: preserve-3d;
-    -webkit-backface-visibility: hidden;
-       -moz-backface-visibility: hidden;
-        -ms-backface-visibility: hidden;
-            backface-visibility: hidden;
-    -webkit-transition: all .4s ease-in-out;
-       -moz-transition: all .4s ease-in-out;
-        -ms-transition: all .4s ease-in-out;
-            transition: all .4s ease-in-out;
-
-  }
-  [role="main"] .cards.active .hidden {
+  #votePanel .cards .hidden {
     background-image: url(/img/card-back.png);
     background-repeat: no-repeat;
     background-position: center;
     text-indent: -9999px;
-    -webkit-transform: rotateX(0deg) rotateY(0deg);
-       -moz-transform: rotateX(0deg) rotateY(0deg);
-        -ms-transform: rotateX(0deg) rotateY(0deg);
-            transform: rotateX(0deg) rotateY(0deg);
-    -webkit-transform-style: preserve-3d;
-       -moz-transform-style: preserve-3d;
-        -ms-transform-style: preserve-3d;
-            transform-style: preserve-3d;
-    -webkit-backface-visibility: hidden;
-       -moz-backface-visibility: hidden;
-        -ms-backface-visibility: hidden;
-            backface-visibility: hidden;
-    -webkit-transition: all .4s ease-in-out;
-       -moz-transition: all .4s ease-in-out;
-        -ms-transition: all .4s ease-in-out;
-            transition: all .4s ease-in-out;
   }
-
   @media only screen and (-webkit-min-device-pixel-ratio: 2) {
-    [role="main"] .cards .hidden { 
+    #votePanel .cards .hidden { 
       background-image: url(/img/card-back_@2x.png);
       background-size: 50%; 
     }
   }
-  [role="main"] .cards.finished .vote {
-    -webkit-transition-delay: 1s;
-       -moz-transition-delay: 1s;
-        -ms-transition-delay: 1s;
-            transition-delay: 1s;
+  #votePanel .cards li {
+    position: relative;
+  }
+  .csstransforms3d #votePanel .cards.active .vote,
+  .csstransforms3d #votePanel .cards.finished .vote,
+  .csstransforms3d #votePanel .cards.active .hidden,
+  .csstransforms3d #votePanel .cards.finished .hidden {
+    -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+/*        -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;*/
+    -webkit-backface-visibility: hidden;
+       -moz-backface-visibility: hidden;
+/*        -ms-backface-visibility: hidden;
+            backface-visibility: hidden;*/
+    -webkit-transition: all .4s ease-in-out;
+       -moz-transition: all .4s ease-in-out;
+/*        -ms-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;*/
+    -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+/*        -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;*/
+  }
+  .csstransforms3d #votePanel .cards.active .vote {
+    -webkit-transform: rotateY(-180deg);
+       -moz-transform: rotateY(-180deg);
+/*        -ms-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);*/
+  }
+  .csstransforms3d #votePanel .cards.active .hidden {
     -webkit-transform: rotateX(0deg) rotateY(0deg);
        -moz-transform: rotateX(0deg) rotateY(0deg);
-        -ms-transform: rotateX(0deg) rotateY(0deg);
-            transform: rotateX(0deg) rotateY(0deg);
+/*        -ms-transform: rotateX(0deg) rotateY(0deg);
+            transform: rotateX(0deg) rotateY(0deg);*/
   }
-  [role="main"] .cards.finished .hidden {
+  .csstransforms3d #votePanel .cards.finished .vote {
     -webkit-transition-delay: 1s;
        -moz-transition-delay: 1s;
-        -ms-transition-delay: 1s;
-            transition-delay: 1s;
+/*        -ms-transition-delay: 3s;
+            transition-delay: 3s;*/
+    -webkit-transform: rotateX(0deg) rotateY(0deg);
+       -moz-transform: rotateX(0deg) rotateY(0deg);
+/*        -ms-transform: rotateX(0deg) rotateY(0deg);
+            transform: rotateX(0deg) rotateY(0deg);*/
+  }
+  .csstransforms3d #votePanel .cards.finished .hidden {
+    -webkit-transition-delay: 1s;
+       -moz-transition-delay: 1s;
+/*        -ms-transition-delay: 1s;
+            transition-delay: 1s;*/
     -webkit-transform: rotateY(180deg);
        -moz-transform: rotateY(180deg);
-        -ms-transform: rotateY(180deg);
-            transform: rotateY(180deg);
+/*        -ms-transform: rotateY(180deg);
+            transform: rotateY(180deg);*/
   }
-  [role="main"] .cards.finished .vote {z-index: 900;}
-  [role="main"] .cards.finished .hidden {z-index: 800;}
-  [role="main"] .cards.active .vote {z-index: 800;}
-  [role="main"] .cards.active .hidden {z-index: 900;}
+  #votePanel .cards.finished .vote {z-index: 900;}
+  #votePanel .cards.finished .hidden {z-index: 800;}
+  #votePanel .cards.active .vote {z-index: 800;}
+  #votePanel .cards.active .hidden {z-index: 900;}
 
 /* TAB BUTTONS */
   .vote-item {
@@ -348,51 +343,51 @@ hr {
     min-width: 2.5em;
     border-radius: 0.75em;
   }
-  [role="navigation"] .vote-item {
+  #cardPanel .vote-item {
     right: 0;
   }
-  [role="navigation"] .vote-item a:after {
+  #cardPanel .vote-item a:after {
     left: auto;
     right: 15%;
   }
-  .active-cardPanel [role="navigation"] .vote-item a:after {
+  .active-cardPanel #cardPanel .vote-item a:after {
     left: auto;
     right: 40%;
   }
-  .active-settings [role="complementary"] .vote-item a:after {
+  .active-settings #adminPanel .vote-item a:after {
     left: 50%;
   }
-  .narrow-screen.active-settings [role="complementary"] .vote-item a:after {
+  .narrow-screen.active-settings #adminPanel .vote-item a:after {
     left: 14%;
   }
-  [role="navigation"] .vote-item a,
-  [role="navigation"] .vote-item a:after {
+  #cardPanel .vote-item a,
+  #cardPanel .vote-item a:after {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
-  [role="navigation"] .vote-item a:after {
+  #cardPanel .vote-item a:after {
     box-shadow: -2px 1px 0px #aaa inset
   }
-  [role="complementary"] .vote-item {
+  #adminPanel .vote-item {
     left: 0;
   }
-  [role="complementary"] .vote-item a:after {
+  #adminPanel .vote-item a:after {
     box-shadow: 2px 1px 0px #aaa inset
   }
-  [role="complementary"] .vote-item a,
-  [role="complementary"] .vote-item a:after {
+  #adminPanel .vote-item a,
+  #adminPanel .vote-item a:after {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
 
 /* POSITIONING OF SECTIONS */
-  [role="navigation"],
-  [role="complementary"] { 
+  #cardPanel,
+  #adminPanel { 
     background: #D9D0D0;
   }
-  [role="navigation"],
-  [role="main"],
-  [role="complementary"] {
+  #cardPanel,
+  #votePanel,
+  #adminPanel {
     -webkit-transition: .2s all ease;
        -moz-transition: .2s all ease;
         -ms-transition: .2s all ease;
@@ -414,26 +409,26 @@ hr {
          -o-transition: .2s all ease;    
             transition: .2s all ease; 
   }
-   [role="navigation"] {
+   #cardPanel {
     width: 27%;
     margin: 0;
     float: left;
   }
-     [role="navigation"] .vote-item {
+     #cardPanel .vote-item {
       right: -7%;
       z-index: 1;
     }
-   [role="main"] {
+   #votePanel {
     width: 22%;
     margin: 0;
     float: left;
   }
-   [role="complementary"] {
+   #adminPanel {
     width: 26%;
     margin: 0;
     float: left;
   }
-    [role="complementary"] .vote-item {
+    #adminPanel .vote-item {
       left: -7%;
     }
   .active-cardPanel .wrapper {
@@ -442,7 +437,7 @@ hr {
   .active-settings .wrapper {
     margin-left: -193%;
   }
-  .active-cardPanel [role="navigation"] .vote-item {
+  .active-cardPanel #cardPanel .vote-item {
     right: 0;
   }
 
@@ -451,33 +446,33 @@ hr {
       width: 150%;
       margin-left: 0;
     }
-    [role="navigation"] {
+    #cardPanel {
       width: 24%; 
       margin-left: 0;
       margin-right: 1%;
     }
-    [role="navigation"] .vote-item {
+    #cardPanel .vote-item {
       display: none;
     }
-    [role="main"] {
+    #votePanel {
       width: 22%;
       float: left;
       margin-right: 1%;
     }
-    [role="complementary"] {
+    #adminPanel {
       width: 19%;
       margin-left: 1%;
     }
     .active-settings .wrapper {
       margin-left: -25%;
     }
-    .active-settings [role="navigation"] {
+    .active-settings #cardPanel {
       margin-left: -15%;
     }
-    .active-settings [role="main"] {
+    .active-settings #votePanel {
       width: 24%;
     }
-    .active-settings [role="complementary"] {
+    .active-settings #adminPanel {
       width: 26%;
     }
   }
@@ -491,19 +486,19 @@ hr {
       display: none;
     }
 
-    [role="navigation"] {
+    #cardPanel {
       width: 13%; 
       margin-left: 0;
       float: left;
       padding: 3%
     }
 
-    [role="main"] {
+    #votePanel {
       width: 48%;
       padding: 3%;    
     }
 
-    [role="complementary"] {
+    #adminPanel {
       width: 13%; 
       padding: 3%;  
       margin-right: 0;

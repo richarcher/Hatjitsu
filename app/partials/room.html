@@ -2,7 +2,7 @@
 
   <div id="roomNumber">Room: <strong><i>{{roomId}}</i></strong></div>
 
-  <section id="cardPanel" role="navigation">
+  <section id="cardPanel" >
     <div ng-show="voter">
       <h2>Estimate</h2>
       <ul class="cards{{votingState}}">
@@ -20,11 +20,11 @@
     <span class="vote-item"><a href="#menu" class="cardPanel-button">Vote</a></span>
   </section>
 
-  <section id="votePanel" role="main">
+  <section id="votePanel" >
     <h2>Votes</h2>
     <span class="sub">Humans: {{humanCount}}, Voters: <span class="label">{{voterCount}}</span></span>
     
-    <ul class="cards {{votingState}}">
+    <ul class="cards{{votingState}}">
       <li ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card mine-{{vote.sessionId==sessionId}}">
         <div class="vote">{{vote.visibleVote}}</div>
         <div class="hidden">x</div>
@@ -32,7 +32,7 @@
     </ul>
   </section>
 
-  <section id="adminPanel" ng-switch on="showAdmin" role="complementary">
+  <section id="adminPanel" ng-switch on="showAdmin" >
     <h2>Settings</h2>
     <hr />
     <div ng-switch-when="true">
