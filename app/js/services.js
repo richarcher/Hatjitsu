@@ -102,7 +102,9 @@ Sock.prototype.emit = function(msg, data, callback) {
   // console.log('service: emit ' + msg);
    this.rootScope.activity = true;
    this.socket.emit(msg, data, function(response) {
-    that.rootScope.activity = false;
+    that.rootScope.$apply(function() {
+      that.rootScope.activity = false;
+    });
     callback.call(this, response);
    });  
 }
