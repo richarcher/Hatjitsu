@@ -2,8 +2,11 @@
 
 /* Controllers */
 
-function MainCtrl($scope) {
+function MainCtrl($scope, $timeout) {
   $scope.logoState = '';
+  $scope.errorMessage = null;
+  $scope.message = null;
+
   $scope.$on('$routeChangeSuccess', function() {
     $scope.logoState = '';
   }); 
@@ -19,11 +22,24 @@ function MainCtrl($scope) {
   $scope.$on('unfinished vote', function() {
     $scope.logoState = '';
   });
+
+  $scope.$on('show message', function(evnt, msg) {
+    $scope.message = msg;
+    $timeout(function() {
+      $scope.message = null;
+    }, 4000);
+  });
+  $scope.$on('show error', function(evnt, msg) {
+    $scope.errorMessage = msg;
+    $timeout(function() {
+      $scope.errorMessage = null;
+    }, 3000);
+  });
 }
 
-MainCtrl.$inject = ['$scope'];
+MainCtrl.$inject = ['$scope', '$timeout'];
 
-function LobbyCtrl($scope, $location, $timeout, socketService) {
+function LobbyCtrl($scope, $location, socketService) {
   $scope.disableButtons = false;
   $scope.createRoom = function() {
     // console.log('createRoom: emit create room');
@@ -41,10 +57,7 @@ function LobbyCtrl($scope, $location, $timeout, socketService) {
       $scope.$apply(function() {
         if (response.error) {
           $scope.disableButtons = false;
-          $scope.errorMessage = response.error;
-          $timeout(function() {
-            $scope.errorMessage = null;
-          }, 3000);
+          $scope.$emit('show error', response.error);
         } else {
           // console.log("going to enter room " + response.roomUrl);
           $location.path(response.roomUrl);    
@@ -54,7 +67,7 @@ function LobbyCtrl($scope, $location, $timeout, socketService) {
   }
 }
 
-LobbyCtrl.$inject = ['$scope', '$location', '$timeout', 'socketService'];
+LobbyCtrl.$inject = ['$scope', '$location', 'socketService'];
 
 
 function RoomCtrl($scope, $routeParams, $timeout, socketService) {
@@ -62,28 +75,11 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   var processMessage = function(response, process) {
     // console.log("processMessage: response:", response)
     if (response.error) {
-      $scope.$apply(function() {
-        $scope.errorMessage = response.error;
-        $timeout(function() {
-          $scope.errorMessage = null;
-        }, 3000);
-      });
+      $scope.$emit('show error', response.error);
     } else {
-      $scope.$apply(function() {
-        $scope.errorMessage = null;
-      });
       (process || angular.noop)(response);
     }
   };
-
-  var displayMessage = function(msg) {
-    $scope.$apply(function() {
-      $scope.message = msg;
-      $timeout(function() {
-        $scope.message = null;
-      }, 5000);
-    });
-  }
 
   // wipe out vote if voting state is not yet finished to prevent cheating.
   // if it has already been set - use the actual vote. This works for unvoting - so that 
@@ -220,7 +216,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       });
     });
     socketService.on('card pack set', function () {
-      displayMessage('Card pack changed...');
+      $scope.$emit('show message', 'Card pack changed...');
       // console.log("on card pack set");
       // console.log("emit room info", { roomUrl: $scope.roomId });
       this.emit('room info', { roomUrl: $scope.roomId }, function(response){
@@ -351,8 +347,6 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
   $scope.voterCount = 0;
   $scope.showAdmin = false;
   $scope.voter = true;
-  $scope.errorMessage = null;
-  $scope.message = null;
   $scope.connections = {};
   $scope.votes = [];
   $scope.cardPack = '';
