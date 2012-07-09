@@ -23,9 +23,11 @@ function MainCtrl($scope) {
 
 MainCtrl.$inject = ['$scope'];
 
-function LobbyCtrl($scope, $location, socketService) {
+function LobbyCtrl($scope, $location, $timeout, socketService) {
+  $scope.disableButtons = false;
   $scope.createRoom = function() {
     // console.log('createRoom: emit create room');
+    $scope.disableButtons = true;
     socketService.emit('create room', {}, function(roomUrl){
       $scope.$apply(function() {
         $location.path(roomUrl);
@@ -34,9 +36,11 @@ function LobbyCtrl($scope, $location, socketService) {
   }
   $scope.enterRoom = function(room) {
     // console.log('enterRoom: room info');
+    $scope.disableButtons = true;
     socketService.emit('room info', { roomUrl: room }, function(response){
       $scope.$apply(function() {
         if (response.error) {
+          $scope.disableButtons = false;
           $scope.errorMessage = response.error;
           $timeout(function() {
             $scope.errorMessage = null;
@@ -50,7 +54,7 @@ function LobbyCtrl($scope, $location, socketService) {
   }
 }
 
-LobbyCtrl.$inject = ['$scope', '$location', 'socketService'];
+LobbyCtrl.$inject = ['$scope', '$location', '$timeout', 'socketService'];
 
 
 function RoomCtrl($scope, $routeParams, $timeout, socketService) {

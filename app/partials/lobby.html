@@ -1,8 +1,9 @@
+<div id="appError" class="notification" ui-show="errorMessage">{{errorMessage}}</div>
 <section id="lobby">
   <h3>Rooms for scrum <span style="font-weight: 300;">planning poker</span> to estimate agile projects.</h3>
   <p>First person to <strong>create</strong> the room is the moderator. <strong>Share</strong> the url or room number with other team members to <strong>join</strong> the room.</p>
-  <button ng-click="createRoom()" id="creator" class="btn" title="Create a new planning poker room">Create new room</button>
+  <button ng-click="createRoom()" id="creator" class="btn" title="Create a new planning poker room" ng-disabled="disableButtons">Create new room</button>
   <div>
-    <label>Or enter existing room</label> <div class="input-prepend"><span class="add-on">/</span><input ng-model="room" ui-enter="enterRoom(room)" type="tel" maxlength="5" placeholder="room no" class="roomUrl" />&nbsp;<button ng-click="enterRoom(room)" class="btn" title="Join an existing planning poker room">Join</button></div>
+    <label>Or enter existing room</label> <div class="input-prepend"><span class="add-on">/</span><input ng-model="room" ui-enter="enterRoom(room)" type="tel" maxlength="5" placeholder="room no" class="roomUrl" />&nbsp;<button ng-click="enterRoom(room)" class="btn" title="Join an existing planning poker room" ng-disabled="disableButtons">Join</button></div>
   </div>
 </section>
