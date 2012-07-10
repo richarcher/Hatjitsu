@@ -1,6 +1,5 @@
+<div id="roomNumber">Room: <strong><i>{{roomId}}</i></strong></div>
 <div class="wrapper" ng-init="configureRoom()">
-
-  <div id="roomNumber">Room: <strong><i>{{roomId}}</i></strong></div>
 
   <section id="cardPanel" >
     <div ng-show="voter">
@@ -51,7 +50,7 @@
       </button>
       <hr />
     </div>
-    <p><label>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-change="toggleVoter()" /></label></p>
+    <p><label>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" /></label></p>
     <hr />
     <span class="vote-item"><a href="#extra" class="sidebar-button">Settings</a></span>
   </section>
