@@ -4,13 +4,15 @@
  */
 var _ = require('underscore')._;
 
+var env = process.env.NODE_ENV || 'development';
+
 var express = require('express'),
     fs = require('fs');
 
 var app = module.exports = express.createServer();
 var io = require('socket.io').listen(app);
 var lobbyClass = require('./lib/lobby.js');
-var siteConfig = require('./siteConfig.js');
+var config = require('./config.js')[env];
 var path = require('path');
 
 var gzippo = require('gzippo');
@@ -30,13 +32,12 @@ var options = {
   , viewsDir   : path.join(__dirname, 'app')
   , domain     : 'assets.hatchetapp.net'
   , bucket     : 'hatchetapp'
-  , key        : 'AKIAIQBPSC6SHF7PCQIA'
-  , secret     : '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'
-  , hostname   : 'hatchetapp.net'
-  , port       : 1337
+  , key        : 'AKIAIS3XCFXFKWXGKK7Q'
+  , secret     : '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'
+  , hostname   : config.hostname
+  , port       : config.port
   , ssl        : false
-  , minify     : false
-  , production : siteConfig.packAssets
+  , production : config.packAssets
 };
 
 // Initialize the CDN magic
@@ -71,7 +72,7 @@ app.dynamicHelpers({ CDN: CDN });
 
 
 app.get('/', function(req, res) {
-  res.render('index.ejs', { siteConfig: siteConfig });
+  res.render('index.ejs');
 });
 
 app.get('/debug_state', function(req, res) {
@@ -88,7 +89,7 @@ app.get('/debug_state', function(req, res) {
 
 app.get('/:id', function(req, res) {
   if (req.params.id in lobby.rooms) {
-    res.render('index.ejs', { siteConfig: siteConfig });
+    res.render('index.ejs');
   } else {
     res.redirect('/');  
   }
