@@ -69,22 +69,7 @@
       $('body').removeClass("active-cardPanel").toggleClass("active-settings");
     }
 
-    var resizer = function () {
-      var size = window.getComputedStyle(document.body,':after').getPropertyValue('content');
-      if (size == 'widescreen') {
-        $("body").removeClass().addClass("three-column");
-      } else if (size == 'narrow'){
-        $("body").removeClass().addClass("narrow-screen");
-      } else {
-        $('body').removeClass();
-      }
-    }
-
-    // add/remove classes everytime the window resize event fires
-    $(window).resize(function() { resizer(); }); 
-
     $(document).ready(function(){
-      resizer();
 
       // Toggle for nav menu
       $('.cardPanel-button').click(function() {
