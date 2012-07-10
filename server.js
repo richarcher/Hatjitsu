@@ -30,7 +30,7 @@ var statsSocketMessagesReceived = 0;
 var options = {
     publicDir  : path.join(__dirname, 'app')
   , viewsDir   : path.join(__dirname, 'app')
-  , domain     : 'assets.hatchetapp.net'
+  , domain     : 'assets.hat.jit.su'
   , bucket     : 'hatchetapp'
   , key        : 'AKIAIS3XCFXFKWXGKK7Q'
   , secret     : '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'
