@@ -338,7 +338,7 @@ hr {
   }
   #adminPanel {
     padding-left: 5%;
-    padding-right: 1%;
+    padding-right: 0%;
   }
   .wrapper {
     -webkit-transition: .2s all ease;
@@ -436,7 +436,14 @@ hr {
     text-indent: -300%;
     background-color: #D9D0D0;
     border-radius: 1em;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    /*-webkit-tap-highlight-color: rgba(0,0,0,0);*/
+  }
+  .vote-item {
+    -webkit-transition: .2s all ease;
+       -moz-transition: .2s all ease;
+        -ms-transition: .2s all ease;
+         -o-transition: .2s all ease;
+            transition: .2s all ease;
   }
   .vote-item a:after {
     display: block;
@@ -451,10 +458,22 @@ hr {
     border-radius: 0.75em;
   }
   #cardPanel .vote-item {
-    right: -10%;
+    /*right: -13%;*/
+    right: 0;
+    -webkit-transform: translate(100%, 0);
+       -moz-transform: translate(100%, 0);
+        -ms-transform: translate(100%, 0);
+         -o-transform: translate(100%, 0);
+            transform: translate(100%, 0);
   }
   #adminPanel .vote-item {
-    left: -12%;
+    /*left: -18%;*/
+    left: 0;
+    -webkit-transform: translate(-140%, 0);
+       -moz-transform: translate(-140%, 0);
+        -ms-transform: translate(-140%, 0);
+         -o-transform: translate(-140%, 0);
+            transform: translate(-140%, 0);
   }
   #cardPanel .vote-item a,
   #cardPanel .vote-item a:after {
@@ -474,10 +493,18 @@ hr {
     right: 0;
   }
   .active-cardPanel #cardPanel .vote-item {
-    right: 0;
+    -webkit-transform: translate(0%, 0);
+       -moz-transform: translate(0%, 0);
+        -ms-transform: translate(0%, 0);
+         -o-transform: translate(0%, 0);
+            transform: translate(0%, 0);
   }
   .active-settings #adminPanel .vote-item {
-    left: 0;
+    -webkit-transform: translate(0%, 0);
+       -moz-transform: translate(0%, 0);
+        -ms-transform: translate(0%, 0);
+         -o-transform: translate(0%, 0);
+            transform: translate(0%, 0);
   }
   @media all and (min-width: 400px) {
     #cardPanel .vote-item {
