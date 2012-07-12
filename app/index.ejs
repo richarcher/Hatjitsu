@@ -75,29 +75,18 @@
   <script src="https://s3.amazonaws.com/hatchetapp/socket-0.9.6.io.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
-  <%- CDN([ '/lib/jquery.cookie/jquery.cookie.js', '/lib/underscore.min.js', '/lib/angular/angular.min.js', '/lib/modernizr.custom.11646.js' ]) %>
-  <%- CDN([ '/js/app.js', '/js/controllers.js', '/js/directives.js', '/js/filters.js', '/js/services.js' ]) %>
+  <%- CDN([ '/lib/jquery.cookie/jquery.cookie.js', '/lib/underscore.min.js', '/lib/angular/angular.min.js', '/lib/modernizr.custom.11646.js', '/lib/google.fastbutton.js', '/lib/jquery.google.fastbutton.js']) %>
+  <%- CDN([ '/js/app.js', '/js/controllers.js', '/js/directives.js', '/js/filters.js', '/js/services.js', '/js/document.js' ]) %>
 
 </body>
 
 <script>
-  var resizer = function () {
-    var size = window.getComputedStyle(document.body,':after').getPropertyValue('content');
-    if (size == 'widescreen') {
-      $("body").removeClass().addClass("three-column");
-    } else if (size == 'narrow'){
-      $("body").removeClass().addClass("narrow-screen");
-    } else {
-      $('body').removeClass();
-    }
-  }
+// add/remove classes everytime the window resize event fires
+$(window).resize(function() { resizer(); }); 
 
-  // add/remove classes everytime the window resize event fires
-  $(window).resize(function() { resizer(); }); 
-
-  $(document).ready(function(){
-    resizer();
-  });
+$(document).ready(function(){
+  resizer();
+});
 </script>
 
 </html>

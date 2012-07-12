@@ -16,7 +16,7 @@
     <div ng-hide="voter">
       <p>You have chosen to simply observe this session. Enjoy!</p>
     </div>
-    <span class="vote-item"><a href="#menu" class="cardPanel-button">Vote</a></span>
+    <span class="vote-item"><span class="cardPanel-button">Vote</span></span>
   </section>
 
   <section id="votePanel" >
@@ -52,35 +52,22 @@
     </div>
     <p><label>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" /></label></p>
     <hr />
-    <span class="vote-item"><a href="#extra" class="sidebar-button">Settings</a></span>
+    <span class="vote-item"><span href="#extra" class="sidebar-button">Settings</span></span>
   </section>
 
 </div>
-  <script>
-    var showCardPanel = function() {
-      $('body').removeClass("active-settings").toggleClass("active-cardPanel");
-    }
+<script>
+$(document).ready(function(){
 
-    var showVotePanel = function() {
-      $('body').removeClass("active-settings").removeClass("active-cardPanel");
-    }
+  $('.cardPanel-button').fastClick(function(e) {
+    e.preventDefault();
+    showCardPanel();
+  });
 
-    var showSettings = function() {
-      $('body').removeClass("active-cardPanel").toggleClass("active-settings");
-    }
+  $('.sidebar-button').fastClick(function(e) {
+    e.preventDefault();
+    showSettings();
+  });
 
-    $(document).ready(function(){
-
-      // Toggle for nav menu
-      $('.cardPanel-button').click(function() {
-        showCardPanel();
-        return false;
-      }); 
-      // Toggle for sidebar
-      $('.sidebar-button').click(function() {
-        showSettings();
-        return false;
-      });
-
-    });
-  </script>
+});
+</script>
