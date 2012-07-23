@@ -146,12 +146,12 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
         $scope.showAdmin = true;
       }
       
-      $scope.humanCount = roomObj.clientCount;
+      $scope.connections = roomObj.connections;
+      $scope.humanCount = $scope.connections.length;
       $scope.cardPack = roomObj.cardPack;
       $scope.forcedReveal = roomObj.forcedReveal;
       $scope.cards = chooseCardPack($scope.cardPack);
 
-      $scope.connections = _.filter(roomObj.connections, function(c) { return c.socketId });
       $scope.votes = _.chain($scope.connections).filter(function(c) { return c.vote }).values().value();
       $scope.voterCount = _.filter($scope.connections, function(c) { return c.voter }).length;
 
