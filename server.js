@@ -63,7 +63,7 @@ app.configure('development', function(){
 app.configure('production', function(){
   var oneDay = 86400000;
   // app.use(assetsManagerMiddleware);
-  app.use(gzippo.staticGzip(__dirname + '/app', { maxAge: oneDay, clientMaxAge: oneDay }));
+  app.use(gzippo.staticGzip(__dirname + '/app'));
   app.use(express.errorHandler());
 });
 
