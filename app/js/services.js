@@ -9,12 +9,12 @@ var pokerAppServices = angular.module('pokerApp.services', []);
 
 pokerAppServices.value('version', '0.1');
 
-pokerAppServices.service('socketService', ['$rootScope',  '$timeout', function($rootScope) {
+pokerAppServices.service('socket', ['$rootScope',  '$timeout', function($rootScope) {
   var sock = new Sock($rootScope);
   return sock;
 }]);
 
-pokerAppServices.factory('socketService', ['$rootScope', function($rootScope) {
+pokerAppServices.factory('socket', ['$rootScope', function($rootScope) {
   var socket = io.connect(location.protocol + '//' + location.hostname, {
     'port': location.port,
     'reconnect': true,
