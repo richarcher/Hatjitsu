@@ -45,24 +45,20 @@ function LobbyCtrl($scope, $location, socketService) {
     // console.log('createRoom: emit create room');
     $scope.disableButtons = true;
     socketService.emit('create room', {}, function(roomUrl){
-      $scope.$apply(function() {
-        $location.path(roomUrl);
-      });
+      $location.path(roomUrl);
     });
   }
   $scope.enterRoom = function(room) {
     // console.log('enterRoom: room info');
     $scope.disableButtons = true;
     socketService.emit('room info', { roomUrl: room }, function(response){
-      $scope.$apply(function() {
-        if (response.error) {
-          $scope.disableButtons = false;
-          $scope.$emit('show error', response.error);
-        } else {
-          // console.log("going to enter room " + response.roomUrl);
-          $location.path(response.roomUrl);    
-        }
-      });
+      if (response.error) {
+        $scope.disableButtons = false;
+        $scope.$emit('show error', response.error);
+      } else {
+        // console.log("going to enter room " + response.roomUrl);
+        $location.path(response.roomUrl);    
+      }
     });
   }
 }
@@ -138,33 +134,30 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
 
   var refreshRoomInfo = function(roomObj) {
     // console.log("refreshRoomInfo: roomObj:", roomObj)
-    $scope.$apply(function() {
-      if (roomObj.createAdmin) {
-        $.cookie("admin-" + roomObj.roomUrl, true);  
-      }
-      if($.cookie("admin-" + roomObj.roomUrl)) {
-        $scope.showAdmin = true;
-      }
-      
-      $scope.connections = roomObj.connections;
-      $scope.humanCount = $scope.connections.length;
-      $scope.cardPack = roomObj.cardPack;
-      $scope.forcedReveal = roomObj.forcedReveal;
-      $scope.cards = chooseCardPack($scope.cardPack);
+    if (roomObj.createAdmin) {
+      $.cookie("admin-" + roomObj.roomUrl, true);  
+    }
+    if($.cookie("admin-" + roomObj.roomUrl)) {
+      $scope.showAdmin = true;
+    }
+    
+    $scope.connections = roomObj.connections;
+    $scope.humanCount = $scope.connections.length;
+    $scope.cardPack = roomObj.cardPack;
+    $scope.forcedReveal = roomObj.forcedReveal;
+    $scope.cards = chooseCardPack($scope.cardPack);
 
-      $scope.votes = _.chain($scope.connections).filter(function(c) { return c.vote }).values().value();
-      $scope.voterCount = _.filter($scope.connections, function(c) { return c.voter }).length;
+    $scope.votes = _.chain($scope.connections).filter(function(c) { return c.vote }).values().value();
+    $scope.voterCount = _.filter($scope.connections, function(c) { return c.voter }).length;
 
-      var connection = myConnectionHash();
+    var connection = myConnectionHash();
 
-      if (connection) {
-        $scope.voter = connection.voter;  
-        $scope.myVote = connection.vote;
-      }
+    if (connection) {
+      $scope.voter = connection.voter;  
+      $scope.myVote = connection.vote;
+    }
 
-      processVotes();
-
-    });
+    processVotes();
 
     // we first want the cards to be displayed as hidden, and then apply the finished state
     // if voting has finished - which then actions the transition.
@@ -272,10 +265,8 @@ function RoomCtrl($scope, $routeParams, $timeout, socketService) {
       if (!$.cookie("sessionId")) {
         $.cookie("sessionId", sessionId);  
       }
-      $scope.$apply(function() {
-        $scope.sessionId = $.cookie("sessionId");
-        // console.log("session id = " + $scope.sessionId);
-      });
+      $scope.sessionId = $.cookie("sessionId");
+      // console.log("session id = " + $scope.sessionId);
       // console.log("emit join room", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
       socketService.emit('join room', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response){
         processMessage(response, refreshRoomInfo);
