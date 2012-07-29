@@ -1,6 +1,6 @@
 {
   "name": "hatchetapp.net",
-  "version": "0.0.1-60",
+  "version": "0.0.1-69",
   "subdomain": "hat",
   "domains": [
     "hatchetapp.net",
@@ -10,7 +10,7 @@
     "start": "server.js"
   },
   "engines": {
-    "node": "0.6.19"
+    "node": "0.8.4"
   },
   "dependencies": {
     "express": "2.5.10",
