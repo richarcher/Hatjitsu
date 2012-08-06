@@ -96,7 +96,7 @@ app.get('/:id', function(req, res) {
 
 
 io.configure(function () {
-  io.set('transports', ['websocket', 'xhr-polling', 'jsonp-polling']);
+  io.set('transports', ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 });
 
 io.configure('production', function(){
