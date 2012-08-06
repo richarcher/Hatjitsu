@@ -21,7 +21,7 @@ pokerAppServices.factory('socket', ['$rootScope', function($rootScope) {
     'reconnection delay': 500,
     'max reconnection attempts': 10,
     'try multiple transports': true,
-    'transports': ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']
+    'transports': ['websocket', 'xhr-polling', 'jsonp-polling']
   });
 
   $rootScope.socketMessage = null;  

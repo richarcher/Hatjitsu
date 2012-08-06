@@ -70,7 +70,6 @@ app.configure('production', function(){
 // Add the dynamic view helper
 app.dynamicHelpers({ CDN: CDN });
 
-
 app.get('/', function(req, res) {
   res.render('index.ejs');
 });
@@ -87,21 +86,17 @@ app.get('/debug_state', function(req, res) {
   });
 });
 
-app.get('/#!/'), function(req,res) {
-  res.end();
-}
-
 app.get('/:id', function(req, res) {
   if (req.params.id in lobby.rooms) {
     res.render('index.ejs');
   } else {
-    res.redirect('/');  
+   res.redirect('/');  
   }
 });
 
 
 io.configure(function () {
-  io.set('transports', ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
+  io.set('transports', ['websocket', 'xhr-polling', 'jsonp-polling']);
 });
 
 io.configure('production', function(){
