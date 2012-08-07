@@ -1,73 +1,101 @@
-<div id="roomNumber">Room: <strong><i>{{roomId}}</i></strong></div>
-<div class="wrapper" ng-init="configureRoom()">
-
-  <section id="cardPanel" >
-    <div ng-show="voter">
-      <h2>Estimate</h2>
-      <ul class="cards{{votingState}}">
-        <li ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" onclick="showVotePanel();" class="card mine-{{card==myVote}}">
-          <div>{{card}}</div>
-        </li>
-        <li ng-hide="cards" class="waiting">
-          No cards found
-        </li>
-      </ul>
-    </div>
-    <div ng-hide="voter">
-      <p>You have chosen to simply observe this session. Enjoy!</p>
-    </div>
-    <span class="vote-item"><span class="cardPanel-button">Vote</span></span>
-  </section>
-
-  <section id="votePanel" >
-    <h2>Votes</h2>
-    <span class="sub">Humans: {{humanCount}}, Voters: <span class="label">{{voterCount}}</span></span>
-    
+<section id="cardPanel" >
+  <div ng-show="voter">
+    <h2>Estimate</h2>
     <ul class="cards{{votingState}}">
-      <li ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card mine-{{vote.sessionId==sessionId}}">
-        <div class="vote">{{vote.visibleVote}}</div>
-        <div class="hidden">x</div>
+      <li ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" onclick="showVotePanel();" class="card mine-{{card==myVote}}">
+        <div>{{card}}</div>
+      </li>
+      <li ng-hide="cards" class="waiting">
+        No cards found
       </li>
     </ul>
-  </section>
+  </div>
+  <div ng-hide="voter">
+    <p>You have chosen to simply observe this session. Enjoy!</p>
+  </div>
+  <hr/>
+  <div><label>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" /></label></div>
+</section>
 
-  <section id="adminPanel" ng-switch on="showAdmin" >
-    <h2>Settings</h2>
-    <hr />
-    <div ng-switch-when="true">
-      <p><strong>Card pack</strong>:</p>
-      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="goat"> Mountain Goat</label>
-      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="fib"> Fibonacci</label>
-      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="seq"> Sequential</label>
-      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="play"> Playing Cards</label>
-      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="tshirt"> T-Shirt</label>
-      <hr />
-      <button ng-click="resetVote()" class="btn" title="Start a new vote">
-        <i class="icon icon-refresh"></i> Reset
-      </button>
-      <button ng-click="forceReveal()" class="btn" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
-        <i class="icon icon-exclamation-sign"></i> Reveal
-      </button>
-      <hr />
-    </div>
-    <p><label>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" /></label></p>
-    <hr />
-    <span class="vote-item"><span href="#extra" class="sidebar-button">Settings</span></span>
-  </section>
+<div class="contents" >
+  <header id="header">
+    <a href="/" title="Back to the Lobby">
+      <span class="logo {{logoState}}"></span>
+      <h1>Hatjitsu</h1>
+    </a>
+  </header>
+  <noscript>
+    <p>This site is <em>heavily</em> dependant upon JavaScript. If you don't have it enabled, you're not going to have a Good Time.</p>
+  </noscript>
 
+  <div id="activity" ng-show="activity"></div>
+  <div id="socketMessage" class="notification" ui-show="socketMessage">{{socketMessage}}</div>
+  <div id="appError" class="notification" ui-show="errorMessage">{{errorMessage}}</div>
+  <div id="message" class="notification" ui-show="message">{{message}}</div>
+
+  <div id="roomNumber">Room: <strong><i>{{roomId}}</i></strong></div>
+  <div class="wrapper" ng-init="configureRoom()">
+
+    <section id="votePanel" >
+      <h2>Votes</h2>
+      <span class="sub">Humans: {{humanCount}}, Voters: <span class="label">{{voterCount}}</span></span>
+      <div class="clearfix"></div>
+      <div ng-switch on="showAdmin">
+        <button ng-click="resetVote()" class="btn" title="Start a new vote">
+          <i class="icon icon-refresh"></i> Reset
+        </button>
+        <button ng-click="forceReveal()" class="btn" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
+          <i class="icon icon-exclamation-sign"></i> Reveal
+        </button>
+        <hr/>
+      </div>
+      <ul class="cards{{votingState}}">
+        <li ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card mine-{{vote.sessionId==sessionId}}">
+          <div class="vote">{{vote.visibleVote}}</div>
+          <div class="hidden">x</div>
+        </li>
+      </ul>
+      <section id="adminPanel" ng-switch on="showAdmin" >
+        <div ng-switch-when="true">
+          <hr/>
+          <p><strong>Card pack</strong>:</p>
+          <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="goat"> Mountain Goat</label>
+          <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="fib"> Fibonacci</label>
+          <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="seq"> Sequential</label>
+          <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="play"> Playing Cards</label>
+          <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="tshirt"> T-Shirt</label>
+        </div>
+      </section>
+    </section>
+
+  </div>
+  <footer role="contentInfo">
+    <p>&copy; <a href="http://www.unboxedconsulting.com" title="Ruby on Rails, node, and iOS development in Cape Town">UBXD</a> 2012 - Built by <a href="mailto:joerg.diekmann@ubxd.com" title="Software developer in Cape Town">@Jörg</a> &amp; <a href="mailto:richard.archer@ubxd.com" title="Software developer in Cape Town">@Rïch</a>. <strong><a href="https://twitter.com/hatjitsu" title="Feedback to us via Twitter">Feedback?</a></strong></p>
+  </footer>
 </div>
+
+
 <script>
 $(document).ready(function(){
 
-  $('.cardPanel-button').fastClick(function(e) {
-    e.preventDefault();
-    showCardPanel();
-  });
+  window.size = window.getComputedStyle(document.body, ':after').getPropertyValue('content');
+  if (size != 'widescreen') {
+    $('#cardPanel').addClass('meny').after('<div class="meny-arrow">&#x25BA;</div>');
+    $('.contents').addClass('meny-contents');
+    window.meny = new MenySystem();
+    meny.activate();
+  }
+  else {
+    $('.contents').addClass('no-meny');
+  }
 
-  $('.sidebar-button').fastClick(function(e) {
-    e.preventDefault();
-    showSettings();
-  });
+  window.showVotePanel = function() {
+    if (size == 'widescreen') {
+      return;
+    } else {
+      meny.deactivate();
+    }
+  }
 
 });
 </script>

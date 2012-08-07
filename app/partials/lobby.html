@@ -1,8 +1,29 @@
-<section id="lobby">
-  <h3>Distributed scrum <span>planning poker</span> for estimating agile projects.</h3>
-  <p>First person to <strong>create</strong> the room is the moderator. <strong>Share</strong> the url or room number with other team members to <strong>join</strong> the room.</p>
-  <button ng-click="createRoom()" id="creator" class="btn" title="Create a new planning poker room" ng-disabled="disableButtons">Create new room</button>
-  <div>
-    <label>Or enter existing room</label> <div class="input-prepend"><span class="add-on">/</span><input ng-model="room" ui-enter="enterRoom(room)" type="tel" maxlength="5" placeholder="room no" class="roomUrl" />&nbsp;<button ng-click="enterRoom(room)" class="btn" title="Join an existing planning poker room" ng-disabled="disableButtons">Join</button></div>
-  </div>
-</section>
+<div class="contents" >
+  <header id="header">
+    <a href="/" title="Back to the Lobby">
+      <span class="logo {{logoState}}"></span>
+      <h1>Hatjitsu</h1>
+    </a>
+  </header>
+  <noscript>
+    <p>This site is <em>heavily</em> dependant upon JavaScript. If you don't have it enabled, you're not going to have a Good Time.</p>
+  </noscript>
+
+  <div id="activity" ng-show="activity"></div>
+  <div id="socketMessage" class="notification" ui-show="socketMessage">{{socketMessage}}</div>
+  <div id="appError" class="notification" ui-show="errorMessage">{{errorMessage}}</div>
+  <div id="message" class="notification" ui-show="message">{{message}}</div>
+
+  <section id="lobby">
+    <h3>Distributed scrum <span>planning poker</span> for estimating agile projects.</h3>
+    <p>First person to <strong>create</strong> the room is the moderator. <strong>Share</strong> the url or room number with other team members to <strong>join</strong> the room.</p>
+    <button ng-click="createRoom()" id="creator" class="btn" title="Create a new planning poker room" ng-disabled="disableButtons">Create new room</button>
+    <div>
+      <label>Or enter existing room</label> <div class="input-prepend"><span class="add-on">/</span><input ng-model="room" ui-enter="enterRoom(room)" type="tel" maxlength="5" placeholder="room no" class="roomUrl" />&nbsp;<button ng-click="enterRoom(room)" class="btn" title="Join an existing planning poker room" ng-disabled="disableButtons">Join</button></div>
+    </div>
+  </section>
+
+  <footer role="contentInfo">
+    <p>&copy; <a href="http://www.unboxedconsulting.com" title="Ruby on Rails, node, and iOS development in Cape Town">UBXD</a> 2012 - Built by <a href="mailto:joerg.diekmann@ubxd.com" title="Software developer in Cape Town">@Jörg</a> &amp; <a href="mailto:richard.archer@ubxd.com" title="Software developer in Cape Town">@Rïch</a>. <strong><a href="https://twitter.com/hatjitsu" title="Feedback to us via Twitter">Feedback?</a></strong></p>
+  </footer>
+</div>

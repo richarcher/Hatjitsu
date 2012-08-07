@@ -20,6 +20,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 
   <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/meny.css" />
   <link rel="stylesheet" href="/css/app.css" />
 
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144x144.png" />
@@ -47,46 +48,16 @@
 
   </script>
 </head>
-<body class="no-js">
-  <div class="container" ng-controller="MainCtrl">
-    <header id="header">
-      <a href="/" title="Back to the Lobby">
-        <span class="logo {{logoState}}"></span>
-        <h1>Hatjitsu</h1>
-      </a>
-    </header>
-    <noscript>
-      <p>This site is <em>heavily</em> dependant upon JavaScript. If you don't have it enabled, you're not going to have a Good Time.</p>
-    </noscript>
-
-    <div id="activity" ng-show="activity"></div>
-    <div id="socketMessage" class="notification" ui-show="socketMessage">{{socketMessage}}</div>
-    <div id="appError" class="notification" ui-show="errorMessage">{{errorMessage}}</div>
-    <div id="message" class="notification" ui-show="message">{{message}}</div>
-
-    <div id="content" ng-view></div>
-
-    <footer role="contentInfo">
-      <p>&copy; <a href="http://www.unboxedconsulting.com" title="Ruby on Rails, node, and iOS development in Cape Town">UBXD</a> 2012 - Built by <a href="mailto:joerg.diekmann@ubxd.com" title="Software developer in Cape Town">@Jörg</a> &amp; <a href="mailto:richard.archer@ubxd.com" title="Software developer in Cape Town">@Rïch</a>. <strong><a href="https://twitter.com/hatjitsu" title="Feedback to us via Twitter">Feedback?</a></strong></p>
-    </footer>
-  </div>
+<body class="no-js" ng-controller="MainCtrl">
+  <div id="content" ng-view></div>
 
   <!-- script src="/socket.io/socket.io.js"></script-->
   <script src="https://s3.amazonaws.com/hatchetapp/socket-0.9.6.io.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
-  <%- CDN([ '/lib/jquery.cookie/jquery.cookie.js', '/lib/underscore.min.js', '/lib/angular/angular.min.js', '/lib/modernizr.custom.11646.js', '/lib/google.fastbutton.js', '/lib/jquery.google.fastbutton.js']) %>
-  <%- CDN([ '/js/app.js', '/js/controllers.js', '/js/directives.js', '/js/filters.js', '/js/services.js', '/js/document.js' ]) %>
+  <%- CDN([ '/lib/jquery.cookie/jquery.cookie.js', '/lib/underscore.min.js', '/lib/angular/angular.min.js', '/lib/modernizr.custom.11646.js', '/lib/google.fastbutton.js', '/lib/meny.js']) %>
+  <%- CDN([ '/js/app.js', '/js/controllers.js', '/js/directives.js', '/js/filters.js', '/js/services.js' ]) %>
 
 </body>
-
-<script>
-// add/remove classes everytime the window resize event fires
-$(window).resize(function() { resizer(); }); 
-
-$(document).ready(function(){
-  resizer();
-});
-</script>
 
 </html>

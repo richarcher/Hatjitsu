@@ -1,15 +1,15 @@
-body {
-  background: #FFFFFF url(/img/noise.png) -50% -10%;
-}
-a:hover,
+a, a:hover,
 a:focus {
+  color: #c2575b;
   text-decoration: none;
+
+  -webkit-transition: 0.15s color ease;
+     -moz-transition: 0.15s color ease;
+      -ms-transition: 0.15s color ease;
+       -o-transition: 0.15s color ease;
+          transition: 0.15s color ease;
 }
-a, 
-a:hover,
-a:focus { 
-  color: #dddddd;
-}
+
 select {
   width: 100%;
 }
@@ -23,11 +23,19 @@ button {
 hr {
   border-top: none;
 }
-.container {
-  width: 100%;
-  margin: 0 auto;
-  overflow: hidden;
+
+#content {
+  height: 100%;
 }
+
+.contents {
+  position: relative;
+  background: #eee;
+  padding: 20px 40px;
+  width: 100%;
+  height: 100%;
+}
+
 
 /* HEADER/FOOTER */
   header {
@@ -41,20 +49,18 @@ hr {
     height: 8em;
   }
   header h1 {
-    font-size: 3em;
-    margin-top: 0.8em;
-    margin-left: 2.6em;
+    font-size: 2.5em;
+    margin-top: 0.5em;
+    margin-left: 2.7em;
   }
   #roomNumber {
     position: absolute;
-    top: 71px;
-    left: 103px;
+    top: 73px;
+    left: 122px;
     color: #999;
   }
   .logo {
     position: absolute;
-    top: 1em;
-    left: 1em;
     background: url('/img/hatchet.svg') no-repeat center;
     background-size: 100%;
     display: block;
@@ -80,6 +86,7 @@ hr {
   }
 
   footer {
+    font-size: 11px;
     clear: both;
     text-align: center;
     color: #AAA;
@@ -141,7 +148,6 @@ hr {
 
 /* LOBBY PAGE */
   #lobby {
-    margin: 2em;
     text-align: center;
   }
   #lobby h1 {
@@ -151,9 +157,6 @@ hr {
   #lobby h3 span {
     font-weight: 300;
   }
-  #lobby label {
-    color: white;
-  }
   #lobby button#creator {
     margin: 1em;
     padding: 1em;
@@ -161,19 +164,20 @@ hr {
   #lobby input.roomUrl {
     width: 56px;
   }
-  @media all and (min-width: 600px) {
-    #lobby h1 {
-      color: white;
-      text-align: right;
-      left: -49%;
-      position: relative;
-    }          
-  }
 
 /* VOTING PAGE */
 
-  #cardPanel,
-  #adminPanel { 
+  #adminPanel {
+    margin-top: 100px;
+  }
+  
+  #cardPanel {
+    position: fixed;
+    height: 100%;
+    width: 180px;
+    z-index: 1;
+    margin: 0px;
+    padding: 20px;
     background: #D9D0D0;
   }
   #votePanel h2 {
@@ -319,215 +323,10 @@ hr {
   #votePanel .cards.active .vote {z-index: 800;}
   #votePanel .cards.active .hidden {z-index: 900;}
 
-/* POSITIONING OF SECTIONS */
-  .wrapper {
-    width: 300%;
-    height: 100%;
-    overflow: hidden;
-  }
-  #cardPanel,
-  #votePanel,
-  #adminPanel {
-    height: 100%;
-    padding: 2em 3%;
-    position: relative;
-  }
-  #cardPanel {
-    padding-left: 1%;
-    padding-right: 5%;
-  }
-  #adminPanel {
-    padding-left: 5%;
-    padding-right: 0%;
-  }
-  .wrapper {
-    -webkit-transition: .2s all ease;
-       -moz-transition: .2s all ease;
-        -ms-transition: .2s all ease;
-         -o-transition: .2s all ease;
-            transition: .2s all ease;
-  }
-  #cardPanel {
-    float: left;
-    width: 27%;
-  }
-  #votePanel {
-    float: left;
-    margin-left: 3%;
-    width: 22%;
-  }
-  #adminPanel {
-    float: right;
-    width: 27%;
-  }
-  .wrapper {
-    -webkit-transform: translate(-33%, 0);
-       -moz-transform: translate(-33%, 0);
-        -ms-transform: translate(-33%, 0);
-         -o-transform: translate(-33%, 0);
-            transform: translate(-33%, 0);
-  }
-  .active-cardPanel .wrapper {
-    -webkit-transform: translate(0, 0);
-       -moz-transform: translate(0, 0);
-        -ms-transform: translate(0, 0);
-         -o-transform: translate(0, 0);
-            transform: translate(0, 0);
-  }
-  .active-settings .wrapper {
-    -webkit-transform: translate(-66%, 0);
-       -moz-transform: translate(-66%, 0);
-        -ms-transform: translate(-66%, 0);
-         -o-transform: translate(-66%, 0);
-            transform: translate(-66%, 0);
-  }
-  @media all and (min-width: 400px) {
-    #cardPanel {
-      padding-right: 3%;
-      width: 24%;
-    }
-    #votePanel {
-      margin-left: 0;
-      width: 30%;
-    }
-    .wrapper {
-      width: 150%;
-      -webkit-transform: translate(0, 0);
-         -moz-transform: translate(0, 0);
-          -ms-transform: translate(0, 0);
-           -o-transform: translate(0, 0);
-              transform: translate(0, 0);
-    }
-    .active-settings .wrapper {
-      -webkit-transform: translate(-28%, 0);
-         -moz-transform: translate(-28%, 0);
-          -ms-transform: translate(-28%, 0);
-           -o-transform: translate(-28%, 0);
-              transform: translate(-28%, 0);
-    }
-  }
-  @media all and (min-width: 800px) {
-    .wrapper {
-      width: 100%;
-      -webkit-transform: translate(0, 0);
-         -moz-transform: translate(0, 0);
-          -ms-transform: translate(0, 0);
-           -o-transform: translate(0, 0);
-              transform: translate(0, 0);
-    }
-    .active-settings .wrapper {
-    } 
-  }
 
-/* TAB BUTTONS */
-  .vote-item {
-    position: absolute;
-    top: 0;
-    display: block;
-    width: 13%;
-    height: 100%;
-    overflow: hidden;
-  }
-  .vote-item span {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-indent: -300%;
-    background-color: #D9D0D0;
-    border-radius: 1em;
-    cursor: pointer;
-    /*-webkit-tap-highlight-color: rgba(0,0,0,0);*/
-  }
-  .vote-item {
-    -webkit-transition: .2s all ease;
-       -moz-transition: .2s all ease;
-        -ms-transition: .2s all ease;
-         -o-transition: .2s all ease;
-            transition: .2s all ease;
-  }
-  .vote-item span:after {
-    display: block;
-    background-color: #BBBBBB;
-    background-image: url(/img/vert-ribbing.png);
-    background-size:5px 1px;
-    position: absolute;
-    content: ".";
-    top: 1em;
-    bottom: 1em;
-    width: 80%;
-    border-radius: 0.75em;
-  }
-  #cardPanel .vote-item {
-    /*right: -13%;*/
-    right: 0;
-    -webkit-transform: translate(100%, 0);
-       -moz-transform: translate(100%, 0);
-        -ms-transform: translate(100%, 0);
-         -o-transform: translate(100%, 0);
-            transform: translate(100%, 0);
-  }
-  #adminPanel .vote-item {
-    /*left: -18%;*/
-    left: 0;
-    -webkit-transform: translate(-140%, 0);
-       -moz-transform: translate(-140%, 0);
-        -ms-transform: translate(-140%, 0);
-         -o-transform: translate(-140%, 0);
-            transform: translate(-140%, 0);
-  }
-  #cardPanel .vote-item span,
-  #cardPanel .vote-item span:after {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-  #adminPanel .vote-item span,
-  #adminPanel .vote-item span:after {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  #cardPanel .vote-item span:after {
-    box-shadow: -2px 1px 0px #aaa inset;
-  }
-  #adminPanel .vote-item span:after {
-    box-shadow: 2px 1px 0px #aaa inset;
-    right: 0;
-  }
-  .active-cardPanel #cardPanel .vote-item {
-    -webkit-transform: translate(0%, 0);
-       -moz-transform: translate(0%, 0);
-        -ms-transform: translate(0%, 0);
-         -o-transform: translate(0%, 0);
-            transform: translate(0%, 0);
-  }
-  .active-settings #adminPanel .vote-item {
-    -webkit-transform: translate(0%, 0);
-       -moz-transform: translate(0%, 0);
-        -ms-transform: translate(0%, 0);
-         -o-transform: translate(0%, 0);
-            transform: translate(0%, 0);
-  }
-  @media all and (min-width: 400px) {
-    #cardPanel .vote-item {
-      display: none;
+@media all and (min-width: 45em) {
+    body:after {
+        content: 'widescreen';
+        display: none;
     }
-  }
-  @media all and (min-width: 800px) {
-    #adminPanel .vote-item {
-      display: none;
-    }
-  }
-
-/* Used to allow JS to plug into @media query state */
-  @media all and (min-width: 400px) {
-      body:after {
-          content: 'narrow';
-          display: none;
-      }
-  }
-  @media all and (min-width: 800px) {
-      body:after {
-          content: 'widescreen';
-          display: none;
-      }
-  }
+}
