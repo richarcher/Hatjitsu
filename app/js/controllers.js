@@ -87,6 +87,8 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
       v.visibleVote = v.visibleVote === undefined && (!$scope.forcedReveal && voteCount < $scope.voterCount) ? 'oi!' : v.vote;
     });
 
+    $scope.placeholderVotes = new Array($scope.voterCount - voteCount);
+
     $scope.forceRevealDisable = ( !$scope.forcedReveal && $scope.votes.length < $scope.voterCount ) ? false : true;
 
     if ($scope.votes.length === $scope.voterCount || $scope.forcedReveal) {

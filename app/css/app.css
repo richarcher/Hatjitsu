@@ -319,6 +319,24 @@ hr {
   #votePanel .cards.active .vote {z-index: 800;}
   #votePanel .cards.active .hidden {z-index: 900;}
 
+  #votePanel .cards .placeholder {
+    display: block;
+    float: left;
+    width: 2em;
+    height: 3em;
+    font-size: 1.5em;
+    background-color: transparent;
+    background-image: none;
+    margin: 0 4% 0.5em 0;
+    text-align: center;
+    line-height: 3em;
+  }
+  #votePanel .cards .placeholder div {
+    background-color: transparent;
+    border: 1px dashed #555;
+    box-shadow: none;
+  }
+
 /* POSITIONING OF SECTIONS */
   .wrapper {
     width: 300%;
