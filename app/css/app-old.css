@@ -1,0 +1,551 @@
+body {
+  background: #FFFFFF url(/img/noise.png) -50% -10%;
+}
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+a, 
+a:hover,
+a:focus { 
+  color: #dddddd;
+}
+select {
+  width: 100%;
+}
+button {
+  -webkit-transition: .3s opacity ease;
+     -moz-transition: .3s opacity ease;
+      -ms-transition: .3s opacity ease;
+       -o-transition: .3s opacity ease;
+          transition: .3s opacity ease;
+}
+hr {
+  border-top: none;
+}
+.container {
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* HEADER/FOOTER */
+  header {
+    overflow: hidden;
+    position: relative;
+  }
+  header a {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    height: 8em;
+  }
+  header h1 {
+    font-size: 3em;
+    margin-top: 0.8em;
+    margin-left: 2.6em;
+  }
+  #roomNumber {
+    position: absolute;
+    top: 71px;
+    left: 103px;
+    color: #999;
+  }
+  .logo {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    background: url('/img/hatchet.svg') no-repeat center;
+    background-size: 100%;
+    display: block;
+    border-radius: 50%;
+    width: 6em;
+    height: 6em;
+    z-index: 1;
+    background-color: color;
+    -webkit-transition: .3s background-color ease;
+       -moz-transition: .3s background-color ease;
+        -ms-transition: .3s background-color ease;
+         -o-transition: .3s background-color ease;
+            transition: .3s background-color ease;
+  }
+  .logo.green {
+    background-color: lawngreen;
+  }
+  .logo.yellow {
+    background-color: gold;
+  }
+  .logo.red {
+    background-color: brown;
+  }
+
+  footer {
+    clear: both;
+    text-align: center;
+    color: #AAA;
+    padding-top: 1.4em;
+  }
+
+  footer a {
+    color: #555;
+  }
+  footer a:hover,
+  footer a:focus {
+    color: #444;
+    text-decoration: underline;
+  }
+
+/* NOTIFICATIONS */
+  #activity {
+    background: url(/img/led.gif) no-repeat;
+    height: 5px;
+    width: 12px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+  }
+  .notification {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    padding: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 11px;
+    font-weight: bold;
+    -webkit-transition: .5s all ease;
+       -moz-transition: .5s all ease;
+        -ms-transition: .5s all ease;
+         -o-transition: .5s all ease;
+            transition: .5s all ease;
+  }
+  #appError {
+    left: 100px;
+    background-color: red;
+    color: white;
+  }
+  #message {
+    left: 100px;
+    background-color: blue;
+    color: white;
+  }
+  #socketMessage {
+    right: 0px;
+    background-color: yellow;
+    color: black;
+  }
+  .ui-show {
+    opacity: 0.7;
+  }
+
+/* LOBBY PAGE */
+  #lobby {
+    margin: 2em;
+    text-align: center;
+  }
+  #lobby h1 {
+    color: white;
+    text-align: center;
+  }
+  #lobby h3 span {
+    font-weight: 300;
+  }
+  #lobby label {
+    color: white;
+  }
+  #lobby button#creator {
+    margin: 1em;
+    padding: 1em;
+  }
+  #lobby input.roomUrl {
+    width: 56px;
+  }
+  @media all and (min-width: 600px) {
+    #lobby h1 {
+      color: white;
+      text-align: right;
+      left: -49%;
+      position: relative;
+    }          
+  }
+
+/* VOTING PAGE */
+
+  #cardPanel,
+  #adminPanel { 
+    background: #D9D0D0;
+  }
+  #votePanel h2 {
+    float: left;
+    margin-right: 0.5em;
+  }
+  span.sub {
+    float: left;
+    font-size: 13px;
+    font-weight: normal;
+    color: #999;
+    padding-top: 1em;
+  }
+
+/* CARDS */
+  .cards {
+    overflow: hidden;
+    margin: 0;
+    padding: 1%;
+    clear: both;
+  }
+  .cards .card {
+    display: block;
+    float: left;
+    width: 2em;
+    height: 3em;
+    font-size: 1.5em;
+    background-color: #FAFAFA;
+    margin: 0 4% 0.5em 0;
+    text-align: center;
+    line-height: 3em;
+  }
+  .cards.finished .card div,
+  #votePanel .cards.finished .mine-true .hidden,
+  #votePanel .cards.finished .mine-true .vote {
+    cursor: default;
+  }
+  #cardPanel .cards .card {
+    box-shadow: 1px 0px 0px #aaa;
+    border-radius: 0.2em;
+    cursor: pointer;
+  }
+  #cardPanel .cards .card.mine-true {
+    box-shadow: none;
+    cursor: pointer;
+    background-color: gold;
+  }
+  #cardPanel .cards.finished .card {
+    opacity: 0.7;
+    color: rgba(0,0,0,0.7);
+    box-shadow: none;
+  }
+  #cardPanel .cards.finished .card {
+    -webkit-transition: .5s all ease;
+       -moz-transition: .5s all ease;
+        -ms-transition: .5s all ease;
+         -o-transition: .5s all ease;
+            transition: .5s all ease;
+  }
+  #votePanel .cards .mine-true div {
+    background-color: gold;
+    cursor: pointer;
+  }
+  #votePanel .cards div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: linen;
+    border-radius: 0.2em;
+    box-shadow: 0px 0px 2px #555;
+  }
+  #votePanel .cards .hidden {
+    background-image: url(/img/card-back.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    text-indent: -9999px;
+  }
+  @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    #votePanel .cards .hidden { 
+      background-image: url(/img/card-back_@2x.png);
+      background-size: 50%; 
+    }
+  }
+  #votePanel .cards li {
+    position: relative;
+  }
+  .csstransforms3d #votePanel .cards.active .vote,
+  .csstransforms3d #votePanel .cards.finished .vote,
+  .csstransforms3d #votePanel .cards.active .hidden,
+  .csstransforms3d #votePanel .cards.finished .hidden {
+    -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+/*        -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;*/
+    -webkit-backface-visibility: hidden;
+       -moz-backface-visibility: hidden;
+/*        -ms-backface-visibility: hidden;
+            backface-visibility: hidden;*/
+    -webkit-transition: all .4s ease-in-out;
+       -moz-transition: all .4s ease-in-out;
+/*        -ms-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;*/
+    -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+/*        -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;*/
+  }
+  .csstransforms3d #votePanel .cards.active .vote {
+    -webkit-transform: rotateY(-180deg);
+       -moz-transform: rotateY(-180deg);
+/*        -ms-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);*/
+  }
+  .csstransforms3d #votePanel .cards.active .hidden {
+    -webkit-transform: rotateX(0deg) rotateY(0deg);
+       -moz-transform: rotateX(0deg) rotateY(0deg);
+/*        -ms-transform: rotateX(0deg) rotateY(0deg);
+            transform: rotateX(0deg) rotateY(0deg);*/
+  }
+  .csstransforms3d #votePanel .cards.finished .vote {
+    -webkit-transition-delay: 1s;
+       -moz-transition-delay: 1s;
+/*        -ms-transition-delay: 3s;
+            transition-delay: 3s;*/
+    -webkit-transform: rotateX(0deg) rotateY(0deg);
+       -moz-transform: rotateX(0deg) rotateY(0deg);
+/*        -ms-transform: rotateX(0deg) rotateY(0deg);
+            transform: rotateX(0deg) rotateY(0deg);*/
+  }
+  .csstransforms3d #votePanel .cards.finished .hidden {
+    -webkit-transition-delay: 1s;
+       -moz-transition-delay: 1s;
+/*        -ms-transition-delay: 1s;
+            transition-delay: 1s;*/
+    -webkit-transform: rotateY(180deg);
+       -moz-transform: rotateY(180deg);
+/*        -ms-transform: rotateY(180deg);
+            transform: rotateY(180deg);*/
+  }
+  #votePanel .cards.finished .vote {z-index: 900;}
+  #votePanel .cards.finished .hidden {z-index: 800;}
+  #votePanel .cards.active .vote {z-index: 800;}
+  #votePanel .cards.active .hidden {z-index: 900;}
+
+  #votePanel .cards .placeholder {
+    display: block;
+    float: left;
+    width: 2em;
+    height: 3em;
+    font-size: 1.5em;
+    background-color: transparent;
+    background-image: none;
+    margin: 0 4% 0.5em 0;
+    text-align: center;
+    line-height: 3em;
+  }
+  #votePanel .cards .placeholder div {
+    background-color: transparent;
+    border: 1px dashed #555;
+    box-shadow: none;
+  }
+
+/* POSITIONING OF SECTIONS */
+  .wrapper {
+    width: 300%;
+    height: 100%;
+    overflow: hidden;
+  }
+  #cardPanel,
+  #votePanel,
+  #adminPanel {
+    height: 100%;
+    padding: 2em 3%;
+    position: relative;
+  }
+  #cardPanel {
+    padding-left: 1%;
+    padding-right: 5%;
+  }
+  #adminPanel {
+    padding-left: 5%;
+    padding-right: 0%;
+  }
+  .wrapper {
+    -webkit-transition: .2s all ease;
+       -moz-transition: .2s all ease;
+        -ms-transition: .2s all ease;
+         -o-transition: .2s all ease;
+            transition: .2s all ease;
+  }
+  #cardPanel {
+    float: left;
+    width: 27%;
+  }
+  #votePanel {
+    float: left;
+    margin-left: 3%;
+    width: 22%;
+  }
+  #adminPanel {
+    float: right;
+    width: 27%;
+  }
+  .wrapper {
+    -webkit-transform: translate(-33%, 0);
+       -moz-transform: translate(-33%, 0);
+        -ms-transform: translate(-33%, 0);
+         -o-transform: translate(-33%, 0);
+            transform: translate(-33%, 0);
+  }
+  .active-cardPanel .wrapper {
+    -webkit-transform: translate(0, 0);
+       -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+         -o-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  .active-settings .wrapper {
+    -webkit-transform: translate(-66%, 0);
+       -moz-transform: translate(-66%, 0);
+        -ms-transform: translate(-66%, 0);
+         -o-transform: translate(-66%, 0);
+            transform: translate(-66%, 0);
+  }
+  @media all and (min-width: 400px) {
+    #cardPanel {
+      padding-right: 3%;
+      width: 24%;
+    }
+    #votePanel {
+      margin-left: 0;
+      width: 30%;
+    }
+    .wrapper {
+      width: 150%;
+      -webkit-transform: translate(0, 0);
+         -moz-transform: translate(0, 0);
+          -ms-transform: translate(0, 0);
+           -o-transform: translate(0, 0);
+              transform: translate(0, 0);
+    }
+    .active-settings .wrapper {
+      -webkit-transform: translate(-28%, 0);
+         -moz-transform: translate(-28%, 0);
+          -ms-transform: translate(-28%, 0);
+           -o-transform: translate(-28%, 0);
+              transform: translate(-28%, 0);
+    }
+  }
+  @media all and (min-width: 800px) {
+    .wrapper {
+      width: 100%;
+      -webkit-transform: translate(0, 0);
+         -moz-transform: translate(0, 0);
+          -ms-transform: translate(0, 0);
+           -o-transform: translate(0, 0);
+              transform: translate(0, 0);
+    }
+    .active-settings .wrapper {
+    } 
+  }
+
+/* TAB BUTTONS */
+  .vote-item {
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 13%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .vote-item span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-indent: -300%;
+    background-color: #D9D0D0;
+    border-radius: 1em;
+    cursor: pointer;
+    /*-webkit-tap-highlight-color: rgba(0,0,0,0);*/
+  }
+  .vote-item {
+    -webkit-transition: .2s all ease;
+       -moz-transition: .2s all ease;
+        -ms-transition: .2s all ease;
+         -o-transition: .2s all ease;
+            transition: .2s all ease;
+  }
+  .vote-item span:after {
+    display: block;
+    background-color: #BBBBBB;
+    background-image: url(/img/vert-ribbing.png);
+    background-size:5px 1px;
+    position: absolute;
+    content: ".";
+    top: 1em;
+    bottom: 1em;
+    width: 80%;
+    border-radius: 0.75em;
+  }
+  #cardPanel .vote-item {
+    /*right: -13%;*/
+    right: 0;
+    -webkit-transform: translate(100%, 0);
+       -moz-transform: translate(100%, 0);
+        -ms-transform: translate(100%, 0);
+         -o-transform: translate(100%, 0);
+            transform: translate(100%, 0);
+  }
+  #adminPanel .vote-item {
+    /*left: -18%;*/
+    left: 0;
+    -webkit-transform: translate(-140%, 0);
+       -moz-transform: translate(-140%, 0);
+        -ms-transform: translate(-140%, 0);
+         -o-transform: translate(-140%, 0);
+            transform: translate(-140%, 0);
+  }
+  #cardPanel .vote-item span,
+  #cardPanel .vote-item span:after {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  #adminPanel .vote-item span,
+  #adminPanel .vote-item span:after {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  #cardPanel .vote-item span:after {
+    box-shadow: -2px 1px 0px #aaa inset;
+  }
+  #adminPanel .vote-item span:after {
+    box-shadow: 2px 1px 0px #aaa inset;
+    right: 0;
+  }
+  .active-cardPanel #cardPanel .vote-item {
+    -webkit-transform: translate(0%, 0);
+       -moz-transform: translate(0%, 0);
+        -ms-transform: translate(0%, 0);
+         -o-transform: translate(0%, 0);
+            transform: translate(0%, 0);
+  }
+  .active-settings #adminPanel .vote-item {
+    -webkit-transform: translate(0%, 0);
+       -moz-transform: translate(0%, 0);
+        -ms-transform: translate(0%, 0);
+         -o-transform: translate(0%, 0);
+            transform: translate(0%, 0);
+  }
+  @media all and (min-width: 400px) {
+    #cardPanel .vote-item {
+      display: none;
+    }
+  }
+  @media all and (min-width: 800px) {
+    #adminPanel .vote-item {
+      display: none;
+    }
+  }
+
+/* Used to allow JS to plug into @media query state */
+  @media all and (min-width: 400px) {
+      body:after {
+          content: 'narrow';
+          display: none;
+      }
+  }
+  @media all and (min-width: 800px) {
+      body:after {
+          content: 'widescreen';
+          display: none;
+      }
+  }
