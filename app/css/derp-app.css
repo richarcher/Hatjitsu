@@ -1,0 +1,242 @@
+body {
+  font: 14px/1.3em 'Helvetica neue', 'Helvetica', 'Arial', sans-serif;
+}
+/*
+
+  Header
+
+*/
+  .header {
+    overflow: hidden;
+    position: relative;
+  }
+  .header a {
+    display: block;
+    overflow: hidden;
+  }
+  .header__text {
+    font-size: 1em;
+    margin-left: 7em;
+  }
+  .header__logo {
+    float: left;
+    display: block;
+    width: 6em;
+    height: 6em;
+    border-radius: 50%;
+    background: url('/img/hatchet.svg') no-repeat center;
+    background-size: 100%;
+    -webkit-transition: .3s background-color ease;
+       -moz-transition: .3s background-color ease;
+        -ms-transition: .3s background-color ease;
+         -o-transition: .3s background-color ease;
+            transition: .3s background-color ease;
+    z-index: 1;
+  }
+  .header__logo--green {
+    background-color: lawngreen;
+  }
+  .header__logo--yellow {
+    background-color: gold;
+  }
+  .header__logo--red {
+    background-color: brown;
+  }
+
+/*
+
+  Footer
+
+*/
+  .footer {
+    text-align: center;
+  }
+
+/*
+
+  Cards
+
+*/
+  .cards {
+    overflow: hidden;
+  }
+    .cards .card {
+      margin-bottom: 0.5em;
+      margin-right: 0.5em;
+      top: 1px;
+    }
+  .card {
+    display: inline-block;
+    width: 2em;
+    height: 3em;
+    font-size: 1.5em;
+    background-color: rgb(250, 250, 250);
+    margin: 0;
+    text-align: center;
+    line-height: 3em;
+    border: 1px solid #555;
+    -webkit-border-radius: 0.2em;
+      border-radius: 0.2em;
+    cursor: pointer;
+  }
+    .card--2-sided {
+      position: relative;
+      border: none;
+    }
+    .card--selected {
+      background-color: gold;
+    }
+    .card--disabled {
+      opacity: 0.7;
+      cursor: default;
+    }
+
+      .card--2-sided > * {
+        position: absolute;
+        display: inline-block;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border: 1px solid #555;
+        -webkit-border-radius: 0.2em;
+                border-radius: 0.2em;
+        -webkit-transform-style: preserve-3d;
+           -moz-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+                transform-style: preserve-3d;
+        -webkit-backface-visibility: hidden;
+           -moz-backface-visibility: hidden;
+            -ms-backface-visibility: hidden;
+                backface-visibility: hidden;
+        -webkit-transition: all .4s ease-in-out;
+           -moz-transition: all .4s ease-in-out;
+            -ms-transition: all .4s ease-in-out;
+                transition: all .4s ease-in-out;
+        -webkit-transform-style: preserve-3d;
+           -moz-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+                transform-style: preserve-3d;
+      }
+        .card--2-sided.card--selected {
+          background-color: transparent;
+        }
+        .card--2-sided.card--selected > * {
+          background-color: gold;
+        }
+        .card--2-sided.card--disabled {
+          opacity: 1;
+        }
+        .card--2-sided.card--disabled > * {
+          opacity: 0.7;
+        }
+      .card--side-1 { z-index: 2; }
+      .card--side-2 { z-index: 1; }
+
+      /* Step 1: by default, the second side is reversed */
+      .csstransforms3d .card--side-2{
+        -webkit-transform: rotateY(-180deg);
+           -moz-transform: rotateY(-180deg);
+            -ms-transform: rotateY(-180deg);
+                transform: rotateY(-180deg);
+      }
+      /* Step 2: adding .flipped to a parent triggers animation */
+      .csstransforms3d .flipped .card--side-1 {
+        -webkit-transform: rotateY(-180deg);
+           -moz-transform: rotateY(-180deg);
+            -ms-transform: rotateY(-180deg);
+                transform: rotateY(-180deg);
+      }
+      .csstransforms3d .flipped .card--side-2 {
+        -webkit-transform: rotateX(0deg) rotateY(0deg);
+           -moz-transform: rotateX(0deg) rotateY(0deg);
+            -ms-transform: rotateX(0deg) rotateY(0deg);
+                transform: rotateX(0deg) rotateY(0deg);
+      }
+
+      /* Step 2b: adding .flipped-stagger to a parent triggers staggered animation */
+      .csstransforms3d .flipped-stagger .card--side-1 {
+        -webkit-transform: rotateY(-180deg);
+           -moz-transform: rotateY(-180deg);
+            -ms-transform: rotateY(-180deg);
+                transform: rotateY(-180deg);
+      }
+      .csstransforms3d .flipped-stagger .card--side-2 {
+        -webkit-transform: rotateX(0deg) rotateY(0deg);
+           -moz-transform: rotateX(0deg) rotateY(0deg);
+            -ms-transform: rotateX(0deg) rotateY(0deg);
+                transform: rotateX(0deg) rotateY(0deg);
+      }
+      .csstransforms3d .flipped-stagger .card:nth-child(1) > * {
+    -webkit-transition-delay: 0.1s;
+       -moz-transition-delay: 0.1s;
+        -ms-transition-delay: 0.1s;
+            transition-delay: 0.1s;
+      }
+
+
+
+
+      .csstransforms3d .flipped-stagger .card:nth-child(2) > * {
+    -webkit-transition-delay: 0.2s;
+       -moz-transition-delay: 0.2s;
+        -ms-transition-delay: 0.2s;
+            transition-delay: 0.2s;
+      }
+
+      .csstransforms3d .flipped-stagger .card:nth-child(3) > * {
+    -webkit-transition-delay: 0.3s;
+       -moz-transition-delay: 0.3s;
+        -ms-transition-delay: 0.3s;
+            transition-delay: 0.3s;
+      }
+
+      .csstransforms3d .flipped-stagger .card:nth-child(4) > * {
+    -webkit-transition-delay: 0.4s;
+       -moz-transition-delay: 0.4s;
+        -ms-transition-delay: 0.4s;
+            transition-delay: 0.4s;
+      }
+
+      .csstransforms3d .flipped-stagger .card:nth-child(5) > *{
+    -webkit-transition-delay: 0.5s;
+       -moz-transition-delay: 0.5s;
+        -ms-transition-delay: 0.5s;
+            transition-delay: 0.5s;
+      }
+
+      .csstransforms3d .flipped-stagger .card:nth-child(6) > *{
+    -webkit-transition-delay: 0.6s;
+       -moz-transition-delay: 0.6s;
+        -ms-transition-delay: 0.6s;
+            transition-delay: 0.6s;
+      }
+
+      .csstransforms3d .flipped-stagger .card:nth-child(7) > *{
+    -webkit-transition-delay: 0.7s;
+       -moz-transition-delay: 0.7s;
+        -ms-transition-delay: 0.7s;
+            transition-delay: 0.7s;
+      }
+
+      .csstransforms3d .flipped-stagger .card:nth-child(8) > *{
+    -webkit-transition-delay: 0.8s;
+       -moz-transition-delay: 0.8s;
+        -ms-transition-delay: 0.8s;
+            transition-delay: 0.8s;
+      }
+
+      .csstransforms3d .flipped-stagger .card > *{
+    -webkit-transition-delay: 1s;
+       -moz-transition-delay: 1s;
+        -ms-transition-delay: 1s;
+            transition-delay: 1s;
+      }
+
+/*
+
+  Surgical classes
+
+*/
+  .no-js-hide {
+    display: none;
+  }

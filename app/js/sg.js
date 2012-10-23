@@ -1,0 +1,17 @@
+$(document).ready(function(){
+  $('#toggleFlipper01').click(function(){
+    $('#toggleFlippee01').toggleClass('flipped');
+  });
+  $('#toggleFlipper02').click(function(){
+    $('#toggleFlippee02').toggleClass('flipped');
+  });
+  $('#toggleFlipper03').click(function(){
+    $('#toggleFlippee03').toggleClass('flipped');
+  });
+  $('#toggleFlipper04').click(function(){
+    $('#toggleFlippee04').toggleClass('flipped');
+  });
+  $('#toggleFlipper05').click(function(){
+    $('#toggleFlippee05').toggleClass('flipped-stagger');
+  });
+});
