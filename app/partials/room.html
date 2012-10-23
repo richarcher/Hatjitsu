@@ -1,7 +1,7 @@
-<div id="roomNumber">Room: <strong><i>{{roomId}}</i></strong></div>
-<div class="wrapper" ng-init="configureRoom()">
+<div class="roomNumber">Room: <strong><i>{{roomId}}</i></strong></div>
+<div ng-init="configureRoom()">
 
-  <section id="cardPanel" >
+  <section class="cardPanel" >
     <div ng-show="voter">
       <h2>Estimate</h2>
       <ul class="cards{{votingState}}">
@@ -16,10 +16,9 @@
     <div ng-hide="voter">
       <p>You have chosen to simply observe this session. Enjoy!</p>
     </div>
-    <span class="vote-item"><span class="cardPanel-button">Vote</span></span>
   </section>
 
-  <section id="votePanel" >
+  <section class="votePanel" >
     <h2>Votes</h2>
     <span class="sub">Humans: <span class="label">{{humanCount}}</span></span>
     
@@ -32,45 +31,36 @@
         <div>&nbsp;</div>
       </li>
     </ul>
-  </section>
 
-  <section id="adminPanel" ng-switch on="showAdmin" >
-    <h2>Settings</h2>
-    <hr />
-    <div ng-switch-when="true">
-      <p><strong>Card pack</strong>:</p>
-      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="goat"> Mountain Goat</label>
-      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="fib"> Fibonacci</label>
-      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="seq"> Sequential</label>
-      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="play"> Playing Cards</label>
-      <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="tshirt"> T-Shirt</label>
-      <hr />
-      <button ng-click="resetVote()" class="btn" title="Start a new vote">
-        <i class="icon icon-refresh"></i> Reset
-      </button>
-      <button ng-click="forceReveal()" class="btn" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
-        <i class="icon icon-exclamation-sign"></i> Reveal
-      </button>
-      <hr />
+    <div ng-switch on="showAdmin" >
+
+      <p><label>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" /></label></p>
+
+      <div ng-switch-when="true">
+
+        <button ng-click="resetVote()" class="btn" title="Start a new vote">
+          <i class="icon icon-refresh"></i> Reset
+        </button>
+        <button ng-click="forceReveal()" class="btn" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
+          <i class="icon icon-exclamation-sign"></i> Reveal
+        </button>
+
+        <p><strong>Card pack</strong>:</p>
+        <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="goat"> Mountain Goat</label>
+        <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="fib"> Fibonacci</label>
+        <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="seq"> Sequential</label>
+        <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="play"> Playing Cards</label>
+        <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="tshirt"> T-Shirt</label>
+
+      </div>
+
     </div>
-    <p><label>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" /></label></p>
-    <hr />
-    <span class="vote-item"><span href="#extra" class="sidebar-button">Settings</span></span>
   </section>
 
 </div>
+
 <script>
 $(document).ready(function(){
-
-  $('.cardPanel-button').fastClick(function(e) {
-    e.preventDefault();
-    showCardPanel();
-  });
-
-  $('.sidebar-button').fastClick(function(e) {
-    e.preventDefault();
-    showSettings();
-  });
 
 });
 </script>
