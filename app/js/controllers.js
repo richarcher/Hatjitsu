@@ -116,14 +116,15 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   }
 
   var setLocalVote = function(vote) {
-    $scope.myVote = vote;
     var voteHash = myVoteHash();
+    $scope.myVote = vote;
+    $scope.voted = haveIVoted();
     if (!voteHash) {
       // initialize connections array with my first vote. (just to speed up UI)
       $scope.votes.push({ sessionId: $scope.sessionId, vote: vote });
     } else {
       if (vote) {
-        voteHash.vote = vote;    
+        voteHash.vote = vote;
       } else {
         // we're unvoting - lets remove it from the votes.
         $scope.votes = _.filter($scope.votes, function(v) { return v.sessionId != $scope.sessionId } );
@@ -155,8 +156,10 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     var connection = myConnectionHash();
 
     if (connection) {
-      $scope.voter = connection.voter;  
+      console.log(connection.vote);
+      $scope.voter = connection.voter;
       $scope.myVote = connection.vote;
+      $scope.voted = haveIVoted();
     }
 
     processVotes();
@@ -192,11 +195,19 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   }
 
   var setVotingState = function() {
-    $scope.votingState = votingFinished() ? ' finished' : ' active';
+    $scope.cardsState = votingFinished() ? ' card--disabled' : '';
+    $scope.votingState = votingFinished() ? ' flipped-stagger' : '';
   }
 
   var votingFinished = function() {
     return $scope.forcedReveal || $scope.votes.length === $scope.voterCount;
+  }
+
+  var haveIVoted = function() {
+    if (typeof $scope.myVote === 'undefined' || $scope.myVote === null) {
+      return false;
+    }
+    return true;
   }
 
   $scope.configureRoom = function() {
@@ -308,7 +319,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   $scope.unvote = function(sessionId) {
     if (sessionId === $scope.sessionId) {
       if ( !votingFinished() ) {
-        setLocalVote(null);
+        setLocalVote(undefined);
 
         // console.log("emit unvote", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
         socket.emit('unvote', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function(response) {
@@ -348,7 +359,8 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   $scope.connections = {};
   $scope.votes = [];
   $scope.cardPack = '';
-  $scope.myVote = null;
+  $scope.myVote = undefined;
+  $scope.voted = haveIVoted();
   $scope.votingState = "";
   $scope.forcedReveal = false;
   $scope.forceRevealDisable = true;

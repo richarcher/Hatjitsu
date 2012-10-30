@@ -63,10 +63,10 @@ body {
     .cards .card {
       margin-bottom: 0.5em;
       margin-right: 0.5em;
-      top: 1px;
     }
   .card {
     display: inline-block;
+    float: left;
     width: 2em;
     height: 3em;
     font-size: 1.5em;
@@ -75,12 +75,12 @@ body {
     text-align: center;
     line-height: 3em;
     border: 1px solid #555;
+    position: relative;
     -webkit-border-radius: 0.2em;
       border-radius: 0.2em;
   }
     .card--2-sided {
-      position: relative;
-      border: none;
+      border-color: transparent;
       background-color: transparent;
     }
     .card--selected {
@@ -88,6 +88,11 @@ body {
     }
     .card--disabled {
       opacity: 0.5;
+    }
+    .card--placeholder {
+      border: 1px dotted black;
+      background-color: transparent;
+      top: 1px;
     }
 
       .card--2-sided > * {

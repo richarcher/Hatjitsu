@@ -3,15 +3,15 @@
 
   <section class="cardPanel" >
     <div ng-show="voter">
-      <h2>Estimate</h2>
-      <ul class="cards{{votingState}}">
-        <li ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" onclick="showVotePanel();" class="card mine-{{card==myVote}}">
-          <div>{{card}}</div>
-        </li>
-        <li ng-hide="cards" class="waiting">
+      <p>Choose your estimate...</p>
+      <div class="cards{{cardsState}}">
+        <div ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" class="card" ng-class="{'card--selected' : card==myVote}">
+          {{card}}
+        </div>
+        <div ng-hide="cards" class="waiting">
           No cards found
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
     <div ng-hide="voter">
       <p>You have chosen to simply observe this session. Enjoy!</p>
@@ -19,22 +19,11 @@
   </section>
 
   <section class="votePanel" >
-    <h2>Votes</h2>
-    <span class="sub">Humans: <span class="label">{{humanCount}}</span></span>
-    
-    <ul class="cards{{votingState}}">
-      <li ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card mine-{{vote.sessionId==sessionId}}">
-        <div class="vote">{{vote.visibleVote}}</div>
-        <div class="hidden">x</div>
-      </li>
-      <li ng-repeat="i in placeholderVotes" class="placeholder">
-        <div>&nbsp;</div>
-      </li>
-    </ul>
+    <!-- <span class="sub">Humans: <span class="label">{{humanCount}}</span></span> -->
+
+    <p><label>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" /></label></p>
 
     <div ng-switch on="showAdmin" >
-
-      <p><label>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" /></label></p>
 
       <div ng-switch-when="true">
 
@@ -55,6 +44,24 @@
       </div>
 
     </div>
+
+    <div ng-switch on="voted">
+
+      <p ng-switch-when="false">You haven't estimated yet</p>
+      <p ng-switch-when="true">Your current estimate: <b>{{myVote}}</b></p>
+
+    </div>
+
+    <div class="cards{{votingState}}">
+      <div ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card card--2-sided" ng-class="{'card--selected' : vote.sessionId==sessionId}">
+        <div class="card--side-1">x</div>
+        <div class="card--side-2">{{vote.visibleVote}}</div>
+      </div>
+      <div ng-repeat="i in placeholderVotes" class="card card--placeholder">
+        &nbsp;
+      </div>
+    </div>
+
   </section>
 
 </div>
