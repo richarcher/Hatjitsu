@@ -1,3 +1,10 @@
+@font-face {
+  font-family: korean;
+  src: url(/fonts/Korean_Calligraphy.eot?#) format('eot'),
+       url(/fonts/Korean_Calligraphy.woff?) format('woff'),
+       url(/fonts/Korean_Calligraphy.ttf) format('truetype');
+}
+
 body {
   font: 14px/1.3em 'Helvetica neue', 'Helvetica', 'Arial', sans-serif;
 }
@@ -15,6 +22,14 @@ body {
     overflow: hidden;
   }
   .header__text {
+    line-height: 1;
+    font-size: 3em;
+    margin: 0.5em 0 0 2.5em;
+    font-family: 'korean', serif;
+    font-weight: normal;
+    color: #3D3938;
+  }
+  .header__text > * {
     font-size: 1em;
     margin-left: 7em;
   }
