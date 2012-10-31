@@ -420,12 +420,12 @@ hr {
   position: absolute;
   width: 100%;
   height: 135px;
-  top: 65px;
+  top: 51px;
   left: 0px;
 }
 .bg-tree {
   display: block;
-  background: url(/img/bg-tree.png) no-repeat right top;
+  /*background: url(/img/bg-tree.png) no-repeat right top;*/
   position: absolute;
   width: 320px;
   height: 200px;
