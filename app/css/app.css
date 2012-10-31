@@ -20,6 +20,7 @@ body {
   .header a {
     display: block;
     overflow: hidden;
+    text-decoration: none;
   }
   .header__text {
     line-height: 1;
@@ -31,11 +32,11 @@ body {
   }
   .header__text > * {
     font-size: 1em;
-    margin-left: 7em;
   }
   .header__logo {
     float: left;
     display: block;
+    margin-left: 1em;
     width: 6em;
     height: 6em;
     border-radius: 50%;
@@ -78,24 +79,28 @@ body {
     .cards .card {
       margin-bottom: 0.5em;
       margin-right: 0.5em;
+      float: left;
     }
   .card {
     display: inline-block;
-    float: left;
     width: 2em;
     height: 3em;
-    font-size: 1.5em;
-    background-color: rgb(250, 250, 250);
     margin: 0;
-    text-align: center;
-    line-height: 3em;
-    border: 1px solid #555;
+    box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 1);
     position: relative;
     -webkit-border-radius: 0.2em;
-      border-radius: 0.2em;
+            border-radius: 0.2em;
+    
+    color: #25201c;
+    font-size: 1.5em;
+    text-align: center;
+    text-shadow: 0px 1px 2px #d7d6d4;
+    line-height: 3em;
+
+    background-color: rgba(224, 217, 207, 1);
   }
     .card--2-sided {
-      border-color: transparent;
+      box-shadow: none;
       background-color: transparent;
     }
     .card--selected {
@@ -105,9 +110,8 @@ body {
       opacity: 0.5;
     }
     .card--placeholder {
-      border: 1px dotted black;
-      background-color: transparent;
-      top: 1px;
+      background-color: rgba(224, 217, 207, 0.1);
+      box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 0.7);
     }
 
       .card--2-sided > * {
@@ -116,8 +120,8 @@ body {
         width: 100%;
         top: 0;
         left: 0;
-        background-color: rgb(250, 250, 250);
-        border: 1px solid #555;
+        background-color: rgba(178, 174, 161, 1);
+        box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 1);
         -webkit-border-radius: 0.2em;
                 border-radius: 0.2em;
         -webkit-transform-style: preserve-3d;

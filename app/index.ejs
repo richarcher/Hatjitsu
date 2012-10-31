@@ -52,13 +52,14 @@
   <div class="container" ng-controller="MainCtrl">
     <header class="header">
       <a href="/" title="Back to the Lobby">
-        <span class="logo {{logoState}}"></span>
-        <h1>Hatjitsu</h1>
+        <span class="header__logo {{logoState}}"></span>
+        <h1 class="header__text">Hatjitsu</h1>
       </a>
+      <noscript>
+        <p>This site is <em>heavily</em> dependant upon JavaScript. If you don't have it enabled, you're not going to have a Good Time.</p>
+      </noscript>
+      <div class="bg-mount"></div>
     </header>
-    <noscript>
-      <p>This site is <em>heavily</em> dependant upon JavaScript. If you don't have it enabled, you're not going to have a Good Time.</p>
-    </noscript>
 
     <div class="activity" ng-show="activity"></div>
     <div class="socketMessage" class="notification" ui-show="socketMessage">{{socketMessage}}</div>

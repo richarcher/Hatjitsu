@@ -11,13 +11,13 @@ function MainCtrl($scope, $timeout) {
     $scope.logoState = '';
   }); 
   $scope.$on('unanimous vote', function() {
-    $scope.logoState = 'green';
+    $scope.logoState = 'header__logo--green';
   });
   $scope.$on('not unanimous vote', function() {
-    $scope.logoState = 'yellow';
+    $scope.logoState = 'header__logo--yellow';
   });
   $scope.$on('problem vote', function() {
-    $scope.logoState = 'red';
+    $scope.logoState = 'header__logo--red';
   });
   $scope.$on('unfinished vote', function() {
     $scope.logoState = '';
