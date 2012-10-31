@@ -61,14 +61,15 @@
       <div class="bg-mount"></div>
     </header>
 
-    <div class="activity" ng-show="activity"></div>
-    <div class="socketMessage" class="notification" ui-show="socketMessage">{{socketMessage}}</div>
-    <div class="appError" class="notification" ui-show="errorMessage">{{errorMessage}}</div>
-    <div class="message" class="notification" ui-show="message">{{message}}</div>
+    <div class="alert activity" ng-show="activity"></div>
+    <div class="alert socketMessage" class="notification" ui-show="socketMessage">{{socketMessage}}</div>
+    <div class="alert appError" class="notification" ui-show="errorMessage">{{errorMessage}}</div>
+    <div class="alert message" class="notification" ui-show="message">{{message}}</div>
 
     <div class="content" ng-view></div>
 
-    <footer role="contentInfo">
+    <footer class="footer">
+
       <p>&copy; <a href="http://www.unboxedconsulting.com" title="Ruby on Rails, node, and iOS development in Cape Town">UBXD</a> 2012 - Built by <a href="mailto:joerg.diekmann@ubxd.com" title="Software developer in Cape Town">@Jörg</a> &amp; <a href="mailto:richard.archer@ubxd.com" title="Software developer in Cape Town">@Rïch</a>. <strong><a href="https://twitter.com/hatjitsu" title="Feedback to us via Twitter">Feedback?</a></strong></p>
     </footer>
   </div>
