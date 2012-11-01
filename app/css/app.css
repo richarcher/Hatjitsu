@@ -131,9 +131,31 @@ hr {
 .cardPanel {
   overflow: hidden; 
   padding: 0 8px;
+  text-align: center;
   background-image: url(/img/bg.jpg);
   background-size: 250px;
+  position: relative;
+  /* max-height: 0px; */
 }
+  .cardPanel:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.1);
+    top: 0;
+    left: 0;
+  }
+  .cardPanel p {
+    text-align: left;
+  }
+  @media screen and (min-width: 28em) {
+    .cardPanel {
+      text-align: left;
+    }
+  }
+
 
 /*
 
