@@ -28,21 +28,44 @@ hr {
     background-image: url(/img/bg.jpg);
     background-size: 250px;
     position: relative;
-    padding-bottom: 76px; /* allow for absolutely positioned mountain */
+    z-index: 3;
     padding-top: 8px;
+    padding-bottom: 67px; /* allow for absolutely positioned mountain */
+    zoom: 1;
+    border: 1px solid #B9AAA7;
+    border-width: 0 1px;
+  }
+  .header:before,
+  .header:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  .header:after {
+    clear: both;
   }
   .header a {
     display: block;
     overflow: hidden;
     text-decoration: none;
+    position: relative;
   }
   .header__text {
     line-height: 1;
     font-size: 3em;
-    margin: 0.5em 0 0 2.5em;
+    margin: 0.5em 0 0 0.5em;
     font-family: 'korean', serif;
     font-weight: normal;
     color: #3D3938;
+    position: absolute;
+    right: 0;
+  }
+  @media screen and (min-width: 17em) {
+    .header__text {
+      position: relative;
+      margin-left: 2.5em;
+    }
   }
   .header__text > * {
     font-size: 1em;
