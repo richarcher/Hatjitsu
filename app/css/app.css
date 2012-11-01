@@ -7,8 +7,7 @@
 
 body {
   font: 16px/1.3em 'Helvetica neue', 'Helvetica', 'Arial', sans-serif;
-  background-image: url(/img/bg.jpg);
-  background-size: 250px;
+  background-color: #ebe6dc;
   color: #3d3938;
   text-shadow: 0px 0px 1px #f4f0e9;
   margin: 0;
@@ -17,16 +16,20 @@ hr {
   clear: both;
 }
 .container {
-  margin: 8px 0;
+  margin: 0 auto;
+  max-width: 55em;
 }
-/*
 
+/*
   Header
 
 */
   .header {
+    background-image: url(/img/bg.jpg);
+    background-size: 250px;
     position: relative;
     padding-bottom: 76px; /* allow for absolutely positioned mountain */
+    padding-top: 8px;
   }
   .header a {
     display: block;
@@ -76,10 +79,13 @@ hr {
 
 */
   .footer {
+    overflow: hidden;
     text-align: center;
     position: relative;
     background-image: url(/img/bg.jpg);
     background-size: 250px;
+    border: 1px solid #B9AAA7;
+    border-width: 0 1px;
   }
 
 /*
@@ -91,15 +97,19 @@ hr {
   position: relative;
 }
 .votePanel {
+  overflow: hidden;
   padding: 0 8px;
   position: relative;
+  background-image: url(/img/bg.jpg);
+  background-size: 250px;
+  border: 1px solid #B9AAA7;
+  border-width: 0 1px;
 }
 .cardPanel {
-  overflow: hidden;
-  background-color: rgba(0,0,0,0.1);
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  overflow: hidden; 
   padding: 0 8px;
+  background-image: url(/img/bg.jpg);
+  background-size: 250px;
 }
 
 /*
@@ -113,7 +123,6 @@ hr {
     .cards .card {
       margin-bottom: 0.5em;
       margin-right: 0.5em;
-      float: left;
     }
   .card {
     display: inline-block;
@@ -157,6 +166,7 @@ hr {
       background-color: transparent;
       background-image: none;
       border: none;
+      float: left;
     }
     .card--selected {
       background-color: gold;
