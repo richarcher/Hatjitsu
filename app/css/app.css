@@ -8,6 +8,9 @@
 body {
   font: 16px/1.3em 'Helvetica neue', 'Helvetica', 'Arial', sans-serif;
   background-color: #ebe6dc;
+  background-image: url(/img/body.jpg);
+  background-size: 250px;
+  background-position: 10%;
   color: #3d3938;
   text-shadow: 0px 0px 1px #f4f0e9;
   margin: 0;
@@ -60,6 +63,7 @@ hr {
     color: #3D3938;
     position: absolute;
     right: 0;
+    z-index: 1;
   }
   @media screen and (min-width: 17em) {
     .header__text {
@@ -107,7 +111,7 @@ hr {
     position: relative;
     background-image: url(/img/bg.jpg);
     background-size: 250px;
-    border: 1px solid #B9AAA7;
+    border: 1px solid #b9aaa7;
     border-width: 0 1px;
   }
 
@@ -125,7 +129,7 @@ hr {
   position: relative;
   background-image: url(/img/bg.jpg);
   background-size: 250px;
-  border: 1px solid #B9AAA7;
+  border: 1px solid #b9aaa7;
   border-width: 0 1px;
 }
 .cardPanel {
