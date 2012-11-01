@@ -201,8 +201,10 @@ hr {
   .card:focus {
     background-color: rgb(216, 208, 197);
     background-position: 0 -30px;
+    border-color: transparent;
     -webkit-transition: background-position 0.1s linear;
        -moz-transition: background-position 0.1s linear;
+        -ms-transition: background-position 0.1s linear;
          -o-transition: background-position 0.1s linear;
             transition: background-position 0.1s linear;
   }
@@ -215,21 +217,32 @@ hr {
     }
     .card--selected {
       background-color: gold;
-      background-image: -moz-linear-gradient(top, gold, gold);
       background-image: -webkit-gradient(linear, 0 0, 0 100%, from(gold), to(gold));
       background-image: -webkit-linear-gradient(top, gold, gold);
-      background-image: -o-linear-gradient(top, gold, gold);
-      background-image: linear-gradient(to bottom, gold, gold);
+      background-image:    -moz-linear-gradient(top, gold, gold);
+      background-image:      -o-linear-gradient(top, gold, gold);
+      background-image:         linear-gradient(to bottom, gold, gold);
       background-repeat: repeat-x;
+    }
+      .card--selected:hover,
+      .card--selected:focus {
+        background-position: 0 0;
+        background-color: gold;
+      }
+    .card--disabled,
+    .card--disabled > * {
+      cursor: default;
     }
     .card--disabled {
       opacity: 0.5;
     }
+
     .card--placeholder {
       background-color: rgba(224, 217, 207, 0.1);
       box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 0.7);
       background-image: none;
       border: none;
+      border-top: 1px solid transparent;
       cursor: default;
     }
     .card--placeholder:hover,
@@ -244,36 +257,42 @@ hr {
         width: 100%;
         top: 0;
         left: 0;
-        /*box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 1);*/
         -webkit-border-radius: 0.2em;
                 border-radius: 0.2em;
         -webkit-transform-style: preserve-3d;
            -moz-transform-style: preserve-3d;
             -ms-transform-style: preserve-3d;
+             -o-transform-style: preserve-3d;
                 transform-style: preserve-3d;
         -webkit-backface-visibility: hidden;
            -moz-backface-visibility: hidden;
             -ms-backface-visibility: hidden;
+             -o-backface-visibility: hidden;
                 backface-visibility: hidden;
-        -webkit-transition: all .4s ease-in-out;
-           -moz-transition: all .4s ease-in-out;
-            -ms-transition: all .4s ease-in-out;
-                transition: all .4s ease-in-out;
+        -webkit-transition: -webkit-transform .4s ease-in-out;
+           -moz-transition: -moz-transform .4s ease-in-out;
+            -ms-transition: -ms-transform .4s ease-in-out;
+             -o-transition: -o-transform .4s ease-in-out;
+                transition: transform .4s ease-in-out;
         -webkit-transform-style: preserve-3d;
            -moz-transform-style: preserve-3d;
             -ms-transform-style: preserve-3d;
+             -o-transform-style: preserve-3d;
                 transform-style: preserve-3d;
         background-color: rgb(224, 217, 207);
-        background-image: -moz-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
         background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(224, 217, 207)), to(rgb(216, 208, 197)));
         background-image: -webkit-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
-        background-image: -o-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
-        background-image: linear-gradient(to bottom, rgb(224, 217, 207), rgb(216, 208, 197));
+        background-image:    -moz-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
+        background-image:      -o-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
+        background-image:         linear-gradient(to bottom, rgb(224, 217, 207), rgb(216, 208, 197));
         background-repeat: repeat-x;
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
         border: 1px solid #BBB;
         border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
         border-bottom-color: #A2A2A2;
+      }
+      .card--2-sided > *:hover {
+        border-color: transparent;
       }
         .card--2-sided.card--selected {
           background-color: transparent;
@@ -282,16 +301,17 @@ hr {
         .card--2-sided > .card--selected,
         .card--2-sided.card--selected > * {
           background-color: gold;
-          background-image: -moz-linear-gradient(top, gold, gold);
           background-image: -webkit-gradient(linear, 0 0, 0 100%, from(gold), to(gold));
           background-image: -webkit-linear-gradient(top, gold, gold);
-          background-image: -o-linear-gradient(top, gold, gold);
-          background-image: linear-gradient(to bottom, gold, gold);
+          background-image:    -moz-linear-gradient(top, gold, gold);
+          background-image:      -o-linear-gradient(top, gold, gold);
+          background-image:         linear-gradient(to bottom, gold, gold);
           background-repeat: repeat-x;
         }
         .card--2-sided > .card--disabled,
         .card--2-sided.card--disabled {
           opacity: 1;
+          background-color: transparent;
         }
         .card--2-sided.card--disabled > * {
           opacity: 0.5;
@@ -304,6 +324,7 @@ hr {
         -webkit-transform: rotateY(-180deg);
            -moz-transform: rotateY(-180deg);
             -ms-transform: rotateY(-180deg);
+             -o-transform: rotateY(-180deg);
                 transform: rotateY(-180deg);
       }
       /* Step 2: adding .flipped to a parent triggers animation */
@@ -311,12 +332,14 @@ hr {
         -webkit-transform: rotateY(-180deg);
            -moz-transform: rotateY(-180deg);
             -ms-transform: rotateY(-180deg);
+             -o-transform: rotateY(-180deg);
                 transform: rotateY(-180deg);
       }
       .csstransforms3d .flipped .card--side-2 {
         -webkit-transform: rotateX(0deg) rotateY(0deg);
            -moz-transform: rotateX(0deg) rotateY(0deg);
             -ms-transform: rotateX(0deg) rotateY(0deg);
+             -o-transform: rotateX(0deg) rotateY(0deg);
                 transform: rotateX(0deg) rotateY(0deg);
       }
 
@@ -325,66 +348,77 @@ hr {
         -webkit-transform: rotateY(180deg);
            -moz-transform: rotateY(180deg);
             -ms-transform: rotateY(180deg);
+             -o-transform: rotateY(180deg);
                 transform: rotateY(180deg);
       }
       .csstransforms3d .flipped-stagger .card--side-2 {
         -webkit-transform: rotateX(0deg) rotateY(0deg);
            -moz-transform: rotateX(0deg) rotateY(0deg);
             -ms-transform: rotateX(0deg) rotateY(0deg);
+             -o-transform: rotateX(0deg) rotateY(0deg);
                 transform: rotateX(0deg) rotateY(0deg);
       }
       .csstransforms3d .flipped-stagger .card:nth-child(1) > * {
         -webkit-transition-delay: 0.1s;
            -moz-transition-delay: 0.1s;
             -ms-transition-delay: 0.1s;
+             -o-transition-delay: 0.1s;
                 transition-delay: 0.1s;
       }
       .csstransforms3d .flipped-stagger .card:nth-child(2) > * {
         -webkit-transition-delay: 0.2s;
            -moz-transition-delay: 0.2s;
             -ms-transition-delay: 0.2s;
+             -o-transition-delay: 0.2s;
                 transition-delay: 0.2s;
       }
       .csstransforms3d .flipped-stagger .card:nth-child(3) > * {
         -webkit-transition-delay: 0.3s;
            -moz-transition-delay: 0.3s;
             -ms-transition-delay: 0.3s;
+             -o-transition-delay: 0.3s;
                 transition-delay: 0.3s;
       }
       .csstransforms3d .flipped-stagger .card:nth-child(4) > * {
         -webkit-transition-delay: 0.4s;
            -moz-transition-delay: 0.4s;
             -ms-transition-delay: 0.4s;
+             -o-transition-delay: 0.4s;
                 transition-delay: 0.4s;
       }
       .csstransforms3d .flipped-stagger .card:nth-child(5) > *{
         -webkit-transition-delay: 0.5s;
            -moz-transition-delay: 0.5s;
             -ms-transition-delay: 0.5s;
+             -o-transition-delay: 0.5s;
                 transition-delay: 0.5s;
       }
       .csstransforms3d .flipped-stagger .card:nth-child(6) > *{
         -webkit-transition-delay: 0.6s;
            -moz-transition-delay: 0.6s;
             -ms-transition-delay: 0.6s;
+             -o-transition-delay: 0.6s;
                 transition-delay: 0.6s;
       }
       .csstransforms3d .flipped-stagger .card:nth-child(7) > *{
         -webkit-transition-delay: 0.7s;
            -moz-transition-delay: 0.7s;
             -ms-transition-delay: 0.7s;
+             -o-transition-delay: 0.7s;
                 transition-delay: 0.7s;
       }
       .csstransforms3d .flipped-stagger .card:nth-child(8) > *{
         -webkit-transition-delay: 0.8s;
            -moz-transition-delay: 0.8s;
             -ms-transition-delay: 0.8s;
+             -o-transition-delay: 0.8s;
                 transition-delay: 0.8s;
       }
       .csstransforms3d .flipped-stagger .card > *{
         -webkit-transition-delay: 1s;
            -moz-transition-delay: 1s;
             -ms-transition-delay: 1s;
+             -o-transition-delay: 1s;
                 transition-delay: 1s;
       }
 /* 
@@ -402,11 +436,11 @@ hr {
   vertical-align: middle;
   cursor: pointer;
   background-color: rgb(224, 217, 207);
-  background-image: -moz-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(224, 217, 207)), to(rgb(216, 208, 197)));
   background-image: -webkit-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
-  background-image: -o-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
-  background-image: linear-gradient(to bottom, rgb(224, 217, 207), rgb(216, 208, 197));
+  background-image:    -moz-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
+  background-image:      -o-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
+  background-image:         linear-gradient(to bottom, rgb(224, 217, 207), rgb(216, 208, 197));
   background-repeat: repeat-x;
   border: 1px solid #BBB;
   border-color: rgba(224, 217, 207, 1) rgba(224, 217, 207, 1) #BFBFBF;
@@ -424,8 +458,10 @@ hr {
 .btn:focus {
   background-color: rgb(216, 208, 197);
   background-position: 0 -15px;
+  border-color: transparent;
   -webkit-transition: background-position 0.1s linear;
      -moz-transition: background-position 0.1s linear;
+      -ms-transition: background-position 0.1s linear;
        -o-transition: background-position 0.1s linear;
           transition: background-position 0.1s linear;
 }
@@ -446,7 +482,6 @@ hr {
 .icon-exclamation-sign {
   background-position: 0 -120px;
 }
-
 
 
 /*

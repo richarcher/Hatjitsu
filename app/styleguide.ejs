@@ -69,12 +69,18 @@
         <span class="card">5</span>
         <span class="card">6</span>
       </div>
-      <p>If a card is selected or active, add a class of <code>.card--selected</code> to the <code>.card</code> element in question. Conversely, <code>.card--disabled</code> will mark it as disabled. Or indeed, both at the same time... :</p>
+      <p>If a card is selected or active, add a class of <code>.card--selected</code> to the <code>.card</code> element in question.</p>
+      <p>Conversely, <code>.card--disabled</code> will mark it as disabled.</p>
+      <p>Finally, <code>.card--placeholder</code> is used to visually represent where a card will be placed.</p>
+      <p>These 3 classes can be mixed and matched as needed.</p>
+
       <div class="cards">
         <span class="card">1</span>
         <span class="card card--selected">2</span>
         <span class="card card--disabled">3</span>
         <span class="card card--disabled card--selected">4</span>
+        <span class="card card--placeholder">∅</span>
+        <span class="card card--placeholder card--disabled">∅</span>
       </div>
       <h3>2 sided cards</h3>
       <p>2-sided cards are available to those with fancy JavaScriptin' and CSS3 3D-Transforms on their calculatin' machines. The basic markup is a little more involved, but should make sense:</p>
@@ -111,6 +117,8 @@
           <span class="card--side-1">L</span>
           <span class="card--side-2">O</span>
         </span>
+        <span class="card card--placeholder">♠</span>
+        
       </div>
       <button id="toggleFlipper02">Toggle flip</button>
       <p>or selected only on one side...</p>
@@ -145,7 +153,7 @@
         </span>
       </div>
       <button id="toggleFlipper04">Flip only card 2</button>
-      <p>Or to stagger the animation of cards, simple add <code>.flipped-stagger</code> to <code>.cards</code>... ( note staggering only works up to a maximum of 8 votes, any more will be flipped at the same time)</p>
+      <p>Or to stagger the animation of cards, simply add <code>.flipped-stagger</code> to <code>.cards</code>... ( note staggering only works up to a maximum of 8 votes, any more will be flipped at the same time)</p>
       <div  id="toggleFlippee05" class="cards">
         <span class="card card--2-sided">
           <span class="card--side-1">1</span>
@@ -207,8 +215,9 @@
           <span class="card--side-1">15</span>
           <span class="card--side-2 card--selected">15</span>
         </span>
+        <span class="card card--placeholder">♥</span>
         <span class="card card--2-sided">
-          <span class="card--side-1">16</span>
+          <span class="card--side-1">17</span>
           <span class="card--side-2 card--selected">16</span>
         </span>
       </div>
@@ -217,9 +226,15 @@
     <hr>
     <section>
       <h1>Buttons</h1>
-      <p><abbr title="(To Be Completed)">TBC</abbr></p>
-      <p>Reset button, reveal button, vote/not vote toggle etc.</p>
-      <button class="btn"><i class="icon icon-refresh"></i> Button </button>
+      <p>Basic setup: <code>button.btn</code> </p>
+      <p>Use the <code>.icon</code> to assign a space, and then either <code>.icon-refresh</code> or <code>.icon-exclamation-sign</code> for the various icons to use.</p>
+      <button class="btn">Vanilla Button</button>
+      <button class="btn"><i class="icon icon-refresh"></i> Refresh </button>
+      <button class="btn"><i class="icon icon-exclamation-sign"></i> Golly! </button>
+      <h3>2-way toggle</h3>
+      <p>Basic setup: <code>&lt;label class="toggler"&gt;I am voting: &lt;input type="checkbox" /&gt;&lt;/label&gt;</code> </p>
+      
+      <label class="toggler" data-on="I am voting" data-off="I am not voting">I am voting: <input type="checkbox" /></label>
     </section>
     <hr>
     <section>
