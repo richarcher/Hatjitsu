@@ -145,7 +145,7 @@ hr {
   background-image: url(/img/bg.jpg);
   background-size: 250px;
   position: relative;
-  /* max-height: 0px; */
+  -webkit-transition: all .5s ease;
 }
   .cardPanel:before {
     content: "";
@@ -493,9 +493,84 @@ hr {
   background-position: 0 -120px;
 }
 
+.switch {
+  width: 187px;
+  height: 30px;
+  position: relative;
+}
+.switch input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    opacity: 0;
+    cursor: pointer;
+}
+.switch .btn {
+  width: 100%;
+  height: 30px;
+  padding :0;
+  text-indent: -100%;
+  line-height: 34px;
+  text-align: left;
+  background-image: none;
+  background-color: #B4573A;
+  border-bottom-color: transparent;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+  margin: 2px 0 0 2px;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.switch:hover .btn,
+.switch:focus .btn {
+  background-position: 0 0;
+  border-color: transparent;
+  background-color: #813D28;
+}
 
+.switch .btn:after {
+  content: attr(data-off);
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  text-indent: 33px;
+}
+.switch .btn:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  background-image: url("/img/glyphicons-halflings-white.png");
+  background-position: -312px 0;
+  top: 10px;
+  left: 13px;
+}
+.switch input:checked ~ .btn {
+  background-color: #408F21;
+}
+.switch:hover input:checked ~ .btn,
+.switch:focus input:checked ~ .btn {
+  background-color: #276310;
+}
+.switch input:checked ~ .btn:after {
+  content: attr(data-on);
+}
+
+.switch input:checked ~ .btn:before {
+  background-position: -288px 0;
+}
 /*
+
   Alerts
+
 */
 .alert {
   display: none;

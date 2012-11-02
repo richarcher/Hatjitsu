@@ -20,7 +20,12 @@
   <section class="votePanel" >
     <!-- <span class="sub">Humans: <span class="label">{{humanCount}}</span></span> -->
     <p class="roomNumber">Room: {{roomId}}</p>
-    <p><label>I am a <strong>voter</strong>: <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" /></label></p>
+
+    
+    <p class="switch">
+      <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()">
+      <label class="btn" data-on="You are a voter" data-off="You are not a voter">I am voting</label>
+    </p>
 
     <div ng-switch on="showAdmin" >
 
