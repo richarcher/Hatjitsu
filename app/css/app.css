@@ -8,7 +8,7 @@
 body {
   font: 16px/1.3em 'Helvetica neue', 'Helvetica', 'Arial', sans-serif;
   background-color: #ebe6dc;
-  background-image: url(/img/body.jpg);
+  background-image: url(/img/bg.jpg);
   background-size: 250px;
   background-position: 10%;
   color: #3d3938;
@@ -21,6 +21,7 @@ hr {
 .container {
   margin: 0 auto;
   max-width: 55em;
+  overflow: hidden;
 }
 
 /*
@@ -120,8 +121,13 @@ hr {
 */
 
 .lobby {
-  margin: 0 0 0 8px;
+  padding: 0 8px;
   position: relative;
+  background-image: url(/img/bg.jpg);
+  background-size: 250px;
+  overflow: hidden;
+  border: 1px solid #b9aaa7;
+  border-width: 0 1px;  
 }
 .votePanel {
   overflow: hidden;
@@ -515,7 +521,7 @@ hr {
   width: 100%;
   height: 135px;
   top: 51px;
-  left: 0px;
+  left: -1%;
 }
 .bg-tree {
   display: block;
