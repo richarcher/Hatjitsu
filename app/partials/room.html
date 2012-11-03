@@ -3,18 +3,20 @@
   <section class="cardPanel" >
     <div ng-show="voter">
       <p>Choose your estimate...</p>
-      <div class="cards{{cardsState}}">
-        <div ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" class="card" ng-class="{'card--selected' : card==myVote}">
-          {{card}}
-        </div>
-        <div ng-hide="cards" class="waiting">
-          No cards found
-        </div>
-      </div>
     </div>
     <div ng-hide="voter">
-      <p>You have chosen to simply observe this session. Enjoy!</p>
+      <p>You have chosen not to vote.</p>
     </div>
+    
+    <div class="cards{{cardsState}}">
+      <div ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" class="card" ng-class="{'card--selected' : card==myVote}">
+        {{card}}
+      </div>
+      <div ng-hide="cards" class="waiting">
+        No cards found
+      </div>
+    </div>
+
   </section>
 
   <section class="votePanel" >

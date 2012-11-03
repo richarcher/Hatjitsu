@@ -89,7 +89,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
 
     $scope.placeholderVotes = new Array($scope.voterCount - voteCount);
 
-    $scope.forceRevealDisable = ( !$scope.forcedReveal && $scope.votes.length <= $scope.voterCount ) ? false : true;
+    $scope.forceRevealDisable = ( !$scope.forcedReveal && $scope.votes.length < $scope.voterCount ) ? false : true;
 
     if ($scope.votes.length === $scope.voterCount || $scope.forcedReveal) {
       var uniqVotes = _.chain($scope.votes).pluck('vote').uniq().value().length;
@@ -156,7 +156,6 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     var connection = myConnectionHash();
 
     if (connection) {
-      console.log(connection.vote);
       $scope.voter = connection.voter;
       $scope.myVote = connection.vote;
       $scope.voted = haveIVoted();
