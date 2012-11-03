@@ -22,24 +22,26 @@
     <p class="roomNumber">Room: {{roomId}}</p>
 
     
-    <p class="switch">
+    <div class="switch">
       <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()">
       <label class="btn" data-on="You are a voter" data-off="You are not a voter">I am voting</label>
-    </p>
+    </div>
 
     <div ng-switch on="showAdmin" >
 
       <div ng-switch-when="true">
-
-        <button ng-click="resetVote()" class="btn" title="Start a new vote">
-          <i class="icon icon-refresh"></i> Reset
-        </button>
-        <button ng-click="forceReveal()" class="btn" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
-          <i class="icon icon-exclamation-sign"></i> Reveal
-        </button>
+        <div class="row">
+          <button ng-click="resetVote()" class="span2 btn" title="Start a new vote">
+            <i class="icon icon-refresh"></i> Reset
+          </button>
+          <button ng-click="forceReveal()" class="span2 btn" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
+            <i class="icon icon-exclamation-sign"></i> Reveal
+          </button>
+        </div>
 
         <p><strong>Card pack</strong>:</p>
-        <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="goat"> Mountain Goat</label>
+        <label>
+          <input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="goat"> Mountain Goat</label>
         <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="fib"> Fibonacci</label>
         <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="seq"> Sequential</label>
         <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="play"> Playing Cards</label>
