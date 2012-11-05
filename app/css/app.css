@@ -504,18 +504,18 @@ hr {
     -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
        -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  }
-
-  .btn:hover,
-  .btn:focus {
-    background-color: rgb(216, 208, 197);
-    background-position: 0 -15px;
-    border-color: transparent;
     -webkit-transition: background-position 0.1s ease;
        -moz-transition: background-position 0.1s ease;
         -ms-transition: background-position 0.1s ease;
          -o-transition: background-position 0.1s ease;
             transition: background-position 0.1s ease;
+  }
+
+  .btn:hover,
+  .btn:focus {
+    /* background-color: rgb(216, 208, 197); */
+    background-position: 0 40px;
+    border-color: transparent;
   }
   .icon {
     display: inline-block;
@@ -524,15 +524,14 @@ hr {
     margin-top: 2px;
     line-height: 14px;
     vertical-align: text-top;
-    background-image: url("/img/glyphicons-halflings.png");
-    background-position: 14px 14px;
+    background-image: url("/img/glyphicons.png");
     background-repeat: no-repeat;
   }
   .icon-refresh {
-    background-position: -240px -24px;
+    background-position: 0px 0px;
   }
   .icon-exclamation-sign {
-    background-position: 0 -120px;
+    background-position: -90px 0px;
   }
 
   .switch {
@@ -549,26 +548,21 @@ hr {
       margin: 0;
   }
   .switch .btn {
-    padding :0;
+    padding: 0;
     text-indent: -100%;
     line-height: 30px;
-    background-image: none;
-    background-color: #B4573A;
-    border-bottom-color: transparent;
-    color: #fff;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+    color: #B4573A;
     margin: 0;
-    -webkit-transition: background-color 0.2s ease;
-       -moz-transition: background-color 0.2s ease;
-        -ms-transition: background-color 0.2s ease;
-         -o-transition: background-color 0.2s ease;
-            transition: background-color 0.2s ease;
+    -webkit-transition: background-position 0.1s ease;
+       -moz-transition: background-position 0.1s ease;
+        -ms-transition: background-position 0.1s ease;
+         -o-transition: background-position 0.1s ease;
+            transition: background-position 0.1s ease;
   }
   .switch:hover .btn,
   .switch:focus .btn {
-    background-position: 0 0;
+    background-position: 0 40px;
     border-color: transparent;
-    background-color: #813D28;
   }
 
   .switch .btn:after {
@@ -589,25 +583,23 @@ hr {
     content: "";
     position: absolute;
     z-index: 1;
-    width: 14px;
-    height: 14px;
-    background-image: url("/img/glyphicons-halflings-white.png");
-    background-position: -312px 0;
-    top: 13px;
+    width: 15px;
+    height: 13px;
+    background-image: url("/img/glyphicons.png");
+    background-position: -58px 0px;
+    top: 15px;
     left: 11px;
   }
   .switch input:checked ~ .btn {
-    background-color: #408F21;
-  }
-  .switch:hover input:checked ~ .btn,
-  .switch:focus input:checked ~ .btn {
-    background-color: #276310;
+    color: #408F21;
+    background-position: 0 40px;
+    border-color: #bbb;
   }
   .switch input:checked ~ .btn:after {
     content: attr(data-on);
   }
   .switch input:checked ~ .btn:before {
-    background-position: -288px 0;
+    background-position: -28px 0;
   }
 
 /*
