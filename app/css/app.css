@@ -484,7 +484,7 @@ hr {
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
     vertical-align: middle;
     cursor: pointer;
-    background-color: rgb(224, 217, 207);
+    background-color: rgb(216, 208, 197);
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(224, 217, 207)), to(rgb(216, 208, 197)));
     background-image: -webkit-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
     background-image:    -moz-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
@@ -492,7 +492,6 @@ hr {
     background-image:         linear-gradient(to bottom, rgb(224, 217, 207), rgb(216, 208, 197));
     background-repeat: repeat-x;
     border: 1px solid #BBB;
-    /* border-color: rgba(224, 217, 207, 1) rgba(224, 217, 207, 1) #BFBFBF; */
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     border-bottom-color: #A2A2A2;
     -webkit-box-sizing: border-box;
@@ -513,8 +512,7 @@ hr {
 
   .btn:hover,
   .btn:focus {
-    /* background-color: rgb(216, 208, 197); */
-    background-position: 0 40px;
+    background-position: 0 -40px;
     border-color: transparent;
   }
   .icon {
@@ -561,7 +559,7 @@ hr {
   }
   .switch:hover .btn,
   .switch:focus .btn {
-    background-position: 0 40px;
+    background-position: 0 -40px;
     border-color: transparent;
   }
 
@@ -592,7 +590,7 @@ hr {
   }
   .switch input:checked ~ .btn {
     color: #408F21;
-    background-position: 0 40px;
+    background-position: 0 -40px;
     border-color: #bbb;
   }
   .switch input:checked ~ .btn:after {
