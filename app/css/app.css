@@ -602,6 +602,39 @@ hr {
 
 /*
 
+  Radiogroup
+
+*/
+
+  .radiogroup {
+    margin: 0;
+    padding-left: 0;
+    list-style-type: none;
+    background-color: white;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+  }
+    .radiogroup li {
+      position: relative;
+    }
+      .radiogroup input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+      }
+      .radiogroup label {
+        display: block;
+        height: 44px;
+        cursor: pointer;
+      }
+        .radiogroup input:checked ~ label {
+          /* background-color: green; */
+          font-weight: bold;
+        }
+
+/*
+
   Alerts
 
 */

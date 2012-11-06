@@ -42,12 +42,28 @@
         </div>
 
         <p><strong>Card pack</strong>:</p>
-        <label>
-          <input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="goat"> Mountain Goat</label>
-        <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="fib"> Fibonacci</label>
-        <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="seq"> Sequential</label>
-        <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="play"> Playing Cards</label>
-        <label><input type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="tshirt"> T-Shirt</label>
+        <ul class="radiogroup">
+          <li>
+            <input id="deckGoat" type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="goat">
+            <label for="deckGoat">Mountain Goat</label>
+          </li>
+          <li>
+            <input id="deckFib" type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="fib">
+            <label for="deckFib">Fibonacci</label>
+          </li>
+          <li>
+            <input id="deckSeq" type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="seq">
+            <label for="deckSeq">Sequential</label>
+          </li>
+          <li>
+            <input id="deckPlay" type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="play">
+            <label for="deckPlay">Playing Cards</label>
+          </li>
+          <li>
+            <input id="deckShirt" type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="tshirt">
+            <label for="deckShirt">T-Shirt</label>
+          </li>
+        </ul>
 
       </div>
 
