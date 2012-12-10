@@ -30,10 +30,9 @@
   <link rel="apple-touch-startup-image" href="/img/apple-touch-startup-image-768x1004.png" media="(device-width: 768px) and (orientation: portrait)" />
   <link rel="apple-touch-startup-image" href="/img/apple-touch-startup-image-748x1024.png" media="(device-width: 768px) and (orientation: landscape)" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="/lib/jquery-1.8.2.min.js"><\/script>')</script>
 
-
+  <%- CDN([ '/lib/modernizr.custom.31033.js', '/js/testing.js' ]) %>
+  
   <script type="text/javascript">
 
     var _gaq = _gaq || [];
@@ -48,7 +47,7 @@
 
   </script>
 </head>
-<body class="no-js">
+<body>
   <div class="container" ng-controller="MainCtrl">
     <header class="header">
       <a href="/" title="Back to the Lobby">
@@ -75,21 +74,11 @@
     </footer>
   </div>
 
-  <!-- script src="/socket.io/socket.io.js"></script-->
-  <script src="https://s3.amazonaws.com/hatchetapp/socket-0.9.6.io.min.js"></script>
 
-  <%- CDN([ '/lib/jquery.cookie/jquery.cookie.js', '/lib/underscore.min.js', '/lib/angular/angular.min.js', '/lib/modernizr.custom.11646.js', '/lib/google.fastbutton.js', '/lib/jquery.google.fastbutton.js']) %>
-  <%- CDN([ '/js/general.js', '/js/app.js', '/js/controllers.js', '/js/directives.js', '/js/filters.js', '/js/services.js', '/js/document.js' ]) %>
+  <script src="https://s3.amazonaws.com/hatchetapp/socket-0.9.6.io.min.js"></script>
+  <%- CDN([ '/lib/underscore.min.js', '/lib/jquery-1.8.2.min.js', '/lib/jquery.cookie.js' ]) %>
+  <%- CDN([ '/lib/angular/angular.min.js', '/js/app.js', '/js/controllers.js', '/js/directives.js', '/js/filters.js', '/js/services.js']) %>
 
 </body>
-
-<script>
-// add/remove classes everytime the window resize event fires
-$(window).resize(function() { resizer(); }); 
-
-$(document).ready(function(){
-  resizer();
-});
-</script>
 
 </html>
