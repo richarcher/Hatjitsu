@@ -60,11 +60,13 @@ hr {
     position: absolute;
     right: 0;
     z-index: 1;
+    text-align: left;
   }
   @media screen and (min-width: 17em) {
     .header__text {
       position: relative;
       margin-left: 2.5em;
+      right: auto;
     }
   }
   .header__text > * {
@@ -95,6 +97,19 @@ hr {
   .header__logo--red {
     background-color: brown;
   }
+
+    .no-svg .header__logo {
+      background-color: white;
+    }
+      .no-svg .header__logo--green {
+        background-color: lawngreen;
+      }
+      .no-svg .header__logo--yellow {
+        background-color: gold;
+      }
+      .no-svg .header__logo--red {
+        background-color: brown;
+      }
 
 /*
 
@@ -368,9 +383,16 @@ hr {
           opacity: 1;
           background-color: transparent;
         }
+          .no-csstransforms3d .card--2-sided > .card--disabled,
+          .no-csstransforms3d .card--2-sided.card--disabled {
+            background-color: rgb(224, 217, 207);
+          }
         .card--2-sided.card--disabled > * {
           opacity: 0.5;
         }
+          .no-csstransforms3d .card--2-sided.card--disabled > * {
+            outline: 1px solid red;
+          }
       .card--side-1 { z-index: 2; }
       .card--side-2 { z-index: 1; }
 
@@ -390,6 +412,7 @@ hr {
              -o-transform: rotateY(-180deg);
                 transform: rotateY(-180deg);
       }
+
       .csstransforms3d .flipped .card--side-2 {
         -webkit-transform: rotateX(0deg) rotateY(0deg);
            -moz-transform: rotateX(0deg) rotateY(0deg);
@@ -397,6 +420,10 @@ hr {
              -o-transform: rotateX(0deg) rotateY(0deg);
                 transform: rotateX(0deg) rotateY(0deg);
       }
+        .no-csstransforms3d .card--side-1 { z-index: 1; }
+        .no-csstransforms3d .card--side-2 { z-index: 2; }
+        .no-csstransforms3d .flipped .card--side-1 { z-index: 2; }
+        .no-csstransforms3d .flipped .card--side-2 { z-index: 1; }
 
       /* Step 2b: adding .flipped-stagger to a parent triggers staggered animation */
       .csstransforms3d .flipped-stagger .card--side-1 {
@@ -476,6 +503,9 @@ hr {
              -o-transition-delay: 1s;
                 transition-delay: 1s;
       }
+        .no-csstransforms3d .flipped-stagger .card--side-1 { z-index: 2; }
+        .no-csstransforms3d .flipped-stagger .card--side-2 { z-index: 1; }
+
 
 /* 
 
