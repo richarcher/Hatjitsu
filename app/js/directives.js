@@ -11,7 +11,7 @@ angular.module('pokerApp.directives', []).
   }]).
   directive('uiShow', [function() {
     return function(scope, elm, attrs) {
-      scope.$watch(attrs.uiShow, function(newVal, oldVal) {
+      scope.$watch(attrs.uiShow, function(newVal) {
         if (newVal) {
           elm.addClass('ui-show');
         } else {
@@ -22,7 +22,7 @@ angular.module('pokerApp.directives', []).
   }]).
   directive('uiHide', [function() {
     return function(scope, elm, attrs) {
-      scope.$watch(attrs.uiHide, function(newVal, oldVal) {
+      scope.$watch(attrs.uiHide, function(newVal) {
         if (newVal) {
           elm.addClass('ui-hide');
         } else {
