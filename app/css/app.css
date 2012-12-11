@@ -295,29 +295,6 @@ hr {
         background-position: 0 0;
         background-color: gold;
       }
-    .card--disabled,
-    .card--disabled > * {
-      cursor: default;
-    }
-    .card--disabled {
-      opacity: 0.5;
-    }
-
-    .card--placeholder {
-      background-color: rgba(224, 217, 207, 0.1);
-      -webkit-box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 0.7);
-         -moz-box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 0.7);
-              box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 0.7);
-      background-image: none;
-      border: none;
-      border-top: 1px solid transparent;
-      cursor: default;
-    }
-    .card--placeholder:hover,
-    .card--placeholder:focus {
-      background-image: none;
-      background-color: transparent;
-    }
 
       .card--2-sided > * {
         position: absolute;
@@ -347,7 +324,7 @@ hr {
             -ms-transform-style: preserve-3d;
              -o-transform-style: preserve-3d;
                 transform-style: preserve-3d;
-        background-color: rgb(224, 217, 207);
+        background-color: #E0D9CF;
         background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(224, 217, 207)), to(rgb(216, 208, 197)));
         background-image: -webkit-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
         background-image:    -moz-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
@@ -380,8 +357,9 @@ hr {
         }
         .card--2-sided > .card--disabled,
         .card--2-sided.card--disabled {
-          opacity: 1;
+          opacity: 0.5;
           background-color: transparent;
+          color: #AAA;
         }
           .no-csstransforms3d .card--2-sided > .card--disabled,
           .no-csstransforms3d .card--2-sided.card--disabled {
@@ -391,8 +369,32 @@ hr {
           opacity: 0.5;
         }
           .no-csstransforms3d .card--2-sided.card--disabled > * {
-            outline: 1px solid red;
+            opacity: 1;
           }
+    .card--placeholder {
+      background-color: #cccccc;
+      background-color: rgba(0, 0, 0, 0);
+      -webkit-box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 0.7);
+         -moz-box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 0.7);
+              box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 0.7);
+      background-image: none;
+      border: none;
+      border-top: 1px solid transparent;
+      cursor: default;
+    }
+    .card--placeholder:hover,
+    .card--placeholder:focus {
+      background-image: none;
+      background-color: #cccccc;
+      background-color: rgba(0, 0, 0, 0);
+    }
+    .card--disabled,
+    .card--disabled > * {
+      cursor: default;
+    }
+    .card--disabled {
+      opacity: 0.5;
+    }
       .card--side-1 { z-index: 2; }
       .card--side-2 { z-index: 1; }
 
