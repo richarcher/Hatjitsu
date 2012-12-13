@@ -1,9 +1,11 @@
 <div class="lobby">
   <h3>Distributed scrum <span>planning poker</span> for estimating agile projects.</h3>
   <p>First person to <strong>create</strong> the room is the moderator. <strong>Share</strong> the url or room number with other team members to <strong>join</strong> the room.</p>
-  <button ng-click="createRoom()" class="btn" title="Create a new planning poker room" ng-disabled="disableButtons">Create new room</button>
-  <div>
-    <label>Or enter existing room</label> <div class="input-prepend"><span class="add-on">/</span><input ng-model="room" ui-enter="enterRoom(room)" type="tel" maxlength="5" placeholder="room no" class="roomUrl" />&nbsp;<button ng-click="enterRoom(room)" class="btn" title="Join an existing planning poker room" ng-disabled="disableButtons">Join</button></div>
-  </div>
-  <div class="bg-tree"></div>
+
+        <button ng-click="createRoom()" class="btn" title="Create a new planning poker room" ng-disabled="disableButtons">Create new room</button>
+
+        <label>Or enter existing room</label> <input ng-model="room" ui-enter="enterRoom(room)" type="tel" maxlength="5" placeholder="room no" class="roomUrl" />
+
+        <button ng-click="enterRoom(room)" class="btn" title="Join an existing planning poker room" ng-disabled="disableButtons">Join</button>
+
 </div>

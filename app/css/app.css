@@ -165,7 +165,7 @@ a:focus {
     background-size: 250px;
     overflow: hidden;
     border: 1px solid #b9aaa7;
-    border-width: 0 1px;  
+    border-width: 0 1px;
   }
   .votePanel {
     overflow: hidden;
@@ -177,7 +177,7 @@ a:focus {
     border-width: 0 1px;
   }
   .cardPanel {
-    overflow: hidden; 
+    overflow: hidden;
     padding: 0 8px;
     text-align: center;
     background-image: url(/img/bg.jpg);
@@ -238,13 +238,16 @@ a:focus {
     clear: both;
   }
     .row .span2 {
+      display: block;
       width: 100%
     }
-    @media screen and (min-width: 28em) {
-      .row .span2 {
-        width: 49.47%;
+      @media screen and (min-width: 16em) {
+        .row .span2 {
+          display: inline-block;
+          width: 49.4%;
+        }
       }
-    }
+
 /*
 
   Cards
@@ -271,7 +274,7 @@ a:focus {
     position: relative;
     -webkit-border-radius: 0.2em;
             border-radius: 0.2em;
-    
+
     color: #25201c;
     font-size: 1.5em;
     text-align: center;
@@ -280,11 +283,11 @@ a:focus {
     cursor: pointer;
 
     background-color: rgb(224, 217, 207);
-    background-image: -moz-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(224, 217, 207)), to(rgb(216, 208, 197)));
-    background-image: -webkit-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
-    background-image: -o-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
-    background-image: linear-gradient(to bottom, rgb(224, 217, 207), rgb(216, 208, 197));
+    background-image: -webkit-linear-gradient(rgb(224, 217, 207), rgb(216, 208, 197));
+    background-image:    -moz-linear-gradient(rgb(224, 217, 207), rgb(216, 208, 197));
+    background-image:      -o-linear-gradient(rgb(224, 217, 207), rgb(216, 208, 197));
+    background-image:         linear-gradient(rgb(224, 217, 207), rgb(216, 208, 197));
     background-repeat: repeat-x;
   }
   .card:hover,
@@ -535,9 +538,9 @@ a:focus {
         .no-csstransforms3d .flipped-stagger .card--side-2 { z-index: 1; }
 
 
-/* 
+/*
 
-  Buttons 
+  Buttons
 
 */
   .btn {
@@ -602,7 +605,8 @@ a:focus {
 
   .switch {
     position: relative;
-    margin: 2px 0.3% 0;
+    margin: 2px 0 0;
+    width: 100%;
   }
   .switch input {
       position: absolute;
@@ -616,7 +620,7 @@ a:focus {
   .switch .btn {
     padding: 0;
     text-indent: -100%;
-    line-height: 30px;
+    line-height: 40px;
     color: #B4573A;
     margin: 0;
     -webkit-transition: background-position 0.1s ease;
@@ -666,7 +670,20 @@ a:focus {
   .switch input:checked ~ .btn:before {
     background-position: -28px 0;
   }
-
+  .no-checked .switch .btn:before,
+  .no-checked .switch .btn:after {
+    display: none;
+  }
+  .no-checked .switch .btn {
+    text-indent: 1.5em;
+    color: #333;
+  }
+  .no-checked .switch input {
+    width: auto;
+    height: auto;
+    top: 11px;
+    left: 2px;
+  }
 /*
 
   Radiogroup
