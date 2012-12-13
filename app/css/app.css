@@ -18,7 +18,26 @@ body {
 hr {
   clear: both;
 }
+/*
+  Links
 
+*/
+a {
+  -webkit-transition: color .1s ease-out;
+     -moz-transition: color .1s ease-out;
+      -ms-transition: color .1s ease-out;
+       -o-transition: color .1s ease-out;
+          transition: color .1s ease-out;
+}
+a,
+a:visited,
+a:active {
+  color: #493e27;
+}
+a:hover,
+a:focus {
+  color: rgb(189, 27, 27);
+}
 /*
   Header
 
