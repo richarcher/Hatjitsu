@@ -237,14 +237,17 @@ a:focus {
   .row:after {
     clear: both;
   }
-    .row .span2 {
+    .row .span2, .row .span1 {
       display: block;
       width: 100%
     }
       @media screen and (min-width: 16em) {
+        .row .span1 {
+          width: 99%;
+        }
         .row .span2 {
           display: inline-block;
-          width: 49.4%;
+          width: 49%;
         }
       }
 
@@ -605,8 +608,8 @@ a:focus {
 
   .switch {
     position: relative;
-    margin: 2px 0 0;
-    width: 100%;
+    margin: 2px 0.5% 0;
+    width: 99%;
   }
   .switch input {
       position: absolute;
@@ -684,6 +687,33 @@ a:focus {
     top: 11px;
     left: 2px;
   }
+  .roomUrl {
+    text-align: center;
+    font-size: 16px;
+    line-height: 31px;
+    box-sizing: border-box;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    vertical-align: middle;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+    border-width: 0px;
+  }
+/*
+
+  Typography
+
+*/
+
+  .subheading {
+    font-size: 1.1em;
+    font-weight: bold;
+    letter-spacing: -0.1px;
+    line-height: 1.2em;
+    text-align: left;
+  }
+
 /*
 
   Radiogroup
@@ -712,8 +742,8 @@ a:focus {
       }
       .radiogroup li:last-of-type label {
         -webkit-border-radius: 0 0 4px 4px;
-        -moz-border-radius: 0 0 4px 4px;
-        border-radius: 0 0 4px 4px;
+           -moz-border-radius: 0 0 4px 4px;
+                border-radius: 0 0 4px 4px;
       }
       .radiogroup input {
         position: absolute;
