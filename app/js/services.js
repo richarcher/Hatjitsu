@@ -28,6 +28,10 @@ pokerAppServices.factory('socket', ['$rootScope', function($rootScope) {
   $rootScope.activity = false;  
   $rootScope.sessionId = null;
 
+  $(function() {
+    $('body.loading').removeClass('loading');
+  });
+
   socket.on('error', function(reason) {
     // console.log('service: on error', reason);
     $rootScope.$apply(function() {
