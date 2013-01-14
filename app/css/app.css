@@ -167,6 +167,12 @@ a:focus {
     border: 1px solid #b9aaa7;
     border-width: 0 1px;
   }
+    .lobby p,
+    .lobby .subheading,
+    .lobby label {
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
   .votePanel {
     overflow: hidden;
     padding: 0 8px;
@@ -215,6 +221,7 @@ a:focus {
     margin: 0 auto;
     max-width: 55em;
     overflow: hidden;
+    position: relative;
   }
 
 /*
@@ -688,7 +695,6 @@ a:focus {
     left: 2px;
   }
   .roomUrl {
-    text-align: center;
     font-size: 16px;
     line-height: 31px;
     box-sizing: border-box;
@@ -772,11 +778,16 @@ a:focus {
 
 */
   .alert {
-    position: fixed;
     z-index: 3;
     top: 0;
     left: 0;
     width: 100%;
+    position: fixed;
+  }
+  @media screen and (min-width: 55em) {
+    .alert {
+      position: absolute;
+    }
   }
   .loading .alert {
     display: none;
