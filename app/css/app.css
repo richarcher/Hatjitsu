@@ -781,7 +781,39 @@ a:focus {
   .loading .alert {
     display: none;
   }
-
+  .alert .activity {
+    width: 1em;
+    height: 1em;
+    background-color: rgb(153, 12, 12);
+    text-indent: 100%;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    margin-right: 0.2em;
+    float: right;
+    text-align: right;
+    -webkit-border-radius: 0.5em;
+       -moz-border-radius: 0.5em;
+            border-radius: 0.5em;
+  }
+  .socketMessage,
+  .appError,
+  .message {
+    padding: 0 2em 0 0.5em;
+    line-height: 1.5em;
+  }
+  .message {
+    background-color: rgb(255, 255, 111);
+    background-color: rgba(255, 255, 111, 0.4);
+    color: rgb(129, 129, 15);
+  }
+  .socketMessage {
+    background-color: rgba(0, 255, 255, 0.2);
+  }
+  .appError {
+    background-color: rgba(255, 0, 0, 0.3);
+    color: rgb(102, 43, 43);
+    text-shadow: none;
+  }
 /*
 
   Surgical classes
