@@ -194,7 +194,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   }
 
   var setVotingState = function() {
-    $scope.cardsState = votingFinished() ? ' card--disabled' : '';
+    $scope.cardsState = votingFinished() || !$scope.voter ? ' card--disabled' : '';
     $scope.votingState = votingFinished() ? ' flipped-stagger' : '';
   }
 
@@ -304,7 +304,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
 
   $scope.vote = function(vote) {
     if ($scope.myVote != vote) {
-      if ( !votingFinished() ) {
+      if ( !votingFinished() && $scope.voter  ) {
         setLocalVote(vote);
 
         // console.log("emit vote", { roomUrl: $scope.roomId, vote: vote, sessionId: $scope.sessionId });
