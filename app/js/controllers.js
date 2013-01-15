@@ -9,7 +9,7 @@ function MainCtrl($scope, $timeout) {
 
   $scope.$on('$routeChangeSuccess', function() {
     $scope.logoState = '';
-  }); 
+  });
   $scope.$on('unanimous vote', function() {
     $scope.logoState = 'header__logo--green';
   });
@@ -57,7 +57,7 @@ function LobbyCtrl($scope, $location, socket) {
         $scope.$emit('show error', response.error);
       } else {
         // console.log("going to enter room " + response.roomUrl);
-        $location.path(response.roomUrl);    
+        $location.path(response.roomUrl);
       }
     });
   }
@@ -78,7 +78,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   };
 
   // wipe out vote if voting state is not yet finished to prevent cheating.
-  // if it has already been set - use the actual vote. This works for unvoting - so that 
+  // if it has already been set - use the actual vote. This works for unvoting - so that
   // before the flip occurs - we don't display 'oi'
   var processVotes = function() {
 
@@ -89,7 +89,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
 
     $scope.placeholderVotes = new Array($scope.voterCount - voteCount);
 
-    $scope.forceRevealDisable = ( !$scope.forcedReveal && $scope.votes.length < $scope.voterCount ) ? false : true;
+    $scope.forceRevealDisable = ( !$scope.forcedReveal && ( $scope.votes.length < $scope.voterCount || $scope.voterCount === 0 ) ) ? false : true;
 
     if ($scope.votes.length === $scope.voterCount || $scope.forcedReveal) {
       var uniqVotes = _.chain($scope.votes).pluck('vote').uniq().value().length;
@@ -100,7 +100,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
       } else if ($scope.voterCount > 3 && uniqVotes == ($scope.voterCount - 1)) {
         $scope.$emit('problem vote');
       } else {
-        $scope.$emit('not unanimous vote');  
+        $scope.$emit('not unanimous vote');
       }
     } else {
       $scope.$emit('unfinished vote');
@@ -138,12 +138,12 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   var refreshRoomInfo = function(roomObj) {
     // console.log("refreshRoomInfo: roomObj:", roomObj)
     if (roomObj.createAdmin) {
-      $.cookie("admin-" + roomObj.roomUrl, true);  
+      $.cookie("admin-" + roomObj.roomUrl, true);
     }
     if($.cookie("admin-" + roomObj.roomUrl)) {
       $scope.showAdmin = true;
     }
-    
+
     $scope.connections = roomObj.connections;
     $scope.humanCount = $scope.connections.length;
     $scope.cardPack = roomObj.cardPack;
@@ -275,7 +275,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
       var sessionId = this.socket.sessionid;
       // console.log("new socket id = " + sessionId);
       if (!$.cookie("sessionId")) {
-        $.cookie("sessionId", sessionId);  
+        $.cookie("sessionId", sessionId);
       }
       $scope.sessionId = $.cookie("sessionId");
       // console.log("session id = " + $scope.sessionId);
