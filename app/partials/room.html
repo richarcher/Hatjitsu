@@ -47,15 +47,23 @@
       <label class="btn" data-on="You are a voter" data-off="You are not a voter">I am voting</label>
     </div>
 
+    <div ng-switch on="voter">
 
-    <div ng-switch on="voted">
+      <div ng-switch-when="false">
+        <p>&nbsp;</p>
+      </div>
 
-      <p ng-switch-when="false">You haven't estimated yet</p>
-      <p ng-switch-when="true">Your current estimate: <b>{{myVote}}</b></p>
+      <div ng-switch-when="true">
+        <div ng-switch on="voted">
+          <p ng-switch-when="false">You haven't estimated yet</p>
+          <p ng-switch-when="true">Your current estimate: <b>{{myVote}}</b></p>
+        </div>
+      </div>
 
     </div>
 
     <div class="cards{{votingState}}">
+
       <div ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card card--2-sided" ng-class="{'card--selected' : vote.sessionId==sessionId}">
         <div class="card--side-1">x</div>
         <div class="card--side-2">{{vote.visibleVote}}</div>
@@ -63,6 +71,7 @@
       <div ng-repeat="i in placeholderVotes" class="card card--placeholder">
         &nbsp;
       </div>
+
     </div>
 
     <div ng-switch on="showAdmin" >
@@ -76,12 +85,9 @@
             <i class="icon icon-exclamation-sign"></i> Reveal
           </button>
         </div>
-
       </div>
 
     </div>
-
-    <div class="bg-tree"></div>
 
   </section>
 
