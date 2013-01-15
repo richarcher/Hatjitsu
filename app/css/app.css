@@ -238,7 +238,7 @@ a:focus {
   .row {
     width: 100%;
     display: block;
-    text-align: center;
+    text-align: left;
   }
   .row:before,
   .row:after {
@@ -256,11 +256,11 @@ a:focus {
     }
       @media screen and (min-width: 16em) {
         .row .span1 {
-          width: 99%;
+          width: 16em;
         }
         .row .span2 {
           display: inline-block;
-          width: 49%;
+          width: 16em;
         }
       }
 
@@ -561,7 +561,7 @@ a:focus {
 */
   .btn {
     padding: 4px 12px;
-    margin: 2px auto 0;
+    margin: 2px 0 0;
     line-height: 31px;
     display: inline-block;
     width: 100%;
@@ -596,7 +596,11 @@ a:focus {
          -o-transition: background-position 0.1s ease;
             transition: background-position 0.1s ease;
   }
-
+    @media screen and (min-width: 16em) {
+      .btn {
+        width: 16em;
+      }
+    }
   .btn:hover,
   .btn:focus {
     background-position: 0 -40px;
@@ -621,9 +625,15 @@ a:focus {
 
   .switch {
     position: relative;
-    margin: 2px 0.5% 0;
-    width: 99%;
+    margin: 2px 0 0;
+    width: 100%;
   }
+    @media screen and (min-width: 16em) {
+      .switch {
+        width: 16em;
+      }
+    }
+
   .switch input {
       position: absolute;
       width: 100%;
