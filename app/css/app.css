@@ -136,6 +136,12 @@ a:focus {
       background: url('/img/sun-mask.png') no-repeat center;
     }
 
+  .roomNumber {
+    position: absolute;
+    z-index: 4;
+    top: 4.3em;
+    left: 7.7em;
+  }
 
 /*
 
