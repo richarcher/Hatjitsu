@@ -2,13 +2,32 @@
   <p class="roomNumber">Room: {{roomId}}</p>
 
   <section class="cardPanel" >
-    <div ng-show="voter">
-      <p>Choose your estimate...</p>
+    <div class="row cardPanel-meta">
+      <div class="span2 subheading">
+        <div ng-show="voter">
+          <span>Choose your estimate...</span>
+        </div>
+        <div ng-hide="voter">
+          <span>You have chosen not to vote.</span>
+        </div>
+      </div>
+      <div ng-switch on="showAdmin" class="span2 pullright">
+        <div ng-switch-when="true">
+            <div id="dd" class="dropdown-wrapper btn">
+              <span>Mountain Goat pack</span>
+              <ul class="dropdown">
+                <li><a href="#" ng-model="cardPack" id="deckGoat" ng-click="setCardPack('goat')">Mountain Goat</a></li>
+                <li><a href="#" ng-model="cardPack" id="deckFib" ng-click="setCardPack('fib')">Fibonacci</a></li>
+                <li><a href="#" ng-model="cardPack" id="deckSeq" ng-click="setCardPack('seq')">Sequential</a></li>
+                <li><a href="#" ng-model="cardPack" id="deckPlay" ng-click="setCardPack('play')">Playing Cards</a></li>
+                <li><a href="#" ng-model="cardPack" id="deckShirt" ng-click="setCardPack('tshirt')">T-Shirt</a></li>
+              </ul>
+            </div>
+        </div>
+      </div>
     </div>
-    <div ng-hide="voter">
-      <p>You have chosen not to vote.</p>
-    </div>
-    
+
+
     <div class="cards{{cardsState}}">
       <div ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" class="card" ng-class="{'card--selected' : card==myVote}">
         {{card}}
@@ -23,51 +42,11 @@
   <section class="votePanel" >
     <!-- <span class="sub">Humans: <span class="label">{{humanCount}}</span></span> -->
 
-    
     <div class="switch">
       <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()">
       <label class="btn" data-on="You are a voter" data-off="You are not a voter">I am voting</label>
     </div>
 
-    <div ng-switch on="showAdmin" >
-
-      <div ng-switch-when="true">
-        <div class="row">
-          <button ng-click="resetVote()" class="span2 btn" title="Start a new vote">
-            <i class="icon icon-refresh"></i> Reset
-          </button>
-          <button ng-click="forceReveal()" class="span2 btn" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
-            <i class="icon icon-exclamation-sign"></i> Reveal
-          </button>
-        </div>
-
-        <p><strong>Card pack</strong>:</p>
-        <ul class="radiogroup">
-          <li>
-            <input id="deckGoat" type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="goat">
-            <label for="deckGoat">Mountain Goat</label>
-          </li>
-          <li>
-            <input id="deckFib" type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="fib">
-            <label for="deckFib">Fibonacci</label>
-          </li>
-          <li>
-            <input id="deckSeq" type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="seq">
-            <label for="deckSeq">Sequential</label>
-          </li>
-          <li>
-            <input id="deckPlay" type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="play">
-            <label for="deckPlay">Playing Cards</label>
-          </li>
-          <li>
-            <input id="deckShirt" type="radio" ng-model="cardPack" ng-change="setCardPack(cardPack)" value="tshirt">
-            <label for="deckShirt">T-Shirt</label>
-          </li>
-        </ul>
-
-      </div>
-
-    </div>
 
     <div ng-switch on="voted">
 
@@ -86,8 +65,32 @@
       </div>
     </div>
 
+    <div ng-switch on="showAdmin" >
+
+      <div ng-switch-when="true">
+        <div class="row">
+          <button ng-click="resetVote()" class="span2 btn" title="Start a new vote">
+            <i class="icon icon-refresh"></i> Reset
+          </button>
+          <button ng-click="forceReveal()" class="span2 btn" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
+            <i class="icon icon-exclamation-sign"></i> Reveal
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
     <div class="bg-tree"></div>
 
   </section>
 
 </div>
+<script type="text/javascript">
+  $(function() {
+    var dd = new DropDown( $('#dd') );
+    $(document).click(function() {
+      $('.dropdown-wrapper').removeClass('active');
+    });
+  });
+</script>

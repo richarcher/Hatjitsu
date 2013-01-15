@@ -9,6 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript" src="/lib/modernizr.custom.07116.js"></script>
   <script type="text/javascript" src="/js/testing.js"></script>
+  <script type="text/javascript" src="/lib/jquery-1.8.2.min.js" ></script>
+  <script type="text/javascript" src="/js/dom.js" ></script>
 </head>
 <body class="body language-markup">
   <div class="container">
@@ -264,29 +266,26 @@
     </section>
     <hr>
     <section>
-      <h1>Radio buttons</h1>
-      <ul class="radiogroup" data-codeblock>
-        <li>
-          <input id="deckGoat" type="radio" value="goat" name="group001" checked>
-          <label for="deckGoat">Mountain Goat</label>
-        </li>
-        <li>
-          <input id="deckFib" type="radio" value="fib" name="group001">
-          <label for="deckFib">Fibonacci</label>
-        </li>
-        <li>
-          <input id="deckSeq" type="radio" value="seq" name="group001">
-          <label for="deckSeq">Sequential</label>
-        </li>
-        <li>
-          <input id="deckPlay" type="radio" value="play" name="group001">
-          <label for="deckPlay">Playing Cards</label>
-        </li>
-        <li>
-          <input id="deckShirt" type="radio" value="tshirt" name="group001">
-          <label for="deckShirt">T-Shirt</label>
-        </li>
-      </ul>
+      <h1>Dropdown</h1>
+      <p>Javascript is required to use this customised drop down menu</p>
+      <div id="dd" class="dropdown-wrapper btn">
+        <span>Card pack:</span>
+        <ul class="dropdown">
+          <li><a href="#" id="deckGoat" >Mountain Goat</a></li>
+          <li><a href="#" id="deckFib" >Fibonacci</a></li>
+          <li><a href="#" id="deckSeq" >Sequential</a></li>
+          <li><a href="#" id="deckPlay" >Playing Cards</a></li>
+          <li><a href="#" id="deckShirt" >T-Shirt</a></li>
+        </ul>
+      </div>
+      <script type="text/javascript">
+        $(function() {
+          var dd = new DropDown( $('#dd') );
+          $(document).click(function() {
+            $('.dropdown-wrapper').removeClass('active');
+          });
+        });
+      </script>
     </section>
     <hr>
     <section>
