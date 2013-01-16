@@ -1,10 +1,9 @@
-Hatjitsu
-===
+#Hatjitsu
 
 Create disposable online [Planning Poker](http://en.wikipedia.org/wiki/Planning_poker) rooms for quick and easy estimations.
 
-Features
----
+##Features
+
 * Simple interface
 * No login/signup required
 * Votes are kept hidden until all have voted to prevent coercion
@@ -12,17 +11,17 @@ Features
 * Multiple planning card decks
 * Adaptive design allows to work on desktop, tablet and mobile
 
-Installation
----
-  npm install -d
-  node app
+##Installation
+
+    npm install -d
+    node app
 
 [http://localhost:5000](http://localhost:5000)
 
-TODOs
----
+##TODOs
 
-[ ] Collapsible card view / jump to votes on vote
-[ ] Initialise dropdowns more effectively
-[ ] Unicode symbol fallback (coffee/ace/king)
-[ ] Improve CTA buttons
+* [ ] Collapsible card view / jump to votes on vote
+* [ ] Initialise dropdowns more effectively
+* [ ] Update favicon, iOS splash page, Twitter avatar etc with new design
+* [ ] Unicode symbol fallback (coffee/ace/king)
+* [ ] Improve CTA buttons
