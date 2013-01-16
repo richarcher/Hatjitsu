@@ -1,23 +1,28 @@
-Online planning poker
-=====================
+Hatjitsu
+===
 
-It will change your life.
+Create disposable online [Planning Poker](http://en.wikipedia.org/wiki/Planning_poker) rooms for quick and easy estimations.
 
+Features
+---
+* Simple interface
+* No login/signup required
+* Votes are kept hidden until all have voted to prevent coercion
+* 'Observer feature' - watch the planning session without having to vote
+* Multiple planning card decks
+* Adaptive design allows to work on desktop, tablet and mobile
+
+Installation
+---
   npm install -d
   node app
 
 [http://localhost:5000](http://localhost:5000)
 
-Testing done with [Mocha](http://visionmedia.github.com/mocha/) and [Should.js](http://github.com/visionmedia/should.js)
-  
-* Terminal tab #1: `node app`
-* Terminal tab #2: `make test`
-
-*Boom.*
-
 TODOs
------
+---
 
-* Cookie-based administrator
-* Administrator panel
-* That'll do for now
+[ ] Collapsible card view / jump to votes on vote
+[ ] Initialise dropdowns more effectively
+[ ] Unicode symbol fallback (coffee/ace/king)
+[ ] Improve CTA buttons
