@@ -14,6 +14,9 @@ DropDown.prototype = {
     $(document).on('click', '.dropdown > li', function(){
       $( '#dd span' ).text( $(this).text() + ' pack');
     });
+    $(document).click(function() {
+      $('.dropdown-wrapper').removeClass('active');
+    });
   },
   getValue : function() {
     return this.val;

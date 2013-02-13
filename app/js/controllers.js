@@ -363,6 +363,8 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   $scope.votingState = "";
   $scope.forcedReveal = false;
   $scope.forceRevealDisable = true;
+
+  new DropDown( $('#dd') );
 }
 
 RoomCtrl.$inject = ['$scope', '$routeParams', '$timeout', 'socket'];
