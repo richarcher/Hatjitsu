@@ -25,3 +25,12 @@ DropDown.prototype = {
     return this.index;
   }
 }
+
+function ScrollIntoView(el) {
+  this.el = el;
+}
+ScrollIntoView.prototype = {
+  now : function () {
+    $('body').animate({ scrollTop : this.el.offset().top }, 'slow');
+  }
+}

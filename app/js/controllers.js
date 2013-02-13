@@ -133,6 +133,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     }
     processVotes();
     setVotingState();
+    $scope.scrollToSelectedCards.now();
   }
 
   var refreshRoomInfo = function(roomObj) {
@@ -363,6 +364,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   $scope.votingState = "";
   $scope.forcedReveal = false;
   $scope.forceRevealDisable = true;
+  $scope.scrollToSelectedCards = new ScrollIntoView( $('#chosenCards'));
 
   new DropDown( $('#dd') );
 }

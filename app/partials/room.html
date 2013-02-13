@@ -62,7 +62,7 @@
 
     </div>
 
-    <div class="cards{{votingState}}">
+    <div class="cards{{votingState}}" id="chosenCards">
 
       <div ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card card--2-sided" ng-class="{'card--selected' : vote.sessionId==sessionId}">
         <div class="card--side-1">x</div>
