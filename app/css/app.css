@@ -814,9 +814,6 @@ a:focus {
       position: absolute;
     }
   }
-  .loading .alert {
-    display: none;
-  }
   .alert .activity {
     width: 1em;
     height: 1em;
