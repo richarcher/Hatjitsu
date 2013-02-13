@@ -94,7 +94,6 @@ a:focus {
     width: 6em;
     height: 6em;
     border-radius: 50%;
-    background: url('/img/hatchet.svg') no-repeat center;
     background-size: 100%;
     -webkit-transition: .3s background-color ease;
        -moz-transition: .3s background-color ease;
@@ -102,20 +101,20 @@ a:focus {
          -o-transition: .3s background-color ease;
             transition: .3s background-color ease;
     z-index: 1;
-    background-color: rgb(253, 226, 194);
-    background-color: rgba(253, 226, 194, 0.1);
+    background-color: rgb(226, 222, 212);
+    background-color: rgba(226, 222, 212, 0.8);
   }
   .header__logo--green {
-    background-color: rgb(138, 228, 52);
-    background-color: rgba(138, 228, 52, 0.5);
+    background-color: rgb(209, 229, 181);
+    background-color: rgba(209, 229, 181, 0.9);
   }
   .header__logo--yellow {
-    background-color: rgb(247, 213, 36);
-    background-color: rgba(247, 213, 36, 0.5);
+    background-color: rgb(237, 226, 177);
+    background-color: rgba(237, 226, 177, 0.9);
   }
   .header__logo--red {
-    background-color: rgb(189, 27, 27);
-    background-color: rgba(189, 27, 27, 0.8);
+    background-color: rgb(224, 157, 154);
+    background-color: rgba(224, 157, 154, 0.9);
   }
 
   .no-svg .header__logo {
@@ -129,7 +128,7 @@ a:focus {
       display: block;
       width: 100%;
       height: 100%;
-      background: url('/img/sun-mask.png') no-repeat center;
+      background: url(/img/sun-mask.png) no-repeat center;
     }
 
   .roomNumber {
@@ -604,7 +603,7 @@ a:focus {
     margin-top: 2px;
     line-height: 14px;
     vertical-align: text-top;
-    background-image: url("/img/glyphicons.png");
+    background-image: url(/img/glyphicons.png);
     background-repeat: no-repeat;
   }
   .icon-refresh {
@@ -672,7 +671,7 @@ a:focus {
     z-index: 1;
     width: 15px;
     height: 13px;
-    background-image: url("/img/glyphicons.png");
+    background-image: url(/img/glyphicons.png);
     background-position: -58px 0px;
     top: 15px;
     left: 11px;
@@ -805,7 +804,7 @@ a:focus {
   .alert .activity {
     width: 1em;
     height: 1em;
-    background: url(../img/led.gif);
+    background: url(/img/led.gif);
     text-indent: 100%;
     margin-top: 0.2em;
     margin-bottom: 0.2em;
