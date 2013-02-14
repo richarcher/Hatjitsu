@@ -62,6 +62,16 @@
     </section>
     <hr>
     <section>
+      <h2>Body</h2>
+      <p>The <code>.body--[colour]</code> applies new styling based upon the consensus of voting, similar to the header logo.</p>
+      <div data-codeblock>
+        <div class="body--green">Green</div>
+        <div class="body--yellow">Yellow</div>
+        <div class="body--red">Red</div>
+      </div>
+    </section>
+    <hr>
+    <section>
       <h2>Cards</h2>
       <h3>1 sided cards</h3>
       <p>Cards are obviously central to this app, and form a large part of the look. They all follow a fairly standard markup pattern.</p>
@@ -267,25 +277,23 @@
     <hr>
     <section>
       <h1>Dropdown</h1>
-      <p>Javascript is required to use this customised drop down menu</p>
-      <div id="dd" class="dropdown-wrapper btn">
-        <span>Card pack:</span>
-        <ul class="dropdown">
-          <li><a href="#" id="deckGoat" >Mountain Goat</a></li>
-          <li><a href="#" id="deckFib" >Fibonacci</a></li>
-          <li><a href="#" id="deckSeq" >Sequential</a></li>
-          <li><a href="#" id="deckPlay" >Playing Cards</a></li>
-          <li><a href="#" id="deckShirt" >T-Shirt</a></li>
-        </ul>
+      <p>Javascript is required to use this customised drop down menu. The #dd selector is customisable to whatever jQuery selector you would prefer.</p>
+      <div data-codeblock="#dd01">
+        <div id="dd" class="dropdown-wrapper btn">
+          <span>Card pack:</span>
+          <ul class="dropdown">
+            <li class="dropdown__item"><a href="#">Mountain Goat</a></li>
+            <li class="dropdown__item"><a href="#">Fibonacci</a></li>
+            <li class="dropdown__item"><a href="#">Sequential</a></li>
+            <li class="dropdown__item"><a href="#">Playing Cards</a></li>
+            <li class="dropdown__item"><a href="#">T-Shirt</a></li>
+          </ul>
+        </div>
+        <script>
+          $(function() { new DropDown( $('#dd') ); });
+        </script>
       </div>
-      <script type="text/javascript">
-        $(function() {
-          var dd = new DropDown( $('#dd') );
-          $(document).click(function() {
-            $('.dropdown-wrapper').removeClass('active');
-          });
-        });
-      </script>
+      <div id="dd01"></div>
     </section>
     <hr>
     <section>
@@ -309,10 +317,24 @@
     <hr>
     <section>
       <h1>Surgical classes</h1>
-      <div class="no-js-hide">
-        <h2><code>.no-js-hide</code> </h2>
-        <p>With JavaScript disabled, this section will not be visible at all. Think of it as an opposite to <code>&lt;noscript&gt;</code> Add a <code>.no-js-hide</code> class to those elements you want to remove.</p>
+      <div>
+        <h2>.bg</h2>
+        <p>Applies a transparent background texture.</p>
+        <div class="bg">
+          <br>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum neque excepturi facilis consequuntur illo rem ipsa ad aspernatur veniam eos dicta minus vero mollitia perferendis quibusdam iure laudantium animi sed.</p>
+          <br>
+        </div>
       </div>
+      <div class="no-js-hide">
+        <h2>.no-js-hide</h2>
+        <p>With JavaScript disabled, this section will not be visible at all.</p>
+        <p>Think of it as an opposite to <code>&lt;noscript&gt;</code> Add a <code>.no-js-hide</code> class to those elements you want to remove.</p>
+      </div>
+      <noscript>
+        <h2>.no-js-hide</h2>
+        <p>Here's where the <code>.no-js-hide</code> text would have been, but is currently hidden.</p>
+      </noscript>
     </section>
   </div>
   <script type="text/javascript" src="/lib/jquery-1.8.2.min.js"></script>

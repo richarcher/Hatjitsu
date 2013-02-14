@@ -1,3 +1,7 @@
+$(function() {
+  $('.no-js-hide').removeClass('no-js-hide');
+});
+
 function DropDown(el) {
   this.dd = el;
   this.val = '';

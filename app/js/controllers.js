@@ -9,18 +9,23 @@ function MainCtrl($scope, $timeout) {
 
   $scope.$on('$routeChangeSuccess', function() {
     $scope.logoState = '';
+    $scope.bodyState = '';
   });
   $scope.$on('unanimous vote', function() {
-    $scope.logoState = 'header__logo--green';
+    $scope.logoState = ' header__logo--green';
+    $scope.bodyState = ' body--green';
   });
   $scope.$on('not unanimous vote', function() {
-    $scope.logoState = 'header__logo--yellow';
+    $scope.logoState = ' header__logo--yellow';
+    $scope.bodyState = ' body--yellow';
   });
   $scope.$on('problem vote', function() {
-    $scope.logoState = 'header__logo--red';
+    $scope.logoState = ' header__logo--red';
+    $scope.bodyState = ' body--red';
   });
   $scope.$on('unfinished vote', function() {
     $scope.logoState = '';
+    $scope.bodyState = '';
   });
 
   $scope.$on('show message', function(evnt, msg) {

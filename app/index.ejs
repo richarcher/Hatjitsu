@@ -47,33 +47,35 @@
 
   </script>
 </head>
-<body class="loading">
-  <div class="container" ng-controller="MainCtrl">
-    <header class="header">
-      <a href="/" title="Back to the Lobby">
-        <span class="header__logo {{logoState}}"></span>
-        <h1 class="header__text">Hatjitsu</h1>
-      </a>
-      <noscript>
-        <p>This site is <em>heavily</em> dependant upon JavaScript. If you don't have it enabled, you're not going to have a Good Time.</p>
-      </noscript>
-      <div class="bg-mount"></div>
-    </header>
+<body>
+  <div class="body bg{{bodyState}}" ng-controller="MainCtrl">
+    <div class="container">
+      <header class="header">
+        <a href="/" title="Back to the Lobby">
+          <span class="header__logo{{logoState}}"></span>
+          <h1 class="header__text">Hatjitsu</h1>
+        </a>
+        <noscript>
+          <p>This site is <em>heavily</em> dependant upon JavaScript. If you don't have it enabled, you're not going to have a Good Time.</p>
+        </noscript>
+        <div class="bg-mount"></div>
+      </header>
 
-    <div class="alert">
-      <div class="activity" ng-show="activity">Activity&hellip;</div>
-      <div class="socketMessage" class="notification" ui-show="socketMessage" ng-bind="socketMessage"></div>
-      <div class="appError" class="notification" ui-show="errorMessage" ng-bind="errorMessage"></div>
-      <div class="message" class="notification" ui-show="message" ng-bind="message"></div>
+      <div class="alert">
+        <div class="activity" ng-show="activity">Activity&hellip;</div>
+        <div class="socketMessage" class="notification" ui-show="socketMessage" ng-bind="socketMessage"></div>
+        <div class="appError" class="notification" ui-show="errorMessage" ng-bind="errorMessage"></div>
+        <div class="message" class="notification" ui-show="message" ng-bind="message"></div>
+      </div>
+
+      <div class="content" ng-view></div>
+
+      <footer class="footer">
+
+        <p>&copy; <a href="http://www.ubxd.com" title="Ruby on Rails, node, and iOS development in Cape Town">UBXD</a> 2012 - Built by <a href="mailto:joerg.diekmann@ubxd.com" title="Software developer in Cape Town">@Jörg</a> &amp; <a href="mailto:richard.archer@ubxd.com" title="Software developer in Cape Town">@Rïch</a>. <strong><a href="https://twitter.com/hatjitsu" title="Feedback to us via Twitter">Feedback?</a></strong></p>
+
+      </footer>
     </div>
-
-    <div class="content" ng-view></div>
-
-    <footer class="footer">
-
-      <p>&copy; <a href="http://www.ubxd.com" title="Ruby on Rails, node, and iOS development in Cape Town">UBXD</a> 2012 - Built by <a href="mailto:joerg.diekmann@ubxd.com" title="Software developer in Cape Town">@Jörg</a> &amp; <a href="mailto:richard.archer@ubxd.com" title="Software developer in Cape Town">@Rïch</a>. <strong><a href="https://twitter.com/hatjitsu" title="Feedback to us via Twitter">Feedback?</a></strong></p>
-
-    </footer>
   </div>
 
 
