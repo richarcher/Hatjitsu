@@ -8,27 +8,20 @@ function DropDown(el) {
   this.initEvents();
 }
 DropDown.prototype = {
-  initEvents : function() {
+  initEvents : function () {
     var obj = this;
-    $(document).on('click', '#dd' ,function(event){
+    $(document).on('click', this.dd, function (event) {
       $(this).toggleClass('active');
       return false;
     });
-
-    $(document).on('click', '.dropdown > li', function(){
-      $( '#dd span' ).text( $(this).text() + ' pack');
+    $(document).on('click', '.dropdown > li', function () {
+      $('span', obj.dd).text($(this).text() + ' pack');
     });
-    $(document).click(function() {
-      $('.dropdown-wrapper').removeClass('active');
+    $(document).click(function () {
+      $('.dropdown-wrapper', obj.dd).removeClass('active');
     });
-  },
-  getValue : function() {
-    return this.val;
-  },
-  getIndex : function() {
-    return this.index;
   }
-}
+};
 
 function ScrollIntoView(el) {
   this.el = el;
@@ -37,4 +30,4 @@ ScrollIntoView.prototype = {
   now : function () {
     $('body').animate({ scrollTop : this.el.offset().top }, 'slow');
   }
-}
+};
