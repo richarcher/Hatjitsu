@@ -1,4 +1,7 @@
-$(function() {
+/*jslint indent: 2, browser: true */
+/*global angular, $, document */
+
+$(function () {
   $('.no-js-hide').removeClass('no-js-hide');
 });
 
