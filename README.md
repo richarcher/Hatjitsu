@@ -20,8 +20,8 @@ Create disposable online [Planning Poker](http://en.wikipedia.org/wiki/Planning_
 
 ##TODOs
 
-* [ ] Collapsible card view / jump to votes on vote
-* [ ] Update favicon, iOS splash page, Twitter avatar etc with new design
+* [x] Collapsible card view / jump to votes on vote
+* [x] Update favicon, iOS splash page, Twitter avatar etc with new design
 * [ ] Unicode symbol fallback (coffee/ace/king)
-* [ ] Improve CTA buttons
+* [x] Improve CTA buttons
 * [ ] Testing harness
