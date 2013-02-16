@@ -44,4 +44,4 @@
         }
         return null;
     };
-})(jQuery);
+})($);
