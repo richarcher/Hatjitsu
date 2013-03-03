@@ -29,7 +29,7 @@
 
 
     <div class="cards{{cardsState}}">
-      <div ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" class="card" ng-class="{'card--selected' : card==myVote}">
+      <div ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" class="card" ng-class="{'card--selected' : card==myVote}" cardvalue>
         {{card}}
       </div>
       <div ng-hide="cards" class="waiting">
@@ -64,9 +64,9 @@
 
     <div class="cards{{votingState}}" id="chosenCards">
 
-      <div ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card card--2-sided" ng-class="{'card--selected' : vote.sessionId==sessionId}">
+      <div ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card card--2-sided" selectedvote>
         <div class="card--side-1">x</div>
-        <div class="card--side-2">{{vote.visibleVote}}</div>
+        <div class="card--side-2" cardvalue>{{vote.visibleVote}}</div>
       </div>
       <div ng-repeat="i in placeholderVotes" class="card card--placeholder">
         &nbsp;

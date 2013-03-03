@@ -12,37 +12,17 @@ angular.module('pokerApp.directives', []).
       elm.text(version);
     };
   }]).
-  directive('uiShow', [function () {
+  directive('cardvalue', function () {
     return function (scope, elm, attrs) {
-      scope.$watch(attrs.uiShow, function (newVal) {
-        if (newVal) {
-          elm.addClass('ui-show');
-        } else {
-          elm.removeClass('ui-show');
-        }
-      });
+      var value = scope.card || scope.vote.vote,
+        code = isNaN(parseInt(value, 10)) ? value.charCodeAt() : value;
+      elm.addClass('card--' + code);
     };
-  }]).
-  directive('uiHide', [function () {
-    return function (scope, elm, attrs) {
-      scope.$watch(attrs.uiHide, function (newVal) {
-        if (newVal) {
-          elm.addClass('ui-hide');
-        } else {
-          elm.removeClass('ui-hide');
-        }
-      });
+  }).
+  directive('selectedvote', function () {
+    return function (scope, elm) {
+      if (scope.vote.sessionId === scope.sessionId) {
+        elm.addClass('card--selected');
+      }
     };
-  }]).
-  directive('uiEnter', [function () {
-    return function (scope, elm, attrs) {
-      elm.bind("keydown keypress", function (event) {
-        if (event.which === 13) {
-          scope.$apply(function () {
-            scope.$eval(attrs.uiEnter);
-          });
-          event.preventDefault();
-        }
-      });
-    };
-  }]);
+  });
