@@ -340,13 +340,13 @@ a:focus {
       background-image:      -o-linear-gradient(top, gold, gold);
       background-image:         linear-gradient(to bottom, gold, gold);
       background-repeat: repeat-x;
+      cursor: default;
     }
       .card--selected:hover,
       .card--selected:focus {
         background-position: 0 0;
         background-color: gold;
       }
-
       .card--2-sided > * {
         position: absolute;
         display: inline-block;
@@ -448,7 +448,6 @@ a:focus {
     }
       .card--side-1 { z-index: 2; }
       .card--side-2 { z-index: 1; }
-
       /* Step 1: by default, the second side is reversed */
       .csstransforms3d .card--side-2{
         -webkit-transform: rotateY(-180deg);
@@ -465,7 +464,6 @@ a:focus {
              -o-transform: rotateY(-180deg);
                 transform: rotateY(-180deg);
       }
-
       .csstransforms3d .flipped .card--side-2 {
         -webkit-transform: rotateX(0deg) rotateY(0deg);
            -moz-transform: rotateX(0deg) rotateY(0deg);
@@ -477,7 +475,6 @@ a:focus {
         .no-csstransforms3d .card--side-2 { z-index: 1; }
         .no-csstransforms3d .flipped .card--side-1 { z-index: 1; }
         .no-csstransforms3d .flipped .card--side-2 { z-index: 2; }
-
       /* Step 2b: adding .flipped-stagger to a parent triggers staggered animation */
       .csstransforms3d .flipped-stagger .card--side-1 {
         -webkit-transform: rotateY(180deg);
@@ -558,6 +555,8 @@ a:focus {
       }
         .no-csstransforms3d .flipped-stagger .card--side-1 { z-index: 1; }
         .no-csstransforms3d .flipped-stagger .card--side-2 { z-index: 2; }
+  .vote.card { cursor: default; }
+  .vote.card--selected { cursor: pointer; }
 
 /*
 
