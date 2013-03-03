@@ -473,10 +473,10 @@ a:focus {
              -o-transform: rotateX(0deg) rotateY(0deg);
                 transform: rotateX(0deg) rotateY(0deg);
       }
-        .no-csstransforms3d .card--side-1 { z-index: 1; }
-        .no-csstransforms3d .card--side-2 { z-index: 2; }
-        .no-csstransforms3d .flipped .card--side-1 { z-index: 2; }
-        .no-csstransforms3d .flipped .card--side-2 { z-index: 1; }
+        .no-csstransforms3d .card--side-1 { z-index: 2; }
+        .no-csstransforms3d .card--side-2 { z-index: 1; }
+        .no-csstransforms3d .flipped .card--side-1 { z-index: 1; }
+        .no-csstransforms3d .flipped .card--side-2 { z-index: 2; }
 
       /* Step 2b: adding .flipped-stagger to a parent triggers staggered animation */
       .csstransforms3d .flipped-stagger .card--side-1 {
@@ -556,8 +556,8 @@ a:focus {
              -o-transition-delay: 1s;
                 transition-delay: 1s;
       }
-        .no-csstransforms3d .flipped-stagger .card--side-1 { z-index: 2; }
-        .no-csstransforms3d .flipped-stagger .card--side-2 { z-index: 1; }
+        .no-csstransforms3d .flipped-stagger .card--side-1 { z-index: 1; }
+        .no-csstransforms3d .flipped-stagger .card--side-2 { z-index: 2; }
 
 /*
 
