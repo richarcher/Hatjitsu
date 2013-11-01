@@ -558,6 +558,15 @@ a:focus {
   .vote.card { cursor: default; }
   .vote.card--selected { cursor: pointer; }
 
+  .voting-average {
+    display: none;
+  }
+
+  .flipped-stagger .voting-average {
+    display: block;
+    clear: both;
+  }
+
 /*
 
   Buttons
@@ -892,3 +901,4 @@ a:focus {
     right: 0;
     z-index: 2;
   }
+
