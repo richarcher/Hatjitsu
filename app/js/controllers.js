@@ -84,6 +84,10 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     }
   };
 
+  var sumOfTwo = function (a, b) {
+    return a + b;
+  };
+
   // wipe out vote if voting state is not yet finished to prevent cheating.
   // if it has already been set - use the actual vote. This works for unvoting - so that
   // before the flip occurs - we don't display 'oi'
@@ -97,6 +101,9 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     voteArr.length = $scope.voterCount - voteCount;
     $scope.placeholderVotes = voteArr;
 
+
+    var total =  _.reduce(_.map(_.pluck($scope.votes, 'vote'), parseFloat), sumOfTwo, 0);
+    $scope.votingAverage = Math.round(total / $scope.votes.length);
 
     $scope.forceRevealDisable = (!$scope.forcedReveal && ($scope.votes.length < $scope.voterCount || $scope.voterCount === 0)) ? false : true;
 
@@ -382,6 +389,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   $scope.scrollToSelectedCards = new ScrollIntoView($('#chosenCards'));
 
   $scope.dropDown = new DropDown('#dd');
+  $scope.votingAverage = 0;
 }
 
 RoomCtrl.$inject = ['$scope', '$routeParams', '$timeout', 'socket'];
