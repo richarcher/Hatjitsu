@@ -14,7 +14,7 @@ Create disposable online [Planning Poker](http://en.wikipedia.org/wiki/Planning_
 ##Installation
 
     npm install -d
-    node app
+    node server
 
 [http://localhost:5000](http://localhost:5000)
 
