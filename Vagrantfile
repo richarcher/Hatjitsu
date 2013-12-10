@@ -7,7 +7,6 @@ Vagrant::configure('2') do |config|
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = 'puppet/manifests'
     puppet.manifest_file = 'site.pp'
-    puppet.module_path = 'puppet/modules'
   end
 
   # there's only one node in this Vagrantfile, call it master
