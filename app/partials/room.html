@@ -29,7 +29,7 @@
 
 
     <div class="cards{{cardsState}}">
-      <div ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" class="card" ng-class="{'card--selected' : card==myVote}" cardvalue>
+      <div ng-show="cards" ng-repeat="card in cards" ng-bind-html-unsafe="card" ng-click="vote(card)" class="card" ng-class="{'card--selected' : card==myVote}" cardvalue>
         {{card}}
       </div>
       <div ng-hide="cards" class="waiting">
@@ -56,7 +56,7 @@
       <div ng-switch-when="true">
         <div ng-switch on="voted">
           <p ng-switch-when="false">You haven't estimated yet</p>
-          <p ng-switch-when="true">Your current estimate: <b>{{myVote}}</b></p>
+          <p ng-switch-when="true">Your current estimate: <b ng-bind-html-unsafe="myVote">{{myVote}}</b></p>
         </div>
       </div>
 
@@ -66,7 +66,7 @@
 
       <div ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card card--2-sided vote" selectedvote>
         <div class="card--side-1">x</div>
-        <div class="card--side-2" cardvalue>{{vote.visibleVote}}</div>
+        <div class="card--side-2" ng-bind-html-unsafe="vote.visibleVote" cardvalue>{{vote.visibleVote}}</div>
       </div>
       <div ng-repeat="i in placeholderVotes" class="card card--placeholder">
         &nbsp;
