@@ -558,6 +558,15 @@ a:focus {
   .vote.card { cursor: default; }
   .vote.card--selected { cursor: pointer; }
 
+  .voting-average, .voting-median {
+    display: none;
+  }
+
+  .flipped-stagger .voting-average, .flipped-stagger  .voting-median {
+    display: block;
+    clear: both;
+  }
+
 /*
 
   Buttons

@@ -84,6 +84,55 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     }
   };
 
+  var sumOfTwo = function (a, b) {
+    return a + b;
+  };
+
+  var myParseFloat = function (a) {
+    var res = parseFloat(a);
+    if (!isNaN(res)) {
+      return res;
+    }
+    if (a == '\u00BD') {
+      return 0.5
+    }
+    return NaN
+  };
+
+  var floatVotes = function (votes) {
+    return _.map(_.pluck(votes, 'vote'), myParseFloat).filter(function(obj) {return !isNaN(obj);});
+  };
+
+  var calculateAverage = function (votes) {
+    var legalVotes = floatVotes(votes);
+    if (legalVotes.length == 0) {
+      return '\u221E';
+    }
+    var total =  _.reduce(legalVotes, sumOfTwo, 0);
+    return Math.round(total * 2 / legalVotes.length) / 2;
+  };
+
+  var findMedian = function (data) {
+      var m = data.sort(function(a, b) {
+          return a - b;
+      });
+
+      var middle = Math.floor((m.length - 1) / 2);
+      if (m.length % 2) {
+          return m[middle];
+      } else {
+          return (m[middle] + m[middle + 1]) / 2.0;
+      }
+  }
+
+  var calculateMedian = function (votes) {
+    var legalVotes = floatVotes(votes);
+    if (legalVotes.length == 0) {
+      return '\u221E';
+    }
+    return findMedian(legalVotes);
+  };
+
   // wipe out vote if voting state is not yet finished to prevent cheating.
   // if it has already been set - use the actual vote. This works for unvoting - so that
   // before the flip occurs - we don't display 'oi'
@@ -97,8 +146,10 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     voteArr.length = $scope.voterCount - voteCount;
     $scope.placeholderVotes = voteArr;
 
-
     $scope.forceRevealDisable = (!$scope.forcedReveal && ($scope.votes.length < $scope.voterCount || $scope.voterCount === 0)) ? false : true;
+
+    $scope.votingAverage = calculateAverage($scope.votes.slice());
+    $scope.votingMedian = calculateMedian($scope.votes.slice());
 
     if ($scope.votes.length === $scope.voterCount || $scope.forcedReveal) {
       var uniqVotes = _.chain($scope.votes).pluck('vote').uniq().value().length;
@@ -382,6 +433,8 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   $scope.votingState = "";
   $scope.forcedReveal = false;
   $scope.forceRevealDisable = true;
+  $scope.votingAverage = 0;
+  $scope.votingMedian = 0;
   $scope.scrollToSelectedCards = new ScrollIntoView($('#chosenCards'));
 
   $scope.dropDown = new DropDown('#dd');
