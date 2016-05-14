@@ -16,6 +16,7 @@
             <div id="dd" class="dropdown-wrapper btn">
               <span>Mountain Goat pack</span>
               <ul class="dropdown">
+                <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckSeq2" ng-click="setCardPack('seq2')">Sequential 2</a></li>
                 <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckGoat" ng-click="setCardPack('goat')">Mountain Goat</a></li>
                 <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckFib" ng-click="setCardPack('fib')">Fibonacci</a></li>
                 <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckSeq" ng-click="setCardPack('seq')">Sequential</a></li>
@@ -71,7 +72,8 @@
       <div ng-repeat="i in placeholderVotes" class="card card--placeholder">
         &nbsp;
       </div>
-
+      <div class="voting-average">Average: <b>{{votingAverage}}</b></div>
+      <div class="voting-median">Median: <b>{{votingMedian}}</b></div>
     </div>
 
     <div ng-switch on="showAdmin" >
