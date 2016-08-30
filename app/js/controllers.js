@@ -73,6 +73,30 @@ function LobbyCtrl($scope, $location, socket) {
 
 LobbyCtrl.$inject = ['$scope', '$location', 'socket'];
 
+function standardDeviation(values){
+  var avg = average(values);
+
+  var squareDiffs = values.map(function(value){
+    var diff = value - avg;
+    var sqrDiff = diff * diff;
+    return sqrDiff;
+  });
+
+  var avgSquareDiff = average(squareDiffs);
+
+  var stdDev = Math.sqrt(avgSquareDiff);
+  return stdDev;
+}
+
+function average(data){
+  var sum = data.reduce(function(sum, value){
+    return sum + parseInt(value);
+  }, 0);
+
+  var avg = sum / data.length;
+  return avg;
+}
+
 function RoomCtrl($scope, $routeParams, $timeout, socket) {
 
   var processMessage = function (response, process) {
@@ -82,6 +106,10 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     } else {
       (process || angular.noop)(response);
     }
+  };
+
+  var sumOfTwo = function (a, b) {
+    return a + b;
   };
 
   // wipe out vote if voting state is not yet finished to prevent cheating.
@@ -97,6 +125,10 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     voteArr.length = $scope.voterCount - voteCount;
     $scope.placeholderVotes = voteArr;
 
+
+    var total =  _.reduce(_.map(_.pluck($scope.votes, 'vote'), parseFloat), sumOfTwo, 0);
+    $scope.votingAverage = Math.round(total / $scope.votes.length);
+    $scope.votingStandardDeviation = standardDeviation(_.pluck($scope.votes, 'vote'), parseFloat);
 
     $scope.forceRevealDisable = (!$scope.forcedReveal && ($scope.votes.length < $scope.voterCount || $scope.voterCount === 0)) ? false : true;
 
@@ -382,6 +414,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   $scope.scrollToSelectedCards = new ScrollIntoView($('#chosenCards'));
 
   $scope.dropDown = new DropDown('#dd');
+  $scope.votingAverage = 0;
 }
 
 RoomCtrl.$inject = ['$scope', '$routeParams', '$timeout', 'socket'];
