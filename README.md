@@ -1,8 +1,10 @@
-#Hatjitsu
+Hatjitsu
+========
 
 Create disposable online [Planning Poker](http://en.wikipedia.org/wiki/Planning_poker) rooms for quick and easy estimations.
 
-##Features
+Features
+========
 
 * Simple interface
 * No login/signup required
@@ -11,14 +13,23 @@ Create disposable online [Planning Poker](http://en.wikipedia.org/wiki/Planning_
 * Multiple planning card decks
 * Adaptive design allows to work on desktop, tablet and mobile
 
-##Installation
+Installation
+============
 
     npm install -d
     node server
 
 [http://localhost:5000](http://localhost:5000)
 
-##TODOs
+Installation (Docker)
+=====================
+
+    just download Dockerfile and docker-compose.yml from the repository
+    run:
+        docker-compose up -d
+
+TODOs
+=====
 
 * [x] Collapsible card view / jump to votes on vote
 * [x] Update favicon, iOS splash page, Twitter avatar etc with new design
