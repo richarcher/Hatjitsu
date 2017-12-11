@@ -10,7 +10,7 @@
     "start": "server.js"
   },
   "engines": {
-    "node": "0.8.x"
+    "node": "6.11.4"
   },
   "dependencies": {
     "express": "2.5.10",
