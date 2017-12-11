@@ -15,33 +15,12 @@ var lobbyClass = require('./lib/lobby.js');
 var config = require('./config.js')[env];
 var path = require('path');
 
-var gzippo = require('gzippo');
-
 var lobby = new lobbyClass.Lobby(io);
 
 var statsConnectionCount = 0;
 var statsDisconnectCount = 0;
 var statsSocketCount = 0;
 var statsSocketMessagesReceived = 0;
-
-// Configuration
-
-// Set the CDN options
-// var options = {
-//     publicDir  : path.join(__dirname, 'app')
-//   , viewsDir   : path.join(__dirname, 'app')
-//   , domain     : 'dkb4nwmyziz71.cloudfront.net'
-//   , bucket     : 'hatchetapp'
-//   , key        : 'AKIAIS3XCFXFKWXGKK7Q'
-//   , secret     : '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'
-//   , hostname   : config.hostname
-//   , port       : config.port
-//   , ssl        : false
-//   , production : config.packAssets
-// };
-
-// Initialize the CDN magic
-//var CDN = require('express-cdn')(app, options);
 
 app.configure(function(){
   app.set('views', __dirname + '/app');
@@ -61,14 +40,9 @@ app.configure('development', function(){
 });
 
 app.configure('production', function(){
-  var oneDay = 86400000;
-  // app.use(assetsManagerMiddleware);
-  app.use(gzippo.staticGzip(__dirname + '/app'));
-  app.use(express.errorHandler());
+  app.use(express.static(__dirname + '/app'));
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
-
-// Add the dynamic view helper
-//app.dynamicHelpers({ CDN: CDN });
 
 app.get('/', function(req, res) {
   res.render('index.ejs');
