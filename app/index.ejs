@@ -14,7 +14,7 @@
     </script>
   <![endif]-->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
 
   <title>Hatjitsu :: Online Scrum Planning Poker for Agile Projects</title>
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
@@ -31,7 +31,8 @@
   <link rel="apple-touch-startup-image" href="/img/apple-touch-startup-image-748x1024.png" media="(device-width: 768px) and (orientation: landscape)" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
 
-  <%- CDN([ '/lib/modernizr.custom.07116.js', '/js/testing.js' ]) %>
+  <script type="text/javascript" src="/lib/modernizr.custom.07116.js"/>
+  <script type="text/javascript" src="/js/testing.js"/>
 
   <script type="text/javascript">
 
@@ -85,8 +86,13 @@
   document.write('<script src=' + ('__proto__' in {} ? zepto_src : jquery_src) + '><\/script>');
   </script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
-  <%- CDN([ '/lib/underscore.min.js', '/lib/jquery.cookie.js' ]) %>
-  <%- CDN([ '/js/app.js', '/js/controllers.js', '/js/directives.js', '/js/filters.js', '/js/services.js', '/js/dom.js']) %>
+  <script type="text/javascript" src='/lib/underscore.min.js'></script>
+  <script type="text/javascript" src="/js/app.js"></script>
+  <script type="text/javascript" src="/js/controllers.js"></script>
+  <script type="text/javascript" src="/js/directives.js"></script>
+  <script type="text/javascript" src="/js/filters.js"></script>
+  <script type="text/javascript" src="/js/services.js"></script>
+  <script type="text/javascript" src="/js/dom.js"></script>
 
 </body>
 

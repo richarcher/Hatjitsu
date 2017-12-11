@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "express": "2.5.10",
-    "express-cdn": "0.0.3",
     "ejs": "0.7.1",
     "gzippo": "0.1.7",
     "socket.io": "~0.9.13",
