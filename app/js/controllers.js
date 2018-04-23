@@ -128,7 +128,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
 
     var total =  _.reduce(_.map(_.pluck($scope.votes, 'vote'), parseFloat), sumOfTwo, 0);
     $scope.votingAverage = Math.round(total / $scope.votes.length) || 0;
-    $scope.votingStandardDeviation = standardDeviation(_.pluck($scope.votes, 'vote'), parseFloat) || 0;
+    $scope.votingStandardDeviation = Math.round(standardDeviation(_.pluck($scope.votes, 'vote'), parseFloat)) || 0;
 
     $scope.forceRevealDisable = (!$scope.forcedReveal && ($scope.votes.length < $scope.voterCount || $scope.voterCount === 0)) ? false : true;
 
