@@ -14,8 +14,9 @@
       <div ng-switch on="showAdmin" class="span2 pullright">
         <div ng-switch-when="true">
             <div id="dd" class="dropdown-wrapper btn">
-              <span>Mountain Goat pack</span>
+              <span>Powers of Two</span>
               <ul class="dropdown">
+                <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckPow2" ng-click="setCardPack('pow2')">Powers of Two</a></li>
                 <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckGoat" ng-click="setCardPack('goat')">Mountain Goat</a></li>
                 <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckFib" ng-click="setCardPack('fib')">Fibonacci</a></li>
                 <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckSeq" ng-click="setCardPack('seq')">Sequential</a></li>
@@ -72,7 +73,9 @@
         &nbsp;
       </div>
 
-      <div class="voting-average">Average: <b>{{votingAverage}} (SD = {{votingStandardDeviation}})</b></div>
+      <div ng-show="votingState">
+        <div class="voting-average">Average: <b>{{votingAverage}} (SD = {{votingStandardDeviation}})</b></div>
+      </div>
     </div>
 
     <div ng-switch on="showAdmin" >
