@@ -2,7 +2,7 @@ FROM alpine:latest
 
 ENV instDir /Hatjitsu
 
-RUN apk --no-cache add nodejs git && \
+RUN apk --no-cache add nodejs npm git && \
     git clone https://github.com/richarcher/Hatjitsu.git ${instDir} && \
     cd ${instDir} && \
     npm install -d
