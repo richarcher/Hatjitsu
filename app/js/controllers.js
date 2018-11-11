@@ -134,29 +134,25 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     } else {
         $scope.votingAverage = Math.round(total / $scope.votes.length);
         $scope.votingStandardDeviation = standardDeviation(_.pluck($scope.votes, 'vote'), parseFloat);
-        var min = 100;
-        var minCount = 0;
-        var max = 0;
-        var maxCount = 0;
+        let min = 100;
+        let minCount = 0;
+        let max = 0;
+        let maxCount = 0;
         _.map(_.pluck($scope.votes, 'vote'), function (v) {
           var i = $scope.cards.indexOf(v);
           if (min > i) {
             min = i;
             minCount = 1;
-          } else if (min == i) {
+          } else if (min === i) {
               minCount++;
           }
           if (max < i) {
             max = i;
             maxCount = 1;
-          } else if (max == i) {
+          } else if (max === i) {
               maxCount++;
           }
         });
-        console.log(min);
-        console.log(minCount);
-        console.log(max);
-        console.log(maxCount);
         if ((max - min) > 2 && $scope.votes.length > (minCount + maxCount)) {
             $scope.votingAverageWithoutMaxAndMin = Math.round((total - $scope.cards[min] * minCount - $scope.cards[max] * maxCount) / ($scope.votes.length - minCount - maxCount));
         } else {
