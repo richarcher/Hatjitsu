@@ -72,7 +72,7 @@
         &nbsp;
       </div>
 
-      <div class="voting-average">Average: <b>{{votingAverage}} (SD = {{votingStandardDeviation}}) {{votingAverageWithoutMaxAndMin}}</b></div>
+      <div class="voting-average">Average: <b>{{votingAverage}} (SD = {{votingStandardDeviation}})<span  ng-show="votingAverageWithoutMaxAndMin.avg != null" id="without_min_and_max"> (without {{votingAverageWithoutMaxAndMin.min}}x{{votingAverageWithoutMaxAndMin.minCount}} & {{votingAverageWithoutMaxAndMin.max}}x{{votingAverageWithoutMaxAndMin.maxCount}} = {{votingAverageWithoutMaxAndMin.avg}})</span></b></div>
     </div>
 
     <div ng-switch on="showAdmin" >

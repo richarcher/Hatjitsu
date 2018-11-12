@@ -154,9 +154,9 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
           }
         });
         if ((max - min) > 2 && $scope.votes.length > (minCount + maxCount)) {
-            $scope.votingAverageWithoutMaxAndMin = "(without " + $scope.cards[min].toString()  + "x" + minCount.toString() + " & " + $scope.cards[max].toString()  + "x" + maxCount.toString() + " = " + Math.round((total - $scope.cards[min] * minCount - $scope.cards[max] * maxCount) / ($scope.votes.length - minCount - maxCount)).toString() + ")";
+            $scope.votingAverageWithoutMaxAndMin = {min:  $scope.cards[min], minCount: minCount, max: $scope.cards[max], maxCount: maxCount, avg: Math.round((total - $scope.cards[min] * minCount - $scope.cards[max] * maxCount) / ($scope.votes.length - minCount - maxCount))}
         } else {
-            $scope.votingAverageWithoutMaxAndMin = "";
+            $scope.votingAverageWithoutMaxAndMin = null;
         }
     }
 
