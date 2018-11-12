@@ -130,7 +130,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     if (voteCount < $scope.voterCount) {
         $scope.votingAverage = null;
         $scope.votingStandardDeviation = null;
-        $scope.votingAverageWithoutMaxAndMin = null;
+        $scope.votingAverageWithoutMaxAndMin = "";
     } else {
         $scope.votingAverage = Math.round(total / $scope.votes.length);
         $scope.votingStandardDeviation = standardDeviation(_.pluck($scope.votes, 'vote'), parseFloat);
@@ -154,9 +154,9 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
           }
         });
         if ((max - min) > 2 && $scope.votes.length > (minCount + maxCount)) {
-            $scope.votingAverageWithoutMaxAndMin = Math.round((total - $scope.cards[min] * minCount - $scope.cards[max] * maxCount) / ($scope.votes.length - minCount - maxCount));
+            $scope.votingAverageWithoutMaxAndMin = "(without " + $scope.cards[min].toString()  + "x" + minCount.toString() + " & " + $scope.cards[max].toString()  + "x" + maxCount.toString() + " = " + Math.round((total - $scope.cards[min] * minCount - $scope.cards[max] * maxCount) / ($scope.votes.length - minCount - maxCount)).toString() + ")";
         } else {
-            $scope.votingAverageWithoutMaxAndMin = null;
+            $scope.votingAverageWithoutMaxAndMin = "";
         }
     }
 
