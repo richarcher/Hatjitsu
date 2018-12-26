@@ -2,15 +2,16 @@
   <h3 class="subheading">Distributed scrum <span>planning poker</span> for estimating agile projects.</h3>
   <p>First person to <strong>create</strong> the room is the moderator. <strong>Share</strong> the url or room number with other team members to <strong>join</strong> the room.</p>
 
-  <label class="subheading" for="roomfield">Enter room number</label>
-  <div class="row">
-    <input ng-model="room" ui-enter="enterRoom(room)" name="roomfield" id="roomfield" type="tel" maxlength="5" placeholder="room no" class="span2 roomUrl" />
-    <button ng-click="enterRoom(room)" class="span2 btn" title="Join an existing planning poker room" ng-disabled="{{disableButtons}}">Join room</button>
-  </div>
-  <label for="createRoom">or</label>
-  <div class="row">
-    <button ng-click="createRoom()" id="createRoom" class="span1 btn" title="Create a new planning poker room" ng-disabled="{{disableButtons}}">Create new room</button>
-  </div>
-
+  <form>
+    <label class="subheading" for="roomfield">Enter room number</label>
+    <div class="row">
+      <input ng-model="room" ui-enter="enterRoom(room)" name="roomfield" id="roomfield" type="tel" maxlength="5" placeholder="room no" class="span2 roomUrl" autofocus/>
+      <button ng-click="enterRoom(room)" class="span2 btn" title="Join an existing planning poker room" ng-disabled="{{disableButtons}}" type="submit">Join room</button>
+    </div>
+    <label for="createRoom">or</label>
+    <div class="row">
+      <button ng-click="createRoom()" id="createRoom" class="span1 btn" title="Create a new planning poker room" ng-disabled="{{disableButtons}}" type="button">Create new room</button>
+    </div>
+  </form>
 
 </div>
