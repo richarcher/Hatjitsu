@@ -214,7 +214,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     case ('tshirt'):
       return tshirt;
     default:
-      return [];
+      return val.split(" ");
     }
   };
 
@@ -344,12 +344,17 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   };
 
   $scope.setCardPack = function (cardPack) {
+    $scope.showCustom = false;
     $scope.cardPack = cardPack;
     $scope.resetVote();
 
     // console.log("set card pack", { roomUrl: $scope.roomId, cardPack: cardPack });
     socket.emit('set card pack', { roomUrl: $scope.roomId, cardPack: cardPack });
   };
+
+  $scope.setCustomPack = function () {
+    $scope.showCustom = true;
+  }
 
   $scope.vote = function (vote) {
     if ($scope.myVote !== vote) {
@@ -403,6 +408,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   $scope.humanCount = 0;
   $scope.voterCount = 0;
   $scope.showAdmin = false;
+  $scope.showCustom = false;
   $scope.voter = true;
   $scope.connections = {};
   $scope.votes = [];
