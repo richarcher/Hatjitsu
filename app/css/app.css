@@ -69,6 +69,7 @@
   display: none;
   top: 110%;
   left: 0;
+  min-width: 10em;
   background: #fff;
   pointer-events: none;
   margin: 0;
