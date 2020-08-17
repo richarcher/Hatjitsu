@@ -66,10 +66,6 @@ app.get('/debug_state', function(req, res) {
   });
 });
 
-app.get('/styleguide', function(req, res) {
-  res.render('styleguide.ejs');
-});
-
 app.get('/:id', function(req, res) {
   if (req.params.id in lobby.rooms) {
     res.render('index.ejs');
