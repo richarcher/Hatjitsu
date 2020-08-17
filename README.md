@@ -1,7 +1,7 @@
-Hatjitsu
+HM Agile Poker Planning
 ========
 
-Create disposable online [Planning Poker](http://en.wikipedia.org/wiki/Planning_poker) rooms for quick and easy estimations.
+Originally Hatjitsu, create disposable online [Planning Poker](http://en.wikipedia.org/wiki/Planning_poker) rooms for quick and easy estimations.
 
 Features
 ========
