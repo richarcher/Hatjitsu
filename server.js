@@ -15,8 +15,6 @@ var lobbyClass = require('./lib/lobby.js');
 var config = require('./config.js')[env];
 var path = require('path');
 
-var gzippo = require('gzippo');
-
 var lobby = new lobbyClass.Lobby(io);
 
 var statsConnectionCount = 0;
@@ -46,7 +44,6 @@ app.configure('development', function(){
 app.configure('production', function(){
   var oneDay = 86400000;
   // app.use(assetsManagerMiddleware);
-  app.use(gzippo.staticGzip(__dirname + '/app'));
   app.use(express.errorHandler());
 });
 
@@ -88,7 +85,6 @@ io.configure(function () {
 io.configure('production', function(){
   io.enable('browser client minification');
   io.enable('browser client etag');
-  io.enable('browser client gzip');
   io.set("polling duration", 10);
   io.set('log level', 1);
 });
