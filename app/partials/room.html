@@ -27,7 +27,10 @@
     <!-- <span class="sub">Humans: <span class="label">{{humanCount}}</span></span> -->
 
     <div class="switch">
-      <label class="btn btn--tertiary" data-on="You are a voter" data-off="You are not a voter" for="voter"><input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" id="voter" > I am voting</label>
+      <label class="btn btn--tertiary" ng-disabled="forceRevealDisable" data-on="You are a voter" data-off="You are not a voter" for="voter">
+        <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" id="voter" >
+         I am voting
+      </label>
     </div>
 
     <div ng-switch on="voter">
