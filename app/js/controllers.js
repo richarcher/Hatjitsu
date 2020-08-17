@@ -198,7 +198,6 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
 
   var chooseCardPack = function (val) {
     var set135 = [ '1', '3', '5', '8', '13', '21', '?'];
-    var jennytime = [ '1Hr or 2', '1/2-full day', '2-3 days', 'toughie, split', 'full sprint', '1-2 sprints', '?'];
     var fib = ['0', '1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '?'];
     var goat = ['0', '\u00BD', '1', '2', '3', '5', '8', '13', '20', '40', '100', '?', '\u2615'];
     var seq = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '?'];
@@ -207,8 +206,6 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     switch (val) {
     case ('set135'):
       return set135;
-    case ('jennytime'):
-      return jennytime;
     case ('fib'):
       return fib;
     case ('goat'):
