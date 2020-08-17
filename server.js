@@ -44,6 +44,7 @@ app.configure('development', function(){
 app.configure('production', function(){
   var oneDay = 86400000;
   // app.use(assetsManagerMiddleware);
+  app.use(express.static(__dirname + '/app'));
   app.use(express.errorHandler());
 });
 
