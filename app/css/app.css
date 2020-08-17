@@ -67,12 +67,15 @@
 .dropdown-wrapper .dropdown {
   position: absolute;
   display: none;
-  top: 98%;
+  top: 110%;
   left: 0;
   right: 0;
   background: #fff;
   pointer-events: none;
   margin: 0;
+  margin-bottom: 1em;
+  border-radius: 4px;
+  border: 1px solid #737373;
   padding: 0;
   z-index: 3;
 }
