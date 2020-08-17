@@ -1,0 +1,27 @@
+.loading {
+	display: none;
+}
+
+.loading--active {
+	@include icon( "spinner" );
+	background-size: auto;
+	animation-name: spin;
+	animation-duration: 1500ms;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: $gutter-width;
+	position: relative;
+	top: -1px;
+}
+
+.loading--white {
+	@include icon( "spinner", "white" );
+	background-size: auto;
+}
+
+.loading--red {
+	@include icon( "spinner", "red" );
+	background-size: auto;
+}

@@ -1,894 +1,150 @@
-html, body {
-  height: 100%;
+.hm-logo {
+  margin-left: 0;
 }
-body {
-  margin: 0;
-}
-hr {
-  clear: both;
-}
-/*
-  Links
-
-*/
-a {
-  -webkit-transition: color .1s ease-out;
-     -moz-transition: color .1s ease-out;
-      -ms-transition: color .1s ease-out;
-       -o-transition: color .1s ease-out;
-          transition: color .1s ease-out;
-}
-a,
-a:visited,
-a:active {
-  color: #493e27;
-}
-a:hover,
-a:focus {
-  color: rgb(189, 27, 27);
-}
-/*
-  Body
-
-*/
-
-  .body {
-    font: 16px/1.3em 'Helvetica neue', 'Helvetica', 'Arial', sans-serif;
-    background-color: #c5bdab;
-    color: #3d3938;
-    text-shadow: 0px 0px 1px #f4f0e9;
-    min-height: 100%;
-    -webkit-transition: .4s background-color ease;
-       -moz-transition: .4s background-color ease;
-        -ms-transition: .4s background-color ease;
-         -o-transition: .4s background-color ease;
-            transition: .4s background-color ease;
-  }
-  .body--green { background-color: #c5c2ad; }
-  .body--yellow { background-color: #c5bca1; }
-  .body--red { background-color: #d1bdad; }
-
-/*
-  Header
-
-*/
-  .header {
-    position: relative;
-    z-index: 3;
-    padding-top: 8px;
-    padding-bottom: 67px; /* allow for absolutely positioned mountain */
-    zoom: 1;
-    border: 1px solid #B9AAA7;
-    border-width: 0 1px;
-  }
-  .header:before,
-  .header:after {
-    content: "\0020";
-    display: block;
-    height: 0;
-    overflow: hidden;
-  }
-  .header:after {
-    clear: both;
-  }
-  .header a {
-    display: block;
-    overflow: hidden;
-    text-decoration: none;
-    position: relative;
-  }
-  .header__text {
-    line-height: 1;
-    font-size: 3em;
-    margin: 0.5em 0 0 0.5em;
-    position: relative;
-    z-index: 1;
-    text-align: left;
-    height: 56px;
-    width: 155px;
-    text-indent: -1000px;
-    background-image: url(/img/title.png);
-    background-repeat: no-repeat;
-  }
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    background-image: url(/img/title@2x.png);
-  }
-  @media screen and (min-width: 17em) {
-    .header__text {
-      position: relative;
-      margin-left: 2.5em;
-      right: auto;
-      width: auto;
-    }
-  }
-  .header__text > * {
-    font-size: 1em;
-  }
-  .header__logo {
-    float: left;
-    display: block;
-    margin-left: 1em;
-    width: 6em;
-    height: 6em;
-    border-radius: 50%;
-    background-size: 100%;
-    -webkit-transition: .3s background-color ease;
-       -moz-transition: .3s background-color ease;
-        -ms-transition: .3s background-color ease;
-         -o-transition: .3s background-color ease;
-            transition: .3s background-color ease;
-    z-index: 1;
-    background-color: rgb(226, 222, 212);
-    background-color: rgba(226, 222, 212, 0.8);
-  }
-  .header__logo--green {
-    background-color: rgb(209, 229, 181);
-    background-color: rgba(209, 229, 181, 0.9);
-  }
-  .header__logo--yellow {
-    background-color: rgb(237, 226, 177);
-    background-color: rgba(237, 226, 177, 0.9);
-  }
-  .header__logo--red {
-    background-color: rgb(224, 157, 154);
-    background-color: rgba(224, 157, 154, 0.9);
-  }
-
-  .no-svg .header__logo {
-    position: relative;
-  }
-    .no-svg .header__logo:after {
-      content: " ";
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: block;
-      width: 100%;
-      height: 100%;
-      background: url(/img/sun-mask.png) no-repeat center;
-    }
-
-  .roomNumber {
-    position: absolute;
-    z-index: 4;
-    top: 4.3em;
-    left: 7.7em;
-  }
-
-/*
-
-  Footer
-
-*/
-  .footer {
-    overflow: hidden;
-    text-align: center;
-    position: relative;
-    border: 1px solid #b9aaa7;
-    border-width: 0 1px;
-  }
-
-/*
-
-  Panel layouts
-
-*/
-
-  .lobby {
-    padding: 0 8px;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid #b9aaa7;
-    border-width: 0 1px;
-  }
-    .lobby p,
-    .lobby .subheading,
-    .lobby label {
-      padding-left: 0.5em;
-      padding-right: 0.5em;
-    }
-  .votePanel {
-    overflow: hidden;
-    padding: 1em 8px 0;
-    position: relative;
-    border: 1px solid #b9aaa7;
-    border-width: 0 1px;
-  }
-  .cardPanel {
-    padding: 0 8px;
-    text-align: center;
-    position: relative;
-    -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.3);
-       -moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.3);
-            box-shadow: inset 0px 1px 1px rgba(0,0,0,0.3);
-    -webkit-transition: all .4s ease-in-out;
-       -moz-transition: all .4s ease-in-out;
-        -ms-transition: all .4s ease-in-out;
-         -o-transition: all .4s ease-in-out;
-            transition: all .4s ease-in-out;
-
-  }
-    .cardPanel:before {
-      content: "";
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.1);
-      top: 0;
-      left: 0;
-    }
-    .cardPanel p {
-      text-align: left;
-    }
-    @media screen and (min-width: 28em) {
-      .cardPanel {
-        text-align: left;
-      }
-    }
-  .cardPanel-meta {
-    padding: 1em 0;
-  }
-  .container {
-    margin: 0 auto;
-    max-width: 55em;
-    overflow: hidden;
-    position: relative;
-  }
-
-/*
-
-  Grid
-
-*/
-  .row {
-    width: 100%;
-    display: block;
-    text-align: left;
-  }
-  .row:before,
-  .row:after {
-    content: "\0020";
-    display: block;
-    height: 0;
-    overflow: hidden;
-  }
-  .row:after {
-    clear: both;
-  }
-    .row .span2, .row .span1 {
-      display: block;
-      width: 100%
-    }
-      @media screen and (min-width: 16em) {
-        .row .span1 {
-          width: 16em;
-        }
-        .row .span2 {
-          display: inline-block;
-          width: 16em;
-        }
-      }
-
 /*
 
   Cards
 
 */
-  .cards {
-    overflow: hidden;
+.cards .card {
+  margin-bottom: 0.5em;
+  margin-right: 0.5em;
+}
+.card {
+  display: inline-block;
+  width: 2.66em;
+  height: 4em;
+  font-size: 1.5em;
+  text-align: center;
+  line-height: 4em;
+  cursor: pointer;
+}
+.card--2-sided {
+  float: left;
+}
+.card--selected {
+  background-color: gold;
+}
+.card--selected:hover,
+.card--selected:focus {
+  background-color: gold;
+}
+.card--2-sided > * {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+  .card--2-sided.card--selected {
+    background-color: transparent;
+    background-image: none;
   }
-    .cards .card {
-      margin-bottom: 0.5em;
-      margin-right: 0.5em;
-    }
-  .card {
-    display: inline-block;
-    width: 2em;
-    height: 3em;
-    margin: 0;
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-       -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-    border: 1px solid transparent;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    border-bottom-color: #A2A2A2;
-    position: relative;
-    -webkit-border-radius: 0.2em;
-            border-radius: 0.2em;
+  .card--2-sided > .card--selected,
+  .card--2-sided.card--selected > * {
+    background-color: gold;
+  }
+.vote.card { cursor: default; }
+.vote.card--selected { cursor: pointer; }
 
-    color: #25201c;
-    font-size: 1.5em;
-    text-align: center;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-    line-height: 3em;
-    cursor: pointer;
+.flipped-stagger .card--side-1 {
+  display: none;
+}
 
-    background-color: rgb(224, 217, 207);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(224, 217, 207)), to(rgb(216, 208, 197)));
-    background-image: -webkit-linear-gradient(rgb(224, 217, 207), rgb(216, 208, 197));
-    background-image:    -moz-linear-gradient(rgb(224, 217, 207), rgb(216, 208, 197));
-    background-image:      -o-linear-gradient(rgb(224, 217, 207), rgb(216, 208, 197));
-    background-image:         linear-gradient(rgb(224, 217, 207), rgb(216, 208, 197));
-    background-repeat: repeat-x;
-  }
-  .card:hover,
-  .card:focus {
-    background-color: rgb(216, 208, 197);
-    background-position: 0 -30px;
-    border-color: transparent;
-    -webkit-transition: background-position 0.1s ease;
-       -moz-transition: background-position 0.1s ease;
-        -ms-transition: background-position 0.1s ease;
-         -o-transition: background-position 0.1s ease;
-            transition: background-position 0.1s ease;
-  }
-    .card--2-sided {
-      -webkit-box-shadow: none;
-         -moz-box-shadow: none;
-              box-shadow: none;
-      background-color: transparent;
-      background-image: none;
-      border: none;
-      float: left;
-    }
-    .card--selected {
-      background-color: gold;
-      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(gold), to(gold));
-      background-image: -webkit-linear-gradient(top, gold, gold);
-      background-image:    -moz-linear-gradient(top, gold, gold);
-      background-image:      -o-linear-gradient(top, gold, gold);
-      background-image:         linear-gradient(to bottom, gold, gold);
-      background-repeat: repeat-x;
-      cursor: default;
-    }
-      .card--selected:hover,
-      .card--selected:focus {
-        background-position: 0 0;
-        background-color: gold;
-      }
-      .card--2-sided > * {
-        position: absolute;
-        display: inline-block;
-        width: 100%;
-        top: 0;
-        left: 0;
-        -webkit-border-radius: 0.2em;
-                border-radius: 0.2em;
-        -webkit-transform-style: preserve-3d;
-           -moz-transform-style: preserve-3d;
-            -ms-transform-style: preserve-3d;
-             -o-transform-style: preserve-3d;
-                transform-style: preserve-3d;
-        -webkit-backface-visibility: hidden;
-           -moz-backface-visibility: hidden;
-            -ms-backface-visibility: hidden;
-             -o-backface-visibility: hidden;
-                backface-visibility: hidden;
-        -webkit-transition: -webkit-transform .4s ease-in-out;
-           -moz-transition: -moz-transform .4s ease-in-out;
-            -ms-transition: -ms-transform .4s ease-in-out;
-             -o-transition: -o-transform .4s ease-in-out;
-                transition: transform .4s ease-in-out;
-        -webkit-transform-style: preserve-3d;
-           -moz-transform-style: preserve-3d;
-            -ms-transform-style: preserve-3d;
-             -o-transform-style: preserve-3d;
-                transform-style: preserve-3d;
-        background-color: #E0D9CF;
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(224, 217, 207)), to(rgb(216, 208, 197)));
-        background-image: -webkit-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
-        background-image:    -moz-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
-        background-image:      -o-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
-        background-image:         linear-gradient(to bottom, rgb(224, 217, 207), rgb(216, 208, 197));
-        background-repeat: repeat-x;
-        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-           -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-        border: 1px solid #BBB;
-        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-        border-bottom-color: #A2A2A2;
-      }
-      .card--2-sided > *:hover {
-        border-color: transparent;
-      }
-        .card--2-sided.card--selected {
-          background-color: transparent;
-          background-image: none;
-        }
-        .card--2-sided > .card--selected,
-        .card--2-sided.card--selected > * {
-          background-color: gold;
-          background-image: -webkit-gradient(linear, 0 0, 0 100%, from(gold), to(gold));
-          background-image: -webkit-linear-gradient(top, gold, gold);
-          background-image:    -moz-linear-gradient(top, gold, gold);
-          background-image:      -o-linear-gradient(top, gold, gold);
-          background-image:         linear-gradient(to bottom, gold, gold);
-          background-repeat: repeat-x;
-        }
-        .card--2-sided > .card--disabled,
-        .card--2-sided.card--disabled {
-          opacity: 0.5;
-          background-color: transparent;
-          color: #AAA;
-        }
-          .no-csstransforms3d .card--2-sided > .card--disabled,
-          .no-csstransforms3d .card--2-sided.card--disabled {
-            background-color: rgb(224, 217, 207);
-          }
-        .card--2-sided.card--disabled > * {
-          opacity: 0.5;
-        }
-          .no-csstransforms3d .card--2-sided.card--disabled > * {
-            opacity: 1;
-          }
-    .card--placeholder {
-      background-color: #cccccc;
-      background-color: rgba(0, 0, 0, 0);
-      -webkit-box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 0.7);
-         -moz-box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 0.7);
-              box-shadow: inset 0px 0px 3px rgba(15, 14, 12, 0.7);
-      background-image: none;
-      border: none;
-      border-top: 1px solid transparent;
-      cursor: default;
-    }
-    .card--placeholder:hover,
-    .card--placeholder:focus {
-      background-image: none;
-      background-color: #cccccc;
-      background-color: rgba(0, 0, 0, 0);
-    }
-    .card--disabled,
-    .card--disabled > * {
-      cursor: default;
-    }
-    .card--disabled {
-      opacity: 0.5;
-    }
-      .card--side-1 { z-index: 2; }
-      .card--side-2 { z-index: 1; }
-      /* Step 1: by default, the second side is reversed */
-      .csstransforms3d .card--side-2{
-        -webkit-transform: rotateY(-180deg);
-           -moz-transform: rotateY(-180deg);
-            -ms-transform: rotateY(-180deg);
-             -o-transform: rotateY(-180deg);
-                transform: rotateY(-180deg);
-      }
-      /* Step 2: adding .flipped to a parent triggers animation */
-      .csstransforms3d .flipped .card--side-1 {
-        -webkit-transform: rotateY(-180deg);
-           -moz-transform: rotateY(-180deg);
-            -ms-transform: rotateY(-180deg);
-             -o-transform: rotateY(-180deg);
-                transform: rotateY(-180deg);
-      }
-      .csstransforms3d .flipped .card--side-2 {
-        -webkit-transform: rotateX(0deg) rotateY(0deg);
-           -moz-transform: rotateX(0deg) rotateY(0deg);
-            -ms-transform: rotateX(0deg) rotateY(0deg);
-             -o-transform: rotateX(0deg) rotateY(0deg);
-                transform: rotateX(0deg) rotateY(0deg);
-      }
-        .no-csstransforms3d .card--side-1 { z-index: 2; }
-        .no-csstransforms3d .card--side-2 { z-index: 1; }
-        .no-csstransforms3d .flipped .card--side-1 { z-index: 1; }
-        .no-csstransforms3d .flipped .card--side-2 { z-index: 2; }
-      /* Step 2b: adding .flipped-stagger to a parent triggers staggered animation */
-      .csstransforms3d .flipped-stagger .card--side-1 {
-        -webkit-transform: rotateY(180deg);
-           -moz-transform: rotateY(180deg);
-            -ms-transform: rotateY(180deg);
-             -o-transform: rotateY(180deg);
-                transform: rotateY(180deg);
-      }
-      .csstransforms3d .flipped-stagger .card--side-2 {
-        -webkit-transform: rotateX(0deg) rotateY(0deg);
-           -moz-transform: rotateX(0deg) rotateY(0deg);
-            -ms-transform: rotateX(0deg) rotateY(0deg);
-             -o-transform: rotateX(0deg) rotateY(0deg);
-                transform: rotateX(0deg) rotateY(0deg);
-      }
-      .csstransforms3d .flipped-stagger .card:nth-child(1) > * {
-        -webkit-transition-delay: 0.1s;
-           -moz-transition-delay: 0.1s;
-            -ms-transition-delay: 0.1s;
-             -o-transition-delay: 0.1s;
-                transition-delay: 0.1s;
-      }
-      .csstransforms3d .flipped-stagger .card:nth-child(2) > * {
-        -webkit-transition-delay: 0.2s;
-           -moz-transition-delay: 0.2s;
-            -ms-transition-delay: 0.2s;
-             -o-transition-delay: 0.2s;
-                transition-delay: 0.2s;
-      }
-      .csstransforms3d .flipped-stagger .card:nth-child(3) > * {
-        -webkit-transition-delay: 0.3s;
-           -moz-transition-delay: 0.3s;
-            -ms-transition-delay: 0.3s;
-             -o-transition-delay: 0.3s;
-                transition-delay: 0.3s;
-      }
-      .csstransforms3d .flipped-stagger .card:nth-child(4) > * {
-        -webkit-transition-delay: 0.4s;
-           -moz-transition-delay: 0.4s;
-            -ms-transition-delay: 0.4s;
-             -o-transition-delay: 0.4s;
-                transition-delay: 0.4s;
-      }
-      .csstransforms3d .flipped-stagger .card:nth-child(5) > *{
-        -webkit-transition-delay: 0.5s;
-           -moz-transition-delay: 0.5s;
-            -ms-transition-delay: 0.5s;
-             -o-transition-delay: 0.5s;
-                transition-delay: 0.5s;
-      }
-      .csstransforms3d .flipped-stagger .card:nth-child(6) > *{
-        -webkit-transition-delay: 0.6s;
-           -moz-transition-delay: 0.6s;
-            -ms-transition-delay: 0.6s;
-             -o-transition-delay: 0.6s;
-                transition-delay: 0.6s;
-      }
-      .csstransforms3d .flipped-stagger .card:nth-child(7) > *{
-        -webkit-transition-delay: 0.7s;
-           -moz-transition-delay: 0.7s;
-            -ms-transition-delay: 0.7s;
-             -o-transition-delay: 0.7s;
-                transition-delay: 0.7s;
-      }
-      .csstransforms3d .flipped-stagger .card:nth-child(8) > *{
-        -webkit-transition-delay: 0.8s;
-           -moz-transition-delay: 0.8s;
-            -ms-transition-delay: 0.8s;
-             -o-transition-delay: 0.8s;
-                transition-delay: 0.8s;
-      }
-      .csstransforms3d .flipped-stagger .card > *{
-        -webkit-transition-delay: 1s;
-           -moz-transition-delay: 1s;
-            -ms-transition-delay: 1s;
-             -o-transition-delay: 1s;
-                transition-delay: 1s;
-      }
-        .no-csstransforms3d .flipped-stagger .card--side-1 { z-index: 1; }
-        .no-csstransforms3d .flipped-stagger .card--side-2 { z-index: 2; }
-  .vote.card { cursor: default; }
-  .vote.card--selected { cursor: pointer; }
-
-/*
-
-  Buttons
-
-*/
-
-  .btn {
-    padding: 4px 12px;
-    margin: 2px 0 0;
-    line-height: 31px;
-    display: inline-block;
-    width: 100%;
-    min-height: 44px;
-    color: #333;
-    font-size: 16px;
-    text-align: left;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-    vertical-align: middle;
-    cursor: pointer;
-    background-color: rgb(216, 208, 197);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(224, 217, 207)), to(rgb(216, 208, 197)));
-    background-image: -webkit-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
-    background-image:    -moz-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
-    background-image:      -o-linear-gradient(top, rgb(224, 217, 207), rgb(216, 208, 197));
-    background-image:         linear-gradient(to bottom, rgb(224, 217, 207), rgb(216, 208, 197));
-    background-repeat: repeat-x;
-    border: 1px solid transparent;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-    -webkit-border-radius: 4px;
-       -moz-border-radius: 4px;
-            border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-       -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-    -webkit-transition: background-position 0.1s ease;
-       -moz-transition: background-position 0.1s ease;
-        -ms-transition: background-position 0.1s ease;
-         -o-transition: background-position 0.1s ease;
-            transition: background-position 0.1s ease;
-  }
-    @media screen and (min-width: 16em) {
-      .btn {
-        width: 16em;
-      }
-    }
-  .btn:hover,
-  .btn:focus {
-    background-position: 0 -40px;
-    border-color: transparent;
-  }
-  .icon {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    margin-top: 2px;
-    line-height: 14px;
-    vertical-align: text-top;
-    background-image: url(/img/glyphicons.png);
-    background-repeat: no-repeat;
-  }
-  .icon-refresh {
-    background-position: 0px 0px;
-  }
-  .icon-exclamation-sign {
-    background-position: -90px 0px;
-  }
-
-  .switch {
-    position: relative;
-    margin: 2px 0 0;
-    width: 100%;
-  }
-    @media screen and (min-width: 16em) {
-      .switch {
-        width: 16em;
-      }
-    }
-
-  .switch input {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 100;
-      opacity: 0;
-      cursor: pointer;
-      margin: 0;
-  }
-  .switch .btn {
-    padding: 0;
-    text-indent: -100%;
-    line-height: 40px;
-    color: #B4573A;
-    margin: 0;
-    -webkit-transition: background-position 0.1s ease;
-       -moz-transition: background-position 0.1s ease;
-        -ms-transition: background-position 0.1s ease;
-         -o-transition: background-position 0.1s ease;
-            transition: background-position 0.1s ease;
-  }
-  .switch:hover .btn,
-  .switch:focus .btn {
-    background-position: 0 -40px;
-    border-color: transparent;
-  }
-
-  .switch .btn:after {
-    content: attr(data-off);
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    text-indent: 31px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    line-height: 40px;
-  }
-  .switch .btn:before {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    width: 15px;
-    height: 13px;
-    background-image: url(/img/glyphicons.png);
-    background-position: -58px 0px;
-    top: 15px;
-    left: 11px;
-  }
-  .switch input:checked ~ .btn {
-    color: #408F21;
-    background-position: 0 -40px;
-  }
-  .switch input:checked ~ .btn:after {
-    content: attr(data-on);
-  }
-  .switch input:checked ~ .btn:before {
-    background-position: -28px 0;
-  }
-  .no-checked .switch .btn:before,
-  .no-checked .switch .btn:after {
-    display: none;
-  }
-  .no-checked .switch .btn {
-    text-indent: 1.5em;
-    color: #333;
-  }
-  .no-checked .switch input {
-    width: auto;
-    height: auto;
-    top: 11px;
-    left: 2px;
-  }
-  .roomUrl {
-    font-size: 16px;
-    line-height: 31px;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-    padding: 4px 12px;
-    margin-bottom: 0;
-    vertical-align: middle;
-    -webkit-border-radius: 4px;
-       -moz-border-radius: 4px;
-            border-radius: 4px;
-    border-width: 0px;
-  }
-
-/*
-
-  Typography
-
-*/
-
-  .subheading {
-    font-size: 1.1em;
-    font-weight: bold;
-    letter-spacing: -0.1px;
-    line-height: 1.2em;
-    text-align: left;
-  }
 
 /*
 
   Dropdown
 
 */
-  .dropdown-wrapper {
-    position: relative;
-    max-width: 13em;
-    padding: 0 1em;
-    outline: none;
-    cursor: pointer;
-    min-height: 34px;
-  }
-    .dropdown-wrapper:after {
-      content: "";
-      width: 0;
-      height: 0;
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      margin-top: -6px;
-      border-width: 6px 0 6px 6px;
-      border-style: solid;
-      border-color: transparent #fff;
-    }
-    .dropdown-wrapper .dropdown {
-      position: absolute;
-      top: 98%;
-      left: 0;
-      right: 0;
-      background: #fff;
-      opacity: 0;
-      pointer-events: none;
-      margin: 0;
-      padding: 0;
-      z-index: 3;
-    }
-    .dropdown-wrapper.active .dropdown {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .dropdown-wrapper.active:after {
-      border-width: 6px 6px 0 6px;
-      border-color: rgb(189, 27, 27) transparent;
-      margin-top: -3px;
-    }
+.dropdown-wrapper {
+  position: relative;
+}
+.dropdown-wrapper .dropdown {
+  position: absolute;
+  display: none;
+  top: 98%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  pointer-events: none;
+  margin: 0;
+  padding: 0;
+  z-index: 3;
+}
+.dropdown-wrapper.active .dropdown {
+  display: block;
+  pointer-events: auto;
+}
 
-    .dropdown li {
-      list-style-type: none;
-    }
-    .dropdown .dropdown__item {
-      display: block;
-      text-decoration: none;
-      padding: 10px 20px;
-    }
+.dropdown li {
+  list-style-type: none;
+}
+.dropdown .dropdown__item {
+  display: block;
+  text-decoration: none;
+  padding: 10px 20px;
+}
 
 /*
 
   Alerts
 
 */
+.alert {
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: fixed;
+}
+@media screen and (min-width: 55em) {
   .alert {
-    z-index: 3;
-    top: 0;
-    left: 0;
-    width: 100%;
-    position: fixed;
+    position: absolute;
   }
-  @media screen and (min-width: 55em) {
-    .alert {
-      position: absolute;
-    }
-  }
-  .alert .activity {
-    width: 1em;
-    height: 1em;
-    background: url(/img/led.gif);
-    text-indent: 100%;
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
-    margin-right: 0.2em;
-    float: right;
-    text-align: right;
-    -webkit-border-radius: 0.5em;
-       -moz-border-radius: 0.5em;
-            border-radius: 0.5em;
-  }
-  .socketMessage,
-  .appError,
-  .message {
-    padding: 0 2em 0 0.5em;
-    line-height: 1.5em;
-  }
-  .message {
-    background-color: rgb(255, 255, 111);
-    background-color: rgba(255, 255, 111, 0.4);
-    color: rgb(129, 129, 15);
-  }
-  .socketMessage {
-    background-color: rgba(0, 255, 255, 0.2);
-  }
-  .appError {
-    background-color: rgba(255, 0, 0, 0.3);
-    color: rgb(102, 43, 43);
-    text-shadow: none;
-  }
+}
+.alert .activity {
+  width: 1em;
+  height: 1em;
+  background: url(/img/led.gif);
+  text-indent: 100%;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  margin-right: 0.2em;
+  float: right;
+  text-align: right;
+  -webkit-border-radius: 0.5em;
+      -moz-border-radius: 0.5em;
+          border-radius: 0.5em;
+}
+.socketMessage,
+.appError,
+.message {
+  padding: 0 2em 0 0.5em;
+  line-height: 1.5em;
+}
+.message {
+  background-color: rgb(255, 255, 111);
+  background-color: rgba(255, 255, 111, 0.4);
+  color: rgb(129, 129, 15);
+}
+.socketMessage {
+  background-color: rgba(0, 255, 255, 0.2);
+}
+.appError {
+  background-color: rgba(255, 0, 0, 0.3);
+  color: rgb(102, 43, 43);
+  text-shadow: none;
+}
 /*
 
   Surgical classes
 
 */
-  .no-js-hide {
-    display: none;
-  }
+.no-js-hide {
+  display: none;
+}
 
-  .pullright {
-    float: right;
-  }
-/*
-
-  Decorators
-
-*/
-  .bg {
-    background-image: url(data:image/png;base64,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);
-  }
-
-  .bg-mount {
-    display: block;
-    background: url(/img/bg-mount.png) no-repeat -100px bottom;
-    position: absolute;
-    width: 100%;
-    height: 135px;
-    top: 51px;
-    left: -1%;
-  }
-    .no-svg .bg-mount {
-      z-index: 2;
-    }
-  .bg-tree {
-    display: none;
-    position: absolute;
-    width: 320px;
-    height: 200px;
-    bottom: 33px;
-    right: 0;
-    z-index: 2;
-  }
+.pullright {
+  float: right;
+}

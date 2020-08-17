@@ -1,0 +1,57 @@
+/*
+ * These classes use WordPress default alignment classes and do not follow the naming convention.
+ */
+
+.alignnone {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.aligncenter {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.alignleft {
+	float: left;
+	margin-right: $gutter-width;
+	margin-left: 0;
+	margin-bottom: $margin-vertical-sm;
+}
+
+.alignright {
+	float: right;
+	margin-left: $gutter-width;
+	margin-right: 0;
+	margin-bottom: $margin-vertical-sm;
+}
+
+.wp-caption {
+	max-width: 100%;
+	margin-top: 0;
+
+	img {
+		vertical-align: top;
+	}
+
+}
+
+.wp-caption-text {
+	@include text-sm;
+	color: $hm-medium-grey;
+	margin-top: 0;
+	padding: #{ $margin-vertical-sm / 4 } 0;
+}
+
+.aligncenter > .wp-caption-text {
+	text-align: center;
+}
+
+.alignleft > .wp-caption-text {
+	text-align: left;
+}
+
+.alignright > .wp-caption-text {
+	text-align: right;
+}

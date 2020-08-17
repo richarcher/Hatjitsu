@@ -1,0 +1,173 @@
+html {
+	font-size: $base-font-size;
+	text-rendering: optimizeLegibility;
+}
+
+body {
+	@include text-std;
+	@include font-body;
+	color: $color-text-default;
+}
+
+strong,
+b {
+	@include font-heading;
+	color: $color-text-heading;
+	text-transform: none;
+	letter-spacing: normal;
+}
+
+em,
+i {
+	@include font-body;
+	color: $color-text-heading;
+	font-style: italic;
+}
+
+h1,
+.text-xxl {
+	@include text-xxl;
+	@include font-heading;
+	@include font-caps;
+	margin: $margin-vertical-sm 0;
+	color: $color-text-heading;
+}
+
+h2,
+.text-xl {
+	@include text-xl;
+	@include font-heading;
+	margin: $margin-vertical-sm 0;
+	color: $color-text-heading;
+}
+
+h3,
+.text-lg {
+	@include text-lg;
+	@include font-heading;
+	margin: $margin-vertical-sm 0;
+	color: $color-text-heading;
+}
+
+h4,
+.text-md {
+	@include text-md;
+	@include font-heading;
+	margin: $margin-vertical-sm 0;
+	color: $color-text-default;
+}
+
+h5,
+h6 {
+	@include text-std;
+	@include font-heading;
+	margin: $margin-vertical-sm 0;
+	color: $color-text-heading;
+}
+
+p,
+ul,
+ol,
+.text-std {
+	margin: $margin-vertical-sm 0;
+}
+
+small,
+.text-sm {
+	@include text-sm;
+}
+
+.text-xs {
+	@include text-xs;
+}
+
+ul,
+ol {
+	list-style-position: outside;
+	padding: 0;
+	padding: 0 0 0 $gutter-width;
+
+	ul,
+	ol {
+		margin: 0;
+	}
+}
+
+blockquote {
+	@include text-lg;
+	margin: $margin-vertical-sm 0;
+
+	@media #{ $mq-sm-up } {
+		margin: $margin-vertical-lg 0;
+	}
+}
+
+hr {
+	border: 1px solid $border-color;
+	border-width: 1px 0 0 0;
+	margin: $margin-vertical-lg 0;
+}
+
+code,
+pre {
+	@include text-xs;
+	color: $color-text-pre;
+	background: $color-background-pre;
+	padding: 0px 5px;
+	display: inline-block;
+	border-radius: 4px;
+}
+
+pre {
+	padding: #{ $margin-vertical-sm / 2 } #{ $gutter-width / 2 };
+	display: block;
+	margin: $margin-vertical-sm 0;
+	max-width: 100%;
+	overflow: auto;
+	white-space: pre-wrap;
+}
+
+code {
+	@include text-sm;
+	line-height: inherit;
+}
+
+// Override the background from prism.js.
+:not( pre ) > code[ class*="language-" ],
+pre[ class*="language-" ] {
+	background: $color-background-pre;
+	border-radius: 4px;
+}
+
+::selection {
+	background: lighten( $color-accent, 20% );
+}
+
+a {
+	@include text-link;
+}
+
+// Text for screen readers only.
+.screen-reader-text {
+	border: 0;
+	clip: rect( 1px, 1px, 1px, 1px );
+	clip-path: inset( 50% );
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal;
+}
+
+// Display text on focus (for skip links).
+.screen-reader-text:focus {
+	clip: auto;
+	clip-path: none;
+	display: block;
+	left: 0.5em;
+	top: 0.5em;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar. */
+}

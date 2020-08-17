@@ -1,0 +1,56 @@
+.label {
+
+	@include text-sm;
+	border: 1px solid $color-link;
+	border-radius: 4px;
+	padding: 0 #{ $gutter-width / 2 };
+	background: $color-white;
+	color: $color-primary;
+	margin-bottom: $margin-vertical-sm / 2;
+	margin-right: $gutter-width / 4;
+	display: inline-block;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 4px;
+	vertical-align: middle;
+	position: relative;
+	vertical-align: bottom;
+	line-height: $base-line-height;
+	transition: color .1s ease-in-out, background .1s ease-in-out, border-color .1s ease-in-out;
+
+	&:link,
+	&:visited {
+		color: $color-primary;
+		text-decoration: none;
+	}
+
+	&:hover,
+	&:focus {
+		color: $color-white;
+		background-color: $color-primary;
+		text-decoration: none;
+		outline: none;
+		transition: color .1s ease-in-out, background .1s ease-in-out, border-color .1s ease-in-out;
+	}
+
+}
+
+.label__count {
+	display: inline-block;
+	border-radius: 100%;
+	min-width: $base-font-size;
+	height: $base-font-size;
+	line-height: $base-font-size;
+	font-family: $font-family-code;
+	font-size: .6 * $base-font-size;
+	background: $color-primary;
+	color: $color-white;
+	margin-left: 0.1em;
+	margin-right: 0.1em;
+
+	.label:hover &,
+	.label:focus & {
+		background-color: $color-white;
+		color: $color-primary;
+	}
+}

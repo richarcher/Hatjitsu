@@ -1,0 +1,62 @@
+@function iconSrc( $name, $color: "black" ) {
+	@return "#{ $images-path }/icons/icon-#{ $name }-#{ $color }.svg";
+}
+
+@mixin icon( $name, $color: "black" ) {
+	$iconSrc: iconSrc( $name, $color );
+	background: url( $iconSrc ) no-repeat center center;
+	background-size: 75%;
+	width: $base-line-height;
+	height: $base-line-height;
+}
+
+$icons: "mail", "wordpress", "server", "facebook", "twitter", "youtube", "strategy", "comment", "link", "lock", "minus", "plus", "minus-alt", "plus-alt", "search", "spinner", "arrow-right", "arrow-down", "github", "linkedin", "instagram", "pin", "close", "download", "smiley-wink";
+$colors: "white", "red"; // Note black is the default.
+
+.icon {
+	display: inline-block;
+	width: $base-line-height;
+	height: $base-line-height;
+	padding: 0;
+	vertical-align: bottom;
+	background: no-repeat center center;
+	background-size: 80%;
+	border: none;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+
+	&:hover,
+	&:focus {
+		border: none;
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
+@each $icon in $icons {
+
+	.icon--#{$icon} {
+		$iconSrc: iconSrc( $icon, "black" );
+		background-image: url( $iconSrc );
+	}
+
+	@each $color in $colors {
+		.icon--#{$icon}.icon--#{$color} {
+			$iconSrc: iconSrc( $icon, $color );
+			background-image: url( $iconSrc );
+		}
+	}
+}
+
+.icon--arrow-left {
+	@extend .icon--arrow-right;
+	transform: rotate( 180deg );
+}
+
+.icon--arrow-up {
+	@extend .icon--arrow-down;
+	transform: rotate( 180deg );
+}

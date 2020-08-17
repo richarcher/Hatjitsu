@@ -1,26 +1,21 @@
 {
-  "name": "hatchetapp.net",
-  "version": "0.0.1-82",
+  "name": "hmagilepoke",
+  "version": "0.1",
   "subdomain": "hat",
-  "domains": [
-    "hatchetapp.net",
-    "www.hatchetapp.net"
-  ],
   "scripts": {
-    "start": "server.js"
+    "start": "node server.js"
   },
   "engines": {
-    "node": "0.8.x"
+    "node": "10.x"
   },
   "dependencies": {
     "express": "2.5.10",
-    "express-cdn": "0.0.3",
     "ejs": "0.7.1",
     "gzippo": "0.1.7",
     "socket.io": "~0.9.13",
-    "underscore": "1.3.3"
+    "underscore": "1.10.2"
   },
   "devDependencies": {
-    "socket.io-client": "*"
+    "socket.io-client": "^2.3.0"
   }
 }

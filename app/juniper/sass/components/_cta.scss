@@ -1,0 +1,88 @@
+.cta {
+	@include text-md;
+	position: relative;
+	white-space: nowrap;
+	border-bottom: 2px solid transparent;
+
+	&--small {
+		@include text-std;
+	}
+
+	&--large {
+		@include text-ml;
+	}
+
+	&--arrow {
+		transition: margin-left 0.2s ease-in-out, border-color 0.2s ease-in-out;
+		margin-right: calc( 1.5rem + #{ $gutter-width / 2 } );
+
+		&:after {
+			@extend .icon;
+			@extend .icon--arrow-right;
+			@extend .icon--red;
+			position: absolute;
+			top: 0;
+			left: 100%;
+			display: inline-block;
+			content: " ";
+			margin-left: $gutter-width / 2;
+			transition: margin-left 0.2s ease-in-out;
+			background-size: 100%;
+		}
+
+		&:hover,
+		&:focus {
+			&:after {
+				margin-left: $gutter-width;
+			}
+		}
+	}
+
+	&--arrow-left {
+		@extend .cta--arrow;
+		transition: margin-right 0.2s ease-in-out, border-color 0.2s ease-in-out;
+		margin-right: 0;
+		margin-left: calc( 1.5rem + #{ $gutter-width / 2 } );
+
+		&:after {
+			@extend .icon--arrow-left;
+			margin-left: 0;
+			margin-right: $gutter-width / 2;
+			transition: margin-right 0.2s ease-in-out;
+			left: auto;
+			right: 100%;
+		}
+
+		&:hover,
+		&:focus {
+			&:after {
+				margin-left: 0;
+				margin-right: $gutter-width;
+			}
+		}
+	}
+
+	&--white {
+		border-bottom: 1px solid #fff;
+
+		&:link,
+		&:focus,
+		&:hover,
+		&:visited {
+			color: #fff;
+			text-decoration: none;
+		}
+
+		&:focus,
+		&:hover {
+			border-bottom: 2px solid #fff;
+		}
+
+
+		&:after {
+			@extend .icon--white;
+		}
+	}
+}
+
+

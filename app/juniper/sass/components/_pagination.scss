@@ -1,0 +1,67 @@
+/**
+ * pagination.
+ *
+ * Requires markup like:
+ *
+ * <div class="pagination">
+ * <?php previous_posts_link( 'Previous Page' ); ?>
+ * <?php next_posts_link( 'Next Page' ); ?>
+ * </div>
+*/
+
+.pagination {
+
+	@extend .util-clearfix;
+
+	margin: $base-line-height auto;
+	border-top: 1px solid $border-color;
+	padding-top: $base-line-height;
+	text-align: center;
+
+	a,
+	&__item {
+		@extend .cta;
+		@extend .cta--small;
+	}
+
+	a:first-child {
+		@extend .cta--arrow-left;
+		float: left;
+	}
+
+	a:last-child {
+		@extend .cta--arrow;
+		float: right;
+	}
+
+	&:empty {
+		display: none;
+	}
+}
+
+
+.pagination--numbers {
+
+	text-align: center;
+
+	> a,
+	> span,
+	&__item {
+		margin: 0 $gutter-width / 2;
+	}
+
+	a:first-child,
+	a:last-child {
+		@extend .cta;
+		@extend .cta--small;
+		float: none;
+
+		&:after {
+			display: none;
+		}
+	}
+}
+
+.wp-pagenavi {
+	@extend .pagination--numbers;
+}

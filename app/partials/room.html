@@ -1,35 +1,19 @@
 <div ng-init="configureRoom()">
   <p class="roomNumber">Room: {{roomId}}</p>
+  <div class="cardPanel-meta">
+    <p>
+      <div ng-show="voter">
+        <span>Choose your estimate...</span>
+      </div>
+      <div ng-hide="voter">
+        <span>You have chosen not to vote.</span>
+      </div>
+    </p>
+  </div>
 
   <section class="cardPanel" >
-    <div class="row cardPanel-meta">
-      <div class="span2 subheading">
-        <div ng-show="voter">
-          <span>Choose your estimate...</span>
-        </div>
-        <div ng-hide="voter">
-          <span>You have chosen not to vote.</span>
-        </div>
-      </div>
-      <div ng-switch on="showAdmin" class="span2 pullright">
-        <div ng-switch-when="true">
-            <div id="dd" class="dropdown-wrapper btn">
-              <span>Mountain Goat pack</span>
-              <ul class="dropdown">
-                <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckGoat" ng-click="setCardPack('goat')">Mountain Goat</a></li>
-                <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckFib" ng-click="setCardPack('fib')">Fibonacci</a></li>
-                <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckSeq" ng-click="setCardPack('seq')">Sequential</a></li>
-                <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckPlay" ng-click="setCardPack('play')">Playing Cards</a></li>
-                <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckShirt" ng-click="setCardPack('tshirt')">T-Shirt</a></li>
-              </ul>
-            </div>
-        </div>
-      </div>
-    </div>
-
-
     <div class="cards{{cardsState}}">
-      <div ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" class="card" ng-class="{'card--selected' : card==myVote}" cardvalue>
+      <div ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" class="card btn btn--tertiary btn--small" ng-class="{'card--selected' : card==myVote}" cardvalue>
         {{card}}
       </div>
       <div ng-hide="cards" class="waiting">
@@ -43,8 +27,7 @@
     <!-- <span class="sub">Humans: <span class="label">{{humanCount}}</span></span> -->
 
     <div class="switch">
-      <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()">
-      <label class="btn" data-on="You are a voter" data-off="You are not a voter">I am voting</label>
+      <label class="btn btn--tertiary" data-on="You are a voter" data-off="You are not a voter" for="voter"><input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" id="voter" > I am voting</label>
     </div>
 
     <div ng-switch on="voter">
@@ -56,7 +39,7 @@
       <div ng-switch-when="true">
         <div ng-switch on="voted">
           <p ng-switch-when="false">You haven't estimated yet</p>
-          <p ng-switch-when="true">Your current estimate: <b>{{myVote}}</b></p>
+          <p ng-switch-when="true">Your current estimate: <strong>{{myVote}}</strong></p>
         </div>
       </div>
 
@@ -64,30 +47,46 @@
 
     <div class="cards{{votingState}}" id="chosenCards">
 
-      <div ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card card--2-sided vote" selectedvote>
+      <div ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card card--2-sided vote btn btn--tertiary btn--small" selectedvote>
         <div class="card--side-1">x</div>
         <div class="card--side-2" cardvalue>{{vote.visibleVote}}</div>
       </div>
-      <div ng-repeat="i in placeholderVotes" class="card card--placeholder">
+      <div ng-repeat="i in placeholderVotes" class="card card--placeholder btn btn--tertiary btn--small">
         &nbsp;
       </div>
 
-      <div ng-show="showAverage" class="voting-average">Average: <b>{{votingAverage}} (SD = {{votingStandardDeviation}})</b></div>
+      <div ng-show="showAverage" class="voting-average">
+        <p>Average: <strong>{{votingAverage}} (SD = {{votingStandardDeviation}})</strong></p>
+      </div>
     </div>
 
     <div ng-switch on="showAdmin" >
 
       <div ng-switch-when="true">
-        <div class="row">
-          <button ng-click="resetVote()" class="span2 btn" title="Start a new vote">
-            <i class="icon icon-refresh"></i> Reset
-          </button>
-          <button ng-click="forceReveal()" class="span2 btn" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
-            <i class="icon icon-exclamation-sign"></i> Reveal
-          </button>
-        </div>
+        <button ng-click="resetVote()" class="btn" title="Start a new vote">
+          Reset
+        </button>
+        <button ng-click="forceReveal()" class="btn" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
+          Reveal
+        </button>
       </div>
 
+    </div>
+    <div ng-switch on="showAdmin" class="">
+      <div ng-switch-when="true">
+          <div id="dd" class="dropdown-wrapper btn btn--tertiary">
+            <span>Mountain Goat pack</span> <i class="icon icon--arrow-down icon--default" title="icon icon--arrow-down icon--default">arrow-down</i>
+            <ul class="dropdown">
+              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckGoat" ng-click="setCardPack('goat')">Mountain Goat</a></li>
+              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckSet135" ng-click="setCardPack('set135')">135</a></li>
+              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckJennyTime" ng-click="setCardPack('jennytime')">Beaumont Time</a></li>
+              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckFib" ng-click="setCardPack('fib')">Fibonacci</a></li>
+              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckSeq" ng-click="setCardPack('seq')">Sequential</a></li>
+              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckPlay" ng-click="setCardPack('play')">Playing Cards</a></li>
+              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckShirt" ng-click="setCardPack('tshirt')">T-Shirt</a></li>
+            </ul>
+          </div>
+      </div>
     </div>
 
   </section>

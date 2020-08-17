@@ -1,0 +1,44 @@
+// Pattern Library Swatches
+.swatch {
+
+	float: left;
+	width: 50%;
+	display: block;
+	margin-bottom: $margin-vertical-sm;
+
+	@media ( min-width: 600px ) {
+
+		width: 25%;
+
+		&:nth-child( #{"4n + 1"} ) {
+			clear: left;
+		}
+	}
+}
+
+.swatch__background {
+
+	height: $margin-vertical-sm;
+	display: block;
+
+	@media ( min-width: 600px ) {
+		display: block;
+		width: auto;
+		height: $margin-vertical-lg;
+	}
+}
+
+.swatch__description {
+	@include text-sm;
+	display: block;
+	text-align: center;
+	margin: #{ $margin-vertical-sm / 4 } 0 0;
+}
+
+.swatch--border {
+	height: auto;
+
+	hr {
+		margin: #{ $margin-vertical-sm / 2 } 0;
+	}
+}

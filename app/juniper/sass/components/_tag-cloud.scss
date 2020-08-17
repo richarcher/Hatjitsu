@@ -1,0 +1,16 @@
+.tag-cloud {
+
+	vertical-align: bottom;
+
+	a {
+
+		display: inline-block;
+		margin-bottom: $margin-vertical-sm / 2;
+
+		+ a {
+			margin-left: $gutter-width / 4;
+		}
+
+	}
+
+}

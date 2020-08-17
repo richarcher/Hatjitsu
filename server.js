@@ -26,30 +26,13 @@ var statsSocketMessagesReceived = 0;
 
 // Configuration
 
-// Set the CDN options
-var options = {
-    publicDir  : path.join(__dirname, 'app')
-  , viewsDir   : path.join(__dirname, 'app')
-  , domain     : 'dkb4nwmyziz71.cloudfront.net'
-  , bucket     : 'hatchetapp'
-  , key        : 'AKIAIS3XCFXFKWXGKK7Q'
-  , secret     : '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'
-  , hostname   : config.hostname
-  , port       : config.port
-  , ssl        : false
-  , production : config.packAssets
-};
-
-// Initialize the CDN magic
-var CDN = require('express-cdn')(app, options);
-
 app.configure(function(){
   app.set('views', __dirname + '/app');
   app.set('view engine', 'ejs');
   app.set('view options', {
       layout: false
   });
-  app.use(express.logger());
+//  app.use(express.logger());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.staticCache());
@@ -68,7 +51,6 @@ app.configure('production', function(){
 });
 
 // Add the dynamic view helper
-app.dynamicHelpers({ CDN: CDN });
 
 app.get('/', function(req, res) {
   res.render('index.ejs');

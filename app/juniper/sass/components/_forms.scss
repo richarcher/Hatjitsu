@@ -1,0 +1,110 @@
+.form__field,
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="email"] {
+	@include font-body;
+	@include text-std;
+	border: 2px solid $border-color;
+	padding: #{ $margin-vertical-sm / 4 } $gutter-width;
+	background: white;
+	box-shadow: none;
+	color: $color-input-text;
+	margin-bottom: $margin-vertical-sm;
+	margin-right: $gutter-width / 2;
+	display: block;
+	text-align: left;
+	border-radius: 4px;
+	vertical-align: middle;
+	width: 100%;
+	max-width: 100%;
+	appearance: none;
+
+	&:hover {
+		border-color: darken( $border-color, 15% );
+		outline: none;
+	}
+
+	&:focus {
+		border-color: darken( $border-color, 30% );
+		outline: none;
+	}
+
+	@media #{ $mq_sm-up } {
+
+		width: 50%;
+
+		&.form__field--lg {
+			width: 100%;
+		}
+
+		&.form__field--md {
+			width: 33%;
+		}
+
+		&.form__field--sm {
+			width: 15%;
+		}
+
+	}
+
+	&.form__field--code {
+		font-family: $font-family-code;
+
+		&::placeholder {
+			font-style: normal;
+		}
+	}
+
+	&::placeholder {
+		font-style: italic;
+		color: rgba( $color-input-text, .5 );
+		opacity: 1; // Required for MS Edge
+	}
+
+}
+
+.form__textarea,
+textarea {
+	@extend .form__field;
+	width: 100%;
+	clear: both;
+}
+
+.form__label,
+form label,
+form legend {
+	@include font-heading;
+	@include text-sm;
+	display: block;
+	margin-top: $margin-vertical-sm;
+	margin-bottom: $margin-vertical-sm / 4;
+}
+
+fieldset {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.form__checkbox-group {
+
+	label {
+		@include font-body;
+		display: inline-block;
+		margin-top: 0;
+	}
+
+	input[type="radio"],
+	input[type="checkbox"] {
+		margin-right: $gutter-width / 4;
+	}
+}
+
+.form__radio-group {
+	@extend .form__checkbox-group;
+	margin-right: $gutter-width;
+	margin-bottom: $margin-vertical-sm / 2;
+	display: inline-block;
+
+}

@@ -1,0 +1,74 @@
+.hm-logo {
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+	display: inline-block;
+	background: url( "#{ $images-path }/logos/logo-black.svg" ) no-repeat center center;
+	background-size: contain;
+	width: 156px;
+	height: 30px;
+	margin: $margin-vertical-sm $gutter-width;
+	vertical-align: top;
+	opacity: 1.0;
+
+	&:hover,
+	&:focus {
+		opacity: 0.6;
+	}
+}
+
+.hm-logo--red {
+	background-image: url( "#{ $images-path }/logos/logo-red.svg" );
+}
+
+.hm-logo--white {
+	background-image: url( "#{ $images-path }/logos/logo-white.svg" );
+}
+
+.hm-logo--alt {
+
+	background-image: url( "#{ $images-path }/logos/logo-alt-black.svg" );
+	width: 107px;
+	height: 60px;
+
+	&.hm-logo--red {
+		background-image: url( "#{ $images-path }/logos/logo-alt-red.svg" );
+	}
+
+	&.hm-logo--white {
+		background-image: url( "#{ $images-path }/logos/logo-alt-white.svg" );
+	}
+
+}
+
+.hm-logo--small {
+
+	background-image: url( "#{ $images-path }/logos/logo-small-black.svg" );
+	width: 52px;
+	height: 30px;
+
+	&.hm-logo--red {
+		background-image: url( "#{ $images-path }/logos/logo-small-red.svg" );
+	}
+
+	&.hm-logo--white {
+		background-image: url( "#{ $images-path }/logos/logo-small-white.svg" );
+	}
+}
+
+.hm-logo--tiny {
+
+	background-image: url( "#{ $images-path }/logos/logo-tiny-black.svg" );
+	width: $base-font-size;
+	height: $base-font-size;
+	margin-top: ( $base-line-height - 1rem ) / 2;
+	margin-bottom: ( $base-line-height - 1rem ) / 2;
+
+	&.hm-logo--red {
+		background-image: url( "#{ $images-path }/logos/logo-tiny-red.svg" );
+	}
+
+	&.hm-logo--white {
+		background-image: url( "#{ $images-path }/logos/logo-tiny-white.svg" );
+	}
+}

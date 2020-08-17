@@ -1,0 +1,164 @@
+@mixin font-heading {
+	font-family: $font-family-heading;
+	font-weight: 700;
+
+	em,
+	i,
+	strong,
+	b {
+		font-weight: 700;
+		font-style: normal;
+		color: $color-primary;
+		text-transform: inherit;
+	}
+}
+
+@mixin font-body {
+	font-family: $font-family-body;
+	font-weight: 300;
+	text-transform: none;
+	letter-spacing: 0;
+
+	strong,
+	b {
+		font-weight: 700;
+	}
+}
+
+@mixin font-accent {
+	font-family: $font-family-accent;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+@mixin font-caps {
+	text-transform: uppercase;
+	letter-spacing: 0.01em;
+}
+
+// 50px (desktop)
+@mixin text-xxl {
+	font-size:  1.555555556rem;
+	line-height: $base-line-height-sm * 1.5;
+
+	@media #{ $mq-sm-up } {
+		font-size: 2.777777778rem;
+		line-height: $base-line-height-sm * 2.5;
+	}
+}
+
+// 32px (desktop)
+@mixin text-xl {
+	font-size:  1.333333333rem;
+	line-height: $base-line-height-sm * 1.25;
+
+	@media #{ $mq-sm-up } {
+		font-size: 1.777777778rem;
+		line-height: $base-line-height * 1.5;
+	}
+}
+
+// 28
+@mixin text-lg {
+	font-size: 1.555555556rem;
+	line-height: $base-line-height * 1.29;
+}
+
+// 24
+@mixin text-ml {
+	font-size: 1.3333333332rem;
+	line-height: $base-line-height;
+}
+
+// 22
+@mixin text-md {
+	font-size: 1.222222222rem;
+	line-height: $base-line-height;
+}
+
+@mixin text-std {
+	font-size: .888888889rem;
+	line-height: $base-line-height;
+
+	@media #{ $mq-sm-up } {
+		font-size: 1rem;
+		line-height: $base-line-height;
+	}
+}
+
+@mixin text-sm {
+	font-size: .888888889rem;
+	line-height: $base-line-height-sm;
+}
+
+@mixin text-xs {
+	font-size: .777777778rem;
+	line-height: 1.4285;
+}
+
+@mixin text-smoothing {
+	-webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
+	-moz-osx-font-smoothing: grayscale; // sass-lint:disable-line no-vendor-prefixes
+}
+
+// Legacy.
+@mixin text-tiny {
+	@include text-sm;
+}
+
+@mixin text-link {
+	color: $color-link;
+	border-bottom: 1px solid $color-link;
+	text-decoration: none;
+	transition: color .2s ease-in, background .2s ease-in, border-width .2s ease-in;
+
+	&:link,
+	&:visited {
+		color: $color-link;
+		text-decoration: none;
+	}
+
+	&:hover,
+	&:focus {
+		color: $color-link-hover;
+		transition: color .2s ease-out, background .2s ease-out, border-width .2s ease-out;
+		border-bottom: 2px solid $color-link;
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
+@mixin text-link-reverse {
+	@include text-link;
+
+	color: white;
+	border-color: rgba( white, .8 );
+
+	&:link,
+	&:visited,
+	&:hover,
+	&:focus {
+		color: white;
+	}
+
+	&:hover,
+	&:focus {
+		border-color: white;
+	}
+
+}
+
+@mixin text-unlink {
+	color: inherit;
+
+	&:link,
+	&:hover,
+	&:focus,
+	&:visited {
+		text-decoration: none;
+		border-bottom: none;
+	}
+
+}

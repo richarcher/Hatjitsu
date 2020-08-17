@@ -17,7 +17,7 @@ Installation
 ============
 
     npm install -d
-    node server
+    npm start
 
 [http://localhost:5000](http://localhost:5000)
 
@@ -28,11 +28,3 @@ Installation (Docker)
     run:
         docker-compose up -d
 
-TODOs
-=====
-
-* [x] Collapsible card view / jump to votes on vote
-* [x] Update favicon, iOS splash page, Twitter avatar etc with new design
-* [ ] Unicode symbol fallback (coffee/ace/king)
-* [x] Improve CTA buttons
-* [ ] Testing harness
