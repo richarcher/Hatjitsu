@@ -11,6 +11,7 @@
   margin-right: 0.5em;
 }
 .card {
+  position: relative;
   display: inline-block;
   width: 2.66em;
   height: 4em;
@@ -104,18 +105,11 @@
   }
 }
 .alert .activity {
-  width: 1em;
-  height: 1em;
-  background: url(/img/led.gif);
-  text-indent: 100%;
   margin-top: 0.2em;
   margin-bottom: 0.2em;
   margin-right: 0.2em;
   float: right;
   text-align: right;
-  -webkit-border-radius: 0.5em;
-      -moz-border-radius: 0.5em;
-          border-radius: 0.5em;
 }
 .socketMessage,
 .appError,
