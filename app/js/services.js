@@ -1,10 +1,9 @@
 /*jslint indent: 2, browser: true */
-/*global angular, Sock, io, $ */
+/*global angular, Sock, io */
 
 'use strict';
 
 /* Services */
-
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
@@ -74,23 +73,19 @@ pokerAppServices.factory('socket', ['$rootScope', function ($rootScope) {
     // console.log('disconnected');
   });
   socket.on('reconnect_failed', function () {
-    // console.log('service: on reconnect_failed');
     $rootScope.$apply(function () {
       $rootScope.socketMessage = ":-( Reconnect failed";
     });
-    // console.log('disconnected');
   });
+
   socket.on('connect', function () {
     var sessionId = this.socket.sessionid;
-    // console.log('service: on connect');
     $rootScope.$apply(function () {
       $rootScope.socketMessage = null;
-      // console.log("new session id = " + sessionId);
-      if (!$.cookie("sessionId")) {
-        $.cookie("sessionId", sessionId);
+      if (!getCookie("sessionId")) {
+        setCookie( "sessionId", sessionId,  0.5 );
       }
-      $rootScope.sessionId = $.cookie("sessionId");
-      // console.log("session id = " + that.rootScope.sessionId);
+      $rootScope.sessionId = getCookie("sessionId");
     });
   });
 

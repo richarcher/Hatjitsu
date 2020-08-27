@@ -1,5 +1,5 @@
 /*jslint indent: 2, browser: true */
-/*global angular, _, $, ScrollIntoView, DropDown */
+/*global angular, _, DropDown */
 
 'use strict';
 
@@ -193,7 +193,6 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     }
     processVotes();
     setVotingState();
-    $scope.scrollToSelectedCards.now();
   };
 
   var chooseCardPack = function (val) {
@@ -205,19 +204,19 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     var tshirt = ['XL', 'L', 'M', 'S', 'XS', '?'];
     var fruit = ['🍎', '🍊', '🍌', '🍉', '🍑', '🍇'];
     switch (val) {
-    case ('set135'):
+    case ('135 set'):
       return set135;
-    case ('fib'):
+    case ('Fibonacci'):
       return fib;
-    case ('goat'):
+    case ('Mountain Goat'):
       return goat;
-    case ('seq'):
+    case ('Sequential'):
       return seq;
-    case ('play'):
+    case ('Playing Cards'):
       return play;
-    case ('tshirt'):
+    case ('T-Shirt'):
       return tshirt;
-    case ('fruit'):
+    case ('Fruit'):
       return fruit;
     default:
       return val.split( ',' );
@@ -227,9 +226,9 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   var refreshRoomInfo = function (roomObj) {
     // console.log("refreshRoomInfo: roomObj:", roomObj)
     if (roomObj.createAdmin) {
-      $.cookie("admin-" + roomObj.roomUrl, true);
+      setCookie('admin-' + roomObj.roomUrl, true, 0.5 );
     }
-    if ($.cookie("admin-" + roomObj.roomUrl)) {
+    if (getCookie('admin-' + roomObj.roomUrl ) ) {
       $scope.showAdmin = true;
     }
 
@@ -329,10 +328,11 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
       // console.log("on connect");
       var sessionId = this.socket.sessionid;
       // console.log("new socket id = " + sessionId);
-      if (!$.cookie("sessionId")) {
-        $.cookie("sessionId", sessionId);
+      if (!getCookie("sessionId")) {
+        setCookie("sessionId", sessionId, 0.5);
       }
-      $scope.sessionId = $.cookie("sessionId");
+      $scope.sessionId = getCookie("sessionId");
+
       // console.log("session id = " + $scope.sessionId);
       // console.log("emit join room", { roomUrl: $scope.roomId, sessionId: $scope.sessionId });
       socket.emit('join room', { roomUrl: $scope.roomId, sessionId: $scope.sessionId }, function (response) {
@@ -418,13 +418,12 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   $scope.voter = true;
   $scope.connections = {};
   $scope.votes = [];
-  $scope.cardPack = '';
+  $scope.cardPack = '135 set';
   $scope.myVote = undefined;
   $scope.voted = haveIVoted();
   $scope.votingState = "";
   $scope.forcedReveal = false;
   $scope.forceRevealDisable = true;
-  $scope.scrollToSelectedCards = new ScrollIntoView($('#chosenCards'));
 
   $scope.dropDown = new DropDown('#dd');
   $scope.votingAverage = 0;

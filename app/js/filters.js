@@ -1,5 +1,5 @@
 /*jslint indent: 2, browser: true */
-/*global angular, $ */
+/*global angular */
 
 'use strict';
 
