@@ -119,6 +119,13 @@
   border-radius: 4px;
   color: rgba(0,0,0,.7);
 }
+
+.socketMessage:empty,
+.appError:empty,
+.message:empty {
+  display: none;
+}
+
 .message {
   background-color: #ffdd57;
 }
