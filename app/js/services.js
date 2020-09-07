@@ -33,21 +33,21 @@ pokerAppServices.factory('socket', ['$rootScope', function ($rootScope) {
   socket.on('error', function (reason) {
     // console.log('service: on error', reason);
     $rootScope.$apply(function () {
-      $rootScope.socketMessage = ":-(  Error = " + reason;
+      $rootScope.socketMessage = "X Error: " + reason;
     });
     // console.log(reason);
   });
   socket.on('connect_failed', function (reason) {
     // console.log('service: on connect failed', reason);
     $rootScope.$apply(function () {
-      $rootScope.socketMessage = ":-(  Connect failed";
+      $rootScope.socketMessage = "X Connection failed";
     });
     // console.log(reason);
   });
   socket.on('disconnect', function () {
     // console.log('service: on disconnect');
     $rootScope.$apply(function () {
-      $rootScope.socketMessage = ":-(  Disconnected";
+      $rootScope.socketMessage = "X Disconnected";
     });
     // console.log('disconnected');
   });
@@ -74,7 +74,7 @@ pokerAppServices.factory('socket', ['$rootScope', function ($rootScope) {
   });
   socket.on('reconnect_failed', function () {
     $rootScope.$apply(function () {
-      $rootScope.socketMessage = ":-( Reconnect failed";
+      $rootScope.socketMessage = "X Reconnect failed";
     });
   });
 

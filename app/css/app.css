@@ -34,6 +34,7 @@
   background-color: transparent;
   background-image: none;
 }
+
 .card--2-sided > .card--selected,
 .card--2-sided.card--selected {
   background-color: gold;
@@ -112,19 +113,22 @@
 .message {
   padding: 0 2em 0 0.5em;
   line-height: 1.5em;
+  margin: 1em;
+  padding: 1em 2em;
+  max-width: 300px;
+  border-radius: 4px;
+  color: rgba(0,0,0,.7);
 }
 .message {
-  background-color: rgb(255, 255, 111);
-  background-color: rgba(255, 255, 111, 0.4);
-  color: rgb(129, 129, 15);
+  background-color: #ffdd57;
 }
 .socketMessage {
-  background-color: rgba(0, 255, 255, 0.2);
+  background-color: #3298dc;
+  color: #fff;
 }
 .appError {
-  background-color: rgba(255, 0, 0, 0.3);
-  color: rgb(102, 43, 43);
-  text-shadow: none;
+  background-color: #f14668;
+  color: #fff;
 }
 /*
 
