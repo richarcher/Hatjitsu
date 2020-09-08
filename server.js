@@ -6,8 +6,7 @@ var _ = require('underscore')._;
 
 var env = process.env.NODE_ENV || 'development';
 
-var express = require('express'),
-    fs = require('fs');
+var express = require('express');
 
 var app = module.exports = express.createServer();
 var io = require('socket.io').listen(app);
