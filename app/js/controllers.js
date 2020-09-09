@@ -129,6 +129,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
 
     var total =  _.reduce(_.map(_.pluck($scope.votes, 'vote'), parseFloat), sumOfTwo, 0);
     $scope.votingAverage = Math.round(total / $scope.votes.length);
+    $scope.votingTotal = total;
     $scope.votingStandardDeviation = standardDeviation(_.pluck($scope.votes, 'vote'), parseFloat);
 
     $scope.forceRevealDisable = (!$scope.forcedReveal && ($scope.votes.length < $scope.voterCount || $scope.voterCount === 0)) ? false : true;
@@ -417,6 +418,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
 
   $scope.dropDown = new DropDown('#dd');
   $scope.votingAverage = 0;
+  $scope.votingTotal = 0;
 }
 
 RoomCtrl.$inject = ['$scope', '$routeParams', '$timeout', 'socket'];
