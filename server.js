@@ -65,12 +65,11 @@ app.get('/debug_state', function(req, res) {
   });
 });
 
-app.get('/:id', function(req, res) {
-  if (req.params.id in lobby.rooms) {
-    res.render('index.ejs');
-  } else {
-   res.redirect('/');
+app.get('/room/:id', function(req, res) {
+  if ( ! req.params.id in lobby.rooms ) {
+    lobby.createRoom( req.params.id );
   }
+  res.render('index.ejs');
 });
 
 
@@ -120,7 +119,7 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('join room', function (data, callback) {
     statsSocketMessagesReceived++;
-    // console.log("on join room " + data.roomUrl, socket.id, data);
+    // console.log("on join room " + data.id, socket.id, data);
     var room = lobby.joinRoom(socket, data);
     if(room.error) {
       callback( { error: room.error } );
@@ -131,8 +130,8 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('room info', function (data, callback) {
     statsSocketMessagesReceived++;
-    // console.log("on room info for " + data.roomUrl, socket.id, data);
-    var room = lobby.getRoom(data.roomUrl);
+    // console.log("on room info for " + data.id, socket.id, data);
+    var room = lobby.getRoom(data.id);
     // room = { error: "there was an error" };
     if (room.error) {
       callback( { error: room.error } );
@@ -143,8 +142,8 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('set card pack', function (data, cardPack) {
     statsSocketMessagesReceived++;
-    // console.log("on set card pack " + data.cardPack + " for " + data.roomUrl, socket.id, data);
-    var room = lobby.getRoom(data.roomUrl);
+    // console.log("on set card pack " + data.cardPack + " for " + data.id, socket.id, data);
+    var room = lobby.getRoom(data.id);
     // console.log("error=" + room.error);
     if (!room.error) {
       room.setCardPack(data);
@@ -153,8 +152,8 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('vote', function (data, callback) {
     statsSocketMessagesReceived++;
-    // console.log("on vote " + data.vote + " received for " + data.roomUrl, socket.id, data);
-    var room = lobby.getRoom(data.roomUrl);
+    // console.log("on vote " + data.vote + " received for " + data.id, socket.id, data);
+    var room = lobby.getRoom(data.id);
     if (room.error) {
       callback( { error: room.error });
     } else {
@@ -165,8 +164,8 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('unvote', function (data, callback) {
     statsSocketMessagesReceived++;
-    // console.log("omn unvote received for " + data.roomUrl, socket.id, data);
-    var room = lobby.getRoom(data.roomUrl);
+    // console.log("omn unvote received for " + data.id, socket.id, data);
+    var room = lobby.getRoom(data.id);
     if (room.error) {
       callback( { error: room.error });
     } else {
@@ -177,8 +176,8 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('reset vote', function (data, callback) {
     statsSocketMessagesReceived++;
-    // console.log("on reset vote  received for " + data.roomUrl, socket.id, data);
-    var room = lobby.getRoom(data.roomUrl);
+    // console.log("on reset vote  received for " + data.id, socket.id, data);
+    var room = lobby.getRoom(data.id);
     if (room.error) {
       callback( { error: room.error });
     } else {
@@ -189,7 +188,7 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('force reveal', function (data, callback) {
     statsSocketMessagesReceived++;
-    var room = lobby.getRoom(data.roomUrl);
+    var room = lobby.getRoom(data.id);
     if (room.error) {
       callback( { error: room.error });
     } else {
@@ -200,8 +199,8 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('toggle voter', function (data, callback) {
     statsSocketMessagesReceived++;
-    // console.log("on toggle voter for " + data.roomUrl, socket.id, data);
-    var room = lobby.getRoom(data.roomUrl);
+    // console.log("on toggle voter for " + data.id, socket.id, data);
+    var room = lobby.getRoom(data.id);
     if (room.error) {
       callback( { error: room.error });
     } else {
