@@ -72,6 +72,10 @@ app.get('/room/:id', function(req, res) {
   res.render('index.ejs');
 });
 
+app.use(function (req, res, next) {
+  res.redirect('/');
+});
+
 
 io.configure(function () {
   io.set('transports', ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
