@@ -2,6 +2,7 @@
   "name": "hmagilepoke",
   "version": "0.1.0",
   "subdomain": "hat",
+  "entry-point": "server.js",
   "scripts": {
     "start": "node server.js"
   },
@@ -9,8 +10,8 @@
     "node": "10.x"
   },
   "dependencies": {
-    "express": "2.5.10",
-    "ejs": "0.7.1",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
     "socket.io": "^0.9.13",
     "underscore": "1.10.2"
   },
