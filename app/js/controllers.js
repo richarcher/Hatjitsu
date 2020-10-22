@@ -126,7 +126,6 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   // if it has already been set - use the actual vote. This works for unvoting - so that
   // before the flip occurs - we don't display 'oi'
   var processVotes = function () {
-
     var voteCount = $scope.votes.length;
     _.each($scope.votes, function (v) {
       v.visibleVote = v.visibleVote === undefined && (!$scope.forcedReveal && voteCount < $scope.voterCount) ? 'oi!' : v.vote;
@@ -141,8 +140,18 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     $scope.showAverage = voteArr.length === 0 && cardValues.length > 0;
 
     $scope.forceRevealDisable = (!$scope.forcedReveal && ($scope.votes.length < $scope.voterCount || $scope.voterCount === 0)) ? false : true;
+    console.log("forceRevealDisable", $scope.forceRevealDisable)
+    console.log("alreadySorted;", $scope.alreadySorted)
+    $scope.sortVotesDisable = !$scope.forceRevealDisable || $scope.alreadySorted;
+    console.log("sortVotesDisable", $scope.sortVotesDisable)
 
     if ($scope.votes.length === $scope.voterCount || $scope.forcedReveal) {
+      if ($scope.alreadySorted) {
+        $scope.votes = $scope.votes.sort(function(el1, el2) {
+          return $scope.cards.indexOf(el1.vote) - $scope.cards.indexOf(el2.vote);
+        });
+      }
+
       var uniqVotes = _.chain($scope.votes).pluck('vote').uniq().value().length;
       if (uniqVotes === 1) {
         $scope.$emit('unanimous vote');
@@ -240,6 +249,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     $scope.humanCount = $scope.connections.length;
     $scope.cardPack = roomObj.cardPack;
     $scope.forcedReveal = roomObj.forcedReveal;
+    $scope.alreadySorted = roomObj.alreadySorted;
     $scope.cards = chooseCardPack($scope.cardPack);
 
     $scope.votes = _.chain($scope.connections).filter(function (c) {
@@ -401,6 +411,14 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     });
   };
 
+  $scope.sortVotes = function () {
+    // console.log("emit sort votes", { roomUrl: $scope.roomId });
+    $scope.sortVotesDisable = true;
+    socket.emit('sort votes', { roomUrl: $scope.roomId }, function (response) {
+      processMessage(response);
+    });
+  };
+
   $scope.toggleVoter = function () {
     // console.log("emit toggle voter", { roomUrl: $scope.roomId, voter: $scope.voter, sessionId: $scope.sessionId });
     socket.emit('toggle voter', { roomUrl: $scope.roomId, voter: $scope.voter, sessionId: $scope.sessionId }, function (response) {
@@ -421,6 +439,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   $scope.votingState = "";
   $scope.forcedReveal = false;
   $scope.forceRevealDisable = true;
+  $scope.sortVotesDisable = true;
   $scope.scrollToSelectedCards = new ScrollIntoView($('#chosenCards'));
 
   $scope.dropDown = new DropDown('#dd');
