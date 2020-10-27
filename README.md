@@ -24,9 +24,9 @@ Installation
 Installation (Docker)
 =====================
 
-    just download Dockerfile and docker-compose.yml from the repository
-    run:
-        docker-compose up -d
+Just checkout the repository and run:
+
+    docker-compose up -d
 
 TODOs
 =====

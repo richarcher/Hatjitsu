@@ -4,4 +4,6 @@ services:
     build: .
     ports:
       - "5000:5000"
-    
+    volumes:
+      - /Hatjitsu/node_modules
+      - .:/Hatjitsu
