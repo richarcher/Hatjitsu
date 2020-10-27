@@ -73,9 +73,7 @@ function LobbyCtrl($scope, $location, socket) {
 
 LobbyCtrl.$inject = ['$scope', '$location', 'socket'];
 
-function standardDeviation(values){
-  var avg = average(values);
-
+function standardDeviation(values, avg){
   var squareDiffs = values.map(function(value){
     var diff = value - avg;
     var sqrDiff = diff * diff;
@@ -90,11 +88,23 @@ function standardDeviation(values){
 
 function average(data){
   var sum = data.reduce(function(sum, value){
-    return sum + parseInt(value);
+    return sum + value;
   }, 0);
 
   var avg = sum / data.length;
   return avg;
+}
+
+function cardValue(vote){
+  if (vote.match(/^[0-9]+$/)) {
+    return parseFloat(vote);
+  } else if (vote == '\u00BD') {
+    return 0.5;
+  } else if (vote == 'A\u2660') {
+    return 1;
+  } else if (vote == '\u2654') {
+    return 13;
+  }
 }
 
 function RoomCtrl($scope, $routeParams, $timeout, socket) {
@@ -124,12 +134,11 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     var voteArr = [];
     voteArr.length = $scope.voterCount - voteCount;
     $scope.placeholderVotes = voteArr;
-    $scope.showAverage = voteArr.length === 0;
 
-
-    var total =  _.reduce(_.map(_.pluck($scope.votes, 'vote'), parseFloat), sumOfTwo, 0);
-    $scope.votingAverage = Math.round(total / $scope.votes.length);
-    $scope.votingStandardDeviation = standardDeviation(_.pluck($scope.votes, 'vote'), parseFloat);
+    var cardValues =  _.filter(_.map(_.pluck($scope.votes, 'vote'), cardValue), _.isNumber);
+    $scope.votingAverage = average(cardValues);
+    $scope.votingStandardDeviation = standardDeviation(cardValues, $scope.votingAverage).toFixed(2);
+    $scope.showAverage = voteArr.length === 0 && cardValues.length > 0;
 
     $scope.forceRevealDisable = (!$scope.forcedReveal && ($scope.votes.length < $scope.voterCount || $scope.voterCount === 0)) ? false : true;
 
