@@ -95,6 +95,16 @@ function average(data){
   return avg;
 }
 
+function median(values) {
+  if (values.length % 2) {
+    var idx1 = Math.floor(values.length / 2)
+    var idx2 = idx1 + 1;
+    return (values[idx1] + values[idx2]) / 2;
+  } else {
+    return values[values.length / 2];
+  }
+}
+
 function cardValue(vote){
   if (vote.match(/^[0-9]+$/)) {
     return parseFloat(vote);
@@ -118,10 +128,6 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     }
   };
 
-  var sumOfTwo = function (a, b) {
-    return a + b;
-  };
-
   // wipe out vote if voting state is not yet finished to prevent cheating.
   // if it has already been set - use the actual vote. This works for unvoting - so that
   // before the flip occurs - we don't display 'oi'
@@ -135,15 +141,13 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     $scope.placeholderVotes = voteArr;
 
     var cardValues =  _.filter(_.map(_.pluck($scope.votes, 'vote'), cardValue), _.isNumber);
-    $scope.votingAverage = average(cardValues);
+    $scope.votingAverage = average(cardValues).toFixed(2);
     $scope.votingStandardDeviation = standardDeviation(cardValues, $scope.votingAverage).toFixed(2);
+    $scope.votingMedian = median(cardValues);
     $scope.showAverage = voteArr.length === 0 && cardValues.length > 0;
 
     $scope.forceRevealDisable = (!$scope.forcedReveal && ($scope.votes.length < $scope.voterCount || $scope.voterCount === 0)) ? false : true;
-    console.log("forceRevealDisable", $scope.forceRevealDisable)
-    console.log("alreadySorted;", $scope.alreadySorted)
     $scope.sortVotesDisable = !$scope.forceRevealDisable || $scope.alreadySorted;
-    console.log("sortVotesDisable", $scope.sortVotesDisable)
 
     if ($scope.votes.length === $scope.voterCount || $scope.forcedReveal) {
       if ($scope.alreadySorted) {
