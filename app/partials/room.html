@@ -21,19 +21,29 @@
                 <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckSeq" ng-click="setCardPack('seq')">Sequential</a></li>
                 <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckPlay" ng-click="setCardPack('play')">Playing Cards</a></li>
                 <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckShirt" ng-click="setCardPack('tshirt')">T-Shirt</a></li>
+                <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckCustom" ng-click="setCustomPack()">Custom</a></li>
               </ul>
             </div>
         </div>
+      </div>
       </div>
     </div>
 
 
     <div class="cards{{cardsState}}">
-      <div ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" class="card" ng-class="{'card--selected' : card==myVote}" cardvalue>
-        {{card}}
-      </div>
-      <div ng-hide="cards" class="waiting">
-        No cards found
+      <div ng-switch on="showCustom">
+          <div ng-switch-when="true">
+              <input ng-model="customPack" ui-enter="setCardPack(customPack)" name="packfield" id="packfield" type="tel" maxlength="50" placeholder="space separated values" class="roomUrl" autofocus/>
+              <button ng-click="setCardPack(customPack)" class="span2 btn" >Set</button>
+          </div>
+          <div ng-switch-when="false">
+              <div ng-show="cards" ng-repeat="card in cards" ng-click="vote(card)" class="card" ng-class="{'card--selected' : card==myVote}" cardvalue>
+                {{card}}
+              </div>
+              <div ng-hide="cards" class="waiting">
+                No cards found
+              </div>
+          </div>
       </div>
     </div>
 
