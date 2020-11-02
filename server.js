@@ -224,6 +224,17 @@ io.sockets.on('connection', function (socket) {
     }
   });
 
+  socket.on('sort votes', function (data, callback) {
+    statsSocketMessagesReceived++;
+    var room = lobby.getRoom(data.roomUrl);
+    if (room.error) {
+      callback( { error: room.error });
+    } else {
+      room.sortVotes();
+      callback( {} );
+    }
+  });
+
   socket.on('toggle voter', function (data, callback) {
     statsSocketMessagesReceived++;
     // console.log("on toggle voter for " + data.roomUrl, socket.id, data);

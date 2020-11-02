@@ -620,12 +620,44 @@ a:focus {
     vertical-align: text-top;
     background-image: url(/img/glyphicons.png);
     background-repeat: no-repeat;
+    background-position: 14px 14px;
   }
   .icon-refresh {
     background-position: 0px 0px;
   }
   .icon-exclamation-sign {
     background-position: -90px 0px;
+  }
+  .icon-sort,
+  .icon-sort::after,
+  .icon-sort::before {
+      box-sizing: border-box;
+      height: 2px;
+      border-radius: 4px;
+      background: currentColor
+  }
+  .icon-sort {
+      display: block;
+      position: relative;
+      transform: scale(var(--ggs,1));
+      width: 8px;
+      top: 4px;
+      left: 2px
+  }
+  .icon-sort::after,
+  .icon-sort::before {
+      content: "";
+      position: absolute
+  }
+  .icon-sort::before {
+      width: 12px;
+      top: -4px;
+      left: -2px
+  }
+  .icon-sort::after {
+      width: 4px;
+      top: 4px;
+      left: 2px
   }
 
   .switch {
