@@ -14,6 +14,7 @@ var bodyParser = require('body-parser');
 var errorhandler = require('errorhandler')
 var methodOverride = require('method-override');
 var morgan = require('morgan')
+var compression = require('compression')
 
 var app = express();
 var server = http.createServer(app)
@@ -24,8 +25,6 @@ var io = socketIO(server, {
 var lobbyClass = require('./lib/lobby.js');
 var config = require('./config.js')[env];
 var path = require('path');
-
-var gzippo = require('gzippo');
 
 var lobby = new lobbyClass.Lobby(io);
 
@@ -70,7 +69,8 @@ if (env === 'development') {
 if (env === 'production') {
   var oneDay = 86400000;
   // app.use(assetsManagerMiddleware);
-  app.use(gzippo.staticGzip(__dirname + '/app'));
+  app.use(compression());
+  app.use(express.static(__dirname + '/app'));
   app.use(errorhandler());
 }
 
