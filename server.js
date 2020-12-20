@@ -6,16 +6,25 @@ var _ = require('underscore')._;
 
 var env = process.env.NODE_ENV || 'development';
 
-var express = require('express'),
-    fs = require('fs');
+var fs = require('fs')
+var http = require('http');
 
-var app = module.exports = express.createServer();
-var io = require('socket.io').listen(app);
+var express = require('express');
+var bodyParser = require('body-parser');
+var errorhandler = require('errorhandler')
+var methodOverride = require('method-override');
+var morgan = require('morgan')
+var compression = require('compression')
+
+var app = express();
+var server = http.createServer(app)
+var socketIO = require('socket.io');
+var io = socketIO(server, {
+  transports : ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']
+});
 var lobbyClass = require('./lib/lobby.js');
 var config = require('./config.js')[env];
 var path = require('path');
-
-var gzippo = require('gzippo');
 
 var lobby = new lobbyClass.Lobby(io);
 
@@ -43,32 +52,30 @@ var options = {
 // Initialize the CDN magic
 var CDN = require('express-cdn')(app, options);
 
-app.configure(function(){
-  app.set('views', __dirname + '/app');
-  app.set('view engine', 'ejs');
-  app.set('view options', {
-      layout: false
-  });
-  app.use(express.logger());
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.staticCache());
+app.set('views', __dirname + '/app');
+app.set('view engine', 'ejs');
+app.set('view options', {
+    layout: false
 });
+app.use(morgan('combined'));
+app.use(bodyParser.json());
+app.use(methodOverride());
 
-app.configure('development', function(){
+if (env === 'development') {
   app.use(express.static(__dirname + '/app'));
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
+  app.use(errorhandler());
+}
 
-app.configure('production', function(){
+if (env === 'production') {
   var oneDay = 86400000;
   // app.use(assetsManagerMiddleware);
-  app.use(gzippo.staticGzip(__dirname + '/app'));
-  app.use(express.errorHandler());
-});
+  app.use(compression());
+  app.use(express.static(__dirname + '/app'));
+  app.use(errorhandler());
+}
 
 // Add the dynamic view helper
-app.dynamicHelpers({ CDN: CDN });
+app.locals.CDN = CDN();
 
 app.get('/', function(req, res) {
   res.render('index.ejs');
@@ -99,24 +106,9 @@ app.get('/:id', function(req, res) {
 });
 
 
-io.configure(function () {
-  io.set('transports', ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
-});
-
-io.configure('production', function(){
-  io.enable('browser client minification');
-  io.enable('browser client etag');
-  io.enable('browser client gzip');
-  io.set("polling duration", 10);
-  io.set('log level', 1);
-});
-io.configure('development', function(){
-  io.set('log level', 2);
-});
-
 var port = process.env.app_port || 5000; // Use the port that Heroku provides or default to 5000
-app.listen(port, function() {
-  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+server.listen(port, function() {
+  console.log("Express server listening on port %d in %s mode", port, app.settings.env);
 });
 
 
@@ -124,7 +116,7 @@ app.listen(port, function() {
 
 /* EVENT LISTENERS */
 
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
 
   statsConnectionCount++;
   statsSocketCount++;
