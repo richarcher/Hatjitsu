@@ -18,13 +18,11 @@ pokerAppServices.service('socket', ['$rootScope',  '$timeout', function ($rootSc
 }]);
 
 pokerAppServices.factory('socket', ['$rootScope', function ($rootScope) {
-  var socket = io.connect(location.protocol + '//' + location.hostname, {
-    'port': location.port,
-    'reconnect': true,
-    'reconnection delay': 500,
-    'max reconnection attempts': 10,
-    'try multiple transports': true,
-    'transports': ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']
+  var socket = io({
+    reconnection : true,
+    reconnectionDelay : 500,
+    reconnectionAttempts: 10,
+    transports : ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']
   });
 
   $rootScope.socketMessage = null;
@@ -81,7 +79,7 @@ pokerAppServices.factory('socket', ['$rootScope', function ($rootScope) {
     // console.log('disconnected');
   });
   socket.on('connect', function () {
-    var sessionId = this.socket.sessionid;
+    var sessionId = this.id;
     // console.log('service: on connect');
     $rootScope.$apply(function () {
       $rootScope.socketMessage = null;

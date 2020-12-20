@@ -340,7 +340,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
 
     socket.on('connect', function () {
       // console.log("on connect");
-      var sessionId = this.socket.sessionid;
+      var sessionId = this.id;
       // console.log("new socket id = " + sessionId);
       if (!$.cookie("sessionId")) {
         $.cookie("sessionId", sessionId);

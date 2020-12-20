@@ -17,7 +17,10 @@ var morgan = require('morgan')
 
 var app = express();
 var server = http.createServer(app)
-var io = require('socket.io').listen(server);
+var socketIO = require('socket.io');
+var io = socketIO(server, {
+  transports : ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']
+});
 var lobbyClass = require('./lib/lobby.js');
 var config = require('./config.js')[env];
 var path = require('path');
@@ -103,21 +106,6 @@ app.get('/:id', function(req, res) {
 });
 
 
-io.configure(function () {
-  io.set('transports', ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
-});
-
-io.configure('production', function(){
-  io.enable('browser client minification');
-  io.enable('browser client etag');
-  io.enable('browser client gzip');
-  io.set("polling duration", 10);
-  io.set('log level', 1);
-});
-io.configure('development', function(){
-  io.set('log level', 2);
-});
-
 var port = process.env.app_port || 5000; // Use the port that Heroku provides or default to 5000
 server.listen(port, function() {
   console.log("Express server listening on port %d in %s mode", port, app.settings.env);
@@ -128,7 +116,7 @@ server.listen(port, function() {
 
 /* EVENT LISTENERS */
 
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
 
   statsConnectionCount++;
   statsSocketCount++;
