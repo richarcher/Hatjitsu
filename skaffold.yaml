@@ -1,0 +1,99 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+build:
+  artifacts:
+  - image: docker-local-dev.jfrog.prodigygame.org/hatjitsu
+    context: .
+    sync:
+      infer:
+    kaniko:
+      dockerfile: Dockerfile
+      cache: {}
+      buildArgs:
+        JFROG_USERNAME: '{{.JFROG_USERNAME}}'
+        JFROG_APIKEY: '{{.JFROG_APIKEY}}'
+  cluster:
+    annotations:
+      sidecar.istio.io/inject: "false"
+    dockerConfig: 
+      secretName: builder-config
+deploy:
+  helm:
+    releases:
+    - name: '{{.RELEASE_NAME}}'
+      namespace: ci
+      version: 0.1.0
+      chartPath: helm-virtual/prodigy-applicatioon
+      remote: true
+      recreatePods: true
+      wait: true
+      overrides:
+        image:
+          registry: docker-local-dev.jfrog.prodigygame.org
+        imagePullSecrets:
+          - name: artifactorycred
+        annotations:
+          hpa.autoscaling.banzaicloud.io/minReplicas: "1"
+          hpa.autoscaling.banzaicloud.io/maxReplicas: "2"
+          cpu.hpa.autoscaling.banzaicloud.io/targetAverageUtilization: "65"
+        resources:
+          limits:
+            cpu: 250m
+            memory: 2048Mi
+          requests:
+            cpu: 250m
+            memory: 512Mi
+        environment:
+          ENV: staging
+          PORT: 3000
+          DATADOG_ENABLED: false
+
+profiles:
+- name: dev
+  activation:
+  - command: dev
+  deploy:
+    helm:
+      releases:
+      - name: hatjitsu
+        version: 0.1.0
+        chartPath: helm-virtual/prodigy-applicatioon
+        artifactOverrides:
+          fullImage: docker-local-dev.jfrog.prodigygame.org/hatjitsu
+        overrides:
+          imagePullSecrets:
+            - name: artifactorycred-dev
+          command: ["npm", "run", "skaffold"]
+
+- name: test-build
+  build:
+    tagPolicy:
+      envTemplate:
+        template: "test-{{.GITHUB_SHA}}"
+  patches:
+  - op: add
+    path: /build/cluster/namespace
+    value: ci
+  - op: replace
+    path: /build/cluster/dockerConfig/secretName
+    value: artifactory-docker
+
+# Can be used for build and deploy commands.
+- name: candidate
+  build:
+    tagPolicy:
+      envTemplate:
+        template: "{{.GITHUB_SHA}}"
+  patches:
+  - op: add
+    path: /build/cluster/namespace
+    value: ci
+  - op: replace
+    path: /build/cluster/dockerConfig/secretName
+    value: artifactory-docker
+  - op: replace
+    path: /build/artifacts/0/image
+    value: docker-local.jfrog.prodigygame.org/hatjitsu
+  - op: replace
+    path: /deploy/helm/releases/0/overrides/image/registry
+    value: docker-local.jfrog.prodigygame.org

@@ -1,0 +1,21 @@
+name: 'Promote Image'
+description: 'Image promotion is achieved by creating a new tag for a Docker image in a remote registry.'
+inputs:
+  source-image:
+    description: 'The full image name for a Docker image that will receive a new tag.'
+    required: true
+  target-image:
+    description: 'A new full image name that references the source image.'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Pull image
+      shell: bash
+      run: docker image pull ${{ inputs.source-image }}
+    - name: Tag image
+      shell: bash
+      run: docker image tag ${{ inputs.source-image }} ${{ inputs.target-image }}
+    - name: Push image
+      shell: bash
+      run: docker image push ${{ inputs.target-image }}

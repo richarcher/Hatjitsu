@@ -1,0 +1,34 @@
+name: Integration
+on:
+  pull_request: 
+    branches:
+    - master
+jobs:
+  publish-test:
+    runs-on: [self-hosted, k8s-staging, default]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Lint Dockerfile
+      run: docker run --rm -i -v $(pwd):/repo:ro --workdir=/repo hadolint/hadolint:latest sh -c "hadolint Dockerfile"
+    - name: Publish Docker image
+      run: skaffold build -p test-build
+  # Deploy application for manual and/or automated testing.
+  deploy-test:
+    needs: publish-test
+    runs-on: [self-hosted, k8s-staging, default]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy test
+      env:
+        RELEASE_NAME: test-hatjitsu-${{ github.event.number }}
+      # Need to use images option with full image value to get Skaffold to pass validation.
+      # https://github.com/GoogleContainerTools/skaffold/issues/3559
+      run: skaffold deploy --images "docker-local-dev.jfrog.prodigygame.org/hatjitsu:test-${GITHUB_SHA}"
+    - name: Provide link to deployment
+      uses: unsplash/comment-on-pr@85a56be
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        msg: |
+          A build based on this branch is accessible at: https://test-hatjitsu-${{ github.event.number }}-ci.prv.prodigygame.org
+        check_for_duplicate_msg: true
