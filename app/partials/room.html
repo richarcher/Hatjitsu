@@ -5,45 +5,15 @@
       <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" id="voter" >
        I am voting
     </label>
-  </div>
-  <div class="cardPanel-meta">
-    <div ng-show="voter">
-      <div ng-switch on="voted">
-        <p ng-switch-when="false">Choose your estimate...</p>
-        <p ng-switch-when="true">Your current estimate: <strong>{{myVote}}</strong></p>
-      </div>
-    </div>
-    <p ng-hide="voter">You have chosen not to vote.</p>
-  </div>
-
-  <section class="votePanel" >
-    <div class="cards{{votingState}}" id="chosenCards">
-      <div ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card card--2-sided vote btn btn--tertiary btn--small" selectedvote>
-        <div class="card--side-1">x</div>
-        <div class="card--side-2" cardvalue>{{vote.visibleVote}}</div>
-      </div>
-      <div ng-repeat="i in placeholderVotes" disabled class="card card--placeholder btn btn--tertiary btn--small">
-        ?
-      </div>
-
-      <div ng-show="showAverage" class="voting-average">
-        <p>Average: <strong>{{votingAverage}}</strong>, Total: <strong>{{votingTotal}}</strong>, SD: <strong>{{votingStandardDeviation}}</strong></p>
-      </div>
-      <div ng-hide="showAverage" class="voting-average">
-        <p>Voting in progress</p>
-      </div>
-    </div>
-
-    <div ng-switch on="showAdmin" >
-
+    <div ng-switch on="showAdmin">
       <div ng-switch-when="true">
-        <button ng-click="resetVote()" class="btn" title="Start a new vote">
+        <button ng-click="resetVote()" class="btn btn--small" title="Start a new vote">
           Reset
         </button>
-        <button ng-click="forceReveal()" class="btn" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
+        <button ng-click="forceReveal()" class="btn btn--small" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
           Reveal
         </button>
-          <div id="dd" class="dropdown-wrapper btn btn--tertiary">
+          <div id="dd" class="dropdown-wrapper btn btn--tertiary btn--small">
             <span>{{cardPack}}  pack</span> <i class="icon icon--arrow-down icon--default" title="icon icon--arrow-down icon--default">arrow-down</i>
             <ul class="dropdown">
               <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckSet135" ng-click="setCardPack('135 set')">135 set</a></li>
@@ -60,8 +30,30 @@
           </div>
       </div>
     </div>
+  </div>
+
+  <section class="votePanel" >
+    <div class="cards{{votingState}}" id="chosenCards">
+      <div ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card card--2-sided vote btn btn--tertiary btn--small" selectedvote>
+        <div class="card--side-1">&#10003;</div>
+        <div class="card--side-2" cardvalue>{{vote.visibleVote}}</div>
+      </div>
+      <div ng-repeat="i in placeholderVotes" disabled class="card card--placeholder btn btn--tertiary btn--small">
+        ?
+      </div>
+    </div>
 
   </section>
+
+  <div class="cardPanel-meta">
+    <div ng-show="voter">
+      <div ng-switch on="voted">
+        <p ng-switch-when="false">Choose your estimate...</p>
+        <p ng-switch-when="true">Your current estimate: <strong>{{myVote}}</strong></p>
+      </div>
+    </div>
+    <p ng-hide="voter">You have chosen not to vote.</p>
+  </div>
 
   <section class="cardPanel" >
     <div class="cards{{cardsState}}">
