@@ -6,48 +6,20 @@ var _ = require('underscore')._;
 
 var env = process.env.NODE_ENV || 'development';
 
-var express = require('express');
+const express = require('express');
+const app = module.exports = express();
+const port = process.env.app_port || 5000;
 
-var app = module.exports = express.createServer();
-var io = require('socket.io').listen(app);
 var lobbyClass = require('./lib/lobby.js');
-var config = require('./config.js')[env];
 var path = require('path');
-
-var lobby = new lobbyClass.Lobby(io);
 
 var statsConnectionCount = 0;
 var statsDisconnectCount = 0;
 var statsSocketCount = 0;
 var statsSocketMessagesReceived = 0;
 
-// Configuration
-
-app.configure(function(){
-  app.set('views', __dirname + '/app');
-  app.set('view engine', 'ejs');
-  app.set('view options', {
-      layout: false
-  });
-//  app.use(express.logger());
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.staticCache());
-});
-
-app.configure('development', function(){
-  app.use(express.static(__dirname + '/app'));
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
-
-app.configure('production', function(){
-  var oneDay = 86400000;
-  // app.use(assetsManagerMiddleware);
-  app.use(express.static(__dirname + '/app'));
-  app.use(express.errorHandler());
-});
-
-// Add the dynamic view helper
+app.use(express.static('app'));
+app.set('views', path.join(__dirname, 'app'));
 
 app.get('/', function(req, res) {
   res.render('index.ejs');
@@ -76,6 +48,14 @@ app.use(function (req, res, next) {
   res.redirect('/');
 });
 
+ // Use the port that Heroku provides or default to 5000
+const server = app.listen(port, function() {
+  console.log("Express server listening on port %d in %s mode", port, app.settings.env);
+});
+
+const io = require('socket.io').listen(server);
+var lobby = new lobbyClass.Lobby(io);
+
 
 io.configure(function () {
   io.set('transports', ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
@@ -90,13 +70,6 @@ io.configure('production', function(){
 io.configure('development', function(){
   io.set('log level', 2);
 });
-
-var port = process.env.app_port || 5000; // Use the port that Heroku provides or default to 5000
-app.listen(port, function() {
-  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
-});
-
-
 
 
 /* EVENT LISTENERS */
