@@ -70,7 +70,7 @@
   padding: 0;
   z-index: 3;
 }
-.dropdown-wrapper.active .dropdown {
+.dropdown-wrapper.dropdown-open .dropdown {
   display: block;
   pointer-events: auto;
 }

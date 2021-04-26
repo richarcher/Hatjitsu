@@ -43,21 +43,21 @@
         <button ng-click="forceReveal()" class="btn" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
           Reveal
         </button>
-          <div id="dd" class="dropdown-wrapper btn btn--tertiary">
-            <span>{{cardPack}}  pack</span> <i class="icon icon--arrow-down icon--default" title="icon icon--arrow-down icon--default">arrow-down</i>
-            <ul class="dropdown">
-              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckSet135" ng-click="setCardPack('135 set')">135 set</a></li>
-              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckGoat" ng-click="setCardPack('Mountain Goat')">Mountain Goat</a></li>
-              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckFib" ng-click="setCardPack('Fibonacci')">Fibonacci</a></li>
-              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckSeq" ng-click="setCardPack('Sequential')">Sequential</a></li>
-              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckPlay" ng-click="setCardPack('Playing Cards')">Playing Cards</a></li>
-              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckShirt" ng-click="setCardPack('T-Shirt')">T-Shirt</a></li>
-              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deck1-5" ng-click="setCardPack('1-5')">1 to 5</a></li>
-              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deck1-10" ng-click="setCardPack('1-10')">1 to 10</a></li>
-              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckShirt" ng-click="setCardPack('Fruit')">Fruit</a></li>
-              <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckCustom" ng-click="setCustomPack()">Custom</a></li>
-            </ul>
-          </div>
+        <div id="dd" class="{{dropdownClass}} dropdown-wrapper btn btn--tertiary" ng-click="openDropdown()">
+          <span>{{cardPack}}  pack</span> <i class="icon icon--arrow-down icon--default" title="icon icon--arrow-down icon--default">arrow-down</i>
+          <ul class="dropdown">
+            <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckSet135" ng-click="setCardPack('135 set')">135 set</a></li>
+            <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckGoat" ng-click="setCardPack('Mountain Goat')">Mountain Goat</a></li>
+            <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckFib" ng-click="setCardPack('Fibonacci')">Fibonacci</a></li>
+            <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckSeq" ng-click="setCardPack('Sequential')">Sequential</a></li>
+            <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckPlay" ng-click="setCardPack('Playing Cards')">Playing Cards</a></li>
+            <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckShirt" ng-click="setCardPack('T-Shirt')">T-Shirt</a></li>
+            <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deck1-5" ng-click="setCardPack('1-5')">1 to 5</a></li>
+            <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deck1-10" ng-click="setCardPack('1-10')">1 to 10</a></li>
+            <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckShirt" ng-click="setCardPack('Fruit')">Fruit</a></li>
+            <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckCustom" ng-click="setCustomPack()">Custom</a></li>
+          </ul>
+        </div>
       </div>
     </div>
 
