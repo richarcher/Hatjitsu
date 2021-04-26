@@ -1,5 +1,5 @@
 /*jslint indent: 2, browser: true */
-/*global angular, _, DropDown */
+/*global angular, _ */
 
 'use strict';
 
@@ -340,6 +340,10 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     });
   };
 
+  $scope.openDropdown = function (event) {
+    $scope.dropdownClass = 'dropdown-open';
+  }
+
   $scope.setCardPack = function (cardPack) {
     $scope.showCustom = false;
     $scope.cardPack = cardPack;
@@ -347,10 +351,16 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
 
     // console.log("set card pack", { id: $scope.roomId, cardPack: cardPack });
     socket.emit('set card pack', { id: $scope.roomId, cardPack: cardPack });
+    $timeout(function () {
+      $scope.dropdownClass = 'dropdown-closed';
+    }, 100);
   };
 
   $scope.setCustomPack = function () {
     $scope.showCustom = true;
+    $timeout(function () {
+      $scope.dropdownClass = 'dropdown-closed';
+    }, 100);
   }
 
   $scope.vote = function (vote) {
@@ -401,6 +411,22 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     });
   };
 
+  document.addEventListener( "click", (evt) => {
+    const element = document.getElementById( 'dd' );
+    let targetElement = evt.target; // clicked element
+
+    do {
+      if (targetElement == element) {
+        return;
+      }
+      targetElement = targetElement.parentNode;
+    } while (targetElement);
+
+    $timeout(function () {
+      $scope.dropdownClass = 'dropdown-closed';
+    }, 100);
+  });
+
   $scope.roomId = $routeParams.roomId;
   $scope.humanCount = 0;
   $scope.voterCount = 0;
@@ -413,10 +439,9 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   $scope.myVote = undefined;
   $scope.voted = haveIVoted();
   $scope.votingState = "";
+  $scope.dropdownClass = "dropdown-closed";
   $scope.forcedReveal = false;
   $scope.forceRevealDisable = true;
-
-  $scope.dropDown = new DropDown('#dd');
   $scope.votingAverage = 0;
   $scope.votingTotal = 0;
 }
