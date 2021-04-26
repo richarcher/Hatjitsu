@@ -149,3 +149,29 @@
 .pullright {
   float: right;
 }
+
+.header {
+  border-bottom: 1px solid #d9d9d9;
+  margin: 1.66667rem 0;
+}
+
+.switch {
+  margin: 1.66667rem 0;
+}
+
+.switch > div {
+  display: inline-block;
+}
+
+.header > a {
+  text-decoration: none;
+  border-bottom: none;
+}
+.header > .hm-logo {
+  display: inline-block;
+  height: 3.3325rem;
+}
+
+h1.header__text {
+  display: inline-block;
+}
