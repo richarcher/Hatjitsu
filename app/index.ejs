@@ -1,7 +1,8 @@
 <!doctype html >
 <html xmlns:ng="http://angularjs.org" lang="en" ng-app="pokerApp">
+
 <head>
-  <!--[if lte IE 8]>
+    <!--[if lte IE 8]>
     <script>
       document.createElement('ng-include');
       document.createElement('ng-pluralize');
@@ -13,80 +14,83 @@
       document.createElement('ng:view');
     </script>
   <![endif]-->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Hatjitsu :: Online Scrum Planning Poker for Agile Projects</title>
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <title>Hatjitsu :: Online Scrum Planning Poker for Agile Projects</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 
-  <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/app.css">
 
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144x144.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/apple-touch-icon-114x114.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/apple-touch-icon-72x72.png" />
-  <link rel="apple-touch-icon-precomposed" href="/img/apple-touch-icon.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" href="/img/apple-touch-icon.png" />
 
-  <link rel="apple-touch-startup-image" href="/img/apple-touch-startup-image.png" media="(device-width: 320px)" />
-  <link rel="apple-touch-startup-image" href="/img/apple-touch-startup-image-768x1004.png" media="(device-width: 768px) and (orientation: portrait)" />
-  <link rel="apple-touch-startup-image" href="/img/apple-touch-startup-image-748x1024.png" media="(device-width: 768px) and (orientation: landscape)" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-startup-image" href="/img/apple-touch-startup-image.png" media="(device-width: 320px)" />
+    <link rel="apple-touch-startup-image" href="/img/apple-touch-startup-image-768x1004.png" media="(device-width: 768px) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/img/apple-touch-startup-image-748x1024.png" media="(device-width: 768px) and (orientation: landscape)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
 
-  <%- CDN([ '/lib/modernizr.custom.07116.js', '/js/testing.js' ]) %>
+    <%- CDN([ '/lib/modernizr.custom.07116.js', '/js/testing.js' ]) %>
 
-  <script type="text/javascript">
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-55600-15']);
+            _gaq.push(['_trackPageview']);
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-55600-15']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
+            (function() {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
 </head>
+
 <body>
-  <div class="body bg{{bodyState}}" ng-controller="MainCtrl">
-    <div class="container">
-      <header class="header">
-        <a href="/" title="Back to the Lobby">
-          <span class="header__logo{{logoState}}"></span>
-          <h1 class="header__text">Hatjitsu</h1>
-        </a>
-        <noscript>
+    <div class="body bg{{bodyState}}" ng-controller="MainCtrl">
+        <div class="container">
+            <header class="header">
+                <a href="/" title="Back to the Lobby">
+                    <span class="header__logo{{logoState}}"></span>
+                    <h1 class="header__text">Hatjitsu</h1>
+                </a>
+                <noscript>
           <p>This site is <em>heavily</em> dependant upon JavaScript. If you don't have it enabled, you're not going to have a Good Time.</p>
         </noscript>
-        <div class="bg-mount"></div>
-      </header>
+                <div class="bg-mount"></div>
+            </header>
 
-      <div class="alert">
-        <div class="activity" ng-show="activity">Activity&hellip;</div>
-        <div class="socketMessage" class="notification" ui-show="socketMessage" ng-bind="socketMessage"></div>
-        <div class="appError" class="notification" ui-show="errorMessage" ng-bind="errorMessage"></div>
-        <div class="message" class="notification" ui-show="message" ng-bind="message"></div>
-      </div>
+            <div class="alert">
+                <div class="activity" ng-show="activity">Activity&hellip;</div>
+                <div class="socketMessage" class="notification" ui-show="socketMessage" ng-bind="socketMessage"></div>
+                <div class="appError" class="notification" ui-show="errorMessage" ng-bind="errorMessage"></div>
+                <div class="message" class="notification" ui-show="message" ng-bind="message"></div>
+            </div>
 
-      <div class="content" ng-view></div>
+            <div class="content" ng-view></div>
 
-      <footer class="footer">
+            <footer class="footer">
 
-        <p>&copy; <a href="http://www.ubxd.com" title="Ruby on Rails, node, and iOS development in Cape Town">UBXD</a> 2012 - 2013; Built by <a href="http://brea.kfa.st" title="nodejs developer in Cape Town">@Jörg</a> &amp; <a href="mailto:richard.archer@ubxd.com" title="Software developer in Cape Town">@Rïch</a>. <strong><a href="https://twitter.com/hatjitsu" title="Feedback to us via Twitter">Feedback?</a></strong></p>
+                <p>&copy; <a href="http://www.ubxd.com" title="Ruby on Rails, node, and iOS development in Cape Town">UBXD</a> 2012 - 2013; Built by <a href="http://brea.kfa.st" title="nodejs developer in Cape Town">@Jörg</a> &amp; <a href="mailto:richard.archer@ubxd.com"
+                        title="Software developer in Cape Town">@Rïch</a>. <strong><a href="https://twitter.com/hatjitsu" title="Feedback to us via Twitter">Feedback?</a></strong></p>
 
-      </footer>
+            </footer>
+        </div>
     </div>
-  </div>
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.11/socket.io.min.js"></script>
-  <script>
-  var zepto_src = "//cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js",
-    jquery_src = "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js";
-  document.write('<script src=' + ('__proto__' in {} ? zepto_src : jquery_src) + '><\/script>');
-  </script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
-  <%- CDN([ '/lib/underscore.min.js', '/lib/jquery.cookie.js' ]) %>
-  <%- CDN([ '/js/app.js', '/js/controllers.js', '/js/directives.js', '/js/filters.js', '/js/services.js', '/js/dom.js']) %>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.min.js"></script>
+    <script>
+        var zepto_src = "//cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js",
+            jquery_src = "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js";
+        document.write('<script src=' + ('__proto__' in {} ? zepto_src : jquery_src) + '><\/script>');
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+    <%- CDN([ '/lib/underscore.min.js', '/lib/jquery.cookie.js' ]) %>
+        <%- CDN([ '/js/app.js', '/js/controllers.js', '/js/directives.js', '/js/filters.js', '/js/services.js', '/js/dom.js']) %>
 
 </body>
 
