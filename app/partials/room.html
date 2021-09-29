@@ -3,13 +3,13 @@
     <span class="label roomNumber">Room: {{roomId}}</span>
     <label class="label" ng-disabled="forceRevealDisable" data-on="You are a voter" data-off="You are not a voter" for="voter">
       <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" id="voter" >
-       I am voting
+      I am voting
     </label>
+    <button ng-click="resetVote()" class="btn btn--small" title="Start a new vote">
+      Reset
+    </button>
     <div ng-switch on="showAdmin">
       <div ng-switch-when="true">
-        <button ng-click="resetVote()" class="btn btn--small" title="Start a new vote">
-          Reset
-        </button>
         <button ng-click="forceReveal()" class="btn btn--small" ng-disabled="forceRevealDisable" title="Force a reveal of all cards if there are some stragglers" >
           Reveal
         </button>
