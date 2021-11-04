@@ -199,6 +199,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   var chooseCardPack = function (val) {
     var decks = {
       '135 set': [ '1', '3', '5', '8', '13', '21', '?'],
+      '135 Abridged': [ '1', '3', '5', '8', '13', '?', '\u2615' ],
       'Fibonacci': ['0', '1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '?'],
       'Mountain Goat': ['0', '\u00BD', '1', '2', '3', '5', '8', '13', '20', '40', '100', '?', '\u2615'],
       'Sequential': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '?'],
