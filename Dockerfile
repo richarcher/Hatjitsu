@@ -7,7 +7,7 @@ RUN apk --no-cache add nodejs git && \
     cd ${instDir} && \
     npm install -d
 
-EXPOSE 5000
+EXPOSE 5099
 
 WORKDIR ${instDir}
 

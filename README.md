@@ -16,10 +16,12 @@ Features
 Installation
 ============
 
-    npm install -d
-    npm start
+```sh
+npm install -d
+npm start
+```
 
-[http://localhost:5000](http://localhost:5000)
+[http://localhost:5099](http://localhost:5099)
 
 Installation (Docker)
 =====================
