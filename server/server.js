@@ -8,9 +8,9 @@ var env = process.env.NODE_ENV || 'development';
 
 const express = require('express');
 const app = module.exports = express();
-const port = process.env.app_port || 5000;
+const port = process.env.app_port || 5099;
 
-var lobbyClass = require('./lib/lobby.js');
+var lobbyClass = require('./lobby.js');
 var path = require('path');
 
 var statsConnectionCount = 0;
@@ -19,7 +19,7 @@ var statsSocketCount = 0;
 var statsSocketMessagesReceived = 0;
 
 app.use(express.static('app'));
-app.set('views', path.join(__dirname, 'app'));
+app.set('views', path.join(__dirname, '../app'));
 
 app.get('/', function(req, res) {
   res.render('index.ejs');
@@ -48,29 +48,13 @@ app.use(function (req, res, next) {
   res.redirect('/');
 });
 
- // Use the port that Heroku provides or default to 5000
+ // Use the port that Heroku provides or default to 5099
 const server = app.listen(port, function() {
   console.log("Express server listening on port %d in %s mode", port, app.settings.env);
 });
 
-const io = require('socket.io').listen(server);
+const io = require('socket.io')(server);
 var lobby = new lobbyClass.Lobby(io);
-
-
-io.configure(function () {
-  io.set('transports', ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
-});
-
-io.configure('production', function(){
-  io.enable('browser client minification');
-  io.enable('browser client etag');
-  io.set("polling duration", 10);
-  io.set('log level', 1);
-});
-io.configure('development', function(){
-  io.set('log level', 2);
-});
-
 
 /* EVENT LISTENERS */
 
@@ -81,10 +65,10 @@ io.sockets.on('connection', function (socket) {
 
   // console.log("On connect", socket.id);
 
-  socket.on('disconnect', function () {
+  socket.on('disconnecting', function () {
     statsDisconnectCount++;
     statsSocketCount--;
-    // console.log("On disconnect", socket.id);
+    console.log("On disconnect", socket.id);
     lobby.broadcastDisconnect(socket);
   });
 
@@ -96,14 +80,15 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('join room', function (data, callback) {
     statsSocketMessagesReceived++;
-    // console.log("on join room " + data.id, socket.id, data);
+    console.log("on join room " + data.id, socket.id, data);
+    socket.join( data.id );
     var room = lobby.joinRoom(socket, data);
     if(room.error) {
       callback( { error: room.error } );
     } else {
       callback(room.info());
     }
-  });
+  } );
 
   socket.on('room info', function (data, callback) {
     statsSocketMessagesReceived++;
@@ -186,4 +171,4 @@ io.sockets.on('connection', function (socket) {
     }
   });
 
-});
+} );

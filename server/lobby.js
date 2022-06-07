@@ -48,6 +48,10 @@ Lobby.prototype.joinRoom = function(socket, data) {
     this.createRoom( data.id );
   }
 
+  console.log( { 'joining room?': data } );
+
+  socket.join( data.id );
+
   var room = this.getRoom(data.id);
   if (socket != null && data && data.sessionId != null) {
     room.enter(socket, data);
@@ -62,25 +66,30 @@ Lobby.prototype.getRoom = function(id) {
   if (room) {
     return room;
   } else {
-    return { error: 'Sorry, this room no longer exists ...'};
+    return null;//{ error: 'Sorry, this room no longer exists ...'};
   }
 };
 
 Lobby.prototype.broadcastDisconnect = function(socket) {
-  var clientRooms = this.io.sockets.manager.roomClients[socket.id]
-    , socketRoom, room
-    ;
-  // console.log("broadcast Disconnect");
-  for (socketRoom in clientRooms) {
-    if (socketRoom.length) {
-      var id = socketRoom.substr(1);
-      var room = this.getRoom(id);
-      if (room) {
-        room.leave(socket);
-      }
-      this.io.sockets.in(id).emit('room left');
+  //var clientRooms = this.io.sockets.manager.roomClients[socket.id]
+  //  , socketRoom, room
+ //   ;
+  const rooms = Array.from( socket.rooms );
+  console.log( { 'socket': socket, 'leaving': rooms } );
+  rooms.forEach( room => {
+    if ( room === socket.id ) {
+      return;
     }
-  }
+
+    var r = this.getRoom( room );
+    if ( r ) {
+      console.log( 'leaving room ' + r.id );
+      r.leave(socket);
+      this.io.to( room ).emit('room left');
+    } else {
+      console.log( 'cant find room with ID ' + room );
+    }
+  } );
 };
 
 

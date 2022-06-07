@@ -1,5 +1,4 @@
 var _ = require('underscore')._;
-var util = require('util');
 
 var Room = function(io, id ) {
   this.io = io;
@@ -24,14 +23,22 @@ Room.prototype.enter = function(socket, data) {
   if (this.connections[data.sessionId]) {
     this.connections[data.sessionId].socketId = socket.id;
   } else {
-    this.connections[data.sessionId] = { sessionId: data.sessionId, socketId: socket.id, vote: null, voter: true };
+    this.connections[data.sessionId] = {
+      sessionId: data.sessionId,
+      socketId: socket.id,
+      vote: null,
+      voter: true
+    };
   }
 }
 
 Room.prototype.leave = function(socket) {
   var connection = _.find(this.connections, function(c) { return c.socketId === socket.id } );
   if (connection && connection.sessionId) {
-    connection.socketId = null;
+    console.log( 'eliminating' + socket.id );
+    this.connections[connection.sessionId] = null;
+  } else {
+    console.log( 'did not find connection?' );
   }
 }
 
@@ -93,7 +100,7 @@ Room.prototype.json = function() {
     hasAdmin: this.hasAdmin,
     cardPack: this.cardPack,
     forcedReveal: this.forcedReveal,
-    connections: _.filter(this.connections, function(c) { return c.socketId })
+    connections: _.filter(this.connections, function(c) { return c?.socketId })
   };
 }
 

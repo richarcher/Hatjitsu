@@ -216,7 +216,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
   };
 
   var refreshRoomInfo = function (roomObj) {
-    // console.log("refreshRoomInfo: roomObj:", roomObj)
+    console.log("refreshRoomInfo: roomObj:", roomObj)
     if (roomObj.createAdmin) {
       setCookie('admin-' + roomObj.id, true, 0.5 );
     }
@@ -316,9 +316,9 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
       });
     });
 
-    socket.on('connect', function () {
+    socket.on('connect', () => {
       // console.log("on connect");
-      var sessionId = this.socket.sessionid;
+      var sessionId = this.id;
       // console.log("new socket id = " + sessionId);
       if (!getCookie("sessionId")) {
         setCookie("sessionId", sessionId, 0.5);
@@ -331,9 +331,9 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
         processMessage(response, refreshRoomInfo);
       });
     });
-    socket.on('disconnect', function () {
+    socket.on('disconnect', () => {
       // console.log("on disconnect");
-    });
+    } );
 
     // console.log("emit join room", { id: $scope.roomId, sessionId: $scope.sessionId });
     socket.emit('join room', { id: $scope.roomId, sessionId: $scope.sessionId }, function (response) {
