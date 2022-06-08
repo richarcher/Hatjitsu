@@ -1,6 +1,5 @@
 <div ng-init="configureRoom()">
   <div class="switch">
-    <span class="label roomNumber">Room: {{roomId}}</span>
     <label class="label" ng-disabled="forceRevealDisable" data-on="You are a voter" data-off="You are not a voter" for="voter">
       <input type="checkbox" ng-model="voter" ng-disabled="forceRevealDisable" ng-change="toggleVoter()" id="voter" >
       I am voting
@@ -33,7 +32,7 @@
   </div>
   <section class="votePanel" >
     <div class="cards{{votingState}}" id="chosenCards">
-      <div ng-repeat="connection in connections" hidden="{{connection.vote}}" ng-click="unvote(connection.vote.sessionId)" class="card card--2-sided vote btn btn--tertiary btn--small" selectedvote style="color: {{connection.color}}; border-color: {{connection.color}};">
+      <div title="{{connection.name}}" ng-repeat="connection in connections" hidden="{{connection.vote}}" ng-click="unvote(connection.vote.sessionId)" class="card card--2-sided vote btn btn--tertiary btn--small" selectedvote style="color: {{connection.color}}; border-color: {{connection.color}};">
         <div class="card--side-1">&#10003;</div>
         <div class="card--side-2">{{connection.vote}}</div>
       </div>
