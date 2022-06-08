@@ -1,24 +1,67 @@
 .hm-logo {
   margin-left: 0;
 }
+
+.container {
+  max-width: 50rem;
+}
 /*
   Cards
 */
+
+.cards {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: wrap;
+}
+
+.votePanel .cards {
+  justify-content: center;
+}
+
 .cards .card {
   margin-bottom: 0.5em;
-  margin-right: 0.5em;
 }
 .card {
+  border-width:2px;
+  border-radius:10px;
   position: relative;
   display: inline-block;
-  min-width: 2.66em;
-  height: 4em;
+  min-width: 2.8em;
+  height: 4.5em;
   font-size: 1.5em;
   text-align: center;
-  line-height: 4em;
+  line-height: 4.5em;
   cursor: pointer;
   overflow: hidden;
+  padding: 0 8px;
 }
+
+.card:hover {
+  background: #fafafa;
+  color: #D24632;
+  border-color: #D24632;
+  border-width: 2px;
+  border-top-width: 1px;
+  border-bottom-width: 3px;
+}
+
+.card-panel {
+  min-width: 3.5em;
+}
+
+.cardPanel .card {
+  min-width: 3em;
+  height: 5em;
+  line-height: 5em;
+  font-size: 2em;
+}
+
+.cardPanel .card.card--selected {
+  outline: 4px solid black;
+  font-weight: bold;
+}
+
 .card--2-sided {
   display: inline-block;
 }
@@ -153,6 +196,10 @@
 .header {
   border-bottom: 1px solid #d9d9d9;
   margin: 1.66667rem 0;
+}
+
+.header a {
+  border-bottom: none;
 }
 
 .switch {

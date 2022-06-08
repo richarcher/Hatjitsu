@@ -45,33 +45,39 @@
 
   </section>
 
-  <div class="cardPanel-meta">
-    <div ng-show="voter">
-      <div ng-switch on="voted">
-        <p ng-switch-when="false">Choose your estimate...</p>
-        <p ng-switch-when="true">Your current estimate: <strong>{{myVote}}</strong></p>
+  <div class="my-votes">
+    <div class="cardPanel-meta">
+      <div ng-show="voter">
+        <div ng-switch on="voted">
+          <p ng-switch-when="false">Choose your estimate...</p>
+          <p ng-switch-when="true">Your current estimate: <strong>{{myVote}}</strong></p>
+        </div>
       </div>
+      <p ng-hide="voter">You have chosen not to vote.</p>
     </div>
-    <p ng-hide="voter">You have chosen not to vote.</p>
-  </div>
 
-  <section class="cardPanel" >
-    <div class="cards{{cardsState}}">
-      <div ng-switch on="showCustom">
-        <div ng-switch-when="true">
+    <div ng-switch on="showCustom">
+      <div ng-switch-when="true">
+        <section class="cardPanel" >
+          <div class="cards{{cardsState}}">
             <input ng-model="customPack" ui-enter="setCardPack(customPack)" name="packfield" id="packfield" type="tel" maxlength="50" placeholder="comma separated values" class="form__field" autofocus/>
             <button ng-click="setCardPack(customPack)" class="btn">Set Custom Pack</button>
-        </div>
-        <div ng-switch-when="false">
-          <div ng-show="cards" ng-repeat="card in cards" ng-disabled="!voter" ng-click="vote(card)" class="card btn btn--tertiary btn--small" ng-class="{'card--selected' : card==myVote}" cardvalue>
+          </div>
+        </section>
+      </div>
+      <div ng-switch-when="false">
+        <section class="cardPanel" >
+          <div class="cards{{cardsState}}">
+            <div ng-show="cards" ng-repeat="card in cards" ng-disabled="!voter" ng-click="vote(card)" class="card btn btn--tertiary btn--small" ng-class="{'card--selected' : card==myVote}" cardvalue>
               {{card}}
             </div>
             <div ng-hide="cards" class="waiting">
               No cards found
             </div>
-        </div>
+          </div>
+        </section>
+      </div>
     </div>
-
-  </section>
+  </div>
 
 </div>

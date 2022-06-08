@@ -48,8 +48,6 @@ Lobby.prototype.joinRoom = function(socket, data) {
     this.createRoom( data.id );
   }
 
-  console.log( { 'joining room?': data } );
-
   socket.join( data.id );
 
   var room = this.getRoom(data.id);
@@ -66,23 +64,20 @@ Lobby.prototype.getRoom = function(id) {
   if (room) {
     return room;
   } else {
-    return null;//{ error: 'Sorry, this room no longer exists ...'};
+    return { error: 'Sorry, this room no longer exists ...'};
   }
 };
 
 Lobby.prototype.broadcastDisconnect = function(socket) {
-  //var clientRooms = this.io.sockets.manager.roomClients[socket.id]
-  //  , socketRoom, room
- //   ;
+
   const rooms = Array.from( socket.rooms );
-  console.log( { 'socket': socket, 'leaving': rooms } );
   rooms.forEach( room => {
     if ( room === socket.id ) {
       return;
     }
 
     var r = this.getRoom( room );
-    if ( r ) {
+    if ( r.id ) {
       console.log( 'leaving room ' + r.id );
       r.leave(socket);
       this.io.to( room ).emit('room left');
