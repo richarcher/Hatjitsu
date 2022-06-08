@@ -1,4 +1,5 @@
 var _ = require('underscore')._;
+const { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator');
 
 var Room = function(io, id ) {
   this.io = io;
@@ -23,7 +24,27 @@ Room.prototype.enter = function(socket, data) {
   if (this.connections[data.sessionId]) {
     this.connections[data.sessionId].socketId = socket.id;
   } else {
+    const color = uniqueNamesGenerator({
+      dictionaries: [ [
+        'red',
+        'blue',
+        'brown',
+        'green',
+        'hotpink',
+        'goldenrod',
+        'purple',
+      ] ],
+      length: 1
+    });
+    const uniqueName = uniqueNamesGenerator({
+      dictionaries: [adjectives, animals ], // colors can be omitted here as not used
+      separator: ' ',
+      length: 2
+    });
+
     this.connections[data.sessionId] = {
+      color: color,
+      name: uniqueName,
       sessionId: data.sessionId,
       socketId: socket.id,
       vote: null,
@@ -63,7 +84,8 @@ Room.prototype.recordVote = function(socket, data) {
   if (this.connections[data.sessionId]) {
     this.connections[data.sessionId]['vote'] = data.vote;
   }
-  socket.broadcast.to(this.id).emit('voted');
+  this.io.sockets.in(this.id).emit('voted');
+  socket.emit('voted');
   // this.io.sockets.in(this.id).emit('voted');
 }
 

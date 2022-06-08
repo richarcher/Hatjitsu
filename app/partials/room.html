@@ -31,12 +31,11 @@
       </div>
     </div>
   </div>
-
   <section class="votePanel" >
     <div class="cards{{votingState}}" id="chosenCards">
-      <div ng-repeat="vote in votes" ng-click="unvote(vote.sessionId)" class="card card--2-sided vote btn btn--tertiary btn--small" selectedvote>
+      <div ng-repeat="connection in connections" hidden="{{connection.vote}}" ng-click="unvote(connection.vote.sessionId)" class="card card--2-sided vote btn btn--tertiary btn--small" selectedvote style="color: {{connection.color}}; border-color: {{connection.color}};">
         <div class="card--side-1">&#10003;</div>
-        <div class="card--side-2" cardvalue>{{vote.visibleVote}}</div>
+        <div class="card--side-2">{{connection.vote}}</div>
       </div>
       <div ng-repeat="i in placeholderVotes" disabled class="card card--placeholder btn btn--tertiary btn--small">
         ?
@@ -49,8 +48,8 @@
     <div class="cardPanel-meta">
       <div ng-show="voter">
         <div ng-switch on="voted">
-          <p ng-switch-when="false">Choose your estimate...</p>
-          <p ng-switch-when="true">Your current estimate: <strong>{{myVote}}</strong></p>
+          <p ng-switch-when="false">Hello <strong style="color: {{myColor}}">{{myName}}</strong>, choose your estimate...</p>
+          <p ng-switch-when="true">Hello <strong style="color: {{myColor}}">{{myName}}</strong>, your current estimate is <strong style="color: {{myColor}}">{{myVote}}</strong>.</p>
         </div>
       </div>
       <p ng-hide="voter">You have chosen not to vote.</p>

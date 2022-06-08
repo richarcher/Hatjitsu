@@ -121,6 +121,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     _.each($scope.votes, function (v) {
       v.visibleVote = v.visibleVote === undefined && (!$scope.forcedReveal && voteCount < $scope.voterCount) ? 'X' : v.vote;
     });
+
     var voteArr = [];
     voteArr.length = $scope.voterCount - voteCount;
     $scope.placeholderVotes = voteArr;
@@ -225,6 +226,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     }
 
     $scope.connections = roomObj.connections;
+    console.log( roomObj );
     $scope.humanCount = $scope.connections.length;
     $scope.cardPack = roomObj.cardPack;
     $scope.forcedReveal = roomObj.forcedReveal;
@@ -242,6 +244,8 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
     if (connection) {
       $scope.voter = connection.voter;
       $scope.myVote = connection.vote;
+      $scope.myColor = connection.color;
+      $scope.myName = connection.name;
       $scope.voted = haveIVoted();
     }
 
@@ -287,7 +291,7 @@ function RoomCtrl($scope, $routeParams, $timeout, socket) {
       });
     });
     socket.on('voted', function () {
-      // console.log("on voted");
+      console.log("on voted");
       // console.log("emit room info", { id: $scope.roomId });
       this.emit('room info', { id: $scope.roomId }, function (response) {
         processMessage(response, refreshRoomInfo);

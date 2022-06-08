@@ -5,6 +5,7 @@
 .container {
   max-width: 50rem;
 }
+
 /*
   Cards
 */
@@ -13,6 +14,10 @@
   display: flex;
   justify-content: space-around;
   flex-flow: wrap;
+}
+
+.card[hidden=""] {
+  display: none;
 }
 
 .votePanel .cards {
@@ -82,8 +87,14 @@
 .card--2-sided.card--selected {
   background-color: gold;
 }
-.vote.card { cursor: default; }
-.vote.card--selected { cursor: pointer; }
+.vote.card {
+  cursor: default;
+  font-weight: bold;
+}
+
+.vote.card--selected {
+  cursor: pointer;
+}
 
 .flipped-stagger .card--side-1 {
   display: none;
