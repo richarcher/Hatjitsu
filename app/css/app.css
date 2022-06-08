@@ -169,7 +169,7 @@
   line-height: 1.5em;
   margin: 1em;
   padding: 1em 2em;
-  max-width: 300px;
+  max-width: 100%;
   border-radius: 4px;
   color: rgba(0,0,0,.7);
 }
@@ -184,7 +184,7 @@
   background-color: #ffdd57;
 }
 .socketMessage {
-  background-color: #3298dc;
+  background-color: black;
   color: #fff;
 }
 .appError {
