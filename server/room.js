@@ -54,7 +54,12 @@ Room.prototype.enter = function(socket, data) {
 }
 
 Room.prototype.leave = function(socket) {
-  var connection = _.find(this.connections, function(c) { return c.socketId === socket.id } );
+  var connection = _.find(this.connections, function(c) {
+    if ( ! c ) {
+      return false;
+    }
+    return c.socketId
+  });
   if (connection && connection.sessionId) {
     console.log( 'eliminating' + socket.id );
     this.connections[connection.sessionId] = null;
