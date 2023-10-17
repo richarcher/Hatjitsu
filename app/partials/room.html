@@ -13,7 +13,7 @@
           Reveal
         </button>
         <div id="dd" class="{{dropdownClass}} dropdown-wrapper btn btn--tertiary btn--small" ng-click="openDropdown()">
-          <span>{{cardPack}}  pack</span> <i class="icon icon--arrow-down icon--default" title="icon icon--arrow-down icon--default">arrow-down</i>
+          <span>{{cardPack}} pack</span> <i class="icon icon--arrow-down icon--default" title="icon icon--arrow-down icon--default">arrow-down</i>
           <ul class="dropdown">
             <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckSet135" ng-click="setCardPack('135 set')">135 set</a></li>
             <li class="dropdown__item"><a href="#" ng-model="cardPack" id="deckGoat" ng-click="setCardPack('Mountain Goat')">Mountain Goat</a></li>
@@ -35,6 +35,7 @@
       <div title="{{connection.name}}" ng-repeat="connection in connections" hidden="{{connection.vote}}" ng-click="unvote(connection.vote.sessionId)" class="card card--2-sided vote btn btn--tertiary btn--small" selectedvote style="color: {{connection.color}}; border-color: {{connection.color}};">
         <div class="card--side-1">&#10003;</div>
         <div class="card--side-2">{{connection.vote}}</div>
+        <div class="card--name" style="color: {{connection.color}}">{{connection.name}}</div>
       </div>
       <div ng-repeat="i in placeholderVotes" disabled class="card card--placeholder btn btn--tertiary btn--small">
         ?

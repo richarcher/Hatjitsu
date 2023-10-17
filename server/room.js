@@ -24,15 +24,26 @@ Room.prototype.enter = function(socket, data) {
   if (this.connections[data.sessionId]) {
     this.connections[data.sessionId].socketId = socket.id;
   } else {
+    // Used to colour code the cards and names
     const color = uniqueNamesGenerator({
       dictionaries: [ [
-        'red',
-        'blue',
-        'brown',
-        'green',
+        'maroon',
+        'firebrick',
+        'forestgreen',
+        'darkolivegreen',
+        'darkmagenta',
+        'saddlebrown',
+        'crimson',
+        'olive',
         'hotpink',
         'goldenrod',
         'purple',
+        'darkslategrey',
+        'indigo',
+        'orangered',
+        'midnightblue',
+        'rebeccapurle',
+        'steelblue',
       ] ],
       length: 1
     });
