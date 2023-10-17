@@ -111,7 +111,12 @@ Room.prototype.forceReveal = function() {
 }
 
 Room.prototype.getClientCount = function() {
-  return _.filter(this.connections, function(c) { return c.socketId }).length;
+  return _.filter(this.connections, function(c) {
+    if ( ! c ) {
+      return false;
+    }
+    return c.socketId
+  }).length;
 }
 
 Room.prototype.json = function() {
