@@ -1,6 +1,6 @@
 {
   "name": "hmagilepoke",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "subdomain": "hat",
   "entry-point": "server/server.js",
   "scripts": {
