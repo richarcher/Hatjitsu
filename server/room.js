@@ -4,6 +4,7 @@ const { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-na
 var Room = function(io, id ) {
   this.io = io;
   this.id = id;
+  this.name = `Room: ${id}`;
   this.createdAt = calcTime(2);
   this.createAdmin = true;
   this.hasAdmin = false;
@@ -15,7 +16,6 @@ var Room = function(io, id ) {
 Room.prototype.info = function() {
   this.createAdmin = this.hasAdmin === false;
   this.hasAdmin = true;
-  // console.log("room info = ", this.json());
   return this.json();
 };
 
@@ -145,6 +145,7 @@ Room.prototype.getClientCount = function() {
 Room.prototype.json = function() {
   return {
     id: this.id,
+    name: this.name,
     createdAt: this.createdAt,
     createAdmin: this.createAdmin,
     hasAdmin: this.hasAdmin,
