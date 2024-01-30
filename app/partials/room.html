@@ -32,12 +32,12 @@
   </div>
   <section class="votePanel" >
     <div class="cards{{votingState}}" id="chosenCards">
-      <div title="{{connection.name}}" ng-repeat="connection in connections" hidden="{{connection.vote}}" ng-click="unvote(connection.vote.sessionId)" class="card card--2-sided vote btn btn--tertiary btn--small" selectedvote style="color: {{connection.color}}; border-color: {{connection.color}};">
+      <div title="{{connection.name}}" ng-repeat="connection in connections track by $index" hidden="{{connection.vote}}" ng-click="unvote(connection.vote.sessionId)" class="card card--2-sided vote btn btn--tertiary btn--small" selectedvote style="color: {{connection.color}}; border-color: {{connection.color}};">
         <div class="card--side-1">&#10003;</div>
         <div class="card--side-2">{{connection.vote}}</div>
         <div class="card--name" style="color: {{connection.color}}">{{connection.name}}</div>
       </div>
-      <div ng-repeat="i in placeholderVotes" disabled class="card card--placeholder btn btn--tertiary btn--small">
+      <div ng-repeat="i in placeholderVotes track by $index" disabled class="card card--placeholder btn btn--tertiary btn--small">
         ?
       </div>
     </div>
