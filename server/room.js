@@ -22,7 +22,7 @@ Room.prototype.info = function() {
 Room.prototype.enter = function(socket, data) {
   // console.log("room entered as " + socket.id);
   if (this.connections[data.sessionId]) {
-    this.connections[data.sessionId].socketId = socket.id;
+    this.connections[data.sessionId].socketIds.push( socket.id );
   } else {
     // Used to colour code the cards and names
     const color = uniqueNamesGenerator({
@@ -57,7 +57,7 @@ Room.prototype.enter = function(socket, data) {
       color: color,
       name: uniqueName,
       sessionId: data.sessionId,
-      socketId: socket.id,
+      socketIds: [ socket.id ],
       vote: null,
       voter: true
     };
@@ -69,11 +69,18 @@ Room.prototype.leave = function(socket) {
     if ( ! c ) {
       return false;
     }
-    return c.socketId
+    return (c.socketIds.length > 0);
   });
   if (connection && connection.sessionId) {
-    console.log( 'eliminating' + socket.id );
-    this.connections[connection.sessionId] = null;
+    console.log( 'eliminating socket with ID: ' + socket.id, JSON.stringify( this.connections[connection.sessionId].socketIds ) );
+    const index = this.connections[connection.sessionId].socketIds.indexOf(socket.id);
+    if (index > -1) {
+      this.connections[connection.sessionId].socketIds.splice(index, 1);
+    }
+    // clean up connections with no sockets
+    if ( this.connections[connection.sessionId].socketIds.length < 1 ) {
+      this.connections[connection.sessionId] = null;
+    }
   } else {
     console.log( 'did not find connection?' );
   }
@@ -131,7 +138,7 @@ Room.prototype.getClientCount = function() {
     if ( ! c ) {
       return false;
     }
-    return c.socketId
+    return (c.socketIds.length > 0);
   }).length;
 }
 
@@ -143,7 +150,12 @@ Room.prototype.json = function() {
     hasAdmin: this.hasAdmin,
     cardPack: this.cardPack,
     forcedReveal: this.forcedReveal,
-    connections: _.filter(this.connections, function(c) { return c?.socketId })
+    connections: _.filter(
+      this.connections,
+      function(c) {
+        return (c && c.socketIds.length > 0);
+      }
+    )
   };
 }
 
