@@ -78,7 +78,7 @@ Lobby.prototype.broadcastDisconnect = function(socket) {
 
     var r = this.getRoom( room );
     if ( r.id ) {
-      console.log( 'leaving room ' + r.id );
+      console.log( 'leaving room ' + r.id, socket.id, r );
       r.leave(socket);
       this.io.to( room ).emit('room left');
     } else {

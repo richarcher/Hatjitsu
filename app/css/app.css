@@ -55,6 +55,7 @@ body {
   border-width: 2px;
   border-top-width: 1px;
   border-bottom-width: 3px;
+  rotate: 1deg;
 }
 
 .card .card--name {
