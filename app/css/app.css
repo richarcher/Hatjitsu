@@ -124,6 +124,9 @@ body {
   display: none;
 }
 
+.flipped-stagger .card:hover .card--name {
+  display: none;
+}
 
 /*
 
