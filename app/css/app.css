@@ -71,7 +71,10 @@ body {
   max-height: 80px;
   line-height: 15px;
   font-weight: bold;
+  width: 100%;
+  text-align: center;
 }
+
 .card-panel {
   min-width: 3.5em;
 }
