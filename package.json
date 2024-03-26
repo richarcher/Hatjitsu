@@ -13,7 +13,7 @@
     "node": "0.8.x"
   },
   "dependencies": {
-    "express": "4.17.1",
+    "express": "4.19.2",
     "express-cdn": "0.0.3",
     "ejs": "3.1.5",
     "gzippo": "0.1.7",
